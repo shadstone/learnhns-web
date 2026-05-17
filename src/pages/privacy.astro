@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Privacy Policy">
+  <div class="content-wrapper">
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last Updated: May 2026</p>
+
+    <div class="privacy-content">
+      <section class="privacy-section">
+        <h2>1. Introduction</h2>
+        <p>This Privacy Policy outlines how the LearnHNS wallets (including our Chrome extension) handle your data. As a decentralized ecosystem tool, we prioritize your privacy and security above all else. We operate on a principle of minimal data collection and maximum user control.</p>
+      </section>
+
+      <section class="privacy-section">
+        <h2>2. Local Wallet Storage</h2>
+        <p>All wallet data, including preferences, account names, and transaction history, is stored entirely locally on your device. We do not sync this data to any external servers or cloud services. If you uninstall the extension or clear your browser data, your local wallet storage will be permanently deleted.</p>
+      </section>
+
+      <section class="privacy-section">
+        <h2>3. Seed Phrase and Private Key Handling</h2>
+        <p>Your Seed Phrase (recovery phrase) and Private Keys are generated locally on your device. They are encrypted using the password you set and are never transmitted to our servers or any third-party services. You are solely responsible for securely backing up your Seed Phrase.</p>
+      </section>
+
+      <section class="privacy-section">
+        <h2>4. Password Handling</h2>
+        <p>The password you create to lock your wallet is only used locally to encrypt and decrypt your private keys. We do not store, transmit, or have access to your password. If you lose your password, we cannot recover it for you.</p>
+      </section>
+
+      <section class="privacy-section">
+        <h2>5. Node and Explorer Requests</h2>
+        <p>To display balances and facilitate transactions, the wallet must communicate with the Handshake blockchain. This is done by querying public Handshake nodes and block explorers. These requests may expose your IP address to those public nodes, but they do not contain any personally identifiable information linking your identity to your wallet addresses.</p>
+      </section>
+
+      <section class="privacy-section">
+        <h2>6. Content Script and DApp Connection Behavior</h2>
+        <p>When you use the LearnHNS wallet extension to connect to decentralized applications (DApps) or ShakeDex, the wallet injects a content script to facilitate communication. The wallet will explicitly prompt you for permission before connecting to any DApp or signing any transactions. We do not track which websites you visit or which DApps you interact with.</p>
+      </section>
+
+      <section class="privacy-section">
+        <h2>7. Analytics Status</h2>
+        <p>Our wallets currently have all telemetry and analytics disabled. We do not use tools like Google Analytics, Mixpanel, or any other tracking software within the wallet application to monitor your behavior.</p>
+      </section>
+
+      <section class="privacy-section">
+        <h2>8. No Sale of User Data</h2>
+        <p>Because we do not collect personal data, we have no data to sell. We will never sell, rent, or trade your information to advertisers, data brokers, or any other third parties.</p>
+      </section>
+
+      <section class="privacy-section">
+        <h2>9. Support Contact</h2>
+        <p>If you have any questions or concerns regarding this Privacy Policy or how your data is handled, please reach out to our maintainers at SkyInclude:</p>
+        <p><a href="https://skyinclude.com/contact" target="_blank" class="btn">Contact Support</a></p>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .last-updated {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    font-family: var(--font-mono);
+  }
+
+  .privacy-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .privacy-section h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 0.5rem;
+  }
+
+  .privacy-section p {
+    color: var(--text-color);
+    line-height: 1.8;
+  }
+</style>

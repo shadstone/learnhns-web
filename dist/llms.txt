@@ -10,6 +10,7 @@ LearnHNS is your gateway to exploring the future of decentralized domains. We cu
 - Podcasts & Videos: https://learnhns.com/podcasts/
 - Services & Wallets: https://learnhns.com/services/
 - How DNS Works: https://learnhns.com/dns/
+- Privacy Policy: https://learnhns.com/privacy/
 
 ## Getting Started with Handshake
 1. Download Bob Wallet (Desktop): https://bobwallet.org/download
