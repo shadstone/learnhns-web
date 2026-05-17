@@ -1,0 +1,25 @@
+# LearnHNS
+
+LearnHNS is your gateway to exploring the future of decentralized domains. We curate the best resources and guides to help users understand and navigate Handshake (HNS), a revolutionary decentralized domain name system.
+
+## Key Resources
+- Homepage: https://learnhns.com/
+- Get Started: https://learnhns.com/start/
+- Learn Handshake: https://learnhns.com/learn/
+- Educational Media: https://learnhns.com/media/
+- Podcasts & Videos: https://learnhns.com/podcasts/
+- Services & Wallets: https://learnhns.com/services/
+- How DNS Works: https://learnhns.com/dns/
+
+## Getting Started with Handshake
+1. Download Bob Wallet (Desktop): https://bobwallet.org/download
+2. Install Bob Extension (Chrome): https://bobwallet.org/extension/
+3. Trade on ShakeDex: https://market.learnhns.com
+4. Participate: https://github.com/handshake-org
+
+## What is Handshake?
+Handshake (HNS) is a decentralized, permissionless naming protocol where every peer is validating and in charge of managing the root DNS naming zone with the goal of creating an alternative to existing Certificate Authorities and naming systems.
+
+## Contact & Maintainer
+Site maintained by SkyInclude.
+Contact: https://skyinclude.com/contact

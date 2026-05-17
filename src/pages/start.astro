@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Get Started with Handshake Tools">
+  <div class="content-wrapper">
+    <h1>Start Using Handshake</h1>
+    <p style="font-size: 1.2rem; color: var(--text-color); margin-bottom: 3rem;">
+      Ready to dive into the Handshake ecosystem? Follow these steps to set up your decentralized tools and start exploring marketplaces on HNS.
+    </p>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h2>Download Bob Wallet</h2>
+        <p>The premier desktop wallet for managing your HNS coins and domain names securely.</p>
+        <a href="https://bobwallet.org/download" target="_blank" class="btn primary-btn">Download Bob Wallet</a>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h2>Install Chrome Extension</h2>
+        <p>Interact with Handshake domains directly from your browser with the Bob Wallet extension.</p>
+        <a href="https://bobwallet.org/extension/" target="_blank" class="btn primary-btn">Get the Extension</a>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h2>Visit ShakeDex Marketplace</h2>
+        <p>Buy and sell Handshake domains on our decentralized web marketplace.</p>
+        <a href="https://market.learnhns.com" target="_blank" class="btn primary-btn">Explore ShakeDex</a>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h2>Join the Community</h2>
+        <p>Participate in GitHub development, join discussions, and help build the future of the decentralized web.</p>
+        <div class="btn-group">
+          <a href="https://github.com/handshake-org" target="_blank" class="btn">GitHub</a>
+          <a href="https://t.me/handshake_hns" target="_blank" class="btn">Telegram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .steps-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .step-card {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .step-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+  }
+
+  .step-number {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    color: #0f172a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: var(--font-mono);
+    box-shadow: 0 4px 10px rgba(56, 189, 248, 0.4);
+  }
+
+  .step-card h2 {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  .primary-btn {
+    background-color: var(--primary-color);
+    color: #0f172a;
+    border: none;
+  }
+
+  .primary-btn:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.02);
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+</style>

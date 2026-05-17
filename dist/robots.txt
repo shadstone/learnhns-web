@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Exclude potential sensitive or irrelevant directories if they ever exist
+Disallow: /api/
+Disallow: /admin/
+
+Sitemap: https://learnhns.com/sitemap-index.xml
