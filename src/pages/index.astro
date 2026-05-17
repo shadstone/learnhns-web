@@ -30,4 +30,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <a href="/services/" class="btn">View Services</a>
     </div>
   </section>
+
+  <section class="video-showcase">
+    <video autoplay loop muted playsinline class="showcase-video">
+      <source src="/learnhns-video.mp4" type="video/mp4" />
+    </video>
+  </section>
 </BaseLayout>
+
+<style>
+  .video-showcase {
+    margin: 4rem auto;
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #334155;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    background: var(--card-bg);
+  }
+  
+  .showcase-video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
