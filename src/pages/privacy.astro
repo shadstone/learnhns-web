@@ -33,22 +33,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </section>
 
       <section class="privacy-section">
-        <h2>6. Content Script and DApp Connection Behavior</h2>
+        <h2>6. Wallet Rescans and Address Lookup</h2>
+        <p>LearnHNS Wallet is a self-custody browser extension. Seed phrases and private keys are stored locally in the user's browser extension storage and are not intentionally sent to LearnHNS servers.</p>
+        <p>However, wallet rescans may send derived receive and change addresses from the user's wallet to the configured Handshake RPC or indexer service. This is used to discover relevant transactions, balances, and Handshake name ownership. If the user uses the default hosted service, that service may see addresses associated with the wallet.</p>
+        <p>Users who prefer not to expose wallet addresses to the default hosted service should configure their own compatible Handshake RPC or indexer endpoint before importing or restoring a wallet.</p>
+      </section>
+
+      <section class="privacy-section">
+        <h2>7. Content Script and DApp Connection Behavior</h2>
         <p>When you use the LearnHNS wallet extension to connect to decentralized applications (DApps) or ShakeDex, the wallet injects a content script to facilitate communication. The wallet will explicitly prompt you for permission before connecting to any DApp or signing any transactions. We do not track which websites you visit or which DApps you interact with.</p>
       </section>
 
       <section class="privacy-section">
-        <h2>7. Analytics Status</h2>
-        <p>Our wallets currently have all telemetry and analytics disabled. We do not use tools like Google Analytics, Mixpanel, or any other tracking software within the wallet application to monitor your behavior.</p>
+        <h2>8. Analytics Status</h2>
+        <p>Please note that the address lookup and rescan behavior described above is completely separate from analytics. LearnHNS Wallet currently has analytics disabled/no-op in the extension code. We do not use tools like Google Analytics, Mixpanel, or any other tracking software within the wallet application to monitor your behavior.</p>
       </section>
 
       <section class="privacy-section">
-        <h2>8. No Sale of User Data</h2>
+        <h2>9. No Sale of User Data</h2>
         <p>Because we do not collect personal data, we have no data to sell. We will never sell, rent, or trade your information to advertisers, data brokers, or any other third parties.</p>
       </section>
 
       <section class="privacy-section">
-        <h2>9. Support Contact</h2>
+        <h2>10. Support Contact</h2>
         <p>If you have any questions or concerns regarding this Privacy Policy or how your data is handled, please reach out to our maintainers at SkyInclude:</p>
         <p><a href="https://skyinclude.com/contact" target="_blank" class="btn">Contact Support</a></p>
       </section>
