@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
-    "astro": "^5.16.4"
+    "astro": "^5.16.4",
+    "glob": "^13.0.6"
   },
   "devDependencies": {
     "sharp": "^0.34.5"
