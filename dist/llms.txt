@@ -14,8 +14,8 @@ LearnHNS is your gateway to exploring the future of decentralized domains. We cu
 
 ## Getting Started with Handshake
 1. Download Bob Wallet (Desktop): 
-   - LearnHNS 2026 Version: https://bobwallet.org/docs/bob-learnhns-testing-party/
-   - 2024 Version: https://bobwallet.org/download
+   - LearnHNS 2026 Version: https://bobwallet.org/download/bob-learnhns
+   - 2024 Version: https://bobwallet.org/download/bob-wallet
 2. Install Bob Extension (Chrome): 
    - LearnHNS 2026 Version: https://bobwallet.org/extension/learnhns-wallet/
    - 2024 Version: https://bobwallet.org/extension/shake-wallet/
