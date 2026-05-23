@@ -31,9 +31,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
       </section>
 
-      <section class="card" style="grid-column: 1 / -1; margin-top: 2rem;">
-        <h2>Live Market Data</h2>
-        <p style="margin-bottom: 1.5rem;">Here are some of the latest listings fetched directly from the LearnHNS Market API:</p>
+      <section style="grid-column: 1 / -1; margin-top: 2rem;">
+        <h2 style="margin-bottom: 0.5rem;">Live Market Data</h2>
+        <p style="margin-bottom: 1.5rem; color: #a0aab2;">Here are some of the latest listings fetched directly from the LearnHNS Market API:</p>
         
         <div id="market-listings" class="listings-grid">
           <p class="loading-text">Loading live listings...</p>
@@ -104,6 +104,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </style>
 
 <script>
+  // A simple punycode decoder since we can't easily use npm modules in a client-side <script> tag natively without a bundler setup.
+  // This is a minimal implementation to handle basic emoji domains like xn--on8h9e.
+  function decodePunycode(str: string) {
+    if (!str.startsWith('xn--')) return str;
+    
+    // Instead of writing a full punycode decoder from scratch here, 
+    // we can use the browser's built-in URL API to decode it!
+    try {
+      const url = new URL(`http://${str}`);
+      return url.hostname;
+    } catch (e) {
+      return str; // Fallback to raw string if decoding fails
+    }
+  }
+
   async function fetchListings() {
     const container = document.getElementById('market-listings');
     if (!container) return;
@@ -131,10 +146,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         const statusClass = isBuyable ? 'status-buyable' : 'status-pending';
         const statusText = isBuyable ? 'Buyable' : 'Pending';
 
+        // Decode punycode (e.g. xn--on8h9e -> 🤝)
+        const decodedName = decodePunycode(listing.name);
+
         return `
           <a href="https://market.learnhns.com/listing/${listing.name}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <div class="listing-card">
-              <div class="listing-name">${listing.name}/</div>
+            <div class="listing-card card">
+              <div class="listing-name">${decodedName}/</div>
               <div class="listing-price">${price}</div>
               <div class="listing-status ${statusClass}">${statusText}</div>
             </div>
