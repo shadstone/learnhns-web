@@ -19,7 +19,7 @@ LearnHNS is your gateway to exploring the future of decentralized domains. We cu
 2. Install Bob Extension (Chrome): 
    - LearnHNS 2026 Version: https://bobwallet.org/extension/learnhns-wallet/
    - 2024 Version: https://bobwallet.org/extension/shake-wallet/
-3. Trade on ShakeDex: https://market.learnhns.com
+3. Trade on ShakeDex: https://learnhns.com/market/
 4. Buy/Sell HNS at Liquidity Spot: https://liquidity.spot
 5. Participate: https://github.com/handshake-org
 
