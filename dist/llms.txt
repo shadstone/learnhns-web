@@ -13,8 +13,12 @@ LearnHNS is your gateway to exploring the future of decentralized domains. We cu
 - Privacy Policy: https://learnhns.com/privacy/
 
 ## Getting Started with Handshake
-1. Download Bob Wallet (Desktop): https://bobwallet.org/download
-2. Install Bob Extension (Chrome): https://bobwallet.org/extension/
+1. Download Bob Wallet (Desktop): 
+   - LearnHNS 2026 Version: https://bobwallet.org/docs/bob-learnhns-testing-party/
+   - 2024 Version: https://bobwallet.org/download
+2. Install Bob Extension (Chrome): 
+   - LearnHNS 2026 Version: https://bobwallet.org/extension/learnhns-wallet/
+   - 2024 Version: https://bobwallet.org/extension/shake-wallet/
 3. Trade on ShakeDex: https://market.learnhns.com
 4. Buy/Sell HNS at Liquidity Spot: https://liquidity.spot
 5. Participate: https://github.com/handshake-org
