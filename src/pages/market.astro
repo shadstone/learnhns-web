@@ -104,20 +104,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </style>
 
 <script>
-  // A simple punycode decoder since we can't easily use npm modules in a client-side <script> tag natively without a bundler setup.
-  // This is a minimal implementation to handle basic emoji domains like xn--on8h9e.
-  function decodePunycode(str: string) {
-    if (!str.startsWith('xn--')) return str;
-    
-    // Instead of writing a full punycode decoder from scratch here, 
-    // we can use the browser's built-in URL API to decode it!
-    try {
-      const url = new URL(`http://${str}`);
-      return url.hostname;
-    } catch (e) {
-      return str; // Fallback to raw string if decoding fails
-    }
-  }
+  import punycode from 'punycode/';
 
   async function fetchListings() {
     const container = document.getElementById('market-listings');
@@ -146,8 +133,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         const statusClass = isBuyable ? 'status-buyable' : 'status-pending';
         const statusText = isBuyable ? 'Buyable' : 'Pending';
 
-        // Decode punycode (e.g. xn--on8h9e -> 🤝)
-        const decodedName = decodePunycode(listing.name);
+        // Decode punycode using the punycode library
+        const decodedName = punycode.toUnicode(listing.name);
 
         return `
           <a href="https://market.learnhns.com/listing/${listing.name}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
