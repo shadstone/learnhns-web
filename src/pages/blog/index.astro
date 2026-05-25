@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts')).sort((a, b) => {
+  const ad = a.data.created_at ? new Date(a.data.created_at).getTime() : 0;
+  const bd = b.data.created_at ? new Date(b.data.created_at).getTime() : 0;
+  return bd - ad;
+});
+
+const fmt = (iso: string | null | undefined) =>
+  iso
+    ? new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+    : null;
+---
+<BaseLayout
+  title="Blog"
+  description="Latest articles from LearnHNS about Handshake (HNS), decentralized DNS, and the future of internet naming."
+>
+  <div class="content-wrapper">
+    <h1>Blog</h1>
+    <p class="blog-intro">Fresh thinking on Handshake, decentralized DNS, and the future of names you actually own.</p>
+
+    {posts.length === 0 ? (
+      <p class="empty">No posts yet — check back soon.</p>
+    ) : (
+      <ul class="post-list">
+        {posts.map((post) => (
+          <li class="post-card">
+            {post.data.featured_image_url && (
+              <a href={`/blog/${post.id}/`} class="thumb-link">
+                <img src={post.data.featured_image_url} alt={post.data.title} class="post-thumb" />
+              </a>
+            )}
+            <div class="post-body">
+              <h2><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2>
+              <p class="post-meta">
+                {post.data.created_at && (
+                  <time datetime={post.data.created_at}>{fmt(post.data.created_at)}</time>
+                )}
+                {post.data.primary_category && (
+                  <>
+                    <span class="dot">/</span>
+                    <span>{post.data.primary_category.name}</span>
+                  </>
+                )}
+              </p>
+              {post.data.excerpt && <p class="post-excerpt">{post.data.excerpt}</p>}
+              <a href={`/blog/${post.id}/`} class="btn">Read More</a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .blog-intro {
+    color: #94a3b8;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+  }
+  .empty {
+    color: #94a3b8;
+    font-family: var(--font-mono);
+    padding: 2rem 0;
+  }
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 2rem;
+  }
+  .post-card {
+    background: var(--card-bg);
+    border: 1px solid #334155;
+    border-radius: 12px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 280px) 1fr;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .post-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-color);
+  }
+  .thumb-link { display: block; }
+  .post-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 16 / 10;
+    border-radius: 0;
+    display: block;
+  }
+  .post-body {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .post-body h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.5rem;
+  }
+  .post-body h2 a {
+    color: #f8fafc;
+    text-decoration: none;
+  }
+  .post-body h2 a:hover {
+    color: var(--primary-color);
+  }
+  .post-meta {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    margin-bottom: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .post-meta .dot { opacity: 0.5; }
+  .post-excerpt {
+    color: #94a3b8;
+    margin-bottom: 1.25rem;
+  }
+  @media (max-width: 640px) {
+    .post-card { grid-template-columns: 1fr; }
+  }
+</style>
