@@ -12,8 +12,8 @@ const posts = defineCollection({
   loader: async () => {
     const items = await fetchAllContent({ type: 'post', status: 'published' });
     return items.map((post) => ({
-      id: post.slug,
       ...post,
+      id: post.slug,
     }));
   },
   schema: z
