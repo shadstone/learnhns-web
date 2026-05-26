@@ -1,89 +1,122 @@
 ---
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
 ---
 <header class="site-header">
-  <div class="header-content">
-    <div class="logo">
-      <a href="/">
-        <img src="/handshake-white.png" alt="LearnHNS - Handshake Logo">
-      </a>
-    </div>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="/learn/">Learn HNS</a></li>
-        <li><a href="/blog/">Blog</a></li>
-        <li><a href="/media/">Reading & Media</a></li>
-        <li><a href="/podcasts/">Podcasts</a></li>
-        <li><a href="/services/">Services</a></li>
-        <li><a href="/dns/">How DNS Works</a></li>
-        <li><a href="/market/">Market</a></li>
-        <li><a href="/start/" class="cta-pill">Start Here</a></li>
-      </ul>
+  <div class="header-inner">
+    <a href="/" class="logo-lockup" aria-label="LearnHNS home">
+      <img src="/learnhnsicon-dark.svg" alt="" onerror="this.style.display='none'" />
+      <span>LearnHNS</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="/learn/" class:list={[{ 'is-active': isActive('/learn') }]}>Learn</a>
+      <a href="/dns/" class:list={[{ 'is-active': isActive('/dns') }]}>DNS</a>
+      <a href="/media/" class:list={[{ 'is-active': isActive('/media') }]}>Media</a>
+      <a href="/podcasts/" class:list={[{ 'is-active': isActive('/podcasts') }]}>Podcasts</a>
+      <a href="/services/" class:list={[{ 'is-active': isActive('/services') }]}>Services</a>
+      <a href="/blog/" class:list={[{ 'is-active': isActive('/blog') }]}>Blog</a>
+      <a href="/market/" class:list={[{ 'is-active': isActive('/market') }]}>Market</a>
+      <a href="/start/" class="cta-pill">Start Learning &rarr;</a>
     </nav>
   </div>
 </header>
 
 <style>
   .site-header {
-    background-color: var(--header-bg);
-    padding: 1rem 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     position: sticky;
     top: 0;
     z-index: 100;
+    height: 64px;
+    padding: 0 2rem;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--glass-border);
   }
 
-  .header-content {
+  .header-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    height: 100%;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .logo img {
-    height: 50px;
-    width: auto;
-    display: block;
-  }
-
-  .main-nav ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
     gap: 1.5rem;
+  }
+
+  .logo-lockup {
+    display: flex;
     align-items: center;
-    margin: 0;
-    padding: 0;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .logo-lockup:hover {
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .logo-lockup img {
+    height: 28px;
+    width: auto;
+    border-radius: 0;
+  }
+
+  .logo-lockup span {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+  }
+
+  .main-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
   }
 
   .main-nav a {
-    color: #ffffff;
+    color: var(--text-secondary);
     text-decoration: none;
+    font-size: 0.825rem;
     font-weight: 500;
-    font-size: 0.95rem;
-    padding: 0.5rem 0.8rem;
+    padding: 0.4rem 0.75rem;
     border-radius: 6px;
-    transition: all 0.2s ease;
+    transition: color 0.2s, background 0.2s;
+    letter-spacing: 0.01em;
   }
 
   .main-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
+    color: var(--text-primary);
+    background: rgba(0, 0, 0, 0.04);
     text-decoration: none;
   }
 
-  @media (max-width: 768px) {
-    .header-content {
-      flex-direction: column;
-      text-align: center;
-    }
-    
-    .main-nav ul {
-      justify-content: center;
-      gap: 0.5rem;
-    }
+  .main-nav a.is-active {
+    color: var(--hns-violet);
+  }
+
+  /* CTA pill overrides the generic .main-nav a styling */
+  .main-nav .cta-pill {
+    margin-left: 0.5rem;
+    font-size: 0.825rem;
+    padding: 0.5rem 1.1rem !important;
+  }
+
+  .main-nav .cta-pill:hover {
+    background: var(--hns-violet-deep) !important;
+    color: #ffffff !important;
+  }
+
+  @media (max-width: 900px) {
+    .site-header { padding: 0 1rem; }
+    .main-nav { gap: 0.1rem; }
+    .main-nav a { padding: 0.3rem 0.5rem; font-size: 0.78rem; }
+  }
+
+  @media (max-width: 700px) {
+    .main-nav a:not(.cta-pill) { display: none; }
   }
 </style>
