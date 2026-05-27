@@ -1,50 +1,148 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
----
-<BaseLayout title="Handshake (HNS) Podcasts & Videos" description="Watch videos and listen to podcasts featuring interviews and deep dives into the Handshake (HNS) decentralized DNS ecosystem.">
-  <div class="content-wrapper">
-    <h1>Educational Podcasts and Videos</h1>
-    <div class="content">
-      <div class="video-section" style="margin-bottom: 3rem;">
-        <h2>Featured Videos</h2>
-        <ul class="resource-list">
-          <li>
-            <h3>Handshake Overview by Namebase</h3>
-            <a href="https://www.youtube.com/watch?v=tB0RWxBNKnE" target="_blank" class="btn">Watch Video</a>
-          </li>
-          <li>
-            <h3>What is Handshake? HNS Explained</h3>
-            <a href="https://www.youtube.com/watch?v=tB0RWxBNKnE" target="_blank" class="btn">Watch Video</a>
-          </li>
-        </ul>
-      </div>
-      
-      <div class="podcast-section" style="margin-bottom: 3rem;">
-        <h2>Podcast Episodes</h2>
-        <ul class="resource-list">
-          <li>
-            <h3>Handshake on The Breakdown with NLW</h3>
-            <a href="https://www.coindesk.com/podcasts/the-breakdown-with-nlw/" target="_blank" class="btn">Listen Now</a>
-          </li>
-          <li>
-            <h3>Handshake: A Decentralized DNS with Devon James</h3>
-            <a href="#" title="Link Offline" style="opacity: 0.5; cursor: not-allowed;" onclick="event.preventDefault();" target="_blank" class="btn">Listen Now (Offline)</a>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7; word-break: break-all;">Original URL: https://podcasts.apple.com/us/podcast/off-the-chain/</p>
-          </li>
-        </ul>
-      </div>
+import { breadcrumbSchema, collectionPageSchema, abs } from '../lib/seo';
 
-      <div class="podcast-section">
-        <h2>Own The Dot Movement</h2>
-        <ul class="resource-list">
-<li>
-            <h3>#OwnTheDot | OwnTheDot.com</h3>
-            <p style="margin-bottom: 1rem;">OwnTheDot is a movement focused on digital ownership, identity, and independence online. It encourages people to "own their dot" meaning to take control of their name, presence, and future on the internet rather than relying entirely on centralized platforms.</p>
-            <p style="margin-bottom: 1.5rem;">At its core, Own The Dot promotes the idea that your digital identity should truly belong to you, much like your name and reputation do in the physical world.</p>
-            <a href="https://ownthedot.com" target="_blank" class="btn">Visit OwnTheDot.com</a>
-          </li>
-        </ul>
+const description = "Watch videos and listen to podcasts featuring interviews and deep dives into the Handshake (HNS) decentralized DNS ecosystem.";
+---
+<BaseLayout
+  title="Handshake (HNS) Podcasts & Videos"
+  description={description}
+  keywords="Handshake podcast, HNS video, The Breakdown NLW, Devon James Handshake, Own The Dot, decentralized DNS podcast"
+  schema={[
+    collectionPageSchema({ title: 'Podcasts & Videos', description, url: abs('/podcasts/') }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Podcasts', path: '/podcasts/' },
+    ]),
+  ]}
+>
+  <div class="page-shell">
+
+    <section class="page-hero">
+      <div class="page-hero-eyebrow">Audio &amp; Video</div>
+      <h1 class="page-hero-title">
+        Hear it from the <em>builders.</em>
+      </h1>
+      <p class="page-hero-lede">
+        Interviews, deep dives, and explainers from the founders, contributors, and
+        early adopters working on the Handshake protocol.
+      </p>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">Featured videos</div>
+      <div class="tile-grid tile-grid--2">
+        <a href="https://www.youtube.com/watch?v=tB0RWxBNKnE" target="_blank" rel="noopener" class="link-tile media-tile">
+          <div class="media-tile-icon">&#9658;</div>
+          <h3>Handshake Overview by Namebase</h3>
+          <p>The introductory explainer covering what Handshake is, why it matters, and how it works at a high level.</p>
+          <span class="link-tile-cta">Watch video &rarr;</span>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=tB0RWxBNKnE" target="_blank" rel="noopener" class="link-tile media-tile">
+          <div class="media-tile-icon">&#9658;</div>
+          <h3>What is Handshake? HNS Explained</h3>
+          <p>A concise breakdown of the Handshake protocol for newcomers approaching crypto-naming for the first time.</p>
+          <span class="link-tile-cta">Watch video &rarr;</span>
+        </a>
       </div>
-    </div>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">Podcast episodes</div>
+      <div class="tile-grid tile-grid--2">
+        <a href="https://www.coindesk.com/podcasts/the-breakdown-with-nlw/" target="_blank" rel="noopener" class="link-tile media-tile">
+          <div class="media-tile-icon">&#9836;</div>
+          <h3>Handshake on The Breakdown with NLW</h3>
+          <p>Nathaniel Whittemore breaks down the Handshake protocol and its place in the broader decentralization conversation.</p>
+          <span class="link-tile-cta">Listen now &rarr;</span>
+        </a>
+
+        <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile media-tile link-tile--offline">
+          <div class="media-tile-icon">&#9836;</div>
+          <h3>Handshake: A Decentralized DNS with Devon James</h3>
+          <p>Off The Chain interview with Devon James on the Handshake naming protocol.</p>
+          <span class="link-tile-cta">Listen now (Offline)</span>
+          <p class="link-tile-original">Original URL: https://podcasts.apple.com/us/podcast/off-the-chain/</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="callout otd-callout">
+        <div class="section-label">Movement</div>
+        <h2>#OwnTheDot</h2>
+        <p class="otd-tagline">A movement focused on digital ownership, identity, and independence online.</p>
+        <p>
+          OwnTheDot encourages people to "own their dot" — to take control of their
+          name, presence, and future on the internet rather than relying entirely on
+          centralized platforms.
+        </p>
+        <p>
+          At its core, Own The Dot promotes the idea that your digital identity should
+          truly belong to you, much like your name and reputation do in the physical world.
+        </p>
+        <div class="otd-cta">
+          <a href="https://ownthedot.com" target="_blank" rel="noopener" class="btn-primary">
+            Visit OwnTheDot.com
+          </a>
+        </div>
+      </div>
+    </section>
+
   </div>
 </BaseLayout>
+
+<style>
+  .page-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .media-tile {
+    padding: 2rem;
+  }
+
+  .media-tile-icon {
+    font-size: 1.6rem;
+    color: var(--hns-violet);
+    margin-bottom: 0.85rem;
+  }
+
+  .media-tile h3 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.65rem !important;
+  }
+
+  .media-tile p {
+    font-size: 0.92rem !important;
+  }
+
+  .otd-callout {
+    padding: 3rem;
+  }
+
+  .otd-callout h2 {
+    font-family: var(--font-mono);
+    font-size: 2.4rem !important;
+    margin: 0 0 1rem !important;
+    color: var(--hns-violet);
+    letter-spacing: -0.02em;
+  }
+
+  .otd-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.3rem !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 1.5rem !important;
+    line-height: 1.4;
+  }
+
+  .otd-callout p {
+    max-width: 720px;
+  }
+
+  .otd-cta { margin-top: 1.5rem; }
+</style>

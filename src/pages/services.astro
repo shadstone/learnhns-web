@@ -1,136 +1,172 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema, collectionPageSchema, abs } from '../lib/seo';
+
+const description = "A complete directory of Handshake (HNS) services including desktop wallets, mining pools, exchanges, and block explorers.";
 ---
-<BaseLayout title="HNS Services - Wallets, Exchanges, and More" description="A complete directory of Handshake (HNS) services including desktop wallets, mining pools, exchanges, and block explorers.">
-  <div class="content-wrapper">
-    <h1>Handshake Services Directory</h1>
-    
-    <div class="card-grid">
-      <section class="card">
-        <h2>Wallets</h2>
-        <ul class="resource-list" style="grid-template-columns: 1fr;">
-          <li>
-            <h3>Bob Wallet</h3>
-            <p>Desktop wallet for managing HNS coins and names</p>
-            <a href="https://bobwallet.org" target="_blank" class="btn">Visit Website</a>
-          </li>
-          <li>
-            <h3>Namebase</h3>
-            <p>Web-based wallet and name management platform</p>
-            <a href="https://www.namebase.io" target="_blank" class="btn">Visit Website</a>
-          </li>
-          <li>
-            <h3>ShakeStation</h3>
-            <p>Modern wallet and name management interface</p>
-            <a href="#" title="Link Offline" style="opacity: 0.5; cursor: not-allowed;" onclick="event.preventDefault();" target="_blank" class="btn">Visit Website (Offline)</a>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7; word-break: break-all;">Original URL: https://shakestation.io</p>
-          </li>
-          <li>
-            <h3>HNS Ledger App</h3>
-            <p>Hardware wallet support for Ledger devices</p>
-            <a href="https://github.com/handshake-org/ledger-app-hns" target="_blank" class="btn">Learn More</a>
-          </li>
-        </ul>
-      </section>
+<BaseLayout
+  title="HNS Services - Wallets, Exchanges, and More"
+  description={description}
+  keywords="HNS wallets, Bob Wallet, Namebase, ShakeStation, HNS Ledger, HNS mining pool, HNS exchange, HNS resolver, NextDNS, HDNS"
+  schema={[
+    collectionPageSchema({ title: 'Handshake Services Directory', description, url: abs('/services/') }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Services', path: '/services/' },
+    ]),
+  ]}
+>
+  <div class="page-shell">
 
-      <section class="card">
-        <h2>Exchanges</h2>
-        <ul class="resource-list" style="grid-template-columns: 1fr;">
-          <li>
-            <h3>Namebase Exchange</h3>
-            <p>Buy, sell, and trade HNS</p>
-            <a href="#" title="Link Offline" style="opacity: 0.5; cursor: not-allowed;" onclick="event.preventDefault();" target="_blank" class="btn">Trade Now (Offline)</a>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7; word-break: break-all;">Original URL: https://www.namebase.io/exchange</p>
-          </li>
-          <li>
-            <h3>Gate.io</h3>
-            <p>HNS trading pairs available</p>
-            <a href="https://gate.io" target="_blank" class="btn">Trade Now</a>
-          </li>
-        </ul>
-      </section>
+    <section class="page-hero">
+      <div class="page-hero-eyebrow">Ecosystem Directory</div>
+      <h1 class="page-hero-title">
+        Handshake <em>services.</em>
+      </h1>
+      <p class="page-hero-lede">
+        Wallets, exchanges, mining pools, name services, developer tooling, resolvers,
+        and explorers — the working ecosystem around HNS, organized so you can
+        actually find what you need.
+      </p>
+    </section>
 
-      <section class="card">
-        <h2>Mining Pools</h2>
-        <ul class="resource-list" style="grid-template-columns: 1fr;">
-          <li>
-            <h3>6Block Pool</h3>
-            <p>Professional HNS mining pool</p>
-            <a href="https://6block.com" target="_blank" class="btn">Start Mining</a>
-          </li>
-          <li>
-            <h3>F2Pool</h3>
-            <p>Multi-currency mining pool supporting HNS</p>
-            <a href="https://www.f2pool.com" target="_blank" class="btn">Start Mining</a>
-          </li>
-        </ul>
-      </section>
+    <section class="page-section">
+      <div class="section-label">Wallets</div>
+      <div class="tile-grid tile-grid--4">
+        <a href="https://bobwallet.org" target="_blank" rel="noopener" class="link-tile">
+          <h3>Bob Wallet</h3>
+          <p>Desktop wallet for managing HNS coins and names.</p>
+          <span class="link-tile-cta">Visit website &rarr;</span>
+        </a>
+        <a href="https://www.namebase.io" target="_blank" rel="noopener" class="link-tile">
+          <h3>Namebase</h3>
+          <p>Web-based wallet and name management platform.</p>
+          <span class="link-tile-cta">Visit website &rarr;</span>
+        </a>
+        <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">
+          <h3>ShakeStation</h3>
+          <p>Modern wallet and name management interface.</p>
+          <span class="link-tile-cta">Visit website (Offline)</span>
+          <p class="link-tile-original">Original URL: https://shakestation.io</p>
+        </a>
+        <a href="https://github.com/handshake-org/ledger-app-hns" target="_blank" rel="noopener" class="link-tile">
+          <h3>HNS Ledger App</h3>
+          <p>Hardware wallet support for Ledger devices.</p>
+          <span class="link-tile-cta">Learn more &rarr;</span>
+        </a>
+      </div>
+    </section>
 
-      <section class="card">
-        <h2>Name Services</h2>
-        <ul class="resource-list" style="grid-template-columns: 1fr;">
-          <li>
-            <h3>Namebase Registry</h3>
-            <p>Register and manage Handshake domains</p>
-            <a href="#" title="Link Offline" style="opacity: 0.5; cursor: not-allowed;" onclick="event.preventDefault();" target="_blank" class="btn">Register Names (Offline)</a>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7; word-break: break-all;">Original URL: https://www.namebase.io/domains</p>
-          </li>
-          <li>
-            <h3>HNS.ID</h3>
-            <p>Handshake name lookup and management</p>
-            <a href="https://hns.id" target="_blank" class="btn">Search Names</a>
-          </li>
-        </ul>
-      </section>
+    <section class="page-section">
+      <div class="section-label">Exchanges</div>
+      <div class="tile-grid tile-grid--3">
+        <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">
+          <h3>Namebase Exchange</h3>
+          <p>Buy, sell, and trade HNS.</p>
+          <span class="link-tile-cta">Trade now (Offline)</span>
+          <p class="link-tile-original">Original URL: https://www.namebase.io/exchange</p>
+        </a>
+        <a href="https://gate.io" target="_blank" rel="noopener" class="link-tile">
+          <h3>Gate.io</h3>
+          <p>HNS trading pairs available.</p>
+          <span class="link-tile-cta">Trade now &rarr;</span>
+        </a>
+      </div>
+    </section>
 
-      <section class="card">
-        <h2>Developer Tools</h2>
-        <ul class="resource-list" style="grid-template-columns: 1fr;">
-          <li>
-            <h3>HSD</h3>
-            <p>Full node implementation and wallet</p>
-            <a href="https://github.com/handshake-org/hsd" target="_blank" class="btn">View Repository</a>
-          </li>
-          <li>
-            <h3>HNSD</h3>
-            <p>Light client for Handshake</p>
-            <a href="https://github.com/handshake-org/hnsd" target="_blank" class="btn">View Repository</a>
-          </li>
-        </ul>
-      </section>
+    <section class="page-section">
+      <div class="section-label">Mining pools</div>
+      <div class="tile-grid tile-grid--3">
+        <a href="https://6block.com" target="_blank" rel="noopener" class="link-tile">
+          <h3>6Block Pool</h3>
+          <p>Professional HNS mining pool.</p>
+          <span class="link-tile-cta">Start mining &rarr;</span>
+        </a>
+        <a href="https://www.f2pool.com" target="_blank" rel="noopener" class="link-tile">
+          <h3>F2Pool</h3>
+          <p>Multi-currency mining pool supporting HNS.</p>
+          <span class="link-tile-cta">Start mining &rarr;</span>
+        </a>
+      </div>
+    </section>
 
-      <section class="card">
-        <h2>Resolvers</h2>
-        <ul class="resource-list" style="grid-template-columns: 1fr;">
-          <li>
-            <h3>HDNS</h3>
-            <p>Public Handshake DNS resolver</p>
-            <a href="#" title="Link Offline" style="opacity: 0.5; cursor: not-allowed;" onclick="event.preventDefault();" target="_blank" class="btn">Configure Now (Offline)</a>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7; word-break: break-all;">Original URL: https://www.hdns.io</p>
-          </li>
-          <li>
-            <h3>NextDNS</h3>
-            <p>DNS resolver with Handshake support</p>
-            <a href="https://nextdns.io" target="_blank" class="btn">Configure Now</a>
-          </li>
-        </ul>
-      </section>
+    <section class="page-section">
+      <div class="section-label">Name services</div>
+      <div class="tile-grid tile-grid--3">
+        <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">
+          <h3>Namebase Registry</h3>
+          <p>Register and manage Handshake domains.</p>
+          <span class="link-tile-cta">Register names (Offline)</span>
+          <p class="link-tile-original">Original URL: https://www.namebase.io/domains</p>
+        </a>
+        <a href="https://hns.id" target="_blank" rel="noopener" class="link-tile">
+          <h3>HNS.ID</h3>
+          <p>Handshake name lookup and management.</p>
+          <span class="link-tile-cta">Search names &rarr;</span>
+        </a>
+      </div>
+    </section>
 
-      <section class="card">
-        <h2>Block Explorers</h2>
-        <ul class="resource-list" style="grid-template-columns: 1fr;">
-          <li>
-            <h3>HNSFans Explorer</h3>
-            <p>Comprehensive Handshake blockchain explorer</p>
-            <a href="https://e.hnsfans.com" target="_blank" class="btn">View Explorer</a>
-          </li>
-          <li>
-            <h3>ShakeShift</h3>
-            <p>Modern Handshake block and name explorer</p>
-            <a href="https://shakeshift.com" target="_blank" class="btn">View Explorer</a>
-          </li>
-        </ul>
-      </section>
-    </div>
+    <section class="page-section">
+      <div class="section-label">Developer tools</div>
+      <div class="tile-grid tile-grid--3">
+        <a href="https://github.com/handshake-org/hsd" target="_blank" rel="noopener" class="link-tile">
+          <h3>HSD</h3>
+          <p>Full node implementation and wallet.</p>
+          <span class="link-tile-cta">View repository &rarr;</span>
+        </a>
+        <a href="https://github.com/handshake-org/hnsd" target="_blank" rel="noopener" class="link-tile">
+          <h3>HNSD</h3>
+          <p>Light client for Handshake.</p>
+          <span class="link-tile-cta">View repository &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">Resolvers</div>
+      <div class="tile-grid tile-grid--3">
+        <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">
+          <h3>HDNS</h3>
+          <p>Public Handshake DNS resolver.</p>
+          <span class="link-tile-cta">Configure now (Offline)</span>
+          <p class="link-tile-original">Original URL: https://www.hdns.io</p>
+        </a>
+        <a href="https://nextdns.io" target="_blank" rel="noopener" class="link-tile">
+          <h3>NextDNS</h3>
+          <p>DNS resolver with Handshake support.</p>
+          <span class="link-tile-cta">Configure now &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">Block explorers</div>
+      <div class="tile-grid tile-grid--3">
+        <a href="https://e.hnsfans.com" target="_blank" rel="noopener" class="link-tile">
+          <h3>HNSFans Explorer</h3>
+          <p>Comprehensive Handshake blockchain explorer.</p>
+          <span class="link-tile-cta">View explorer &rarr;</span>
+        </a>
+        <a href="https://shakeshift.com" target="_blank" rel="noopener" class="link-tile">
+          <h3>ShakeShift</h3>
+          <p>Modern Handshake block and name explorer.</p>
+          <span class="link-tile-cta">View explorer &rarr;</span>
+        </a>
+      </div>
+    </section>
+
   </div>
 </BaseLayout>
+
+<style>
+  .page-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Tighter vertical rhythm — many small sections back to back */
+  .page-section { padding: 1.75rem 0 2.5rem; }
+  .page-section:last-child { padding-bottom: 5rem; }
+</style>

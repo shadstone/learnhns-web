@@ -1,6 +1,7 @@
 {
-  "name": "LearnHNS",
+  "name": "LearnHNS — Handshake Education Hub",
   "short_name": "LearnHNS",
+  "description": "Your gateway to understanding Handshake (HNS) — the decentralized naming protocol.",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,7 +14,9 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#020617",
-  "background_color": "#0f172a",
-  "display": "standalone"
+  "theme_color": "#693AFA",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
 }

@@ -1,92 +1,207 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema, webPageSchema, abs } from '../lib/seo';
+
+const sections = [
+  {
+    n: '01',
+    label: 'Introduction',
+    title: 'Introduction',
+    body: 'This Privacy Policy outlines how the LearnHNS wallets (including our Chrome extension) handle your data. As a decentralized ecosystem tool, we prioritize your privacy and security above all else. We operate on a principle of minimal data collection and maximum user control.',
+  },
+  {
+    n: '02',
+    label: 'Local Storage',
+    title: 'Local Wallet Storage',
+    body: "All wallet data, including preferences, account names, and transaction history, is stored entirely locally on your device. We do not sync this data to any external servers or cloud services. If you uninstall the extension or clear your browser data, your local wallet storage will be permanently deleted.",
+  },
+  {
+    n: '03',
+    label: 'Seed Phrase',
+    title: 'Seed Phrase and Private Key Handling',
+    body: 'Your Seed Phrase (recovery phrase) and Private Keys are generated locally on your device. They are encrypted using the password you set and are never transmitted to our servers or any third-party services. You are solely responsible for securely backing up your Seed Phrase.',
+  },
+  {
+    n: '04',
+    label: 'Password',
+    title: 'Password Handling',
+    body: 'The password you create to lock your wallet is only used locally to encrypt and decrypt your private keys. We do not store, transmit, or have access to your password. If you lose your password, we cannot recover it for you.',
+  },
+  {
+    n: '05',
+    label: 'Node Requests',
+    title: 'Node and Explorer Requests',
+    body: 'To display balances and facilitate transactions, the wallet must communicate with the Handshake blockchain. This is done by querying public Handshake nodes and block explorers. These requests may expose your IP address to those public nodes, but they do not contain any personally identifiable information linking your identity to your wallet addresses.',
+  },
+  {
+    n: '06',
+    label: 'Rescans',
+    title: 'Wallet Rescans and Address Lookup',
+    body: [
+      "LearnHNS Wallet is a self-custody browser extension. Seed phrases and private keys are stored locally in the user's browser extension storage and are not intentionally sent to LearnHNS servers.",
+      "However, wallet rescans may send derived receive and change addresses from the user's wallet to the configured Handshake RPC or indexer service. This is used to discover relevant transactions, balances, and Handshake name ownership. If the user uses the default hosted service, that service may see addresses associated with the wallet.",
+      'Users who prefer not to expose wallet addresses to the default hosted service should configure their own compatible Handshake RPC or indexer endpoint before importing or restoring a wallet.',
+    ],
+  },
+  {
+    n: '07',
+    label: 'DApp Connections',
+    title: 'Content Script and DApp Connection Behavior',
+    body: 'When you use the LearnHNS wallet extension to connect to decentralized applications (DApps) or ShakeDex, the wallet injects a content script to facilitate communication. The wallet will explicitly prompt you for permission before connecting to any DApp or signing any transactions. We do not track which websites you visit or which DApps you interact with.',
+  },
+  {
+    n: '08',
+    label: 'Analytics',
+    title: 'Analytics Status',
+    body: 'Please note that the address lookup and rescan behavior described above is completely separate from analytics. LearnHNS Wallet currently has analytics disabled/no-op in the extension code. We do not use tools like Google Analytics, Mixpanel, or any other tracking software within the wallet application to monitor your behavior.',
+  },
+  {
+    n: '09',
+    label: 'No Sale',
+    title: 'No Sale of User Data',
+    body: 'Because we do not collect personal data, we have no data to sell. We will never sell, rent, or trade your information to advertisers, data brokers, or any other third parties.',
+  },
+  {
+    n: '10',
+    label: 'Support',
+    title: 'Support Contact',
+    body: 'If you have any questions or concerns regarding this Privacy Policy or how your data is handled, please reach out to our maintainers at SkyInclude.',
+    cta: { href: 'https://skyinclude.com/contact', label: 'Contact Support' },
+  },
+];
 ---
-<BaseLayout title="Privacy Policy" description="Read the LearnHNS Privacy Policy. Learn how our wallets and extensions handle your seed phrases, node requests, and user data securely.">
-  <div class="content-wrapper">
-    <h1>Privacy Policy</h1>
-    <p class="last-updated">Last Updated: May 2026</p>
+<BaseLayout
+  title="Privacy Policy"
+  description="Read the LearnHNS Privacy Policy. Learn how our wallets and extensions handle your seed phrases, node requests, and user data securely."
+  schema={[
+    webPageSchema({
+      title: 'Privacy Policy',
+      description: 'How LearnHNS wallets and extensions handle seed phrases, node requests, and personal data.',
+      url: abs('/privacy/'),
+    }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Privacy', path: '/privacy/' },
+    ]),
+  ]}
+>
+  <div class="privacy-shell">
 
-    <div class="privacy-content">
-      <section class="privacy-section">
-        <h2>1. Introduction</h2>
-        <p>This Privacy Policy outlines how the LearnHNS wallets (including our Chrome extension) handle your data. As a decentralized ecosystem tool, we prioritize your privacy and security above all else. We operate on a principle of minimal data collection and maximum user control.</p>
-      </section>
+    <section class="page-hero page-hero--narrow">
+      <div class="page-hero-eyebrow">Policies</div>
+      <h1 class="page-hero-title">
+        Privacy <em>Policy.</em>
+      </h1>
+      <p class="page-hero-lede">
+        How LearnHNS wallets and extensions handle your seed phrases,
+        node requests, and personal data. Minimal collection, maximum user control.
+      </p>
+      <p class="last-updated">Last updated: May 2026</p>
+    </section>
 
-      <section class="privacy-section">
-        <h2>2. Local Wallet Storage</h2>
-        <p>All wallet data, including preferences, account names, and transaction history, is stored entirely locally on your device. We do not sync this data to any external servers or cloud services. If you uninstall the extension or clear your browser data, your local wallet storage will be permanently deleted.</p>
-      </section>
+    <article class="privacy-body">
+      {sections.map((s) => (
+        <section class="privacy-section">
+          <div class="privacy-section-head">
+            <span class="privacy-section-n">{s.n}</span>
+            <div class="privacy-section-meta">
+              <div class="section-label privacy-section-label">{s.label}</div>
+              <h2>{s.title}</h2>
+            </div>
+          </div>
+          {Array.isArray(s.body) ? (
+            s.body.map((p) => <p>{p}</p>)
+          ) : (
+            <p>{s.body}</p>
+          )}
+          {s.cta && (
+            <p class="section-cta">
+              <a href={s.cta.href} target="_blank" rel="noopener" class="btn-primary">{s.cta.label}</a>
+            </p>
+          )}
+        </section>
+      ))}
+    </article>
 
-      <section class="privacy-section">
-        <h2>3. Seed Phrase and Private Key Handling</h2>
-        <p>Your Seed Phrase (recovery phrase) and Private Keys are generated locally on your device. They are encrypted using the password you set and are never transmitted to our servers or any third-party services. You are solely responsible for securely backing up your Seed Phrase.</p>
-      </section>
-
-      <section class="privacy-section">
-        <h2>4. Password Handling</h2>
-        <p>The password you create to lock your wallet is only used locally to encrypt and decrypt your private keys. We do not store, transmit, or have access to your password. If you lose your password, we cannot recover it for you.</p>
-      </section>
-
-      <section class="privacy-section">
-        <h2>5. Node and Explorer Requests</h2>
-        <p>To display balances and facilitate transactions, the wallet must communicate with the Handshake blockchain. This is done by querying public Handshake nodes and block explorers. These requests may expose your IP address to those public nodes, but they do not contain any personally identifiable information linking your identity to your wallet addresses.</p>
-      </section>
-
-      <section class="privacy-section">
-        <h2>6. Wallet Rescans and Address Lookup</h2>
-        <p>LearnHNS Wallet is a self-custody browser extension. Seed phrases and private keys are stored locally in the user's browser extension storage and are not intentionally sent to LearnHNS servers.</p>
-        <p>However, wallet rescans may send derived receive and change addresses from the user's wallet to the configured Handshake RPC or indexer service. This is used to discover relevant transactions, balances, and Handshake name ownership. If the user uses the default hosted service, that service may see addresses associated with the wallet.</p>
-        <p>Users who prefer not to expose wallet addresses to the default hosted service should configure their own compatible Handshake RPC or indexer endpoint before importing or restoring a wallet.</p>
-      </section>
-
-      <section class="privacy-section">
-        <h2>7. Content Script and DApp Connection Behavior</h2>
-        <p>When you use the LearnHNS wallet extension to connect to decentralized applications (DApps) or ShakeDex, the wallet injects a content script to facilitate communication. The wallet will explicitly prompt you for permission before connecting to any DApp or signing any transactions. We do not track which websites you visit or which DApps you interact with.</p>
-      </section>
-
-      <section class="privacy-section">
-        <h2>8. Analytics Status</h2>
-        <p>Please note that the address lookup and rescan behavior described above is completely separate from analytics. LearnHNS Wallet currently has analytics disabled/no-op in the extension code. We do not use tools like Google Analytics, Mixpanel, or any other tracking software within the wallet application to monitor your behavior.</p>
-      </section>
-
-      <section class="privacy-section">
-        <h2>9. No Sale of User Data</h2>
-        <p>Because we do not collect personal data, we have no data to sell. We will never sell, rent, or trade your information to advertisers, data brokers, or any other third parties.</p>
-      </section>
-
-      <section class="privacy-section">
-        <h2>10. Support Contact</h2>
-        <p>If you have any questions or concerns regarding this Privacy Policy or how your data is handled, please reach out to our maintainers at SkyInclude:</p>
-        <p><a href="https://skyinclude.com/contact" target="_blank" class="btn">Contact Support</a></p>
-      </section>
-    </div>
   </div>
 </BaseLayout>
 
 <style>
-  .last-updated {
-    color: #94a3b8;
-    font-size: 0.9rem;
-    margin-bottom: 2rem;
-    font-family: var(--font-mono);
+  .privacy-shell {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
   }
 
-  .privacy-content {
+  .last-updated {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    margin-top: 1.5rem;
+  }
+
+  .privacy-body {
+    padding: 2rem 0 5rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 3rem;
+  }
+
+  .privacy-section {
+    position: relative;
+  }
+
+  .privacy-section-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .privacy-section-n {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--hns-violet);
+    background: rgba(105, 58, 250, 0.06);
+    border: 1px solid rgba(105, 58, 250, 0.2);
+    padding: 0.35rem 0.65rem;
+    border-radius: 8px;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .privacy-section-meta { flex: 1; min-width: 0; }
+
+  .privacy-section-label {
+    margin-bottom: 0.5rem;
+    font-size: 0.6rem;
   }
 
   .privacy-section h2 {
+    font-family: var(--font-serif);
     font-size: 1.5rem;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-    border-bottom: 1px solid #334155;
-    padding-bottom: 0.5rem;
+    font-weight: 500;
+    margin: 0;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
   }
 
   .privacy-section p {
-    color: var(--text-color);
+    color: var(--text-secondary);
     line-height: 1.8;
+    font-size: 0.98rem;
+    margin: 0 0 1rem;
+  }
+
+  .privacy-section p:last-child { margin-bottom: 0; }
+
+  .section-cta { margin-top: 1.25rem; }
+
+  @media (max-width: 600px) {
+    .privacy-section-head { gap: 0.85rem; }
+    .privacy-section-n { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
+    .privacy-section h2 { font-size: 1.3rem; }
   }
 </style>

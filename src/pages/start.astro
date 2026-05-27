@@ -1,166 +1,263 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema, webPageSchema, abs } from '../lib/seo';
+
+const description = "A step-by-step guide to downloading Bob Wallet, installing the Chrome extension, and exploring Handshake (HNS) decentralized domains.";
 ---
-<BaseLayout title="Get Started with Handshake Tools" description="A step-by-step guide to downloading Bob Wallet, installing the Chrome extension, and exploring Handshake (HNS) decentralized domains.">
-  <div class="content-wrapper">
-    <h1>Start Using Handshake</h1>
-    <p style="font-size: 1.2rem; color: var(--text-color); margin-bottom: 3rem;">
-      Ready to dive into the Handshake ecosystem? Follow these steps to set up your decentralized tools and start exploring marketplaces on HNS.
-    </p>
+<BaseLayout
+  title="Get Started with Handshake Tools"
+  description={description}
+  keywords="Handshake setup, Bob Wallet, HNS Chrome extension, ShakeDex, Liquidity Spot, HNS getting started"
+  schema={[
+    webPageSchema({ title: 'Get Started with Handshake Tools', description, url: abs('/start/') }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Start Here', path: '/start/' },
+    ]),
+  ]}
+>
+  <div class="page-shell">
 
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-number">1</div>
-        <h2>Download Bob Wallet</h2>
-        <p>The premier desktop wallet for managing your HNS coins and domain names securely.</p>
-        <div class="btn-group">
-          <a href="https://bobwallet.org/download/bob-learnhns" target="_blank" class="btn primary-btn">LearnHNS 2026 Version</a>
-          <a href="https://bobwallet.org/download/bob-wallet" target="_blank" class="btn">2024 Version</a>
+    <section class="page-hero">
+      <div class="page-hero-eyebrow">Setup Guide</div>
+      <h1 class="page-hero-title">
+        Start using <em>Handshake.</em>
+      </h1>
+      <p class="page-hero-lede">
+        Ready to dive into the Handshake ecosystem? Follow these steps to set up
+        your decentralized tools and start exploring marketplaces on HNS.
+      </p>
+    </section>
+
+    <section class="page-section steps-section">
+      <div class="section-label">The path</div>
+
+      <!-- Featured first step -->
+      <article class="step-card step-card--featured">
+        <span class="step-badge">1</span>
+        <div class="step-body">
+          <h2>Download Bob Wallet</h2>
+          <p>
+            The premier desktop wallet for managing your HNS coins and domain
+            names securely. Start here — it's the foundation for everything else.
+          </p>
+          <div class="btn-group">
+            <a href="https://bobwallet.org/download/bob-learnhns" target="_blank" class="primary-btn">LearnHNS 2026 Version</a>
+            <a href="https://bobwallet.org/download/bob-wallet" target="_blank" class="btn">2024 Version</a>
+          </div>
         </div>
-      </div>
+      </article>
 
-      <div class="step-card">
-        <div class="step-number">2</div>
-        <h2>Install Chrome Extension</h2>
-        <p>Interact with Handshake domains directly from your browser with the Bob Wallet extension.</p>
-        <div class="btn-group">
-          <a href="https://bobwallet.org/extension/learnhns-wallet/" target="_blank" class="btn primary-btn">LearnHNS 2026 Version</a>
-          <a href="https://bobwallet.org/extension/shake-wallet/" target="_blank" class="btn">2024 Version</a>
-        </div>
-      </div>
+      <!-- Remaining steps in tighter grid -->
+      <div class="steps-grid">
+        <article class="step-card">
+          <span class="step-badge">2</span>
+          <div class="step-body">
+            <h2>Install Chrome Extension</h2>
+            <p>Interact with Handshake domains directly from your browser with the Bob Wallet extension.</p>
+            <div class="btn-group">
+              <a href="https://bobwallet.org/extension/learnhns-wallet/" target="_blank" class="primary-btn">LearnHNS 2026 Version</a>
+              <a href="https://bobwallet.org/extension/shake-wallet/" target="_blank" class="btn">2024 Version</a>
+            </div>
+          </div>
+        </article>
 
-      <div class="step-card">
-        <div class="step-number">3</div>
-        <h2>Visit ShakeDex Marketplace</h2>
-        <p>Buy and sell Handshake domains on our decentralized web marketplace channel.</p>
-        <div class="btn-group">
-          <a href="/market/" class="btn primary-btn">Learn About Our Market</a>
-          <a href="https://shakedex.org/markets" target="_blank" class="btn">More Shakedex Channels</a>
-        </div>
-      </div>
+        <article class="step-card">
+          <span class="step-badge">3</span>
+          <div class="step-body">
+            <h2>Visit ShakeDex Marketplace</h2>
+            <p>Buy and sell Handshake domains on our decentralized web marketplace channel.</p>
+            <div class="btn-group">
+              <a href="/market/" class="primary-btn">Learn About Our Market</a>
+              <a href="https://shakedex.org/markets" target="_blank" class="btn">More Shakedex Channels</a>
+            </div>
+          </div>
+        </article>
 
-      <div class="step-card">
-        <div class="step-number">4</div>
-        <h2>Buy/Sell HNS</h2>
-        <p>Easily trade Handshake coins (HNS) through the decentralized Liquidity Spot.</p>
-        <div class="btn-group">
-          <a href="https://liquidity.spot" target="_blank" class="btn primary-btn">Visit Liquidity Spot</a>
-          <a href="https://liquidity.spot/opensource" target="_blank" class="btn">Make Your Own</a>
-        </div>
-      </div>
+        <article class="step-card">
+          <span class="step-badge">4</span>
+          <div class="step-body">
+            <h2>Buy/Sell HNS</h2>
+            <p>Easily trade Handshake coins (HNS) through the decentralized Liquidity Spot.</p>
+            <div class="btn-group">
+              <a href="https://liquidity.spot" target="_blank" class="primary-btn">Visit Liquidity Spot</a>
+              <a href="https://liquidity.spot/opensource" target="_blank" class="btn">Make Your Own</a>
+            </div>
+          </div>
+        </article>
 
-      <div class="step-card">
-        <div class="step-number">5</div>
-        <h2>Contribute Blog Content</h2>
-        <p>This LearnHNS Blog is community-centric. Read our latest articles or contribute your own knowledge to the ecosystem.</p>
-        <div class="btn-group">
-          <a href="/blog/" class="btn primary-btn">Visit Blog</a>
-          <a href="/blog/become-contributor/" class="btn">Become a Contributor</a>
-        </div>
-      </div>
+        <article class="step-card">
+          <span class="step-badge">5</span>
+          <div class="step-body">
+            <h2>Contribute Blog Content</h2>
+            <p>This LearnHNS Blog is community-centric. Read our latest articles or contribute your own knowledge to the ecosystem.</p>
+            <div class="btn-group">
+              <a href="/blog/" class="primary-btn">Visit Blog</a>
+              <a href="/blog/become-contributor/" class="btn">Become a Contributor</a>
+            </div>
+          </div>
+        </article>
 
-      <div class="step-card">
-        <div class="step-number">6</div>
-        <h2>Join the Community</h2>
-        <p>Participate in GitHub development, join discussions, and help build the future of the decentralized web.</p>
-        <div class="btn-group">
-          <a href="https://github.com/handshake-org" target="_blank" class="btn">GitHub</a>
-          <a href="https://t.me/handshake_hns" target="_blank" class="btn">Telegram</a>
-        </div>
-      </div>
-    </div>
-
-    <section class="feedback-section">
-      <h2>Hit a snag? Tell us.</h2>
-      <p>Your feedback shapes the next version of Bob Wallet and this guide. Bug reports, suggestions, screenshots — all welcome.</p>
-      <div class="feedback-embed">
-        <script is:inline src="https://build.memoupdate.com/static/embed.js?form=bob-learnhns-feedback&v=1778219204"></script>
+        <article class="step-card">
+          <span class="step-badge">6</span>
+          <div class="step-body">
+            <h2>Join the Community</h2>
+            <p>Participate in GitHub development, join discussions, and help build the future of the decentralized web.</p>
+            <div class="btn-group">
+              <a href="https://github.com/handshake-org" target="_blank" class="btn">GitHub</a>
+              <a href="https://t.me/handshake_hns" target="_blank" class="btn">Telegram</a>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
+
+    <section class="page-section feedback-section">
+      <div class="callout">
+        <div class="section-label">Feedback</div>
+        <h2>Hit a snag? Tell us.</h2>
+        <p>Your feedback shapes the next version of Bob Wallet and this guide. Bug reports, suggestions, screenshots — all welcome.</p>
+        <div class="feedback-embed">
+          <script is:inline src="https://build.memoupdate.com/static/embed.js?form=bob-learnhns-feedback&v=1778219204"></script>
+        </div>
+      </div>
+    </section>
+
   </div>
 </BaseLayout>
 
 <style>
-  .steps-grid {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  .page-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
   }
 
   .step-card {
-    background: var(--card-bg);
-    padding: 2.5rem;
-    border-radius: 12px;
-    border: 1px solid #334155;
     position: relative;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    background: #ffffff;
+    padding: 2rem 2rem 2rem 4rem;
+    border-radius: 14px;
+    border: 1px solid var(--glass-border);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
   .step-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary-color);
+    transform: translateY(-3px);
+    border-color: var(--hns-violet);
+    box-shadow: 0 12px 32px rgba(105, 58, 250, 0.1);
   }
 
-  .step-number {
+  .step-badge {
     position: absolute;
-    top: -15px;
-    left: -15px;
-    width: 40px;
-    height: 40px;
-    background: var(--primary-color);
-    color: #0f172a;
+    top: 2rem;
+    left: 1.5rem;
+    width: 32px;
+    height: 32px;
+    background: var(--hns-violet);
+    color: #ffffff;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1rem;
+    font-weight: 700;
     font-family: var(--font-mono);
-    box-shadow: 0 4px 10px rgba(56, 189, 248, 0.4);
+    box-shadow: 0 4px 14px rgba(105, 58, 250, 0.35);
   }
 
   .step-card h2 {
-    margin-top: 0.5rem;
-    font-size: 1.5rem;
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin: 0 0 0.6rem;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .step-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+  }
+
+  /* Featured step gets a bigger badge + larger title */
+  .step-card--featured {
+    padding: 2.5rem 2.5rem 2.5rem 5rem;
+    background: linear-gradient(135deg, #ffffff, rgba(105, 58, 250, 0.03));
+    border-color: rgba(105, 58, 250, 0.25);
+    margin-bottom: 2rem;
+  }
+
+  .step-card--featured .step-badge {
+    top: 2.5rem;
+    left: 2rem;
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+  }
+
+  .step-card--featured h2 {
+    font-size: 1.85rem;
+  }
+
+  .step-card--featured p {
+    font-size: 1.05rem;
+    max-width: 640px;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 
   .primary-btn {
-    background-color: var(--primary-color);
-    color: #0f172a;
-    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--hns-violet);
+    color: #ffffff;
+    border: 1px solid var(--hns-violet);
+    padding: 0.55rem 1.1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    font-family: var(--font-sans);
+    text-decoration: none;
+    transition: all 0.2s ease;
   }
 
   .primary-btn:hover {
-    background-color: var(--secondary-color);
-    transform: scale(1.02);
+    background: var(--hns-violet-deep);
+    border-color: var(--hns-violet-deep);
+    color: #ffffff;
+    text-decoration: none;
   }
 
   .btn-group {
     display: flex;
-    gap: 1rem;
+    gap: 0.6rem;
     flex-wrap: wrap;
   }
 
-  .feedback-section {
-    margin-top: 5rem;
-    padding: 2.5rem;
-    background: var(--card-bg);
-    border: 1px solid #334155;
-    border-radius: 12px;
+  .feedback-section .callout h2 {
+    font-size: 1.85rem;
+    margin-bottom: 0.5rem;
   }
 
-  .feedback-section h2 {
-    margin-top: 0;
-    font-size: 1.75rem;
+  .feedback-section .callout p {
+    margin-bottom: 1.5rem;
+    max-width: 640px;
   }
 
-  .feedback-section > p {
-    color: var(--text-color);
-    margin-bottom: 2rem;
-  }
+  .feedback-embed { min-height: 1px; margin-top: 1rem; }
 
-  .feedback-embed {
-    min-height: 1px;
+  @media (max-width: 800px) {
+    .steps-grid { grid-template-columns: 1fr; }
+    .step-card { padding: 1.75rem 1.5rem 1.75rem 3.5rem; }
+    .step-card--featured { padding: 2rem 1.75rem 2rem 4rem; }
+    .step-badge { left: 1rem; top: 1.75rem; }
+    .step-card--featured .step-badge { left: 1.25rem; top: 2rem; }
   }
 </style>

@@ -1,67 +1,146 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
----
-<BaseLayout title="Learn HNS - Understanding Handshake" description="Learn the basics of Handshake (HNS). Discover how decentralized domain names work and read the official whitepaper and developer guides.">
-  <div class="content-wrapper">
-    <h1>Learn About Handshake</h1>
-    <div class="content">
-      <section class="learn-section">
-        <h2>Essential Resources</h2>
-        <ul class="resource-list">
-          <li>
-            <h3>Official Documentation</h3>
-            <p>Comprehensive technical documentation for developers and users</p>
-            <a href="https://hsd-dev.org" target="_blank" class="btn">HSD Documentation</a>
-          </li>
-          <li>
-            <h3>Handshake Whitepaper</h3>
-            <p>Technical overview of the Handshake protocol</p>
-            <a href="https://handshake.org/files/handshake.txt" target="_blank" class="btn">Read Whitepaper</a>
-          </li>
-          <li>
-            <h3>Namebase Learn</h3>
-            <p>Beginner-friendly guides and tutorials</p>
-            <a href="https://learn.namebase.io" target="_blank" class="btn">Visit Namebase Learn</a>
-          </li>
-          <li>
-            <h3>HNS Development Guide</h3>
-            <p>Technical guide for developers building on Handshake</p>
-            <a href="#" title="Link Offline" style="opacity: 0.5; cursor: not-allowed;" onclick="event.preventDefault();" target="_blank" class="btn">Read Development Guide (Offline)</a>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7; word-break: break-all;">Original URL: https://hsd-dev.org/guides/protocol.html</p>
-          </li>
-          <li>
-            <h3>Handshake FAQ</h3>
-            <p>Frequently asked questions about Handshake</p>
-            <a href="https://handshake.org/faq/" target="_blank" class="btn">Read FAQ</a>
-          </li>
-          <li>
-            <h3>Skyinclude Blog</h3>
-            <p>In-depth articles and tutorials about Handshake technology</p>
-            <a href="https://skyinclude.com/blog" target="_blank" class="btn">Read Blog</a>
-          </li>
-        </ul>
-      </section>
+import { breadcrumbSchema, collectionPageSchema, abs } from '../lib/seo';
 
-      <section class="learn-section" style="margin-top: 3rem;">
-        <h2>Community Resources</h2>
-        <ul class="resource-list">
-          <li>
-            <h3>Handshake Community</h3>
-            <p>Join the discussion on Telegram</p>
-            <a href="https://t.me/handshake_hns" target="_blank" class="btn">Join Telegram</a>
-          </li>
-          <li>
-            <h3>Developer Community</h3>
-            <p>Technical discussions and development chat</p>
-            <a href="https://t.me/hns_tech" target="_blank" class="btn">Join Developer Chat</a>
-          </li>
-          <li>
-            <h3>GitHub Repository</h3>
-            <p>Source code and technical resources</p>
-            <a href="https://github.com/handshake-org" target="_blank" class="btn">View on GitHub</a>
-          </li>
-        </ul>
-      </section>
-    </div>
+const description = "Learn the basics of Handshake (HNS). Discover how decentralized domain names work and read the official whitepaper and developer guides.";
+---
+<BaseLayout
+  title="Learn HNS - Understanding Handshake"
+  description={description}
+  keywords="Learn Handshake, HNS whitepaper, decentralized DNS, HSD documentation, Namebase Learn, HNS FAQ"
+  schema={[
+    collectionPageSchema({ title: 'Learn Handshake', description, url: abs('/learn/') }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Learn HNS', path: '/learn/' },
+    ]),
+  ]}
+>
+  <div class="page-shell">
+
+    <section class="page-hero">
+      <div class="page-hero-eyebrow">Education Hub</div>
+      <h1 class="page-hero-title">
+        Learn <em>Handshake.</em>
+      </h1>
+      <p class="page-hero-lede">
+        Whitepapers, documentation, developer guides, and community resources for
+        understanding the decentralized naming protocol from first principles.
+      </p>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">Essential resources</div>
+
+      <a href="https://hsd-dev.org" target="_blank" rel="noopener" class="link-tile link-tile--featured featured-doc">
+        <div class="featured-eyebrow">Start here</div>
+        <h3>Official Documentation</h3>
+        <p>The canonical, comprehensive technical reference for developers and operators. Everything from running a node to building name-aware applications.</p>
+        <span class="link-tile-cta">HSD Documentation &rarr;</span>
+      </a>
+
+      <div class="tile-grid tile-grid--3 learn-grid">
+        <a href="https://handshake.org/files/handshake.txt" target="_blank" rel="noopener" class="link-tile">
+          <h3>Handshake Whitepaper</h3>
+          <p>Technical overview of the Handshake protocol.</p>
+          <span class="link-tile-cta">Read whitepaper &rarr;</span>
+        </a>
+
+        <a href="https://learn.namebase.io" target="_blank" rel="noopener" class="link-tile">
+          <h3>Namebase Learn</h3>
+          <p>Beginner-friendly guides and tutorials.</p>
+          <span class="link-tile-cta">Visit Namebase Learn &rarr;</span>
+        </a>
+
+        <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">
+          <h3>HNS Development Guide</h3>
+          <p>Technical guide for developers building on Handshake.</p>
+          <span class="link-tile-cta">Read guide (Offline)</span>
+          <p class="link-tile-original">Original URL: https://hsd-dev.org/guides/protocol.html</p>
+        </a>
+
+        <a href="https://handshake.org/faq/" target="_blank" rel="noopener" class="link-tile">
+          <h3>Handshake FAQ</h3>
+          <p>Frequently asked questions about Handshake.</p>
+          <span class="link-tile-cta">Read FAQ &rarr;</span>
+        </a>
+
+        <a href="https://skyinclude.com/blog" target="_blank" rel="noopener" class="link-tile">
+          <h3>Skyinclude Blog</h3>
+          <p>In-depth articles and tutorials about Handshake technology.</p>
+          <span class="link-tile-cta">Read blog &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">Community resources</div>
+      <h2 class="section-heading">Join the people building this.</h2>
+      <p class="page-section-lede">Where contributors, operators, and curious newcomers actually talk to each other.</p>
+
+      <div class="tile-grid tile-grid--3">
+        <a href="https://t.me/handshake_hns" target="_blank" rel="noopener" class="link-tile">
+          <h3>Handshake Community</h3>
+          <p>Join the discussion on Telegram.</p>
+          <span class="link-tile-cta">Join Telegram &rarr;</span>
+        </a>
+
+        <a href="https://t.me/hns_tech" target="_blank" rel="noopener" class="link-tile">
+          <h3>Developer Community</h3>
+          <p>Technical discussions and development chat.</p>
+          <span class="link-tile-cta">Join developer chat &rarr;</span>
+        </a>
+
+        <a href="https://github.com/handshake-org" target="_blank" rel="noopener" class="link-tile">
+          <h3>GitHub Repository</h3>
+          <p>Source code and technical resources.</p>
+          <span class="link-tile-cta">View on GitHub &rarr;</span>
+        </a>
+      </div>
+    </section>
+
   </div>
 </BaseLayout>
+
+<style>
+  .page-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-heading {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.75rem;
+  }
+
+  .featured-doc {
+    padding: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .featured-eyebrow {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hns-violet);
+    margin-bottom: 0.5rem;
+  }
+
+  .featured-doc h3 {
+    font-size: 1.8rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .featured-doc p {
+    font-size: 1.02rem !important;
+    max-width: 640px;
+  }
+
+  .learn-grid { margin-top: 1rem; }
+</style>

@@ -1,82 +1,181 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
----
-<BaseLayout title="Handshake Articles, Reading & Media Mentions" description="Explore curated articles, tutorials, and press coverage about the Handshake (HNS) decentralized naming protocol.">
-  <div class="content-wrapper">
-    <h1>Educational Reading & Media Mentions</h1>
-    <div class="media-content">
-      <section class="articles" style="margin-bottom: 3rem;">
-        <h2>Featured Articles</h2>
-        <ul class="resource-list">
-          <li>
-            <h3>Handshake: A Decentralized Certificate Authority and DNS</h3>
-            <p>A comprehensive overview of the Handshake protocol and its implications for internet infrastructure</p>
-            <a href="#" title="Link Offline" style="opacity: 0.5; cursor: not-allowed;" onclick="event.preventDefault();" target="_blank" class="btn">Read Article (Offline)</a>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7; word-break: break-all;">Original URL: https://namebase.io/blog/handshake-a-decentralized-certificate-authority-and-dns/</p>
-          </li>
-          <li>
-            <h3>Understanding Handshake Naming System</h3>
-            <p>Deep dive into how Handshake works and its potential impact on domain naming</p>
-            <a href="https://medium.com/handshake-org/understanding-handshake-naming-system-6cb10a1b4485" target="_blank" class="btn">Read Article</a>
-          </li>
-          <li>
-            <h3>The Future of Domain Names with Handshake</h3>
-            <p>Exploring how Handshake is revolutionizing domain name ownership and management</p>
-            <a href="https://www.coindesk.com/markets/2020/02/18/handshake-revealed-vcs-back-plan-to-give-away-100m-in-crypto-for-free/" target="_blank" class="btn">Read Article</a>
-          </li>
-        </ul>
-      </section>
-      
-      <section class="press" style="margin-bottom: 3rem;">
-        <h2>Press Coverage</h2>
-        <ul class="resource-list">
-          <li>
-            <h3>CoinDesk: Handshake Revealed</h3>
-            <p>February 2020 - Coverage of Handshake's launch and initial distribution</p>
-            <a href="https://www.coindesk.com/markets/2020/02/18/handshake-revealed-vcs-back-plan-to-give-away-100m-in-crypto-for-free/" target="_blank" class="btn">Read Coverage</a>
-          </li>
-          <li>
-            <h3>TechCrunch: Handshake's Alternative DNS</h3>
-            <p>Analysis of Handshake's approach to decentralizing domain names</p>
-            <a href="#" title="Link Offline" style="opacity: 0.5; cursor: not-allowed;" onclick="event.preventDefault();" target="_blank" class="btn">Read Coverage (Offline)</a>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7; word-break: break-all;">Original URL: https://techcrunch.com/2020/02/18/handshake-launches-dns-alternative/</p>
-          </li>
-          <li>
-            <h3>Cypherpunk Times: The DNS Revolution</h3>
-            <p>In-depth look at how Handshake is changing internet naming</p>
-            <a href="#" target="_blank" class="btn">Read Coverage</a>
-          </li>
-        </ul>
-      </section>
+import { breadcrumbSchema, collectionPageSchema, abs } from '../lib/seo';
 
-      <section class="educational" style="margin-bottom: 3rem;">
-        <h2>Educational Resources</h2>
-        <ul class="resource-list">
-          <li>
-            <h3>Getting Started with Handshake</h3>
-            <p>A beginner's guide to understanding and using Handshake domains</p>
-            <a href="#" title="Link Offline" style="opacity: 0.5; cursor: not-allowed;" onclick="event.preventDefault();" target="_blank" class="btn">Read Guide (Offline)</a>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7; word-break: break-all;">Original URL: https://learn.namebase.io/starting-from-zero/getting-started-with-handshake</p>
-          </li>
-          <li>
-            <h3>Handshake Technical Documentation</h3>
-            <p>Technical specifications and implementation details</p>
-            <a href="#" title="Link Offline" style="opacity: 0.5; cursor: not-allowed;" onclick="event.preventDefault();" target="_blank" class="btn">Read Documentation (Offline)</a>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7; word-break: break-all;">Original URL: https://hsd-dev.org/guides/protocol.html</p>
-          </li>
-        </ul>
-      </section>
-      
-      <section class="press-mentions">
-        <h2>Media Mentions</h2>
-        <ul class="resource-list">
-          <li>
-            <h3>Bloomberg: Handshake Could Become Bigger Than Bitcoin</h3>
-            <p>Bloomberg interview discussing Handshake's potential impact on the internet's naming system and its growth prospects in the blockchain space.</p>
-            <a href="https://www.bloomberg.com/news/videos/2021-04-26/kenetic-handshake-could-become-bigger-than-bitcoin-in-5-years-video" target="_blank" class="btn">Watch Interview</a>
-          </li>
-        </ul>
-      </section>
-    </div>
+const description = "Explore curated articles, tutorials, and press coverage about the Handshake (HNS) decentralized naming protocol.";
+---
+<BaseLayout
+  title="Handshake Articles, Reading & Media Mentions"
+  description={description}
+  keywords="Handshake articles, HNS press coverage, CoinDesk Handshake, TechCrunch Handshake, decentralized DNS articles, Namebase blog"
+  schema={[
+    collectionPageSchema({ title: 'Reading & Media', description, url: abs('/media/') }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Reading & Media', path: '/media/' },
+    ]),
+  ]}
+>
+  <div class="page-shell">
+
+    <section class="page-hero">
+      <div class="page-hero-eyebrow">Reading &amp; Media</div>
+      <h1 class="page-hero-title">
+        The best <em>writing</em><br />on Handshake.
+      </h1>
+      <p class="page-hero-lede">
+        A curated set of articles, press coverage, and deep dives on
+        the protocol — from the people building it and the people writing about it.
+      </p>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">Featured articles</div>
+
+      <div class="featured-articles">
+        <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--featured link-tile--offline featured-primary">
+          <div class="featured-eyebrow">Long read</div>
+          <h3>Handshake: A Decentralized Certificate Authority and DNS</h3>
+          <p>A comprehensive overview of the Handshake protocol and its implications for internet infrastructure — the canonical introductory essay.</p>
+          <span class="link-tile-cta">Read article (Offline)</span>
+          <p class="link-tile-original">Original URL: https://namebase.io/blog/handshake-a-decentralized-certificate-authority-and-dns/</p>
+        </a>
+
+        <div class="featured-secondary">
+          <a href="https://medium.com/handshake-org/understanding-handshake-naming-system-6cb10a1b4485" target="_blank" rel="noopener" class="link-tile">
+            <h3>Understanding Handshake Naming System</h3>
+            <p>Deep dive into how Handshake works and its potential impact on domain naming.</p>
+            <span class="link-tile-cta">Read article &rarr;</span>
+          </a>
+
+          <a href="https://www.coindesk.com/markets/2020/02/18/handshake-revealed-vcs-back-plan-to-give-away-100m-in-crypto-for-free/" target="_blank" rel="noopener" class="link-tile">
+            <h3>The Future of Domain Names with Handshake</h3>
+            <p>Exploring how Handshake is revolutionizing domain name ownership and management.</p>
+            <span class="link-tile-cta">Read article &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">Press coverage</div>
+      <div class="tile-grid tile-grid--3">
+        <a href="https://www.coindesk.com/markets/2020/02/18/handshake-revealed-vcs-back-plan-to-give-away-100m-in-crypto-for-free/" target="_blank" rel="noopener" class="link-tile">
+          <h3>CoinDesk: Handshake Revealed</h3>
+          <p>February 2020 — coverage of Handshake's launch and initial distribution.</p>
+          <span class="link-tile-cta">Read coverage &rarr;</span>
+        </a>
+
+        <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">
+          <h3>TechCrunch: Handshake's Alternative DNS</h3>
+          <p>Analysis of Handshake's approach to decentralizing domain names.</p>
+          <span class="link-tile-cta">Read coverage (Offline)</span>
+          <p class="link-tile-original">Original URL: https://techcrunch.com/2020/02/18/handshake-launches-dns-alternative/</p>
+        </a>
+
+        <a href="#" target="_blank" rel="noopener" class="link-tile">
+          <h3>Cypherpunk Times: The DNS Revolution</h3>
+          <p>In-depth look at how Handshake is changing internet naming.</p>
+          <span class="link-tile-cta">Read coverage &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">Educational resources</div>
+      <div class="tile-grid tile-grid--2">
+        <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">
+          <h3>Getting Started with Handshake</h3>
+          <p>A beginner's guide to understanding and using Handshake domains.</p>
+          <span class="link-tile-cta">Read guide (Offline)</span>
+          <p class="link-tile-original">Original URL: https://learn.namebase.io/starting-from-zero/getting-started-with-handshake</p>
+        </a>
+
+        <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">
+          <h3>Handshake Technical Documentation</h3>
+          <p>Technical specifications and implementation details.</p>
+          <span class="link-tile-cta">Read documentation (Offline)</span>
+          <p class="link-tile-original">Original URL: https://hsd-dev.org/guides/protocol.html</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">Media mentions</div>
+
+      <a href="https://www.bloomberg.com/news/videos/2021-04-26/kenetic-handshake-could-become-bigger-than-bitcoin-in-5-years-video" target="_blank" rel="noopener" class="link-tile link-tile--featured mention-card">
+        <div class="featured-eyebrow">Bloomberg interview</div>
+        <h3>"Handshake Could Become Bigger Than Bitcoin"</h3>
+        <p>
+          Bloomberg interview discussing Handshake's potential impact on the
+          internet's naming system and its growth prospects in the blockchain space.
+        </p>
+        <span class="link-tile-cta">Watch interview &rarr;</span>
+      </a>
+    </section>
+
   </div>
 </BaseLayout>
+
+<style>
+  .page-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .featured-articles {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .featured-primary {
+    padding: 2.5rem;
+  }
+
+  .featured-primary h3 {
+    font-size: 1.7rem !important;
+    margin-bottom: 0.75rem !important;
+    line-height: 1.15;
+  }
+
+  .featured-primary p {
+    font-size: 1rem !important;
+  }
+
+  .featured-secondary {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .featured-eyebrow {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hns-violet);
+    margin-bottom: 0.5rem;
+  }
+
+  .mention-card {
+    padding: 2.5rem;
+    max-width: 720px;
+  }
+
+  .mention-card h3 {
+    font-size: 1.55rem !important;
+    margin-bottom: 0.75rem !important;
+    font-style: italic;
+  }
+
+  .mention-card p {
+    font-size: 0.98rem !important;
+  }
+
+  @media (max-width: 900px) {
+    .featured-articles { grid-template-columns: 1fr; }
+    .featured-secondary { grid-template-rows: auto auto; }
+  }
+</style>

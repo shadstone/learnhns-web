@@ -1,9 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { organizationSchema, websiteSchema } from '../lib/seo';
 ---
 <BaseLayout
   title="Your Gateway to Understanding Handshake"
   description="LearnHNS curates the best guides, wallets, tutorials, and community resources for the Handshake decentralized naming protocol. Whether you've never heard of HNS or you're ready to run a full node — start here."
+  keywords="Handshake, HNS, decentralized DNS, blockchain naming, top-level domains, TLD, Bob Wallet, ShakeDex, decentralized internet"
+  schema={[organizationSchema(), websiteSchema()]}
 >
   <!-- LIVE TICKER -->
   <div class="ticker-wrap">
@@ -270,18 +273,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     to   { transform: translateX(-50%); }
   }
 
-  .ticker-item {
+  /* Ticker items are created by JS via innerHTML, so they don't carry
+     Astro's scope attribute. Use :global() so the styles apply anyway. */
+  :global(.ticker-item) {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.72rem;
+    gap: 0.55rem;
+    font-size: 0.65rem;
     font-weight: 500;
+    line-height: 1;
   }
 
-  .ticker-name { color: var(--text-primary); }
-  .ticker-price { color: var(--text-secondary); }
-  .ticker-status-buyable { color: var(--up-color); }
-  .ticker-status-pending { color: var(--text-muted); }
+  :global(.ticker-name) {
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+  }
+  :global(.ticker-price) { color: var(--text-secondary); }
+
+  :global(.ticker-status-buyable),
+  :global(.ticker-status-pending) {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-left: 0.25rem;
+  }
+
+  :global(.ticker-status-buyable) { color: var(--up-color); }
+  :global(.ticker-status-pending) { color: var(--text-muted); }
 
   /* ── Hero ── */
   .home-hero {

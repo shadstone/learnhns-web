@@ -5,4 +5,8 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 
+# Agent-oriented endpoints — useful for AI tools, not for search indexing
+Disallow: /skill.md
+Disallow: /llms.txt
+
 Sitemap: https://learnhns.com/sitemap-index.xml

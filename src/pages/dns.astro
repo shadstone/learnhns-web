@@ -1,99 +1,337 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema, webPageSchema, abs } from '../lib/seo';
+
+const description = "Understand the difference between traditional centralized DNS and Handshake's decentralized naming architecture with helpful diagrams.";
 ---
-<BaseLayout title="How DNS Works vs. Handshake (HNS)" description="Understand the difference between traditional centralized DNS and Handshake's decentralized naming architecture with helpful diagrams.">
-  <div class="content-wrapper">
-    <h1>How DNS Works</h1>
-    
-    <div class="gallery">
-      <div class="gallery-item">
-        <a href="/images/dns/dns-resolution-flow.png" target="_blank">
-          <img src="/images/dns/dns-resolution-flow.png" alt="DNS Resolution Flow" loading="lazy">
-          <p>DNS Resolution Process Flow</p>
+<BaseLayout
+  title="How DNS Works vs. Handshake (HNS)"
+  description={description}
+  keywords="how DNS works, DNS vs Handshake, decentralized DNS, ICANN alternative, DNSSEC, HNS root zone, blockchain DNS"
+  schema={[
+    webPageSchema({ title: 'How DNS Works vs. Handshake', description, url: abs('/dns/') }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'How DNS Works', path: '/dns/' },
+    ]),
+  ]}
+>
+  <div class="page-shell">
+
+    <section class="page-hero">
+      <div class="page-hero-eyebrow">Protocol Deep Dive</div>
+      <h1 class="page-hero-title">
+        How DNS <em>actually</em> works.
+      </h1>
+      <p class="page-hero-lede">
+        The Domain Name System is the internet's address book — translating
+        human-readable names into IP addresses. Here's how the traditional model
+        works, and how Handshake rebuilds the root.
+      </p>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">Diagrams</div>
+      <h2 class="section-heading">Visual references.</h2>
+      <p class="page-section-lede">Click any diagram to open the full-resolution image.</p>
+
+      <div class="diagram-grid">
+        <a href="/images/dns/dns-resolution-flow.png" target="_blank" class="diagram-card diagram-card--featured">
+          <div class="diagram-thumb">
+            <img src="/images/dns/dns-resolution-flow.png" alt="DNS Resolution Flow" loading="lazy" />
+          </div>
+          <div class="diagram-caption">
+            <div class="diagram-eyebrow">Featured</div>
+            <p>DNS Resolution Process Flow</p>
+          </div>
         </a>
-      </div>
-      <div class="gallery-item">
-        <a href="/images/dns/dns-vs-hns.png" target="_blank">
-          <img src="/images/dns/dns-vs-hns.png" alt="DNS vs HNS Comparison" loading="lazy">
+
+        <a href="/images/dns/dns-vs-hns.png" target="_blank" class="diagram-card">
+          <div class="diagram-thumb">
+            <img src="/images/dns/dns-vs-hns.png" alt="DNS vs HNS Comparison" loading="lazy" />
+          </div>
           <p>Traditional DNS vs Handshake HNS</p>
         </a>
-      </div>
-      <div class="gallery-item">
-        <a href="/images/dns/hns-resolution-flow.png" target="_blank">
-          <img src="/images/dns/hns-resolution-flow.png" alt="Handshake Resolution Flow" loading="lazy">
+
+        <a href="/images/dns/hns-resolution-flow.png" target="_blank" class="diagram-card">
+          <div class="diagram-thumb">
+            <img src="/images/dns/hns-resolution-flow.png" alt="Handshake Resolution Flow" loading="lazy" />
+          </div>
           <p>Handshake Name Resolution Process</p>
         </a>
-      </div>
-      <div class="gallery-item">
-        <a href="/images/dns/centralized-vs-decentralized.png" target="_blank">
-          <img src="/images/dns/centralized-vs-decentralized.png" alt="Centralized vs Decentralized DNS" loading="lazy">
+
+        <a href="/images/dns/centralized-vs-decentralized.png" target="_blank" class="diagram-card">
+          <div class="diagram-thumb">
+            <img src="/images/dns/centralized-vs-decentralized.png" alt="Centralized vs Decentralized DNS" loading="lazy" />
+          </div>
           <p>Centralized vs Decentralized DNS Structure</p>
         </a>
-      </div>
-      <div class="gallery-item">
-        <a href="/images/dns/covenant-limits.png" target="_blank">
-          <img src="/images/dns/covenant-limits.png" alt="Handshake Covenant Limits" loading="lazy">
+
+        <a href="/images/dns/covenant-limits.png" target="_blank" class="diagram-card">
+          <div class="diagram-thumb">
+            <img src="/images/dns/covenant-limits.png" alt="Handshake Covenant Limits" loading="lazy" />
+          </div>
           <p>Handshake Protocol Covenant Limits</p>
         </a>
-      </div>
-      <div class="gallery-item">
-        <a href="/images/dns/handshake-stack.png" target="_blank">
-          <img src="/images/dns/handshake-stack.png" alt="Handshake Technical Stack" loading="lazy">
+
+        <a href="/images/dns/handshake-stack.png" target="_blank" class="diagram-card">
+          <div class="diagram-thumb">
+            <img src="/images/dns/handshake-stack.png" alt="Handshake Technical Stack" loading="lazy" />
+          </div>
           <p>Handshake Technical Stack</p>
         </a>
       </div>
-    </div>
+    </section>
 
-    <div class="dns-explanation card" style="margin-top: 3rem;">
-      <h2>Understanding DNS</h2>
-      <p style="font-size: 1.1rem; margin-bottom: 2rem;">The Domain Name System (DNS) is the internet's address book, translating human-readable domain names into IP addresses.</p>
-      
-      <h3 style="margin-top: 2rem; border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; display: inline-block;">Key Differences: Traditional DNS vs Handshake</h3>
-      <ul class="resource-list" style="margin: 2rem 0;">
-        <li>
-          <h4>Centralization vs Decentralization</h4>
+    <section class="page-section">
+      <div class="section-label">Key differences</div>
+      <h2 class="section-heading">Traditional DNS vs Handshake.</h2>
+
+      <div class="diff-grid">
+        <article class="diff-card">
+          <div class="diff-eyebrow">Architecture</div>
+          <h3>Centralization vs Decentralization</h3>
           <p>Traditional DNS relies on centralized authorities (ICANN, registrars) while Handshake creates a decentralized root zone managed by blockchain consensus.</p>
-        </li>
-        <li>
-          <h4>Security Model</h4>
-          <p>DNS uses DNSSEC for security, while Handshake leverages blockchain technology and cryptographic proofs for enhanced security.</p>
-        </li>
-        <li>
-          <h4>Name Ownership</h4>
-          <p>Traditional domains are rented through registrars, while Handshake names are truly owned through blockchain-based assets.</p>
-        </li>
-      </ul>
+        </article>
 
-      <h3 style="margin-top: 2rem; border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; display: inline-block;">Essential Resources</h3>
-      <ul class="resource-list" style="margin: 2rem 0;">
-        <li>
-          <h4>Public Resolvers</h4>
-          <p>Configure your system to resolve Handshake names</p>
-          <div style="margin-top: 1rem; display: flex; gap: 1rem;">
-            <a href="#" title="Link Offline" style="opacity: 0.5; cursor: not-allowed;" onclick="event.preventDefault();" target="_blank" class="btn">HDNS (Offline)</a>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7; word-break: break-all;">Original URL: https://www.hdns.io</p>
-            <a href="https://nextdns.io" target="_blank" class="btn">NextDNS</a>
-          </div>
-        </li>
-        <li>
-          <h4>Technical Deep Dives</h4>
-          <p>Understanding the technical aspects of Handshake DNS</p>
-          <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-            <a href="https://hsd-dev.org/guides/resource-records.html" target="_blank" class="btn">HNS Resource Records</a>
-            <a href="https://github.com/handshake-org/hsd/blob/master/lib/dns/server.js" target="_blank" class="btn">DNS Implementation</a>
-          </div>
-        </li>
-        <li>
-          <h4>Educational Articles</h4>
-          <p>Learn more about DNS and Handshake</p>
-          <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-            <a href="#" title="Link Offline" style="opacity: 0.5; cursor: not-allowed;" onclick="event.preventDefault();" target="_blank" class="btn">How Handshake Works (Offline)</a>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7; word-break: break-all;">Original URL: https://learn.namebase.io/starting-from-zero/how-handshake-works</p>
-            <a href="#" title="Link Offline" style="opacity: 0.5; cursor: not-allowed;" onclick="event.preventDefault();" target="_blank" class="btn">What is Handshake DNS? (Offline)</a>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7; word-break: break-all;">Original URL: https://skyinclude.com/what-is-handshake</p>
-          </div>
-        </li>
-      </ul>
-    </div>
+        <article class="diff-card">
+          <div class="diff-eyebrow">Trust model</div>
+          <h3>Security Model</h3>
+          <p>DNS uses DNSSEC for security, while Handshake leverages blockchain technology and cryptographic proofs for enhanced security.</p>
+        </article>
+
+        <article class="diff-card">
+          <div class="diff-eyebrow">Ownership</div>
+          <h3>Name Ownership</h3>
+          <p>Traditional domains are rented through registrars, while Handshake names are truly owned through blockchain-based assets.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">Going further</div>
+      <h2 class="section-heading">Essential resources.</h2>
+
+      <div class="resource-group">
+        <h3 class="resource-group-title">Public Resolvers</h3>
+        <p class="resource-group-lede">Configure your system to resolve Handshake names.</p>
+        <div class="tile-grid tile-grid--2">
+          <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">
+            <h3>HDNS</h3>
+            <p>Public Handshake DNS resolver.</p>
+            <span class="link-tile-cta">Visit HDNS (Offline)</span>
+            <p class="link-tile-original">Original URL: https://www.hdns.io</p>
+          </a>
+          <a href="https://nextdns.io" target="_blank" rel="noopener" class="link-tile">
+            <h3>NextDNS</h3>
+            <p>DNS resolver with Handshake support.</p>
+            <span class="link-tile-cta">Configure now &rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="resource-group">
+        <h3 class="resource-group-title">Technical Deep Dives</h3>
+        <p class="resource-group-lede">Understanding the technical aspects of Handshake DNS.</p>
+        <div class="tile-grid tile-grid--2">
+          <a href="https://hsd-dev.org/guides/resource-records.html" target="_blank" rel="noopener" class="link-tile">
+            <h3>HNS Resource Records</h3>
+            <p>The complete reference for Handshake DNS resource record types.</p>
+            <span class="link-tile-cta">Read guide &rarr;</span>
+          </a>
+          <a href="https://github.com/handshake-org/hsd/blob/master/lib/dns/server.js" target="_blank" rel="noopener" class="link-tile">
+            <h3>DNS Implementation</h3>
+            <p>Source-level walkthrough of the HSD DNS server.</p>
+            <span class="link-tile-cta">View source &rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="resource-group">
+        <h3 class="resource-group-title">Educational Articles</h3>
+        <p class="resource-group-lede">Learn more about DNS and Handshake.</p>
+        <div class="tile-grid tile-grid--2">
+          <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">
+            <h3>How Handshake Works</h3>
+            <p>Beginner-friendly explainer of the Handshake protocol.</p>
+            <span class="link-tile-cta">Read article (Offline)</span>
+            <p class="link-tile-original">Original URL: https://learn.namebase.io/starting-from-zero/how-handshake-works</p>
+          </a>
+          <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">
+            <h3>What is Handshake DNS?</h3>
+            <p>An overview of how Handshake replaces the DNS root.</p>
+            <span class="link-tile-cta">Read article (Offline)</span>
+            <p class="link-tile-original">Original URL: https://skyinclude.com/what-is-handshake</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
   </div>
 </BaseLayout>
+
+<style>
+  .page-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-heading {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5rem;
+  }
+
+  /* ── Diagram gallery — 1 featured + 5 smaller ── */
+  .diagram-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
+
+  .diagram-card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .diagram-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--hns-violet);
+    box-shadow: 0 12px 32px rgba(105, 58, 250, 0.1);
+    text-decoration: none;
+  }
+
+  .diagram-card--featured {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .diagram-thumb {
+    background: #f7f9fb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .diagram-card--featured .diagram-thumb {
+    aspect-ratio: auto;
+    flex: 1;
+    min-height: 320px;
+  }
+
+  .diagram-thumb img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0;
+    margin: 0;
+  }
+
+  .diagram-card > p,
+  .diagram-card .diagram-caption {
+    padding: 1rem 1.25rem;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .diagram-caption p {
+    margin: 0;
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  .diagram-eyebrow {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hns-violet);
+    margin-bottom: 0.35rem;
+  }
+
+  /* ── Key differences cards ── */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .diff-card {
+    padding: 1.75rem;
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid var(--glass-border);
+  }
+
+  .diff-eyebrow {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .diff-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0 0 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .diff-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ── Resource groups ── */
+  .resource-group { margin-bottom: 2rem; }
+  .resource-group:last-child { margin-bottom: 0; }
+
+  .resource-group-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 0 0 0.35rem;
+    color: var(--text-primary);
+  }
+
+  .resource-group-lede {
+    color: var(--text-secondary);
+    margin: 0 0 1rem;
+    font-size: 0.92rem;
+  }
+
+  @media (max-width: 900px) {
+    .diagram-grid { grid-template-columns: repeat(2, 1fr); }
+    .diagram-card--featured { grid-column: span 2; grid-row: auto; }
+    .diff-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .diagram-grid { grid-template-columns: 1fr; }
+    .diagram-card--featured { grid-column: auto; }
+  }
+</style>

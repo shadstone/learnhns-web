@@ -273,8 +273,247 @@ img { max-width: 100%; height: auto; border-radius: 8px; }
   margin-bottom: 1rem;
 }
 
-/* ── Legacy .hero kept for inner pages — they each have a header.
-   The home page hero is fully styled inline in index.astro and ignores this. */
+/* ──────────────────────────────────────────────────────────
+   Shared page hero — used by every inner page so the masthead
+   shape and rhythm match the home page.
+   ────────────────────────────────────────────────────────── */
+.page-hero {
+  padding: 4.5rem 0 3rem;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.page-hero--narrow { max-width: 680px; }
+
+.page-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hns-violet);
+  margin-bottom: 1.25rem;
+}
+
+.page-hero-eyebrow::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--hns-violet);
+}
+
+.page-hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 4.4vw, 3.75rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  margin: 0 0 1.25rem;
+}
+
+.page-hero-title em {
+  font-style: italic;
+  color: var(--hns-violet);
+}
+
+.page-hero-lede {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+  font-weight: 400;
+  max-width: 640px;
+}
+
+/* ──────────────────────────────────────────────────────────
+   Section label — violet eyebrow with fading hairline
+   ────────────────────────────────────────────────────────── */
+.section-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hns-violet);
+  margin: 0 0 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(105, 58, 250, 0.4), transparent);
+}
+
+/* ──────────────────────────────────────────────────────────
+   Page sections — vertical rhythm between major blocks
+   ────────────────────────────────────────────────────────── */
+.page-section {
+  padding: 2.5rem 0 4rem;
+}
+
+.page-section:last-child {
+  padding-bottom: 5rem;
+}
+
+.page-section h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+}
+
+.page-section-lede {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin: 0 0 2rem;
+  max-width: 640px;
+}
+
+/* ──────────────────────────────────────────────────────────
+   Tile grids — explicit widths so pages can pick rhythm
+   ────────────────────────────────────────────────────────── */
+.tile-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.tile-grid--2 { grid-template-columns: repeat(2, 1fr); }
+.tile-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.tile-grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 900px) {
+  .tile-grid--3, .tile-grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .tile-grid--2, .tile-grid--3, .tile-grid--4 { grid-template-columns: 1fr; }
+}
+
+/* ──────────────────────────────────────────────────────────
+   Link tile — the universal pattern for a clickable card
+   with title + description + violet arrow. Used by the
+   resource lists across /learn, /services, /media, /podcasts.
+   ────────────────────────────────────────────────────────── */
+.link-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid var(--glass-border);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.link-tile:hover {
+  transform: translateY(-3px);
+  border-color: var(--hns-violet);
+  box-shadow: 0 12px 32px rgba(105, 58, 250, 0.1);
+  text-decoration: none;
+}
+
+.link-tile h3,
+.link-tile h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.05rem;
+  margin: 0 0 0.5rem;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.link-tile p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0 0 1rem;
+}
+
+.link-tile p:last-of-type { margin-bottom: 0; }
+
+.link-tile-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: auto;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--hns-violet);
+  letter-spacing: 0.01em;
+}
+
+.link-tile:hover .link-tile-cta { color: var(--hns-violet-deep); }
+
+.link-tile-original {
+  font-size: 0.7rem;
+  margin-top: 0.6rem;
+  color: var(--text-muted);
+  word-break: break-all;
+  font-family: var(--font-mono);
+  opacity: 0.7;
+}
+
+.link-tile--offline {
+  opacity: 0.7;
+}
+
+.link-tile--offline .link-tile-cta {
+  color: var(--text-muted);
+}
+
+.link-tile--offline:hover {
+  border-color: var(--glass-border);
+  transform: none;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.link-tile--featured {
+  border-color: var(--hns-violet);
+  background: linear-gradient(135deg, rgba(105, 58, 250, 0.04), rgba(105, 58, 250, 0));
+  box-shadow: 0 8px 28px rgba(105, 58, 250, 0.06);
+}
+
+.link-tile--featured h3,
+.link-tile--featured h4 {
+  font-size: 1.4rem;
+}
+
+.link-tile--featured p {
+  font-size: 0.95rem;
+}
+
+/* ──────────────────────────────────────────────────────────
+   Callout — full-width violet-tinted section break
+   ────────────────────────────────────────────────────────── */
+.callout {
+  padding: 2.5rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(105, 58, 250, 0.06), rgba(105, 58, 250, 0));
+  border: 1px solid rgba(105, 58, 250, 0.18);
+}
+
+.callout h2 {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  margin: 0 0 0.75rem;
+}
+
+.callout p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* Legacy .hero kept for any orphan use — home page uses .home-hero */
 .hero:not(.hero--home) {
   background: #ffffff;
   border: 1px solid var(--glass-border);
