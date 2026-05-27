@@ -65,8 +65,25 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
   {author && <meta name="author" content={author} />}
   {noindex && <meta name="robots" content="noindex, nofollow" />}
 
-  <meta name="theme-color" content="#693AFA" />
-  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#ffffff" id="theme-color-meta" />
+  <meta name="color-scheme" content="light dark" />
+
+  <!-- No-FOUC theme script — sets [data-theme] on <html> before paint.
+       Reads saved preference; falls back to system preference. -->
+  <script is:inline>
+    (function () {
+      try {
+        var stored = localStorage.getItem('learnhns-theme'); // 'light' | 'dark' | 'system' | null
+        var pref = stored || 'system';
+        var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var resolved = pref === 'system' ? (systemDark ? 'dark' : 'light') : pref;
+        document.documentElement.setAttribute('data-theme', resolved);
+        document.documentElement.setAttribute('data-theme-pref', pref);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', resolved === 'dark' ? '#0b0d12' : '#ffffff');
+      } catch (e) { /* localStorage blocked or other — leave default light */ }
+    })();
+  </script>
 
   <!-- Canonical URL -->
   <link rel="canonical" href={canonicalURL} />

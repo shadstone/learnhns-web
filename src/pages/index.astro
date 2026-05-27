@@ -232,7 +232,7 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
   .ticker-wrap {
     overflow: hidden;
     border-bottom: 1px solid var(--glass-border);
-    background: rgba(0, 0, 0, 0.02);
+    background: var(--surface-soft);
     height: 36px;
     display: flex;
     align-items: center;
@@ -326,16 +326,25 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
     opacity: 0.5;
     z-index: 0;
     mix-blend-mode: multiply;
+    color: var(--text-primary);
+  }
+
+  /* In dark mode, multiply makes things invisible — switch to screen
+     and rely on currentColor so the wireframe lifts off the dark bg. */
+  [data-theme="dark"] .hero-network {
+    mix-blend-mode: screen;
+    opacity: 0.45;
+    color: var(--text-secondary);
   }
 
   .hero-network .net-line {
-    stroke: #000;
+    stroke: currentColor;
     stroke-width: 1;
-    stroke-opacity: 0.25;
+    stroke-opacity: 0.28;
     fill: none;
   }
 
-  .hero-network .net-node { fill: #000; }
+  .hero-network .net-node { fill: currentColor; }
 
   .hero-network .net-node--pulse {
     animation: nodePulse 3s ease-in-out infinite;
@@ -447,8 +456,8 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
     display: block;
     padding: 2rem;
     border-radius: 16px;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.14);
+    background: var(--surface);
+    border: 1px solid var(--glass-border-strong);
     overflow: hidden;
     text-decoration: none;
     color: inherit;
@@ -553,7 +562,7 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
   .dns-diagram {
     padding: 1.75rem;
     border-radius: 14px;
-    background: #ffffff;
+    background: var(--surface);
     border: 1px solid var(--glass-border);
   }
 
@@ -584,7 +593,7 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
   }
 
   .node-icann {
-    background: rgba(0, 0, 0, 0.03);
+    background: var(--surface-soft);
     border: 1px solid rgba(0, 0, 0, 0.15);
     color: rgba(0, 0, 0, 0.5);
     text-decoration: line-through;
@@ -597,7 +606,7 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
   }
 
   .node-user {
-    background: rgba(0, 0, 0, 0.04);
+    background: var(--hover-bg);
     border: 1px solid rgba(0, 0, 0, 0.15);
     color: rgba(0, 0, 0, 0.7);
   }
@@ -635,7 +644,7 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
     padding: 1rem;
     border-radius: 10px;
     text-align: center;
-    background: #ffffff;
+    background: var(--surface);
     border: 1px solid var(--glass-border);
   }
 
@@ -706,7 +715,7 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
     gap: 0.75rem;
     padding: 1.25rem;
     border-radius: 14px;
-    background: #ffffff;
+    background: var(--surface);
     border: 1px solid var(--glass-border);
   }
 
@@ -714,7 +723,7 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
     display: block;
     padding: 1rem;
     border-radius: 10px;
-    background: #ffffff;
+    background: var(--surface);
     border: 1px solid var(--glass-border);
     text-decoration: none;
     color: inherit;
@@ -769,9 +778,9 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
   }
 
   .badge-pending {
-    background: rgba(0, 0, 0, 0.04);
+    background: var(--hover-bg);
     color: var(--text-muted);
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--glass-border-strong);
   }
 
   .auction-bids {
@@ -820,8 +829,8 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
     display: block;
     padding: 1.5rem;
     border-radius: 12px;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.14);
+    background: var(--surface);
+    border: 1px solid var(--glass-border-strong);
     text-decoration: none;
     color: inherit;
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;

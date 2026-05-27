@@ -4,39 +4,94 @@
    ────────────────────────────────────────────────────────── */
 
 :root {
+  /* Background washes */
   --aurora-1: #ffffff;
   --aurora-2: #f7f9fb;
 
+  /* Surfaces — cards, drawers, sticky bars */
+  --surface: #ffffff;
+  --surface-soft: rgba(0, 0, 0, 0.02);
+  --surface-elevated: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.85);
+  --drawer-bg: #ffffff;
+  --hello-text: #ffffff;
+
+  /* Brand */
   --hns-violet: #693AFA;
   --hns-violet-deep: #5630CD;
   --hns-mint: #00f9ca;
 
+  /* Text */
   --text-primary: rgba(0, 0, 0, 0.92);
   --text-secondary: rgba(0, 0, 0, 0.6);
   --text-muted: rgba(0, 0, 0, 0.45);
 
+  /* Borders + glass effects */
   --glass-bg: rgba(0, 0, 0, 0.02);
   --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-border-strong: rgba(0, 0, 0, 0.14);
   --glass-border-bright: rgba(0, 0, 0, 0.22);
+  --hover-bg: rgba(0, 0, 0, 0.04);
 
+  /* Shadows */
+  --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.03), 0 4px 16px rgba(0, 0, 0, 0.03);
+  --shadow-hover: 0 8px 28px rgba(105, 58, 250, 0.10);
+
+  /* Status */
   --up-color: #047857;
   --down-color: #991b1b;
   --warn-color: #b45309;
 
-  /* Legacy aliases kept so existing pages (start, learn, market, etc.)
-     still resolve their color variables until they're individually refactored. */
+  /* Theme-color meta (used by browser chrome on iOS/Android) */
+  --theme-color-meta: #ffffff;
+
+  /* Legacy aliases for inner pages */
   --primary-color: var(--hns-violet);
   --secondary-color: var(--hns-violet-deep);
   --accent-color: var(--hns-violet);
   --background-color: var(--aurora-1);
   --text-color: var(--text-primary);
-  --header-bg: #ffffff;
-  --footer-bg: #f7f9fb;
-  --card-bg: #ffffff;
+  --footer-bg: var(--aurora-2);
+  --card-bg: var(--surface);
 
   --font-serif: 'Fraunces', Georgia, serif;
   --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* ──────────────────────────────────────────────────────────
+   Dark theme — applied when html has [data-theme="dark"].
+   The no-FOUC script in BaseLayout sets this before paint
+   based on saved preference or system setting.
+   ────────────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --aurora-1: #0b0d12;
+  --aurora-2: #11141b;
+
+  --surface: #13161e;
+  --surface-soft: rgba(255, 255, 255, 0.04);
+  --surface-elevated: #1a1e28;
+  --header-bg: rgba(11, 13, 18, 0.78);
+  --drawer-bg: #13161e;
+
+  --text-primary: rgba(255, 255, 255, 0.95);
+  --text-secondary: rgba(255, 255, 255, 0.62);
+  --text-muted: rgba(255, 255, 255, 0.42);
+
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-strong: rgba(255, 255, 255, 0.16);
+  --glass-border-bright: rgba(255, 255, 255, 0.24);
+  --hover-bg: rgba(255, 255, 255, 0.06);
+
+  --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-hover: 0 12px 36px rgba(105, 58, 250, 0.25);
+
+  --up-color: #34d399;
+  --down-color: #f87171;
+  --warn-color: #fbbf24;
+
+  --theme-color-meta: #0b0d12;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -144,7 +199,7 @@ h1 { font-size: 2.5rem; }
   align-items: center;
   gap: 0.5rem;
   padding: 0.85rem 2rem;
-  background: #ffffff;
+  background: var(--surface);
   border: 1px solid var(--glass-border-bright);
   color: var(--text-primary);
   font-weight: 500;
@@ -195,7 +250,7 @@ h1 { font-size: 2.5rem; }
 }
 
 .card {
-  background: #ffffff;
+  background: var(--surface);
   padding: 2rem;
   border-radius: 14px;
   border: 1px solid var(--glass-border);
@@ -220,7 +275,7 @@ h1 { font-size: 2.5rem; }
 }
 
 .resource-list li {
-  background: #ffffff;
+  background: var(--surface);
   padding: 1.5rem;
   border-radius: 10px;
   border: 1px solid var(--glass-border);
@@ -231,7 +286,7 @@ h1 { font-size: 2.5rem; }
 
 /* ── Generic content wrapper used by inner pages ── */
 .content-wrapper {
-  background: #ffffff;
+  background: var(--surface);
   padding: 2.5rem;
   border-radius: 14px;
   border: 1px solid var(--glass-border);
@@ -259,7 +314,7 @@ img { max-width: 100%; height: auto; border-radius: 8px; }
 }
 
 .gallery-item {
-  background: #ffffff;
+  background: var(--surface);
   padding: 1rem;
   border-radius: 10px;
   border: 1px solid var(--glass-border);
@@ -407,7 +462,7 @@ img { max-width: 100%; height: auto; border-radius: 8px; }
   flex-direction: column;
   padding: 1.5rem;
   border-radius: 12px;
-  background: #ffffff;
+  background: var(--surface);
   border: 1px solid var(--glass-border);
   text-decoration: none;
   color: inherit;
@@ -515,7 +570,7 @@ img { max-width: 100%; height: auto; border-radius: 8px; }
 
 /* Legacy .hero kept for any orphan use — home page uses .home-hero */
 .hero:not(.hero--home) {
-  background: #ffffff;
+  background: var(--surface);
   border: 1px solid var(--glass-border);
   padding: 4rem 2rem;
   border-radius: 14px;

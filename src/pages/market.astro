@@ -121,7 +121,7 @@ const description = "Discover the LearnHNS ShakeDex channel. Learn how to buy an
   .feature-tile {
     padding: 1.75rem;
     border-radius: 14px;
-    background: #ffffff;
+    background: var(--surface);
     border: 1px solid var(--glass-border);
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   }
@@ -198,8 +198,8 @@ const description = "Discover the LearnHNS ShakeDex channel. Learn how to buy an
      styles applying. */
   :global(.listing-card) {
     display: block;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.14);
+    background: var(--surface);
+    border: 1px solid var(--glass-border-strong);
     border-radius: 12px;
     padding: 1.25rem;
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -263,9 +263,9 @@ const description = "Discover the LearnHNS ShakeDex channel. Learn how to buy an
     grid-column: 1 / -1;
     text-align: center;
     padding: 2rem 1rem;
-    background: rgba(0, 0, 0, 0.02);
+    background: var(--surface-soft);
     border-radius: 10px;
-    border: 1px dashed rgba(0, 0, 0, 0.12);
+    border: 1px dashed var(--glass-border-strong);
   }
 
   @media (max-width: 800px) {

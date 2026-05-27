@@ -5,7 +5,8 @@ const currentYear = new Date().getFullYear();
   <div class="footer-inner">
     <div class="footer-brand">
       <a href="/" class="logo-lockup" aria-label="LearnHNS home">
-        <img src="/learnhnsicon-dark.svg" alt="" onerror="this.style.display='none'" />
+        <img class="logo-light" src="/learnhnsicon-dark.svg" alt="" onerror="this.style.display='none'" />
+        <img class="logo-dark" src="/learnhnsicon.svg" alt="" onerror="this.style.display='none'" />
         <span>LearnHNS</span>
       </a>
       <p>
@@ -52,7 +53,7 @@ const currentYear = new Date().getFullYear();
 <style>
   .site-footer {
     border-top: 1px solid var(--glass-border);
-    background: rgba(0, 0, 0, 0.02);
+    background: var(--surface-soft);
     padding: 3rem 2rem 1.5rem;
     margin-top: 4rem;
     color: var(--text-secondary);
@@ -78,6 +79,13 @@ const currentYear = new Date().getFullYear();
 
   .logo-lockup img { height: 26px; width: auto; border-radius: 0; }
 
+  /* Theme-aware logo swap — :global() so the html-level [data-theme]
+     selector escapes Astro's scoped styling. */
+  .logo-light { display: inline-block; }
+  .logo-dark { display: none; }
+  :global([data-theme="dark"]) .logo-light { display: none; }
+  :global([data-theme="dark"]) .logo-dark { display: inline-block; }
+
   .logo-lockup span {
     font-family: var(--font-serif);
     font-weight: 700;
@@ -102,7 +110,7 @@ const currentYear = new Date().getFullYear();
     justify-content: center;
     width: 34px; height: 34px;
     border-radius: 8px;
-    background: #ffffff;
+    background: var(--surface);
     border: 1px solid var(--glass-border);
     color: var(--text-muted);
     font-size: 0.85rem;

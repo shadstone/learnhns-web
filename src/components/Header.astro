@@ -6,23 +6,10 @@ const isActive = (href: string) =>
 <header class="site-header" data-nav-open="false">
   <div class="header-inner">
     <a href="/" class="logo-lockup" aria-label="LearnHNS home">
-      <img src="/learnhnsicon-dark.svg" alt="" onerror="this.style.display='none'" />
+      <img class="logo-light" src="/learnhnsicon-dark.svg" alt="" onerror="this.style.display='none'" />
+      <img class="logo-dark" src="/learnhnsicon.svg" alt="" onerror="this.style.display='none'" />
       <span>LearnHNS</span>
     </a>
-
-    <button
-      class="nav-toggle"
-      type="button"
-      aria-label="Open menu"
-      aria-controls="primary-nav"
-      aria-expanded="false"
-    >
-      <span class="nav-toggle-bars" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
-    </button>
 
     <nav class="main-nav" id="primary-nav" aria-label="Primary">
       <a href="/learn/" class:list={[{ 'is-active': isActive('/learn') }]}>Learn</a>
@@ -34,6 +21,41 @@ const isActive = (href: string) =>
       <a href="/market/" class:list={[{ 'is-active': isActive('/market') }]}>Market</a>
       <a href="/start/" class="cta-pill">Start Learning &rarr;</a>
     </nav>
+
+    <div class="header-actions">
+      <button
+        class="theme-toggle"
+        type="button"
+        aria-label="Toggle theme"
+        title="Toggle theme"
+      >
+        <svg class="theme-icon theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+        </svg>
+        <svg class="theme-icon theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+        <svg class="theme-icon theme-icon-system" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="13" rx="2" />
+          <path d="M8 21h8M12 17v4" />
+        </svg>
+      </button>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Open menu"
+        aria-controls="primary-nav"
+        aria-expanded="false"
+      >
+        <span class="nav-toggle-bars" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -44,7 +66,7 @@ const isActive = (href: string) =>
     z-index: 100;
     height: 64px;
     padding: 0 2rem;
-    background: rgba(255, 255, 255, 0.85);
+    background: var(--header-bg);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid var(--glass-border);
@@ -56,9 +78,11 @@ const isActive = (href: string) =>
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 1.5rem;
   }
+
+  /* Push the nav (and the actions that follow) to the right end */
+  .main-nav { margin-left: auto; }
 
   .logo-lockup {
     display: flex;
@@ -105,7 +129,7 @@ const isActive = (href: string) =>
 
   .main-nav a:hover {
     color: var(--text-primary);
-    background: rgba(0, 0, 0, 0.04);
+    background: var(--hover-bg);
     text-decoration: none;
   }
 
@@ -124,6 +148,50 @@ const isActive = (href: string) =>
     background: var(--hns-violet-deep) !important;
     color: #ffffff !important;
   }
+
+  /* Logo swap rules live further down with the :global() escape */
+
+  /* ── Header right-side actions cluster ── */
+  .header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto; /* pushes actions right on mobile when nav is absolute */
+  }
+
+  /* ── Theme toggle button ── */
+  .theme-toggle {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 0;
+    color: var(--text-secondary);
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--hns-violet);
+    background: rgba(105, 58, 250, 0.06);
+    color: var(--hns-violet);
+  }
+
+  .theme-icon { display: none; }
+  /* Use :global() on the ancestor so Astro doesn't scope <html> to a
+     data-astro-cid attribute it'll never have. */
+  :global([data-theme-pref="light"]) .theme-icon-sun { display: block; }
+  :global([data-theme-pref="dark"]) .theme-icon-moon { display: block; }
+  :global([data-theme-pref="system"]) .theme-icon-system { display: block; }
+  /* Same issue for the logo swap */
+  .logo-light { display: inline-block; }
+  .logo-dark { display: none; }
+  :global([data-theme="dark"]) .logo-light { display: none; }
+  :global([data-theme="dark"]) .logo-dark { display: inline-block; }
 
   /* ── Hamburger toggle — only visible on mobile ── */
   .nav-toggle {
@@ -188,13 +256,13 @@ const isActive = (href: string) =>
       top: 64px;
       left: 0;
       right: 0;
-      background: #ffffff;
+      background: var(--drawer-bg);
       border-bottom: 1px solid var(--glass-border);
       padding: 1rem 1.25rem 1.5rem;
       flex-direction: column;
       align-items: stretch;
       gap: 0.25rem;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 
       /* Hidden by default */
       transform: translateY(-8px);
@@ -270,4 +338,33 @@ const isActive = (href: string) =>
       if (e.matches) setOpen(false);
     });
   }
+
+  // Theme toggle — cycles light → dark → system → light…
+  const themeToggle = header?.querySelector<HTMLButtonElement>('.theme-toggle');
+  const themeOrder: Array<'light' | 'dark' | 'system'> = ['light', 'dark', 'system'];
+
+  const applyTheme = (pref: 'light' | 'dark' | 'system') => {
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const resolved = pref === 'system' ? (systemDark ? 'dark' : 'light') : pref;
+    document.documentElement.setAttribute('data-theme', resolved);
+    document.documentElement.setAttribute('data-theme-pref', pref);
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', resolved === 'dark' ? '#0b0d12' : '#ffffff');
+    try { localStorage.setItem('learnhns-theme', pref); } catch (e) { /* ignore */ }
+  };
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = (document.documentElement.getAttribute('data-theme-pref') || 'system') as 'light' | 'dark' | 'system';
+      const next = themeOrder[(themeOrder.indexOf(current) + 1) % themeOrder.length];
+      applyTheme(next);
+    });
+  }
+
+  // Re-resolve when system pref changes (if user is on 'system')
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    if (document.documentElement.getAttribute('data-theme-pref') === 'system') {
+      applyTheme('system');
+    }
+  });
 </script>
