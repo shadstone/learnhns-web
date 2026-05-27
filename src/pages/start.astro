@@ -69,14 +69,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
       </div>
     </div>
-
-    <section class="feedback-section">
-      <h2>Hit a snag? Tell us.</h2>
-      <p>Your feedback shapes the next version of Bob Wallet and this guide. Bug reports, suggestions, screenshots — all welcome.</p>
-      <div class="feedback-embed">
-        <script is:inline src="https://build.memoupdate.com/static/embed.js?form=bob-learnhns-feedback&v=1778219204"></script>
-      </div>
-    </section>
   </div>
 </BaseLayout>
 
@@ -140,27 +132,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-  }
-
-  .feedback-section {
-    margin-top: 5rem;
-    padding: 2.5rem;
-    background: var(--card-bg);
-    border: 1px solid #334155;
-    border-radius: 12px;
-  }
-
-  .feedback-section h2 {
-    margin-top: 0;
-    font-size: 1.75rem;
-  }
-
-  .feedback-section > p {
-    color: var(--text-color);
-    margin-bottom: 2rem;
-  }
-
-  .feedback-embed {
-    min-height: 1px;
   }
 </style>

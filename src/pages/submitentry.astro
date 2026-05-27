@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Submit Your Entry" description="Submit your entry for the SkyInclude & #OwnTheDot competition.">
+  <div class="content-wrapper">
+    <h1>Submit Your Entry</h1>
+    <p style="font-size: 1.2rem; color: var(--text-color); margin-bottom: 2rem; line-height: 1.6;">
+      Submit your entry for the SkyInclude & #OwnTheDot competition (read more here - <a href="https://skyinclude.com/blog/learnhns-kickoff/" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color); font-weight: bold; text-decoration: underline;">https://skyinclude.com/blog/learnhns-kickoff/</a>)
+    </p>
+
+    <div class="form-container">
+      <script is:inline src="https://build.memoupdate.com/static/embed.js?form=bob-learnhns-feedback&v=1778219204"></script>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+
+  .form-container {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    min-height: 400px;
+  }
+</style>
