@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema, webPageSchema, abs } from '../lib/seo';
+
+const description = "Submit your entry for the SkyInclude & #OwnTheDot LearnHNS competition. Make sure you've followed the setup steps before submitting.";
+---
+<BaseLayout
+  title="Submit Your Entry"
+  description={description}
+  keywords="SkyInclude OwnTheDot, LearnHNS competition, HNS competition entry, Handshake giveaway"
+  schema={[
+    webPageSchema({ title: 'Submit Your Entry', description, url: abs('/submitentry/') }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Submit Entry', path: '/submitentry/' },
+    ]),
+  ]}
+>
+  <div class="page-shell">
+
+    <section class="page-hero">
+      <div class="page-hero-eyebrow">Competition</div>
+      <h1 class="page-hero-title">
+        Submit your <em>entry.</em>
+      </h1>
+      <p class="page-hero-lede">
+        For the SkyInclude &amp; #OwnTheDot LearnHNS competition. Make sure
+        you've followed the steps on the <a href="/start/">Start</a> page
+        first, then submit below.
+        <br /><br />
+        Background and rules:
+        <a href="https://skyinclude.com/blog/learnhns-kickoff/" target="_blank" rel="noopener noreferrer">
+          skyinclude.com/blog/learnhns-kickoff
+        </a>
+      </p>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">Entry form</div>
+      <div class="form-container">
+        <script is:inline src="https://build.memoupdate.com/static/embed.js?form=bob-learnhns-feedback&v=1778219204"></script>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .form-container {
+    background: #ffffff;
+    padding: 2.25rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    min-height: 400px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03), 0 4px 16px rgba(0, 0, 0, 0.03);
+  }
+</style>

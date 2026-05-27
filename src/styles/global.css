@@ -525,3 +525,47 @@ img { max-width: 100%; height: auto; border-radius: 8px; }
 
 .hero:not(.hero--home) h1 { font-size: 2.5rem; margin-bottom: 1rem; }
 .hero:not(.hero--home) p { font-size: 1.1rem; max-width: 720px; margin: 0 auto 1.5rem; color: var(--text-secondary); }
+
+/* ──────────────────────────────────────────────────────────
+   Hello Bar — full-width announcement strip above the header,
+   used to promote competitions / events. Sits above .site-header
+   in BaseLayout. Styled to the violet palette.
+   ────────────────────────────────────────────────────────── */
+.hello-bar {
+  background: linear-gradient(90deg, var(--hns-violet), var(--hns-violet-deep));
+  color: #ffffff;
+  text-align: center;
+  padding: 0.7rem 1rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  position: relative;
+  z-index: 101;
+  box-shadow: 0 2px 12px rgba(105, 58, 250, 0.25);
+}
+
+.hello-bar p {
+  margin: 0;
+  color: #ffffff;
+}
+
+.hello-bar a {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  margin-left: 0.4rem;
+  font-weight: 700;
+  transition: color 0.2s ease, text-decoration-thickness 0.2s ease;
+}
+
+.hello-bar a:hover {
+  color: var(--hns-mint);
+  text-decoration-thickness: 2px;
+}
+
+@media (max-width: 600px) {
+  .hello-bar { font-size: 0.75rem; padding: 0.55rem 0.75rem; }
+  .hello-bar a { display: inline-block; margin-left: 0; }
+}
