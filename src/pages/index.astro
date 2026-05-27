@@ -8,16 +8,11 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
   keywords="Handshake, HNS, decentralized DNS, blockchain naming, top-level domains, TLD, Bob Wallet, ShakeDex, decentralized internet"
   schema={[organizationSchema(), websiteSchema()]}
 >
-  <!-- LIVE TICKER -->
-  <div class="ticker-wrap">
+  <!-- LIVE TICKER — hidden by JS if no buyable listings -->
+  <div class="ticker-wrap" id="learnhns-ticker" hidden>
     <div class="ticker-label">Live</div>
     <div class="ticker-viewport">
-      <div class="ticker-track" id="learnhns-ticker-track">
-        <span class="ticker-item"><span class="ticker-name">market.learnhns.com</span><span class="ticker-price">live auctions</span></span>
-        <span class="ticker-item"><span class="ticker-name">loading…</span></span>
-        <span class="ticker-item"><span class="ticker-name">market.learnhns.com</span><span class="ticker-price">live auctions</span></span>
-        <span class="ticker-item"><span class="ticker-name">loading…</span></span>
-      </div>
+      <div class="ticker-track" id="learnhns-ticker-track"></div>
     </div>
   </div>
 
@@ -168,10 +163,10 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
       </div>
     </section>
 
-    <!-- LIVE AUCTIONS STRIP -->
-    <section class="auctions-strip">
+    <!-- LIVE AUCTIONS STRIP — hidden by JS if no buyable listings -->
+    <section class="auctions-strip" id="learnhns-auctions-strip" hidden>
       <div class="auctions-strip-head">
-        <div class="section-label section-label-teal auctions-label">Live Auctions &mdash; the ecosystem is alive</div>
+        <div class="section-label section-label-teal auctions-label">Active auctions &mdash; available now</div>
         <span class="live-dot">Live</span>
         <a href="https://market.learnhns.com" class="strip-link" target="_blank" rel="noopener">View all auctions &rarr;</a>
       </div>
@@ -242,6 +237,9 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
     display: flex;
     align-items: center;
   }
+
+  /* [hidden] attribute is defeated by explicit display:flex above — force it back */
+  .ticker-wrap[hidden] { display: none; }
 
   .ticker-label {
     flex-shrink: 0;
@@ -906,24 +904,25 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
   }
 
   async function loadAuctions(): Promise<void> {
+    const stripEl = document.getElementById('learnhns-auctions-strip');
+    const tickerEl = document.getElementById('learnhns-ticker');
     const auctionsEl = document.getElementById('learnhns-auctions');
     const tickerTrack = document.getElementById('learnhns-ticker-track');
-    if (!auctionsEl || !tickerTrack) return;
+    if (!auctionsEl || !tickerTrack || !stripEl || !tickerEl) return;
 
     try {
       const res = await fetch('https://market.learnhns.com/api/v2/auctions');
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
 
-      const listings = (data.auctions || []).slice(0, 5);
-      if (!listings.length) throw new Error('empty');
+      // Only show buyable listings on the home page — pending listings
+      // belong on /market/ under the "Coming Soon" section.
+      const buyable = ((data.auctions || []) as any[]).filter((l) => l.buyable === true).slice(0, 5);
+      if (!buyable.length) return; // sections remain hidden
 
-      auctionsEl.innerHTML = listings.map((listing: any) => {
+      auctionsEl.innerHTML = buyable.map((listing: any) => {
         const name = punyDecode(listing.name) + '/';
         const price = formatPrice(listing.expectedPrice);
-        const isBuyable = listing.buyable === true;
-        const badgeClass = isBuyable ? 'badge-buyable' : 'badge-pending';
-        const badgeText = isBuyable ? 'Buyable' : 'Pending';
         const bids = listing.bids?.length || 0;
         const url = `https://market.learnhns.com/listing/${listing.name}`;
 
@@ -932,30 +931,26 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
             <div class="auction-tld">${name}</div>
             <div class="auction-price">${price}</div>
             <div class="auction-meta-row">
-              <span class="badge ${badgeClass}">${badgeText}</span>
+              <span class="badge badge-buyable">Buyable</span>
               <span class="auction-bids">${bids} bid${bids !== 1 ? 's' : ''}</span>
             </div>
           </a>
         `;
       }).join('');
 
-      const tickerItems = listings.map((listing: any) => {
+      const tickerItems = buyable.map((listing: any) => {
         const name = punyDecode(listing.name) + '/';
         const price = formatPrice(listing.expectedPrice);
-        const isBuyable = listing.buyable === true;
-        const statusClass = isBuyable ? 'ticker-status-buyable' : 'ticker-status-pending';
-        const statusText = isBuyable ? 'Buyable' : 'Pending';
-        return `<span class="ticker-item"><span class="ticker-name">${name}</span><span class="ticker-price">${price}</span><span class="${statusClass}">${statusText}</span></span>`;
+        return `<span class="ticker-item"><span class="ticker-name">${name}</span><span class="ticker-price">${price}</span><span class="ticker-status-buyable">Buyable</span></span>`;
       }).join('');
       tickerTrack.innerHTML = tickerItems + tickerItems;
 
+      stripEl.hidden = false;
+      tickerEl.hidden = false;
+
     } catch (err) {
       console.warn('[LearnHNS] Market data unavailable:', err);
-      auctionsEl.innerHTML = `
-        <div class="strip-error">
-          Live market data unavailable. <a href="https://market.learnhns.com" target="_blank" rel="noopener">View directly &rarr;</a>
-        </div>
-      `;
+      // Sections remain hidden — no awkward error UI on the home page.
     }
   }
 
