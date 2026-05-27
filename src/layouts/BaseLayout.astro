@@ -74,7 +74,7 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     (function () {
       try {
         var stored = localStorage.getItem('learnhns-theme'); // 'light' | 'dark' | 'system' | null
-        var pref = stored || 'system';
+        var pref = stored || 'light';
         var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         var resolved = pref === 'system' ? (systemDark ? 'dark' : 'light') : pref;
         document.documentElement.setAttribute('data-theme', resolved);

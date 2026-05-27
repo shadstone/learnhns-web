@@ -355,7 +355,7 @@ const isActive = (href: string) =>
 
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
-      const current = (document.documentElement.getAttribute('data-theme-pref') || 'system') as 'light' | 'dark' | 'system';
+      const current = (document.documentElement.getAttribute('data-theme-pref') || 'light') as 'light' | 'dark' | 'system';
       const next = themeOrder[(themeOrder.indexOf(current) + 1) % themeOrder.length];
       applyTheme(next);
     });
