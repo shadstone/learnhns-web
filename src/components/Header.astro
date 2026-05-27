@@ -3,13 +3,28 @@ const path = Astro.url.pathname;
 const isActive = (href: string) =>
   href === '/' ? path === '/' : path.startsWith(href);
 ---
-<header class="site-header">
+<header class="site-header" data-nav-open="false">
   <div class="header-inner">
     <a href="/" class="logo-lockup" aria-label="LearnHNS home">
       <img src="/learnhnsicon-dark.svg" alt="" onerror="this.style.display='none'" />
       <span>LearnHNS</span>
     </a>
-    <nav class="main-nav" aria-label="Primary">
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Open menu"
+      aria-controls="primary-nav"
+      aria-expanded="false"
+    >
+      <span class="nav-toggle-bars" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+
+    <nav class="main-nav" id="primary-nav" aria-label="Primary">
       <a href="/learn/" class:list={[{ 'is-active': isActive('/learn') }]}>Learn</a>
       <a href="/dns/" class:list={[{ 'is-active': isActive('/dns') }]}>DNS</a>
       <a href="/media/" class:list={[{ 'is-active': isActive('/media') }]}>Media</a>
@@ -110,13 +125,149 @@ const isActive = (href: string) =>
     color: #ffffff !important;
   }
 
+  /* ── Hamburger toggle — only visible on mobile ── */
+  .nav-toggle {
+    display: none;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 0;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .nav-toggle:hover {
+    border-color: var(--hns-violet);
+    background: rgba(105, 58, 250, 0.04);
+  }
+
+  .nav-toggle-bars {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 18px;
+  }
+
+  .nav-toggle-bars span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--text-primary);
+    border-radius: 1px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+
+  /* Animate to X when open */
+  [data-nav-open="true"] .nav-toggle-bars span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  [data-nav-open="true"] .nav-toggle-bars span:nth-child(2) {
+    opacity: 0;
+  }
+  [data-nav-open="true"] .nav-toggle-bars span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* ── Compact desktop layout ── */
   @media (max-width: 900px) {
     .site-header { padding: 0 1rem; }
     .main-nav { gap: 0.1rem; }
     .main-nav a { padding: 0.3rem 0.5rem; font-size: 0.78rem; }
   }
 
-  @media (max-width: 700px) {
-    .main-nav a:not(.cta-pill) { display: none; }
+  /* ── Mobile: hamburger replaces nav; drawer slides down ── */
+  @media (max-width: 760px) {
+    .nav-toggle { display: inline-flex; }
+
+    .main-nav {
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-bottom: 1px solid var(--glass-border);
+      padding: 1rem 1.25rem 1.5rem;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.25rem;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+
+      /* Hidden by default */
+      transform: translateY(-8px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: transform 0.25s ease, opacity 0.2s ease, visibility 0s linear 0.25s;
+    }
+
+    [data-nav-open="true"] .main-nav {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: transform 0.25s ease, opacity 0.2s ease, visibility 0s;
+    }
+
+    .main-nav a {
+      padding: 0.85rem 0.75rem;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .main-nav a:last-of-type {
+      border-bottom: none;
+    }
+
+    .main-nav .cta-pill {
+      margin: 0.75rem 0 0 !important;
+      padding: 0.85rem 1.25rem !important;
+      font-size: 0.95rem;
+      text-align: center;
+      border-bottom: none !important;
+    }
   }
 </style>
+
+<script>
+  // Mobile nav drawer toggle.
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const toggle = header?.querySelector<HTMLButtonElement>('.nav-toggle');
+  const nav = header?.querySelector<HTMLElement>('.main-nav');
+
+  if (header && toggle && nav) {
+    const setOpen = (open: boolean) => {
+      header.setAttribute('data-nav-open', String(open));
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+
+    toggle.addEventListener('click', () => {
+      const isOpen = header.getAttribute('data-nav-open') === 'true';
+      setOpen(!isOpen);
+    });
+
+    // Close when a nav link is clicked (drawer should dismiss on navigation)
+    nav.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => setOpen(false));
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && header.getAttribute('data-nav-open') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    // Close if viewport grows past the mobile breakpoint
+    const mq = window.matchMedia('(min-width: 761px)');
+    mq.addEventListener('change', (e) => {
+      if (e.matches) setOpen(false);
+    });
+  }
+</script>
