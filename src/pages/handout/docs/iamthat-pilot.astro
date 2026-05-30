@@ -1,0 +1,293 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { breadcrumbSchema, webPageSchema, abs } from '../../../lib/seo';
+
+const description =
+  'The live .iamthat pilot story for the Handout revival: parent records, DNSSEC, DANE, dual HTTP and HTTPS, and the first handout.iamthat SLD.';
+---
+<BaseLayout
+  title="Handout .iamthat Pilot"
+  description={description}
+  keywords="Handout .iamthat pilot, Handshake hosting, Knot DNS, nginx, DNSSEC, DANE, Bob Wallet, GLUE4, DS record"
+  schema={[
+    webPageSchema({ title: 'Handout .iamthat Pilot', description, url: abs('/handout/docs/iamthat-pilot/') }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Handout', path: '/handout/' },
+      { name: '.iamthat Pilot', path: '/handout/docs/iamthat-pilot/' },
+    ]),
+  ]}
+>
+  <article class="pilot-doc">
+    <header class="doc-hero">
+      <a class="back-link" href="/handout/">Handout</a>
+      <p class="eyebrow">Pilot notes</p>
+      <h1>The first live Handout revival proof is <code>.iamthat</code>.</h1>
+      <p class="lede">
+        This page records the public story of the first LearnHNS Handout pilot:
+        a real Handshake TLD, a small VPS, manual Bob records, Knot DNS,
+        nginx, DNSSEC, DANE/TLSA, and the first managed SLD,
+        <code>handout.iamthat</code>.
+      </p>
+    </header>
+
+    <section class="doc-section">
+      <h2>What worked</h2>
+      <div class="proof-grid">
+        <article>
+          <span>Root TLD</span>
+          <p><code>http://iamthat/</code> loads in SkyInclude Browser.</p>
+        </article>
+        <article>
+          <span>First SLD</span>
+          <p><code>http://handout.iamthat/</code> loads as the first Handout-managed subdomain.</p>
+        </article>
+        <article>
+          <span>Resolver proof</span>
+          <p>Public HNS resolution returned the expected A and TLSA records after the Bob update became effective.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="doc-section">
+      <h2>The parent records</h2>
+      <p>
+        The TLD owner published the parent-zone records in Bob. Handout's job
+        is to generate and verify these values, but for the first revival
+        release the human still approves and submits them.
+      </p>
+      <div class="record-table" role="table" aria-label=".iamthat parent records">
+        <div role="row">
+          <strong role="cell">NS</strong>
+          <code role="cell">ns.iamthat.</code>
+        </div>
+        <div role="row">
+          <strong role="cell">GLUE4</strong>
+          <code role="cell">ns.iamthat. 167.71.215.247</code>
+        </div>
+        <div role="row">
+          <strong role="cell">DS</strong>
+          <code role="cell">46444 13 2 36c2e1eaa3cd2fb022aa03ae103c3bc1f1b93b3aa66aefe94fed7f95d581bad0</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="doc-section split">
+      <div>
+        <h2>Why HTTP stays on</h2>
+        <p>
+          During the pilot, current HNS browser behavior made one decision
+          obvious: the first installer should serve both HTTP and HTTPS and
+          should not force an automatic redirect to HTTPS.
+        </p>
+      </div>
+      <div class="note-box">
+        <strong>Default for the first revival release</strong>
+        <p>
+          HTTP remains available for HNS browser and local resolver
+          compatibility. HTTPS remains available for DANE/TLSA-capable clients.
+          ACME can be documented as a future bridge option, not the default.
+        </p>
+      </div>
+    </section>
+
+    <section class="doc-section">
+      <h2>What is on the server</h2>
+      <p>
+        The live pilot runs on a small DigitalOcean droplet at
+        <code>167.71.215.247</code>. The server is intentionally ordinary:
+        Knot answers authoritative DNS, nginx serves the web pages, UFW limits
+        exposed ports, and Handout keeps generated evidence and rollback notes
+        alongside the live config.
+      </p>
+      <div class="stack-grid">
+        <article>
+          <strong>Knot DNS</strong>
+          <p>Authoritative DNS for <code>.iamthat</code> and managed SLD records.</p>
+        </article>
+        <article>
+          <strong>nginx</strong>
+          <p>Dual HTTP and HTTPS vhosts for the root TLD and SLD pages.</p>
+        </article>
+        <article>
+          <strong>DNSSEC and TLSA</strong>
+          <p>DANE-first certificate proof for Handshake-native trust.</p>
+        </article>
+        <article>
+          <strong>Handout evidence</strong>
+          <p>Review files, manifests, backups, public checks, and SLD gates.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="doc-section split">
+      <div>
+        <h2>The next shape: hosted Handout</h2>
+        <p>
+          This pilot proves the infrastructure path. The next product question
+          is how to make it useful for people who do not want to manage a VPS.
+        </p>
+      </div>
+      <div class="note-box">
+        <strong>A friendlier hosted flow</strong>
+        <p>
+          A TLD owner would choose a name, copy a small set of Bob records, and
+          manage pages or SLDs from a dashboard. Handout would run the DNS,
+          hosting, backups, and proof checks behind the scenes.
+        </p>
+      </div>
+    </section>
+
+    <section class="doc-section roadmap">
+      <h2>Release notes from the pilot</h2>
+      <ul>
+        <li>Knot should be the first modern authoritative DNS target.</li>
+        <li>The all-in-one historical Node server should stay as educational reference.</li>
+        <li>DANE and self-signed TLS should be the default Handshake-native path.</li>
+        <li>ACME support belongs on the long-term bridge-compatibility roadmap.</li>
+        <li>The SLD command language is the clearest naming for subdomain management.</li>
+        <li>Generated service config needs clean install, backup, upgrade, and uninstall boundaries.</li>
+      </ul>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .pilot-doc {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4.5rem;
+  }
+
+  .doc-hero {
+    padding: 4rem 0 2.2rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    color: var(--hns-violet);
+    font-weight: 700;
+  }
+
+  .eyebrow {
+    color: var(--hns-violet);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .doc-hero h1 {
+    font-size: clamp(2.25rem, 6vw, 4.2rem);
+    letter-spacing: 0;
+  }
+
+  .lede,
+  .doc-section p,
+  .roadmap li {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .doc-section {
+    border-top: 1px solid var(--glass-border);
+    padding: 2.7rem 0;
+  }
+
+  .doc-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    letter-spacing: 0;
+  }
+
+  code {
+    color: var(--hns-violet);
+    font-family: var(--font-mono);
+    overflow-wrap: anywhere;
+  }
+
+  .proof-grid,
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .stack-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .proof-grid article,
+  .stack-grid article,
+  .note-box {
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    background: var(--surface);
+    padding: 1.15rem;
+  }
+
+  .proof-grid span,
+  .stack-grid strong,
+  .note-box strong {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  .proof-grid p,
+  .stack-grid p,
+  .note-box p {
+    margin: 0;
+  }
+
+  .record-table {
+    display: grid;
+    margin-top: 1.2rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .record-table div {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    border-top: 1px solid var(--glass-border);
+  }
+
+  .record-table div:first-child {
+    border-top: 0;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.85fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .roadmap ul {
+    display: grid;
+    gap: 0.8rem;
+    margin: 1rem 0 0;
+    padding-left: 1.25rem;
+  }
+
+  @media (max-width: 820px) {
+    .pilot-doc {
+      padding-inline: 1rem;
+    }
+
+    .proof-grid,
+    .stack-grid,
+    .split,
+    .record-table div {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

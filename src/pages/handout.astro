@@ -1,0 +1,355 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema, webPageSchema, abs } from '../lib/seo';
+
+const description =
+  'Handout is the LearnHNS revival project for helping Handshake TLD owners publish real websites, DNSSEC, and DANE-secured names.';
+---
+<BaseLayout
+  title="Handout - Handshake TLD Hosting"
+  description={description}
+  keywords="Handout, Handshake hosting, HNS website, DNSSEC, DANE, TLSA, Knot DNS, nginx, iamthat"
+  schema={[
+    webPageSchema({ title: 'Handout - Handshake TLD Hosting', description, url: abs('/handout/') }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Handout', path: '/handout/' },
+    ]),
+  ]}
+>
+  <div class="handout-page">
+    <section class="hero-band">
+      <div class="hero-copy">
+        <p class="eyebrow">Live LearnHNS revival project</p>
+        <h1>Handout helps a Handshake TLD become a working website.</h1>
+        <p class="lede">
+          Owning a Handshake name is only the first step. Handout is the open-source
+          path we are reviving so a TLD owner can publish authoritative DNS,
+          DNSSEC, DANE/TLSA, and web hosting without turning every launch into
+          a custom sysadmin project.
+        </p>
+        <div class="actions">
+          <a class="btn-primary" href="/handout/docs/iamthat-pilot/">Read the .iamthat pilot</a>
+          <a class="btn-secondary" href="http://handout.iamthat/">Open handout.iamthat</a>
+          <a class="btn-secondary" href="https://github.com/shadstoneofficial/handout" target="_blank" rel="noopener">View Handout repo</a>
+        </div>
+      </div>
+
+      <aside class="proof-panel" aria-label="Live Handout proof">
+        <div class="browser-bar">
+          <span></span>
+          <span></span>
+          <span></span>
+          <code>http://handout.iamthat/</code>
+        </div>
+        <div class="browser-body">
+          <p class="status">Live in SkyInclude Browser</p>
+          <h2>handout.iamthat</h2>
+          <p>First Handout-managed SLD for .iamthat.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="story-section" id="pilot">
+      <div class="section-kicker">The live story</div>
+      <div class="story-grid">
+        <article>
+          <span>1</span>
+          <h2>.iamthat is the root pilot.</h2>
+          <p>
+            We delegated the real Handshake TLD <code>.iamthat</code> to a
+            Handout-managed server and confirmed it resolves through HNS-aware
+            tooling.
+          </p>
+        </article>
+        <article>
+          <span>2</span>
+          <h2>handout.iamthat is the first SLD.</h2>
+          <p>
+            The first subdomain was added through Handout's SLD review and
+            guarded install flow, then checked in SkyInclude Browser.
+          </p>
+        </article>
+        <article>
+          <span>3</span>
+          <h2>HTTP and HTTPS both stay enabled.</h2>
+          <p>
+            The first release should not force HTTPS redirects. HTTP keeps
+            current HNS browsers and proxies usable, while HTTPS remains
+            available for DANE/TLSA-capable clients.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="split-section">
+      <div>
+        <p class="eyebrow">What Handout owns</p>
+        <h2>The technical pieces become a repeatable installer.</h2>
+        <p>
+          The revival release is centered on Knot authoritative DNS, nginx,
+          DNSSEC signing, self-signed TLS certificates, TLSA records, parent
+          record output for Bob or hsd, backups, rollback notes, and public
+          proof artifacts.
+        </p>
+      </div>
+      <div class="capability-list">
+        <article>
+          <strong>Authoritative DNS</strong>
+          <p>Knot serves the TLD zone and managed SLD records.</p>
+        </article>
+        <article>
+          <strong>DANE-first HTTPS</strong>
+          <p>Self-signed certificates are paired with TLSA records instead of assuming Web2 CA trust.</p>
+        </article>
+        <article>
+          <strong>Clean operations</strong>
+          <p>Generated config is backed up, reviewable, and designed for uninstall or upgrade.</p>
+        </article>
+        <article>
+          <strong>Manual parent safety</strong>
+          <p>Bob or hsd publication remains a reviewed human step for now.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="hosted-section">
+      <div class="hosted-copy">
+        <p class="eyebrow">Next product question</p>
+        <h2>Most people should not need to run the VPS themselves.</h2>
+        <p>
+          The open-source installer matters, but the community also needs a
+          hosted Handout service: a simple dashboard where a TLD owner can add
+          the Bob records once, create SLDs, publish starter pages, and grow
+          into custom hosting later.
+        </p>
+      </div>
+      <div class="hosted-steps">
+        <article>
+          <span>Owner</span>
+          <p>Chooses a TLD and copies reviewed NS, GLUE4, and DS records into Bob.</p>
+        </article>
+        <article>
+          <span>Handout</span>
+          <p>Runs the DNS, DNSSEC, DANE, web server, backups, and proof checks.</p>
+        </article>
+        <article>
+          <span>Community</span>
+          <p>Gets real HNS websites without learning every infrastructure detail first.</p>
+        </article>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .handout-page {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4.5rem;
+  }
+
+  .hero-band {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    gap: 2rem;
+    align-items: center;
+    padding: 4.5rem 0 3.25rem;
+  }
+
+  .eyebrow,
+  .section-kicker,
+  .status {
+    color: var(--hns-violet);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .hero-copy h1,
+  .split-section h2,
+  .hosted-copy h2 {
+    font-size: clamp(2.2rem, 6vw, 4.6rem);
+    letter-spacing: 0;
+    margin-bottom: 1.1rem;
+  }
+
+  .split-section h2,
+  .hosted-copy h2 {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+  }
+
+  .lede,
+  .split-section p,
+  .hosted-copy p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    max-width: 680px;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.6rem;
+  }
+
+  .proof-panel {
+    border: 1px solid var(--glass-border-strong);
+    border-radius: 8px;
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+  }
+
+  .browser-bar {
+    display: grid;
+    grid-template-columns: auto auto auto 1fr;
+    gap: 0.45rem;
+    align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+    background: var(--surface-soft);
+    padding: 0.85rem 1rem;
+  }
+
+  .browser-bar span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--glass-border-bright);
+  }
+
+  .browser-bar code {
+    justify-self: end;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    overflow-wrap: anywhere;
+  }
+
+  .browser-body {
+    min-height: 260px;
+    padding: 2rem;
+  }
+
+  .browser-body h2 {
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    letter-spacing: 0;
+    margin-bottom: 1rem;
+  }
+
+  .browser-body p:last-child {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+  }
+
+  .story-section,
+  .split-section,
+  .hosted-section {
+    border-top: 1px solid var(--glass-border);
+    padding: 3.25rem 0;
+  }
+
+  .story-grid,
+  .capability-list,
+  .hosted-steps {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .story-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .story-grid article,
+  .capability-list article,
+  .hosted-steps article {
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    background: var(--surface);
+    padding: 1.2rem;
+  }
+
+  .story-grid span,
+  .hosted-steps span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    height: 2rem;
+    margin-bottom: 0.9rem;
+    border-radius: 999px;
+    background: rgba(105, 58, 250, 0.1);
+    color: var(--hns-violet);
+    font-weight: 700;
+  }
+
+  .story-grid h2 {
+    font-size: 1.25rem;
+    letter-spacing: 0;
+    margin-bottom: 0.65rem;
+  }
+
+  .story-grid p,
+  .capability-list p,
+  .hosted-steps p {
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  code {
+    font-family: var(--font-mono);
+    color: var(--hns-violet);
+  }
+
+  .split-section,
+  .hosted-section {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .capability-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .capability-list strong {
+    display: block;
+    margin-bottom: 0.45rem;
+  }
+
+  .hosted-section {
+    background: var(--surface-soft);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    margin-top: 1rem;
+    padding: 2rem;
+  }
+
+  .hosted-steps {
+    align-self: stretch;
+  }
+
+  @media (max-width: 900px) {
+    .hero-band,
+    .story-grid,
+    .split-section,
+    .hosted-section,
+    .capability-list {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-band {
+      padding-top: 3rem;
+    }
+
+    .hosted-section {
+      padding: 1.25rem;
+    }
+  }
+</style>
