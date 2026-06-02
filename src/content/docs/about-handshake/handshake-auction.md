@@ -98,21 +98,3 @@ When bidding on a name you really care about (e.g. your first+last name), we hig
 Check out this detailed writeup on Handshake Auctions and strategies by blockdomains: [Thoughts On Handshake Top-Level Domain Market Dynamics](https://blockdomains.substack.com/p/thoughts-on-handshake-top-level-domain)
 
 Still not entirely sure how to proceed? Visit the [Namer Community Discord](https://discord.gg/V3aTrkp)’s [#auctions-and-marketplace ](https://discord.gg/9v5QP6r)channel to ask about and discuss bidding strategies.&#x20;
-
-
----
-
-# Agent Instructions: Querying This Documentation
-
-If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
-
-Perform an HTTP GET request on the current page URL with the `ask` query parameter:
-
-```
-GET https://learn.namebase.io/about-handshake/handshake-auction.md?ask=<question>
-```
-
-The question should be specific, self-contained, and written in natural language.
-The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
-
-Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

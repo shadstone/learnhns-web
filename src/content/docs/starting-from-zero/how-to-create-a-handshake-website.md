@@ -113,21 +113,3 @@ In this tutorial @kiba\_gateaux does a quick run through of how to deploy a site
 [View External Resource](https://matthewzipkin.medium.com/using-hns-websites-securely-69959ae02052)
 
 [View External Resource](https://medium.com/@ca98am79/how-to-view-dane-tlsa-websites-on-handshake-with-firefox-f55eb1dd5be9)
-
-
----
-
-# Agent Instructions: Querying This Documentation
-
-If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
-
-Perform an HTTP GET request on the current page URL with the `ask` query parameter:
-
-```
-GET https://learn.namebase.io/starting-from-zero/how-to-create-a-handshake-website.md?ask=<question>
-```
-
-The question should be specific, self-contained, and written in natural language.
-The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
-
-Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

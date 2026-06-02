@@ -49,21 +49,3 @@ The [Namebase Registry](https://www.namebase.io/registry/) is a service that ena
 [HNS.ID](https://hns.id/) is a service that enabled you to sell decentralized 2nd-level domains on your Handshake TLD using the Optimism Layer 2 Ethereum network. We charge 5% of the registration fees for our [Handshake Development Fund](https://docs.hns.id/faq#what-is-the-handshake-dev-fund) and other related purposes.
 
 [Learn more about HNS.ID here](https://support.namebase.io/en/collections/8666069-hns-id).
-
-
----
-
-# Agent Instructions: Querying This Documentation
-
-If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
-
-Perform an HTTP GET request on the current page URL with the `ask` query parameter:
-
-```
-GET https://learn.namebase.io/about-namebase/revenue-streams.md?ask=<question>
-```
-
-The question should be specific, self-contained, and written in natural language.
-The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
-
-Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

@@ -25,21 +25,3 @@ HNS.to is a simple gateway that doesn't require local software or configuration.
 You can run a Handshake resolver locally using the Handshake fullnode or SPV client without relying on any third party providers. This is the most trustless way to resolve Handshake.
 
 [Resolving Handshake locally](/docs/development/resolving-handshake/resolving-handshake-locally)
-
-
----
-
-# Agent Instructions: Querying This Documentation
-
-If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
-
-Perform an HTTP GET request on the current page URL with the `ask` query parameter:
-
-```
-GET https://learn.namebase.io/development/resolving-handshake.md?ask=<question>
-```
-
-The question should be specific, self-contained, and written in natural language.
-The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
-
-Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

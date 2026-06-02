@@ -25,21 +25,3 @@ If a hosting provider doesn't support Handshake, it's most likely because they h
 One of Handshake's primary goals is to replace CAs with a more secure blockchain-based root of trust. [This article](https://www.namebase.io/blog/meet-handshake-decentralizing-dns-to-improve-the-security-of-the-internet/) provides an overview of the concept, and community members have documented how to set up HTTPS websites using Handshake in our [Learning Center](/docs/starting-from-zero/how-to-create-a-handshake-website).
 
 Note that end-user configuration is necessary to visit Handshake HTTPs sites until browsers support it natively. A client app can be created to make this configuration easier in the meantime but such an app doesn't currently exist (if you're interested in making this let the [community](https://community.namebase.io/) know!).
-
-
----
-
-# Agent Instructions: Querying This Documentation
-
-If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
-
-Perform an HTTP GET request on the current page URL with the `ask` query parameter:
-
-```
-GET https://learn.namebase.io/development/guides/traditional-website.md?ask=<question>
-```
-
-The question should be specific, self-contained, and written in natural language.
-The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
-
-Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

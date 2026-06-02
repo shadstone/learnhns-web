@@ -103,21 +103,3 @@ Now as long as your device can resolve Handshake names, you can go to a web brow
 #### [How to build a decentralized site on Handshake](https://ras.cr/handshake-tutorial.html) - ras.cr/
 
 ##
-
-
----
-
-# Agent Instructions: Querying This Documentation
-
-If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
-
-Perform an HTTP GET request on the current page URL with the `ask` query parameter:
-
-```
-GET https://learn.namebase.io/development/guides/building-a-decentralized-blog-on-handshake.md?ask=<question>
-```
-
-The question should be specific, self-contained, and written in natural language.
-The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
-
-Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

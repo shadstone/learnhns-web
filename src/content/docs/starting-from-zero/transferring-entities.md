@@ -30,23 +30,3 @@ You can transfer your Handshake names to any HNS address by visiting your names'
 We handle name transfer requests in the same order of when they are submitted, so there may be a queue of up to 7 days before the TRANSFER transaction is sent for your name. In addition, there is an inherent 288 blocks that must past before we submit your FINALIZE transaction (this is a Handshake restrction, not a Namebase one), thus completing the name transfer. This may also take up to 7 days to process.
 
 There are inherent blockchain limitations for the number of TRANSFER and FINALIZE transactions we can submit each block, so we appreciate your patience as we work through the queue.
-
-
-
-
----
-
-# Agent Instructions: Querying This Documentation
-
-If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
-
-Perform an HTTP GET request on the current page URL with the `ask` query parameter:
-
-```
-GET https://learn.namebase.io/starting-from-zero/transferring-entities.md?ask=<question>
-```
-
-The question should be specific, self-contained, and written in natural language.
-The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
-
-Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

@@ -25,21 +25,3 @@ We use separate passwords and two-step verification with each device and service
 We have previously contracted with [Synack](https://www.synack.com/) to have hundreds of security researchers conduct comprehensive penetration testing on our website. They found no serious vulnerabilities and the time-to-vulnerability was far longer than the average website that they test.&#x20;
 
 When we develop new features we conduct extensive security review to ensure that customer funds remain safe. This often means that we delay releasing features that have already been developed so that we are sure they are safe for customers to use.&#x20;
-
-
----
-
-# Agent Instructions: Querying This Documentation
-
-If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
-
-Perform an HTTP GET request on the current page URL with the `ask` query parameter:
-
-```
-GET https://learn.namebase.io/about-namebase/security.md?ask=<question>
-```
-
-The question should be specific, self-contained, and written in natural language.
-The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
-
-Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

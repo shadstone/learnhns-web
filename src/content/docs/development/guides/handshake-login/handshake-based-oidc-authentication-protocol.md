@@ -86,21 +86,3 @@ This comparison is then determined to be valid by proving that the challenge has
 To prevent replay attacks, the Authorization Server must present the user with a unique challenge for every login attempt. This challenge is the random "state" field provided to the Authorization Server by the application at the start of the OIDC flow. Because the challenge is unique to each login attempt, the client's login payload cannot be replayed. The challenge is signed with RSA-PSS with a salt length of 64 bits.
 
 Once the user receives this challenge, they must sign it with their private key to prove their identity. Then, the Authorization Server can query a trusted Handshake DNS resolver (such as a local full node) to securely verify that the key used to sign the challenge matches the key pinned to the specified Handshake name.
-
-
----
-
-# Agent Instructions: Querying This Documentation
-
-If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
-
-Perform an HTTP GET request on the current page URL with the `ask` query parameter:
-
-```
-GET https://learn.namebase.io/development/guides/handshake-login/handshake-based-oidc-authentication-protocol.md?ask=<question>
-```
-
-The question should be specific, self-contained, and written in natural language.
-The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
-
-Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

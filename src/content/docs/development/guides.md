@@ -18,21 +18,3 @@ In essence, Handshake takes a core piece of internet infrastructure, DNS's root 
 | Decentralized social application | Develop decentralized social applications that minimize centralization while avoiding the the usability issues of federated applications                   | <ul><li>Decentralized Reddit</li><li>Decentralized Twitter</li><li>Decentralized Tumblr</li></ul>                                                                                                                                                                            |
 
 Each application section is standalone and doesn't require that you are familiar with the previous application sections. Dive into whatever interests you most!
-
-
----
-
-# Agent Instructions: Querying This Documentation
-
-If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
-
-Perform an HTTP GET request on the current page URL with the `ask` query parameter:
-
-```
-GET https://learn.namebase.io/development/guides.md?ask=<question>
-```
-
-The question should be specific, self-contained, and written in natural language.
-The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
-
-Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

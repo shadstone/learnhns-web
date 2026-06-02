@@ -34,21 +34,3 @@ Search for the names you want at <https://namebase.io/domains>. You can buy a na
 ![](https://images.ctfassets.net/v3ez3dek3dk6/1tTLSClCogaSqax1bD0xj9/4d44d1f7955928c9d5b99ebba719b948/image.png?fit=pad\&w=720)
 
 You now own a name on the new internet! Your domain is [private](/docs/about-handshake/about-handshake#privacy-preserving), [censorship-resistant](/docs/about-handshake/about-handshake#uncensorable), and truly [owned](/docs/about-handshake/about-handshake#true-domain-ownership) by you instead of merely rented like in the traditional internet. You can now set up your devices to [access Handshake sites](/docs/starting-from-zero/how-to-access-handshake-sites) and learn how to [create your own websites](/docs/starting-from-zero/how-to-create-a-handshake-website) on Handshake.
-
-
----
-
-# Agent Instructions: Querying This Documentation
-
-If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
-
-Perform an HTTP GET request on the current page URL with the `ask` query parameter:
-
-```
-GET https://learn.namebase.io/about-namebase/private-naming.md?ask=<question>
-```
-
-The question should be specific, self-contained, and written in natural language.
-The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
-
-Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

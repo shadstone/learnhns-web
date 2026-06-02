@@ -41,21 +41,3 @@ If you'd like to compile the resolver yourself, you can do so by grabbing the so
 * Debian/Ubuntu: There is no dpkg for apt. If you would like to contribute, please contact us.
 * Alpine: There is no package in apk for Alpine. If you would like to contribue, please contact us.
   {% endhint %}
-
-
----
-
-# Agent Instructions: Querying This Documentation
-
-If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
-
-Perform an HTTP GET request on the current page URL with the `ask` query parameter:
-
-```
-GET https://learn.namebase.io/development/resolving-handshake/resolving-handshake-locally/setting-up-the-light-client.md?ask=<question>
-```
-
-The question should be specific, self-contained, and written in natural language.
-The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
-
-Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

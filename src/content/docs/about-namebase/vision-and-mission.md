@@ -39,21 +39,3 @@ Even though it’s 2020, the secondary market for traditional domain names is st
 ### Support Handshake adoption amongst all stakeholders
 
 Handshake is still in its earliest stages, so it’s important for all ecosystem participants to support adoption. We will support Handshake on marketing and community growth. We will also work on integration efforts with browsers and other relevant projects (i.e. Pi-hole) to bring Handshake to even more users. If you’re interested in joining forces on these efforts, join the [Namer Community](https://community.namebase.io) and help us enable freedom and safety on the Internet!
-
-
----
-
-# Agent Instructions: Querying This Documentation
-
-If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
-
-Perform an HTTP GET request on the current page URL with the `ask` query parameter:
-
-```
-GET https://learn.namebase.io/about-namebase/vision-and-mission.md?ask=<question>
-```
-
-The question should be specific, self-contained, and written in natural language.
-The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
-
-Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.
