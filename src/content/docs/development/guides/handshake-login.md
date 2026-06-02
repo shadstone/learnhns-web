@@ -4,13 +4,9 @@ Use the Authentication Protocol spec to get a high level overview of the propose
 
 If you're looking to see how we implemented login with Handshake on services like [Namer News](https://news.namebase.io), or you're looking to create an OIDC provider yourself for an application you're building, use the Implementation Guide.
 
-{% content-ref url="/pages/LyYXzQLYv5SUsucMnwBy" %}
-[Handshake-based OIDC Authentication Protocol](/development/guides/handshake-login/handshake-based-oidc-authentication-protocol.md)
-{% endcontent-ref %}
+[Handshake-based OIDC Authentication Protocol](/docs/development/guides/handshake-login/handshake-based-oidc-authentication-protocol)
 
-{% content-ref url="/pages/OW13YbOqu4xyXpZMpj3F" %}
-[Handshake Login Implementation Guide](/development/guides/handshake-login/oidc.md)
-{% endcontent-ref %}
+[Handshake Login Implementation Guide](/docs/development/guides/handshake-login/oidc)
 
 
 ---

@@ -20,11 +20,10 @@ To set your DNS Server from the command line, simply run
 networksetup -setdnsservers Wi-Fi 127.0.0.1
 ```
 
-{% hint style="info" %}
-Once set up, we recommend clearing your DNS servers of potentially previously cached domains to fully test whether the resolver is setup correctly.
-
-To flush your DNS settings, run:`sudo killall -HUP mDNSResponder`
-{% endhint %}
+> **Info**
+> Once set up, we recommend clearing your DNS servers of potentially previously cached domains to fully test whether the resolver is setup correctly.
+> 
+> To flush your DNS settings, run:`sudo killall -HUP mDNSResponder`
 
 ## Windows 10
 

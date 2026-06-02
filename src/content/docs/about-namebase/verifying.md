@@ -6,13 +6,11 @@ The verification process can vary depending on your location. Some users may onl
 
 You can verify your account [here](http://namebase.io/kyc/).
 
-{% hint style="info" %}
-While you can't sell or transfer HNS without verifying, you *can* [buy HNS with BTC without verifying on Namebase](/about-namebase/private-naming.md), which you can then use to get and transfer names to other wallets.
-{% endhint %}
+> **Info**
+> While you can't sell or transfer HNS without verifying, you *can* [buy HNS with BTC without verifying on Namebase](/docs/about-namebase/private-naming), which you can then use to get and transfer names to other wallets.
 
-{% hint style="warning" %}
-Trading HNS is not available to NY residents due to regulatory restrictions.
-{% endhint %}
+> **Warning**
+> Trading HNS is not available to NY residents due to regulatory restrictions.
 
 ## Permission Levels
 

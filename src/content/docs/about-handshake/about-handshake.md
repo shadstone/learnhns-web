@@ -2,17 +2,17 @@
 
 ## Handshake
 
-![](/files/-MMF9uLZ0NdsY2pjhp_K)
+
 
 Handshake is a naming protocol that’s backwards compatible with the existing DNS system. It does not replace the DNS protocol, but instead decentralizes the root zone file where TLD ownership information is stored by adding a distributed and decentralized blockchain-based system that no one controls and anyone can use. This allows for a root zone that is uncensorable, permissionless, and free of gatekeepers like ICANN.
 
 Every peer in the Handshake network cryptographically validates and manages the root zone, which completely removes the need for the Certificate Authority system (CAs). Names are logged on the Handshake blockchain, which is essentially one big distributed zone file to which anyone can add an entry.
 
-![](/files/-M6GzUDBMT1XjvGWExq7)
+
 
 ## True name ownership
 
-![](/files/-MMU56CVDjkCutZUOwzc)
+
 
 In the existing internet infrastructure, no one actually owns their name. Namespaces are controlled by centralized organizations such as ICANN, Verisign, Facebook, Twitter, and Google, who can delete and take away your domain, name, account, and/or identity at will.
 
@@ -20,27 +20,27 @@ Current domain registrars have built their businesses on leasing models, chargin
 
 ### Complete control
 
-Handshake name owners have complete control over their data and can use their TLDs as they wish — from simply [hosting a website](/starting-from-zero/how-to-create-a-handshake-website.md) to [becoming a registrar](/starting-from-zero/how-to-use-handshake-names.md#become-a-registrar) that sells subdomains to others. Only name owners can update or transfer their names. As long as name owners control their private keys, because the DNS records are on the decentralized Handshake blockchain, their names cannot be seized or tampered with. And because governance on Handshake is truly decentralized, no one person or entity can make a governance decision that would impact domain owners or the network the same way the [ICANN deal would have for .org domain owners](https://www.eff.org/deeplinks/2020/01/after-nonprofits-protest-icann-californias-attorney-general-steps-org-battle).
+Handshake name owners have complete control over their data and can use their TLDs as they wish — from simply [hosting a website](/docs/starting-from-zero/how-to-create-a-handshake-website) to [becoming a registrar](/docs/starting-from-zero/how-to-use-handshake-names#become-a-registrar) that sells subdomains to others. Only name owners can update or transfer their names. As long as name owners control their private keys, because the DNS records are on the decentralized Handshake blockchain, their names cannot be seized or tampered with. And because governance on Handshake is truly decentralized, no one person or entity can make a governance decision that would impact domain owners or the network the same way the [ICANN deal would have for .org domain owners](https://www.eff.org/deeplinks/2020/01/after-nonprofits-protest-icann-californias-attorney-general-steps-org-battle).
 
 ### Renewal fees
 
-![](/files/-MdJbR0AwX39VURKWlnm)
+
 
 Handshake domain names provide true ownership, which means there are no yearly rental fees. Handshake TLD owners need only submit a biennial "heartbeat transaction" (costs a mining fee) to prove they still have access to their name. In the event a TLD owner loses access to their name and are unable to submit the RENEW transaction, said name will revert to the "auction-able names" pile. However, if you use Namebase you don't need to remember to perform these transactions because our system does this automatically for you. [Learn more about renewals here.](https://support.namebase.io/en/articles/8019613-domain-renewals)
 
 ## Endless top-level domains
 
-![](/files/-MlX7tzr4NeioWGpMAFq)
+
 
 At the root of the DNS hierarchy is a file called the root zone where top-level domain ownership info is recorded. This root zone is managed by [ICANN](https://www.icann.org/), who determines what top-level domains are allowed. In other words, the **entire** traditional domain name system is controlled at the root by a single entity, ICANN. ICANN charges a [$185,000 evaluation fee](https://newgtlds.icann.org/en/applicants/global-support/faqs/faqs-en) for new TLD applications, which may or may not get approved, thus artificially restricting the availability of domains for website owners and developers.
 
 ### Unrestricted
 
-By contrast, anyone can register Handshake names. They are distributed through public decentralized [Handshake name auctions](/about-handshake/handshake-auction.md) that are open to anyone, and the market determines the price of any given TLD, not Namebase, Handshake, or ICANN.
+By contrast, anyone can register Handshake names. They are distributed through public decentralized [Handshake name auctions](/docs/about-handshake/handshake-auction) that are open to anyone, and the market determines the price of any given TLD, not Namebase, Handshake, or ICANN.
 
 ### Any name
 
-![](/files/-MMU8sAvXCgGZiG146NR)
+
 
 Handshake names can be virtually anything, from English letters and decimal numbers to Chinese characters and even emojis! They can be used like a traditional TLD with a subdomain (my.home/, my.家/, my.🏡/) or as a standalone name (home/, 家/, 🏡/).
 
@@ -64,11 +64,11 @@ Handshake ensures DNS records can be modified only by the name's owner, which pr
 
 Your privacy is protected when you register a Handshake domain because no personal information is required. Ownership of names is determined by public-key cryptography, so it’s easy to verify name owners by having them sign a message with their private key. Privacy is a core feature of Handshake names; there is no WHOIS lookup or any other public database where ownership or contact information can be accessed. Unlike traditional domain registrars, Namebase does not charge annual fees to keep your personal details away from prying eyes.
 
-It is possible to [register Handshake names on Namebase **completely** privately without revealing any personal information](/about-namebase/private-naming.md).
+It is possible to [register Handshake names on Namebase **completely** privately without revealing any personal information](/docs/about-namebase/private-naming).
 
 ## A more secure internet
 
-{% embed url="<https://youtu.be/gugKRrv4M7A>" %}
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/gugKRrv4M7A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Browsers trust certificate authorities to prove that websites are who they say they are. However, certificate authorities have sometimes compromised the security of SSL (Secure Sockets Layer is tech that protects transmitted data from being read or modified) by issuing bad certificates or cooperating with governments to spy on and censor traffic. Insecure websites put everyone at risk. Vint Cerf, the “Father of the Internet,” expands on this in his article about [self-authenticating identifiers.](https://cacm.acm.org/magazines/2018/12/232883-self-authenticating-identifiers/fulltext)
 
@@ -88,9 +88,9 @@ Handshake names are their own root of trust and have their TLS keys pinned to th
 
 [The starting point of Internet interaction: a comprehensive explanation of the Handshake mechanism design of the decentralized naming system](https://blockcast.cc/news/the-starting-point-of-internet-interaction-a-comprehensive-explanation-of-the-handshake-mechanism-design-of-the-decentralized-naming-system/?amp) written by Andrew Lee, a co-founder of Handshake.
 
-{% embed url="<https://github.com/handshake-org>" %}
+[View External Resource](https://github.com/handshake-org)
 Handshake Github
-{% endembed %}
+
 
 
 ---

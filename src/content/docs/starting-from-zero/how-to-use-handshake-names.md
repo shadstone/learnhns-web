@@ -1,32 +1,30 @@
 # Use Handshake names
 
-You [truly own](/about-handshake/about-handshake.md#true-domain-ownership) your Handshake names, which means you're free to do anything you'd like with them. Below are some of the ways you can use your Handshake names through Namebase.
+You [truly own](/docs/about-handshake/about-handshake#true-domain-ownership) your Handshake names, which means you're free to do anything you'd like with them. Below are some of the ways you can use your Handshake names through Namebase.
 
-{% hint style="success" %}
-Share your resolvable Handshake name in the [Namer Community ](https://discord.gg/V3aTrkp)to become a Namer!
-{% endhint %}
+> **Success**
+> Share your resolvable Handshake name in the [Namer Community ](https://discord.gg/V3aTrkp)to become a Namer!
 
-{% embed url="<https://youtu.be/m1Q7ertlKwI>" %}
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/m1Q7ertlKwI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Create a website
 
-One of the most straightforward use cases of Handshake names is to set up a website on them. Check out the [Create Handshake websites](/starting-from-zero/how-to-create-a-handshake-website.md) page for numerous tutorials on how on you can do so!
+One of the most straightforward use cases of Handshake names is to set up a website on them. Check out the [Create Handshake websites](/docs/starting-from-zero/how-to-create-a-handshake-website) page for numerous tutorials on how on you can do so!
 
 ## Redirect your name
 
 [Redirects](https://www.namebase.io/manage/redirects) allows you to redirect your Handshake name to any other domain, serving as a human-readable URL shortener. Hover over "Products" in the navbar and select "Redirects", then enter your redirects as follows:
 
-![](/files/-MHs7AS0Qz-jfPj5EE1y)
 
-{% hint style="warning" %}
-Remember to include the "http\://" or "https\://" part of your redirect URL.
-{% endhint %}
+
+> **Warning**
+> Remember to include the "http\://" or "https\://" part of your redirect URL.
 
 ## Sell your name
 
 Find your Handshake name in the [Domain Manager](https://www.namebase.io/domain-manager), select "Manage", and click the slider next to "Sell this domain" to set your name's "Buy now price" and list it for sale.
 
-![](/files/-M6bt80FiTG-wF2qp2Mf)
+
 
 You can edit your listings' Buy now prices or remove them altogether in your Domain Manager's [for sale](https://www.namebase.io/for-sale) page.
 
@@ -34,19 +32,19 @@ You can edit your listings' Buy now prices or remove them altogether in your Dom
 
 Find your Handshake name in the [Domain Manager](https://www.namebase.io/domain-manager), select "Manage", and select "Gift this domain". Make sure the email address of your recipient is the same as their Namebase account's. If the recipient doesn’t have a Namebase account, they’ll be prompted to create one when they claim their name.
 
-![](/files/-MF3EZHM0vRBSw6E6G60)
+
 
 If the recipient doesn't claim their name by the expiration date, the name will be returned to your account.
 
 ## Sell subdomains
 
-The [Namebase Registry](/about-namebase/revenue-streams.md#namebase-registry) is a service that enables you to sell subdomains on your Handshake TLD. [Click here](https://www.namebase.io/registry/) to start selling now.
+The [Namebase Registry](/docs/about-namebase/revenue-streams#namebase-registry) is a service that enables you to sell subdomains on your Handshake TLD. [Click here](https://www.namebase.io/registry/) to start selling now.
 
-![](/files/-MY9KTh-kepNJT7M2joy)
+
 
 [HNS.ID](https://hns.id/) is a service that allows you to sell decentralized subdomains on your Handshake TLD by using the Optimism Layer 2 ethereum network. Second level domains are minted as NFTs and can be managed on the HNS.ID platform.
 
-![](/files/2skETRQK8aPpxmSjRxOl)
+
 
 ## Use your name as your identity
 

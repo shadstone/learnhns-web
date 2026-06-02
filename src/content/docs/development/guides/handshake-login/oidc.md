@@ -20,17 +20,15 @@ Alternatively, developers can host their own authorization server.
 
 Now let's go through how the specific Namer News login implementation works in detail. We hope this can act as a guide for others to implement their own authorization flows.
 
-{% hint style="info" %}
-Here is an open source OIDC Authentication Server: <https://github.com/namebasehq/handshake-oidc>
-{% endhint %}
+> **Info**
+> Here is an open source OIDC Authentication Server: <https://github.com/namebasehq/handshake-oidc>
 
 ## Overview
 
 When implementing OIDC with Handshake, the OIDC provider makes a Handshake DNS query to fetch a TXT record which contains a fingerprint of the user's public key. The user's ability to sign a challenge with their private key is what proves their identity to Handshake, the OIDC provider, and the application requesting identity.
 
-{% hint style="info" %}
-To minimize trust, we recommend each application host their own OIDC provider to handle queries to the Handshake network as opposed to relying on a third-party provider.
-{% endhint %}
+> **Info**
+> To minimize trust, we recommend each application host their own OIDC provider to handle queries to the Handshake network as opposed to relying on a third-party provider.
 
 ### "Login with Handshake" Identity Manager
 
@@ -118,9 +116,8 @@ idManagerUrl.hash = `#/login?state=${btoa(data.state)}&id=${btoa(data.id)}&callb
 
 ### 4. User creates their new identity
 
-{% hint style="info" %}
-If users are simply selecting a domain that they have already used to set up a profile, skip to Step 5.
-{% endhint %}
+> **Info**
+> If users are simply selecting a domain that they have already used to set up a profile, skip to Step 5.
 
 The user is then prompted to create a new identity by providing the name of an owned handshake domain or subdomain.
 
@@ -203,9 +200,8 @@ It then extracts the value from the TXT records.
   },
 ```
 
-{% hint style="info" %}
-dnsResolvers provides a list of IPs of servers resolving handshake names
-{% endhint %}
+> **Info**
+> dnsResolvers provides a list of IPs of servers resolving handshake names
 
 ### 7. Fingerprint comparison, and replay attack verification
 

@@ -2,11 +2,11 @@
 
 You'll find resources dedicated to Handshake and Namebase here. Feel free to use, copy, and share the information as you please!
 
-{% embed url="<https://youtu.be/8I82AFjVJfE>" %}
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/8I82AFjVJfE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Handshake
 
-![Own your name on the Internet](/files/-MMF9uLZ0NdsY2pjhp_K)
+
 
 As part of the decentralized web movement, our community is taking the Internet back from the handful of corporations who currently own it and placing it into the hands of the people by dismantling ICANN's monopoly on top-level domains (.com, .org, .io are all top-level domains controlled by ICANN).&#x20;
 
@@ -23,33 +23,29 @@ What this means is the entire domain name system that everyone uses around the w
 
 Handshake decentralizes the Internet by shifting control of the root zone file away from ICANN and onto a decentralized blockchain.
 
-{% content-ref url="/pages/-M5OB8uYAxwfTZsMxXbw" %}
-[About Handshake](/about-handshake/about-handshake.md)
-{% endcontent-ref %}
+[About Handshake](/docs/about-handshake/about-handshake)
 
 ### HNS <a href="#hns" id="hns"></a>
 
-![](/files/20pNSMs0Bg8npADJvW98)
 
-[HNS](/about-handshake/handshake-coin.md) refers to the [Handshake coin](/about-handshake/handshake-coin.md), which is the digital currency of the Handshake blockchain. HNS is used to bid in [Handshake name auctions](/about-handshake/handshake-auction.md) and the winning bids are burned from the blockchain (the winning bids do not get paid to *anybody),* which has a deflationary effect on the coin's price. HNS is also used to pay transaction fees to the miners, who add bidding, renewal, and other transactions to the Handshake blockchain.‌
 
-{% content-ref url="/pages/-M5OBvepa4QqCLVZUL00" %}
-[HNS coin economics](/about-handshake/handshake-coin.md)
-{% endcontent-ref %}
+[HNS](/docs/about-handshake/handshake-coin) refers to the [Handshake coin](/docs/about-handshake/handshake-coin), which is the digital currency of the Handshake blockchain. HNS is used to bid in [Handshake name auctions](/docs/about-handshake/handshake-auction) and the winning bids are burned from the blockchain (the winning bids do not get paid to *anybody),* which has a deflationary effect on the coin's price. HNS is also used to pay transaction fees to the miners, who add bidding, renewal, and other transactions to the Handshake blockchain.‌
+
+[HNS coin economics](/docs/about-handshake/handshake-coin)
 
 ## Namebase <a href="#namebase" id="namebase"></a>
 
-![](/files/-MMF9xqwwCgZc-CIy5lF)
 
-[Namebase](/about-namebase/vision-and-mission.md) is an onramp for Handshake. We did *not* create Handshake, but just like you, we are Directors of Handshake. Our goal is to make Handshake easy-to-use to enable mass adoption, and you can use our platform to easily [buy](/starting-from-zero/buy-hns.md) and sell HNS as well as [bid on](/starting-from-zero/how-to-get-a-name.md), purchase, [sell](/starting-from-zero/how-to-use-handshake-names.md#sell-your-name), and [use](/starting-from-zero/how-to-use-handshake-names.md) Handshake names.
+
+[Namebase](/docs/about-namebase/vision-and-mission) is an onramp for Handshake. We did *not* create Handshake, but just like you, we are Directors of Handshake. Our goal is to make Handshake easy-to-use to enable mass adoption, and you can use our platform to easily [buy](/docs/starting-from-zero/buy-hns) and sell HNS as well as [bid on](/docs/starting-from-zero/how-to-get-a-name), purchase, [sell](/docs/starting-from-zero/how-to-use-handshake-names#sell-your-name), and [use](/docs/starting-from-zero/how-to-use-handshake-names) Handshake names.
 
 ## Getting started
 
 To get started on Handshake, you just need to buy some Handshake coins, use your Handshake coins to get a name, and begin using your new Handshake name.
 
-1. [Buy Handshake coins](/starting-from-zero/buy-hns.md)
-2. [Get a Handshake name](/starting-from-zero/how-to-get-a-name.md)
-3. [Use your Handshake name](/starting-from-zero/how-to-use-handshake-names.md)
+1. [Buy Handshake coins](/docs/starting-from-zero/buy-hns)
+2. [Get a Handshake name](/docs/starting-from-zero/how-to-get-a-name)
+3. [Use your Handshake name](/docs/starting-from-zero/how-to-use-handshake-names)
 
 
 ---

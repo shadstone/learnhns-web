@@ -8,9 +8,8 @@ To do this, you'll send users to the Namebase domain management settings page of
 
 You'll pass the records to be set via URL parameters. The record assistant decodes these parameters, and asks the user to confirm the records to be set. Namebase updates the user's records, and they're directed back to your application.
 
-{% hint style="info" %}
-The Namebase Record Assistant only works with names custodied in Namebase. If your user is self-custodying their name you should provide separate instructions for how they can set DNS records manually.
-{% endhint %}
+> **Info**
+> The Namebase Record Assistant only works with names custodied in Namebase. If your user is self-custodying their name you should provide separate instructions for how they can set DNS records manually.
 
 ## Step 1: Send users to Namebase with URL Parameters
 
@@ -93,17 +92,16 @@ And the user would be directed to the domain:
 
 `https://namebase.io/next/domain-manager/wouidn/records?records=W3sidHlwZSI6IlRYVCIsImhvc3QiOiJfY29udGVudGhhc2gubXlibG9nIiwidmFsdWUiOiJzaWE6Ly8zQUhQalg4SGxKOUhUQVQ0OHptQ3BwRHNrOEh0dFFCNXN4Yms2NHczX2tvZ0JBIiwidHRsIjo2MH0seyJ0eXBlIjoiQ05BTUUiLCJob3N0IjoibXlibG9nIiwidmFsdWUiOiJzaWEubmFtZWJhc2UuaW8uIiwidHRsIjozNjAwfV0=&redirect=https://example.com`
 
-This same process is how we implemented the content upload flow for dLinks, and the authentication flow for Namer News. To read more about how to use the record assistant for authentication specifically, check out our the [Using Handshake Login](https://github.com/namebasehq/gitbook-learning-center/blob/master/handshake-login/using-handshake-login.md) post.
+This same process is how we implemented the content upload flow for dLinks, and the authentication flow for Namer News. To read more about how to use the record assistant for authentication specifically, check out our the [Using Handshake Login](https://github.com/namebasehq/gitbook-learning-center/blob/master/handshake-login/using-handshake-login) post.
 
 ## Step 2: User confirms record setting, and is sent back to your app
 
 At this point, the user is asked to confirm the records you're asking to have set. Should they click confirm, a JSON request is sent to Namebase's servers, and their domain is updated. They are then redirected to the specified `REDIRECT_URL`.
 
-![What your users will see](/files/0XSZ9HHbdwuNxUq8v4Ak)
 
-{% hint style="info" %}
-If the user attempts to set records for a name they do not own, they will be presented with an error screen letting them know that they do not own the domain they're attempting to set records for.
-{% endhint %}
+
+> **Info**
+> If the user attempts to set records for a name they do not own, they will be presented with an error screen letting them know that they do not own the domain they're attempting to set records for.
 
 ## Conclusion
 

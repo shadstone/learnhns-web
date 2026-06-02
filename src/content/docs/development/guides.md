@@ -1,8 +1,7 @@
 # Developer Guides
 
-{% hint style="info" %}
-Are you looking for Handshake protocol docs? Check out [hsd-dev.org](https://hsd-dev.org/)
-{% endhint %}
+> **Info**
+> Are you looking for Handshake protocol docs? Check out [hsd-dev.org](https://hsd-dev.org/)
 
 ## Overview
 

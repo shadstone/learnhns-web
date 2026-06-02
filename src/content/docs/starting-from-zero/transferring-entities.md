@@ -4,7 +4,7 @@
 
 ### From BTC
 
-Use [this](/starting-from-zero/buy-hns.md#buy-hns-with-btc) guide to transfer BTC to your Namebase wallet to convert to HNS. Note BTC-HNS transactinos take 6 BTC block confirmations (about an hour) to process.
+Use [this](/docs/starting-from-zero/buy-hns#buy-hns-with-btc) guide to transfer BTC to your Namebase wallet to convert to HNS. Note BTC-HNS transactinos take 6 BTC block confirmations (about an hour) to process.
 
 ### From another HNS wallet
 
@@ -20,9 +20,8 @@ If you're outside of the USA, you can also use [Namebase Pro](https://www.nameba
 
 To initiate the transfer, please transfer your name to your Namebase HNS wallet address, which you can generate through your [dashboard](https://www.namebase.io/dashboard). Once you've sent the TRANSFER and FINALIZE transactions — these must be spaced 288 blocks (\~2 days) apart, the transfer will automatically process in 20 block confirmations.
 
-{% hint style="warning" %}
-Remember to submit your FINALIZE transaction!
-{% endhint %}
+> **Warning**
+> Remember to submit your FINALIZE transaction!
 
 ## Transfer out Handshake name
 
@@ -32,7 +31,7 @@ We handle name transfer requests in the same order of when they are submitted, s
 
 There are inherent blockchain limitations for the number of TRANSFER and FINALIZE transactions we can submit each block, so we appreciate your patience as we work through the queue.
 
-![](/files/-MTifBUndirFhJJimNew)
+
 
 
 ---

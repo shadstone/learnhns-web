@@ -6,9 +6,8 @@ Handshake secures DNS by using a blockchain as the root-of-trust. With a trusted
 
 For maximum interoperability, we've designed this standard to be compatible with the OIDC authentication protocol.
 
-{% hint style="info" %}
-Check out this [overview](https://auth0.com/docs/protocols/openid-connect-protocol) and this [illustrated guide](https://developer.okta.com/blog/2019/10/21/illustrated-guide-to-oauth-and-oidc) for a primer on OIDC. Note that you don't need to deeply understand OIDC to use Handshake login — if you've ever added Google Sign-On to your website then you've already used OIDC.
-{% endhint %}
+> **Info**
+> Check out this [overview](https://auth0.com/docs/protocols/openid-connect-protocol) and this [illustrated guide](https://developer.okta.com/blog/2019/10/21/illustrated-guide-to-oauth-and-oidc) for a primer on OIDC. Note that you don't need to deeply understand OIDC to use Handshake login — if you've ever added Google Sign-On to your website then you've already used OIDC.
 
 ## OIDC and Handshake
 
@@ -21,11 +20,10 @@ There are two key differences between typical OIDC usage and OIDC usage with Han
 1. Rather than asking the user to provide a password for a specified username, the Authorization Server asks them to sign a challenge using the public key pinned to the specified Handshake name.
 2. There is no centralized authority that performs this signature verification. Google is the only authority that can validate Google usernames and passwords. With Handshake, any Authorization Server can perform the verification.
 
-![Sequence diagram outlining the OIDC Authentication flow with Handshake](/files/BM4KStzk6mJmQKxXWzXQ)
 
-{% hint style="info" %}
-We provide an open-source OIDC Authentication Server here: <https://github.com/namebasehq/handshake-oidc>
-{% endhint %}
+
+> **Info**
+> We provide an open-source OIDC Authentication Server here: <https://github.com/namebasehq/handshake-oidc>
 
 ## Details
 

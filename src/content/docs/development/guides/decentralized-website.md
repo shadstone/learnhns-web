@@ -10,15 +10,13 @@ As an example, visit [niccarter/](https://niccarter.hns.to) to see [Nic Carter](
 
 Follow this guide to create a decentralized blog using Skynet and Handshake
 
-{% content-ref url="/pages/xjA8ferkgaS55znAwlEg" %}
-[Decentralized blog](/development/guides/building-a-decentralized-blog-on-handshake.md)
-{% endcontent-ref %}
+[Decentralized blog](/docs/development/guides/building-a-decentralized-blog-on-handshake)
 
 ## IPFS
 
 How to pair a Handshake domain to your website on IPFS.
 
-{% embed url="<https://docs.ipfs.io/how-to/websites-on-ipfs/link-a-domain#handshake>" %}
+[View External Resource](https://docs.ipfs.io/how-to/websites-on-ipfs/link-a-domain#handshake)
 
 ## Dynamic websites
 
@@ -26,7 +24,7 @@ It's becoming increasingly possible to create fully decentralized, dynamic websi
 
 Here's an example that combines Handshake with Skynet and Akash:
 
-{% embed url="<https://github.com/coffeeroaster/unstoppable-web2.0/>" %}
+[View External Resource](https://github.com/coffeeroaster/unstoppable-web2.0/)
 
 
 ---

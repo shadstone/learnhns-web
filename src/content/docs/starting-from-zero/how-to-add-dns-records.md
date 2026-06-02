@@ -126,13 +126,13 @@ To add Off-Chain records you must have at least 1 ns records pointing to `44.231
 
 Adding A, AAAA, CNAME, and ALIAS records to the TLD is quite easy. The below image shows the format in case you get stuck.
 
-![](/files/cHkxN1tKb5ZPOb7W3Pps)
+
 
 #### MX Records
 
 MX records are a little bit more complicated. You need to supply the priority in the `Value` field as well as the `Name` of the email server. This is shown in the image below ("10" is the priority for "mail.examplename").
 
-![](/files/9ds0sl3RbQBsr76qP3ln)
+
 
 
 ---

@@ -1,12 +1,12 @@
 # Name minting auction
 
-{% embed url="<https://www.youtube.com/watch?v=KfRDofpzEF8&ab_channel=JohnnyWu>" %}
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/KfRDofpzEF8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Minting process
 
 The cost to mint a Handshake name is determined by the name's on-chain auction.
 
-You can place a bid on any unminted name with [Handshake coins (HNS)](/about-handshake/handshake-coin.md). This triggers the start of the name's 720-[block](https://github.com/namebasehq/gitbook-learning-center/blob/master/about-handshake/mining-hns.md#handshake-blocks) (\~5 days) bidding period. You can bid any amount and optionally add a blind to hide your actual bid from others. Your bid + blind is called your [lockup](#lockup), which is the only value that other bidders see.&#x20;
+You can place a bid on any unminted name with [Handshake coins (HNS)](/docs/about-handshake/handshake-coin). This triggers the start of the name's 720-[block](https://github.com/namebasehq/gitbook-learning-center/blob/master/about-handshake/mining-hns#handshake-blocks) (\~5 days) bidding period. You can bid any amount and optionally add a blind to hide your actual bid from others. Your bid + blind is called your [lockup](#lockup), which is the only value that other bidders see.&#x20;
 
 After the bidding period ends, the 1440-block reveal period begins, during which bidders must reveal the true value of their bids. The bidder with the highest bid (NOT the highest lockup) wins the auction and mints the name. If you placed a blind, it's immediately returned to you when you reveal your bid. A note of caution: If you forget to reveal your bid, it will not be counted and you will permanently lose your entire lockup (both your bid and any blind). However, you don't have to worry about losing your coins if you use Namebase as Namebase reveals your bids automatically.
 
@@ -14,7 +14,7 @@ After the reveal period ends, the winning bidder pays only the second highest bi
 
 Check your understanding of the Handshake name auctions with these [case studies](#case-studies).
 
-![](/files/-MdJbR0AwX39VURKWlnm)
+
 
 ## Blinds and lockups
 

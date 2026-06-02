@@ -6,9 +6,8 @@ A recursive DNS resolver is a piece of software that can recursively resolve dom
 
 Step 1 will involve getting the light client running on your computer.
 
-{% hint style="info" %}
-If you're interested in learning more about the differences between running a Simplified Payment Verification (SPV) node to access a blockchain, and a full node, click through to [the StackOverflow post here](https://bitcoin.stackexchange.com/questions/4649/what-is-an-spv-client). The inclusion of an SPV node is one of the main reasons Handshake was built off of a fork of Bitcoin.
-{% endhint %}
+> **Info**
+> If you're interested in learning more about the differences between running a Simplified Payment Verification (SPV) node to access a blockchain, and a full node, click through to [the StackOverflow post here](https://bitcoin.stackexchange.com/questions/4649/what-is-an-spv-client). The inclusion of an SPV node is one of the main reasons Handshake was built off of a fork of Bitcoin.
 
 ## Using Docker
 
@@ -20,15 +19,13 @@ docker run -d --name hnsd --restart always -p 53:53/udp namebasehq/hnsd "/opt/hn
 
 Once the light client is up and running in the background, you'll need to point your computer's DNS IP to your local machine. Click to the next page to find out how to set the DNS settings for your operating system.
 
-{% content-ref url="/pages/qX5VB2iPJ42HYi8YqhO9" %}
-[Setting your Operating System DNS](/development/resolving-handshake/resolving-handshake-locally/setting-your-operating-system-dns.md)
-{% endcontent-ref %}
+[Setting your Operating System DNS](/docs/development/resolving-handshake/resolving-handshake-locally/setting-your-operating-system-dns)
 
 ## Install from Source Code
 
 If you'd like to compile the resolver yourself, you can do so by grabbing the source code from the handshake-org/hnsd repo linked below.
 
-{% embed url="<https://github.com/handshake-org/hnsd>" %}
+[View External Resource](https://github.com/handshake-org/hnsd)
 
 ## Coming Soon: Install from pre-built binaries
 

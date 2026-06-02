@@ -6,9 +6,7 @@ This guide walks through how to visit Handshake websites using HNS.to, browsers,
 
 HNS.to is a simple gateway that doesn't require local software or configuration. It's useful for sharing Handshake websites publicly.
 
-{% content-ref url="/pages/MUK0HmGdkOBwwRA5UkeR" %}
-[HNS.to](/development/resolving-handshake/hns.to.md)
-{% endcontent-ref %}
+[HNS.to](/docs/development/resolving-handshake/hns.to)
 
 ## Browsers
 
@@ -20,17 +18,13 @@ HNS.to is a simple gateway that doesn't require local software or configuration.
 
 [HNSDoH](https://welcome.hnsdoh.com/) is a public DNS resolver that supports Handshake domains.
 
-{% content-ref url="/pages/H0RCmmGCZrYXQM9h2RMU" %}
-[HNSDoH](/development/resolving-handshake/hnsdoh.md)
-{% endcontent-ref %}
+[HNSDoH](/docs/development/resolving-handshake/hnsdoh)
 
 ## Local Resolution
 
 You can run a Handshake resolver locally using the Handshake fullnode or SPV client without relying on any third party providers. This is the most trustless way to resolve Handshake.
 
-{% content-ref url="/pages/CDtb6CLWuAZmv4CrqXbJ" %}
-[Resolving Handshake locally](/development/resolving-handshake/resolving-handshake-locally.md)
-{% endcontent-ref %}
+[Resolving Handshake locally](/docs/development/resolving-handshake/resolving-handshake-locally)
 
 
 ---

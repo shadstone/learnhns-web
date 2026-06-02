@@ -1,6 +1,6 @@
 # Vision and mission
 
-![](/files/-MMF9xqwwCgZc-CIy5lF)
+
 
 Namebase exists to enable an internet that is owned by individuals and not a handful of organizations like ICANN that control the DNS today.
 

@@ -1,6 +1,6 @@
 # Create Handshake websites
 
-One of the most straightforward use cases of Handshake names is to set up a website on them. You can also [use Handshake names in these other ways](/starting-from-zero/how-to-use-handshake-names.md).
+One of the most straightforward use cases of Handshake names is to set up a website on them. You can also [use Handshake names in these other ways](/docs/starting-from-zero/how-to-use-handshake-names).
 
 ## Level 1 - No code
 
@@ -9,47 +9,42 @@ One of the most straightforward use cases of Handshake names is to set up a webs
 HNSHosting offers WordPress hosting on Handshake names deployed in minutes with HTTPS support.\
 Registering for free might be limited to users on their discord server. <https://hnshosting.au>
 
-{% hint style="info" %}
-This site was created soley by Namer [Nathan.Woodburn/](https://nathan.woodburn.au/).
-{% endhint %}
+> **Info**
+> This site was created soley by Namer [Nathan.Woodburn/](https://nathan.woodburn.au/).
 
 ### Excerpt
 
 Excerpt is a simple blog hosting platform that allows you to deploy a blog to your Handshake name in minutes. Find out more at [https://excerpt/](https://excerpt.hns.to).
 
-{% hint style="info" %}
-This site was created soley by Namer [e.skimo/](https://hns.to/e.skimo/).
-{% endhint %}
+> **Info**
+> This site was created soley by Namer [e.skimo/](https://hns.to/e.skimo/).
 
 ### HNS Links
 
 [HNS Links](https://links.hns.au/) is a no-code way to deploy a links page to your Handshake name. It is free and supports features such as HIP05 wallet addresses, NIP05 Nostr usernames, and more.
 
-{% hint style="info" %}
-This site was created soley by Namer [Nathan.Woodburn/](https://nathan.woodburn.au/).
-{% endhint %}
+> **Info**
+> This site was created soley by Namer [Nathan.Woodburn/](https://nathan.woodburn.au/).
 
 ### Vercel
 
 [Vercel](https://vercel.com) offers many templates that you can use to build your website, hosted on Vercel.
 
-{% embed url="<https://www.youtube.com/watch?v=iVLuIVJaFz0&ab_channel=JohnnyWu>" %}
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/iVLuIVJaFz0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Emojis and non-English names on Vercel
 
-{% embed url="<https://www.youtube.com/watch?v=Bv6RXQ8jKWg&feature=emb_title&ab_channel=SkyInclude>" %}
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/Bv6RXQ8jKWg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-{% hint style="info" %}
-This tutorial was created soley by Namer [skyinclude/](https://hns.to/skyinclude/).
-{% endhint %}
+> **Info**
+> This tutorial was created soley by Namer [skyinclude/](https://hns.to/skyinclude/).
 
 ### Wordpress and Kinsta
 
-{% embed url="<https://www.youtube.com/watch?v=EU-AfMkmQEk>" %}
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/EU-AfMkmQEk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-{% hint style="info" %}
-This tutorial was created soley by Namer [skyinclude/](https://hns.to/skyinclude/).
-{% endhint %}
+> **Info**
+> This tutorial was created soley by Namer [skyinclude/](https://hns.to/skyinclude/).
 
 ## Level 2 - HTML
 
@@ -57,71 +52,67 @@ This tutorial was created soley by Namer [skyinclude/](https://hns.to/skyinclude
 
 If you have a website on IPFS, here's how to link it to your Handshake name.
 
-{% embed url="<https://docs.ipfs.io/how-to/websites-on-ipfs/link-a-domain#handshake>" %}
+[View External Resource](https://docs.ipfs.io/how-to/websites-on-ipfs/link-a-domain#handshake)
 
 ### Any HTML file on Github Pages
 
 Host any HTML file on your Handshake name through Github Pages. The template used in the video can be accessed at [templates.nb/](https://hns.to/templates.nb/).
 
-{% embed url="<https://www.youtube.com/watch?v=_PsHU2gAMEM&ab_channel=JohnnyWu>" %}
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/_PsHU2gAMEM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-{% hint style="info" %}
-This tutorial was made possible by Namer [outofthisworld/](https://hns.to/outofthisworld/).
-{% endhint %}
+> **Info**
+> This tutorial was made possible by Namer [outofthisworld/](https://hns.to/outofthisworld/).
 
 ### Heroku
 
-{% embed url="<https://rithvikvibhu.medium.com/deploy-apps-on-a-handshake-name-with-heroku-ccdb23ff839b>" %}
+[View External Resource](https://rithvikvibhu.medium.com/deploy-apps-on-a-handshake-name-with-heroku-ccdb23ff839b)
 
-{% hint style="info" %}
-This tutorial was created soley by Namer [rithvik/](https://hns.to/rithvik/).
-{% endhint %}
+> **Info**
+> This tutorial was created soley by Namer [rithvik/](https://hns.to/rithvik/).
 
 ### Wordpress and AWS
 
 Skyinclude.com Mike made a quick video on how to build a Handshake site using Wordpress.org, WP2Static.com, and Amazon AWS.amazon.com with Namebase.io as the TLD registrar.
 
-{% embed url="<https://www.youtube.com/watch?v=dxgLBvKC5YM&ab_channel=SkyInclude>" %}
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/dxgLBvKC5YM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-{% hint style="info" %}
-This tutorial was created soley by Namer [skyinclude/](https://hns.to/skyinclude/).
-{% endhint %}
+> **Info**
+> This tutorial was created soley by Namer [skyinclude/](https://hns.to/skyinclude/).
 
 ### Gatsby and Github Pages
 
 In this tutorial @kiba\_gateaux does a quick run through of how to deploy a site to github pages and access it with a Handshake domain name. In just 10 minutes you can have a website at your own personal TLD!
 
-{% embed url="<https://www.youtube.com/watch?v=AL3uiw17OwM&t=138s&ab_channel=TitansOfData>" %}
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/AL3uiw17OwM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-{% hint style="info" %}
-This tutorial was created solely by Namer [kiba\_gateaux/](https://hns.to/kiba_gateaux/).
-{% endhint %}
+> **Info**
+> This tutorial was created solely by Namer [kiba\_gateaux/](https://hns.to/kiba_gateaux/).
 
 ### Fleek
 
-{% embed url="<https://www.youtube.com/watch?v=2hAe2SbNpxU&ab_channel=AlexVela>" %}
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/2hAe2SbNpxU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Skynet and Arweave
 
-{% embed url="<https://youtu.be/Bbm0Yal86WI>" %}
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/Bbm0Yal86WI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Level 3 - Custom namserver
 
 ### CoreDNS
 
-{% embed url="<https://github.com/Mattsky/HNS_howto>" %}
+[View External Resource](https://github.com/Mattsky/HNS_howto)
 
-{% embed url="<https://dev.to/rithvikvibhu/setting-up-a-handshake-tld-with-a-hosted-dns-service-2g6c>" %}
+[View External Resource](https://dev.to/rithvikvibhu/setting-up-a-handshake-tld-with-a-hosted-dns-service-2g6c)
 
 ## Level 4 - HTTPS
 
-{% embed url="<https://www.sebastianrasor.com/blog/hosting-a-secure-website-on-the-handshake-protocol-using-dane#sign-records-to-enable-dnssec>" %}
+[View External Resource](https://www.sebastianrasor.com/blog/hosting-a-secure-website-on-the-handshake-protocol-using-dane#sign-records-to-enable-dnssec)
 
-{% embed url="<https://medium.com/@matthewzipkin/building-a-secure-website-on-your-handshake-tld-a8922a950a4f>" %}
+[View External Resource](https://medium.com/@matthewzipkin/building-a-secure-website-on-your-handshake-tld-a8922a950a4f)
 
-{% embed url="<https://matthewzipkin.medium.com/using-hns-websites-securely-69959ae02052>" %}
+[View External Resource](https://matthewzipkin.medium.com/using-hns-websites-securely-69959ae02052)
 
-{% embed url="<https://medium.com/@ca98am79/how-to-view-dane-tlsa-websites-on-handshake-with-firefox-f55eb1dd5be9>" %}
+[View External Resource](https://medium.com/@ca98am79/how-to-view-dane-tlsa-websites-on-handshake-with-firefox-f55eb1dd5be9)
 
 
 ---
