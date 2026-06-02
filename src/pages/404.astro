@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="404: Page Not Found | LearnHNS" 
+  description="The page you are looking for could not be found."
+>
+  <div class="not-found-container">
+    <div class="not-found-content">
+      <h1 class="error-code">404</h1>
+      <h2 class="error-title">Page Not Found</h2>
+      <p class="error-message">
+        We couldn't find the page you're looking for. It might have been moved, deleted, or never existed in the first place.
+      </p>
+      
+      <div class="action-buttons">
+        <a href="/" class="btn primary">Return Home</a>
+        <a href="/start" class="btn secondary">Get Started with HNS</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 4rem 1.5rem;
+    text-align: center;
+  }
+
+  .not-found-content {
+    max-width: 600px;
+    background: var(--surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 4rem 3rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .not-found-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--hns-violet), var(--hns-violet-deep));
+  }
+
+  .error-code {
+    font-size: 6rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--hns-violet);
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    text-shadow: 0 0 20px rgba(105, 58, 250, 0.3);
+  }
+
+  .error-title {
+    font-size: 2rem;
+    font-family: var(--font-serif);
+    color: var(--text-primary);
+    margin: 1rem 0;
+    font-weight: 600;
+  }
+
+  .error-message {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn.primary {
+    background: var(--hns-violet);
+    color: #fff;
+    border: 1px solid transparent;
+  }
+
+  .btn.primary:hover {
+    background: var(--hns-violet-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(105, 58, 250, 0.3);
+  }
+
+  .btn.secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border);
+  }
+
+  .btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 600px) {
+    .not-found-content {
+      padding: 3rem 1.5rem;
+    }
+    .error-code {
+      font-size: 4rem;
+    }
+    .error-title {
+      font-size: 1.5rem;
+    }
+    .action-buttons {
+      flex-direction: column;
+      width: 100%;
+    }
+    .btn {
+      width: 100%;
+    }
+  }
+</style>

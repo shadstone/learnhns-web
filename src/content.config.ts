@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 import { fetchAllContent } from './lib/wdd';
 
 const categorySchema = z.object({
@@ -52,4 +53,8 @@ const posts = defineCollection({
     .passthrough(),
 });
 
-export const collections = { posts };
+const docs = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/docs" }),
+});
+
+export const collections = { posts, docs };

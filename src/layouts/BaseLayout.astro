@@ -74,14 +74,14 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     (function () {
       try {
         var stored = localStorage.getItem('learnhns-theme'); // 'light' | 'dark' | 'system' | null
-        var pref = stored || 'light';
+        var pref = stored || 'dark'; // User explicitly requested dark tech theme as default
         var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         var resolved = pref === 'system' ? (systemDark ? 'dark' : 'light') : pref;
         document.documentElement.setAttribute('data-theme', resolved);
         document.documentElement.setAttribute('data-theme-pref', pref);
         var meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute('content', resolved === 'dark' ? '#0b0d12' : '#ffffff');
-      } catch (e) { /* localStorage blocked or other — leave default light */ }
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
     })();
   </script>
 
