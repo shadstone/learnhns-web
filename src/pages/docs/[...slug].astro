@@ -5,7 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 export async function getStaticPaths() {
   const docsEntries = await getCollection('docs');
   return docsEntries.map(entry => ({
-    params: { slug: entry.id },
+    params: { slug: entry.id === 'readme' ? undefined : entry.id },
     props: { entry },
   }));
 }
@@ -18,7 +18,7 @@ const editUrl = `https://github.com/shadstoneofficial/learnhns-web/edit/main/src
 ---
 
 <BaseLayout 
-  title={`${entry.id} | LearnHNS Docs`} 
+  title={`${entry.id === 'readme' ? 'Introduction' : entry.id} | LearnHNS Docs`} 
   description="LearnHNS Documentation Archive"
 >
   <div class="page-content" style="max-width: 800px; margin: 2rem auto; padding: 2rem; background: var(--surface); border: 1px solid var(--glass-border); border-radius: 12px;">
