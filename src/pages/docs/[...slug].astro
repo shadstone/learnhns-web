@@ -4,10 +4,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
   const docsEntries = await getCollection('docs');
-  return docsEntries.map(entry => ({
-    params: { slug: entry.id === 'readme' ? undefined : entry.id },
-    props: { entry },
-  }));
+  return docsEntries
+    .filter(entry => entry.id !== 'readme') // Filter out readme, it's handled by index.astro
+    .map(entry => ({
+      params: { slug: entry.id },
+      props: { entry },
+    }));
 }
 
 const { entry } = Astro.props;

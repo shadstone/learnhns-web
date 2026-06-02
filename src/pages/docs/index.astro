@@ -1,0 +1,131 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Fetch all markdown files from the "docs" collection
+const docsEntries = await getCollection('docs');
+
+// Function to safely generate a nice title from a slug/id
+function formatTitle(slug) {
+  // If the file is 'readme', call it Introduction
+  if (slug === 'readme') return 'Introduction';
+  
+  // Get the last part of the path if it's nested
+  const parts = slug.split('/');
+  const filename = parts[parts.length - 1];
+  
+  // Replace hyphens with spaces and capitalize words
+  return filename
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+// Group entries by their directory folder
+const groupedDocs = docsEntries.reduce((acc, entry) => {
+  const parts = entry.id.split('/');
+  
+  // If it's a top-level file (like readme.md), group it under "General"
+  if (parts.length === 1) {
+    if (!acc['General']) acc['General'] = [];
+    acc['General'].push(entry);
+    return acc;
+  }
+
+  // Use the directory name as the category
+  const categorySlug = parts[0];
+  const categoryName = categorySlug
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+
+  if (!acc[categoryName]) {
+    acc[categoryName] = [];
+  }
+  acc[categoryName].push(entry);
+
+  return acc;
+}, {});
+
+// Make sure "General" (containing Introduction) is at the top
+const categories = Object.keys(groupedDocs).sort((a, b) => {
+  if (a === 'General') return -1;
+  if (b === 'General') return 1;
+  return a.localeCompare(b);
+});
+---
+
+<BaseLayout 
+  title="Documentation Table of Contents | LearnHNS" 
+  description="Browse all Handshake and Namebase documentation preserved by the LearnHNS community."
+>
+  <div class="page-content" style="max-width: 800px; margin: 2rem auto; padding: 2rem; background: var(--surface); border: 1px solid var(--glass-border); border-radius: 12px;">
+    
+    <header style="margin-bottom: 3rem; text-align: center;">
+      <h1 style="font-family: var(--font-serif); font-size: 2.5rem; color: var(--text-primary); margin-bottom: 1rem;">
+        Documentation Archive
+      </h1>
+      <p style="color: var(--text-secondary); line-height: 1.6; max-width: 600px; margin: 0 auto;">
+        Welcome to the LearnHNS community documentation archive. Below you will find a complete index of all preserved Handshake and Namebase resources.
+      </p>
+    </header>
+
+    <div class="toc-container">
+      {categories.map(category => (
+        <section class="toc-category" style="margin-bottom: 2.5rem;">
+          <h2 style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--text-primary); border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem; margin-bottom: 1rem;">
+            {category}
+          </h2>
+          <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem;">
+            {groupedDocs[category].map(entry => {
+              // Special case: map 'readme' directly to '/docs/'
+              const url = entry.id === 'readme' ? '/docs/' : `/docs/${entry.id}`;
+              return (
+                <li>
+                  <a href={url} class="toc-link">
+                    {formatTitle(entry.id)}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
+    </div>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .toc-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    background: rgba(105, 58, 250, 0.02);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+  }
+  
+  .toc-link:hover {
+    color: var(--hns-violet);
+    background: rgba(105, 58, 250, 0.05);
+    border-color: var(--hns-violet);
+    transform: translateX(4px);
+  }
+
+  /* Optional: Add a small arrow icon on hover */
+  .toc-link::after {
+    content: '→';
+    margin-left: auto;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .toc-link:hover::after {
+    opacity: 1;
+  }
+</style>
