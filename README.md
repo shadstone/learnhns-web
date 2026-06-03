@@ -1,43 +1,53 @@
-# Astro Starter Kit: Minimal
+# LearnHNS Web
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Astro website for [learnhns.com](https://learnhns.com), the public education and documentation surface for the LearnHNS ecosystem.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## What Lives Here
 
-## 🚀 Project Structure
+- Public pages, guides, and docs for Handshake/HNS users.
+- Static assets needed by the website at runtime.
+- Public agent-facing files such as `public/llms.txt` and `/skill.md`.
+- The optional WebDesignDaddy CMS integration used by the blog.
 
-Inside of your Astro project, you'll see the following folders and files:
+Internal plans, deployment handoffs, raw specs, large source archives, and cross-repo coordination notes should live in the adjacent hub workspace:
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+../hub-learnhns/temp-specs/
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Setup
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```sh
+npm install
+npm run dev
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+The local dev server defaults to `http://localhost:4321`.
 
-## 🧞 Commands
+## Build
 
-All commands are run from the root of the project, from a terminal:
+```sh
+npm run build
+npm run preview
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+The production build is written to `dist/`, which is intentionally ignored by git.
 
-## 👀 Want to learn more?
+## Environment
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The site can build without local environment variables. Blog content is fetched only when a public CMS site key is configured:
+
+```sh
+cp .env.example .env
+```
+
+Set `PUBLIC_CMS_SITE_KEY` in `.env` when developing the WDD-powered blog locally. Do not commit `.env` or other local secret files.
+
+## Public-Repo Hygiene
+
+Before publishing or cutting a release:
+
+- Keep `node_modules/`, `.astro/`, `dist/`, `.DS_Store`, logs, and local `.env` files out of git.
+- Keep only runtime assets in `public/`; move source archives and working media exports to the hub `temp-specs` folder.
+- Keep private roadmap notes, deployment runbooks, account notes, and raw agent handoffs out of this repo.
+- Run `npm run build` before shipping changes.
