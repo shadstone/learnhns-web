@@ -1,6 +1,51 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { organizationSchema, websiteSchema } from '../lib/seo';
+import { getCollection } from 'astro:content';
+
+// ── Library explorer — built from the real docs collection so the
+//    folders + file trees on the home page never drift or 404. ──
+const docsEntries = await getCollection('docs');
+
+function formatTitle(slug: string): string {
+  const filename = slug.split('/').pop() || slug;
+  return filename
+    .split('-')
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+}
+
+type FolderMeta = { name: string; icon: string };
+const FOLDER_META: Record<string, FolderMeta> = {
+  'starting-from-zero': { name: 'Starting from Zero', icon: '🚀' },
+  'about-handshake': { name: 'About Handshake', icon: '🤝' },
+  'about-namebase': { name: 'About Namebase', icon: '🔑' },
+  'development': { name: 'Development', icon: '⌨️' },
+};
+const FOLDER_ORDER = ['starting-from-zero', 'about-handshake', 'about-namebase', 'development'];
+
+const grouped = new Map<string, { title: string; file: string; url: string }[]>();
+for (const entry of docsEntries) {
+  const parts = entry.id.split('/');
+  if (parts.length === 1) continue; // skip top-level readme
+  const folder = parts[0];
+  if (!grouped.has(folder)) grouped.set(folder, []);
+  grouped.get(folder)!.push({
+    title: formatTitle(entry.id),
+    file: (parts[parts.length - 1]) + '.md',
+    url: `/docs/${entry.id}`,
+  });
+}
+
+const folders = FOLDER_ORDER
+  .filter((slug) => grouped.has(slug))
+  .map((slug) => ({
+    slug,
+    name: FOLDER_META[slug]?.name ?? formatTitle(slug),
+    icon: FOLDER_META[slug]?.icon ?? '📁',
+    entries: grouped.get(slug)!.slice(0, 8),
+    total: grouped.get(slug)!.length,
+  }));
 ---
 <BaseLayout
   title="Your Gateway to Understanding Handshake"
@@ -20,213 +65,172 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
 
     <!-- HERO -->
     <section class="home-hero">
-      <svg class="hero-network" viewBox="0 0 1000 500" aria-hidden="true">
-        <g class="net-lines">
-          <line class="net-line" x1="120" y1="120" x2="320" y2="220" />
-          <line class="net-line" x1="120" y1="120" x2="280" y2="380" />
-          <line class="net-line" x1="320" y1="220" x2="500" y2="100" />
-          <line class="net-line" x1="320" y1="220" x2="500" y2="340" />
-          <line class="net-line" x1="320" y1="220" x2="280" y2="380" />
-          <line class="net-line" x1="500" y1="100" x2="680" y2="240" />
-          <line class="net-line" x1="500" y1="340" x2="680" y2="240" />
-          <line class="net-line" x1="500" y1="340" x2="720" y2="400" />
-          <line class="net-line" x1="680" y1="240" x2="880" y2="160" />
-          <line class="net-line" x1="680" y1="240" x2="860" y2="380" />
-          <line class="net-line" x1="280" y1="380" x2="500" y2="340" />
-          <line class="net-line" x1="880" y1="160" x2="860" y2="380" />
-        </g>
-        <g class="net-nodes">
-          <circle class="net-node net-node--pulse" cx="120" cy="120" r="4" />
-          <circle class="net-node" cx="320" cy="220" r="6" />
-          <circle class="net-node net-node--pulse" cx="500" cy="100" r="4" />
-          <circle class="net-node" cx="500" cy="340" r="5" />
-          <circle class="net-node net-node--pulse" cx="680" cy="240" r="6" />
-          <circle class="net-node" cx="280" cy="380" r="4" />
-          <circle class="net-node net-node--pulse" cx="880" cy="160" r="4" />
-          <circle class="net-node" cx="860" cy="380" r="4" />
-          <circle class="net-node net-node--pulse" cx="720" cy="400" r="3" />
-        </g>
-      </svg>
-      <div class="hero-eyebrow">Handshake Protocol &mdash; Education Hub</div>
-      <h1 class="hero-title">
-        Your gateway to<br />
-        <em>understanding Handshake.</em>
-      </h1>
+      <div class="float-names" aria-hidden="true" id="floats"></div>
+
+      <span class="hero-eyebrow"><span class="pulse"></span>Handshake protocol · education hub</span>
+      <h1 class="hero-title">Own a piece of the <span class="accent-grad">internet's root.</span></h1>
       <p class="hero-lead">
-        LearnHNS curates the best guides, wallets, tutorials, and community
-        resources for the Handshake decentralized naming protocol. Whether
-        you've never heard of HNS or you're ready to run a full node — start here.
+        Handshake puts top-level domains on a blockchain, so a name is property
+        you hold, not a rental you pay for every year. Type one and see.
       </p>
-      <div class="hero-actions">
-        <a href="/start/" class="btn-primary">
-          Start Learning
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <a href="/market/" class="btn-secondary">Browse Marketplace</a>
-      </div>
-    </section>
 
-    <!-- WHERE TO BEGIN — three learning paths -->
-    <section class="learning-paths">
-      <div class="section-label">Where to begin</div>
-
-      <div class="paths-grid">
-        <a href="/start/" class="path-card path-card-1">
-          <span class="path-icon" aria-hidden="true">&#9654;</span>
-          <div class="path-label">Start here</div>
-          <h3>Getting Started</h3>
-          <p class="path-tagline">New to Handshake? Start here.</p>
-          <p>Zero to first domain in one afternoon. Wallet setup, bidding, resolving — the complete beginner path for anyone curious about owning a piece of the internet.</p>
-          <span class="path-arrow" aria-hidden="true">&#8599;</span>
-        </a>
-
-        <a href="/learn/" class="path-card path-card-2">
-          <span class="path-icon" aria-hidden="true">&#9670;</span>
-          <div class="path-label">Go deeper</div>
-          <h3>Learn the Protocol</h3>
-          <p class="path-tagline">How HNS, DNS, and decentralized name resolution actually work.</p>
-          <p>Deep dives on the Handshake blockchain, the auction mechanism, DNSSEC, resolvers, and why this matters for the future of the internet.</p>
-          <span class="path-arrow" aria-hidden="true">&#8599;</span>
-        </a>
-
-        <a href="/media/" class="path-card path-card-3">
-          <span class="path-icon" aria-hidden="true">&#9711;</span>
-          <div class="path-label">Explore the ecosystem</div>
-          <h3>Media &amp; Tools</h3>
-          <p class="path-tagline">Podcasts, articles, wallets, and services curated for the ecosystem.</p>
-          <p>The best HNS podcasts, long-form articles, wallet comparisons, and community services. Everything you need to stay current and get things done.</p>
-          <span class="path-arrow" aria-hidden="true">&#8599;</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- WHAT IS HANDSHAKE -->
-    <section class="explainer">
-      <div class="section-label section-label-teal">The Protocol</div>
-      <div class="explainer-grid">
-        <div>
-          <h2>The internet's namespace,<br /><em>finally decentralized.</em></h2>
-          <p>
-            For decades, the domain name system has been controlled by a handful of
-            organizations — primarily ICANN — who decide which top-level domains
-            exist, who can register them, and how much you pay every year to keep
-            them. Your domain isn't yours; it's a rental.
-          </p>
-          <p>
-            Handshake changes the root. By recording TLD ownership on a proof-of-work
-            blockchain, it creates a naming system where you hold the keys — not a
-            registrar. Resolve names with a compatible browser or resolver, and your
-            domain works across the decentralized web forever.
-          </p>
-          <p>
-            LearnHNS curates the best tools, tutorials, wallets, and marketplaces so
-            you can get from zero to sovereign in an afternoon.
-          </p>
+      <!-- Resolver — the signature -->
+      <div class="resolver">
+        <form class="resolver-box" id="resolver-form">
+          <input id="nameInput" type="text" placeholder="yourname" autocomplete="off" spellcheck="false" aria-label="Search a Handshake name" />
+          <span class="tld">/</span>
+          <button class="resolve-btn" type="submit">Resolve</button>
+        </form>
+        <div class="resolve-status" id="status">Try a name to check the root zone</div>
+        <div class="suggest">
+          <button class="chip" data-n="welcome" type="button">welcome<b>/</b></button>
+          <button class="chip" data-n="crypto" type="button">crypto<b>/</b></button>
+          <button class="chip" data-n="degen" type="button">degen<b>/</b></button>
+          <button class="chip" data-n="namebase" type="button">namebase<b>/</b></button>
         </div>
-        <div>
-          <div class="dns-diagram">
-            <p class="diagram-title">Traditional vs. Handshake DNS</p>
-            <div class="diagram-row">
-              <div class="diagram-node node-icann">ICANN Root</div>
-              <div class="diagram-arrow">&rarr;</div>
-              <div class="diagram-node node-icann">Registrar</div>
-              <div class="diagram-arrow">&rarr;</div>
-              <div class="diagram-node node-user">You (Renter)</div>
-            </div>
-            <p class="diagram-label">Old way — you pay annually, they can revoke</p>
-            <div class="diagram-row">
-              <div class="diagram-node node-hns">HNS Blockchain</div>
-              <div class="diagram-arrow">&rarr;</div>
-              <div class="diagram-node node-hns">Your Wallet</div>
-              <div class="diagram-arrow">&rarr;</div>
-              <div class="diagram-node node-user node-user--owner">You (Owner)</div>
-            </div>
-            <p class="diagram-label">New way — cryptographic ownership, forever</p>
-          </div>
-          <div class="stats-row">
-            <div class="stat-item">
-              <div class="stat-number">4M+</div>
-              <div class="stat-label">Names Registered</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">$0</div>
-              <div class="stat-label">Annual Renewal</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">100%</div>
-              <div class="stat-label">Permissionless</div>
-            </div>
-          </div>
-        </div>
+      </div>
+
+      <!-- trust strip -->
+      <div class="trust">
+        <div class="stat"><div class="num">4.1<span class="u">M</span></div><div class="lbl">Names registered</div></div>
+        <div class="stat"><div class="num">$0</div><div class="lbl">Annual renewal</div></div>
+        <div class="stat"><div class="num">100<span class="u">%</span></div><div class="lbl">Permissionless</div></div>
+        <div class="stat"><div class="num">&infin;</div><div class="lbl">You hold the keys</div></div>
       </div>
     </section>
 
     <!-- LIVE AUCTIONS STRIP — hidden by JS if no buyable listings -->
     <section class="auctions-strip" id="learnhns-auctions-strip" hidden>
       <div class="auctions-strip-head">
-        <div class="section-label section-label-teal auctions-label">Active auctions &mdash; available now</div>
+        <div class="kicker auctions-label">Active auctions &mdash; available now</div>
         <span class="live-dot">Live</span>
         <a href="https://market.learnhns.com" class="strip-link" target="_blank" rel="noopener">View all auctions &rarr;</a>
       </div>
-
       <div class="auctions-row" id="learnhns-auctions">
         <div class="strip-loading">Loading live auction data…</div>
       </div>
     </section>
 
-    <!-- RESOURCES -->
-    <section class="resources">
-      <div class="section-label">Start Exploring</div>
-      <h2>Everything you need,<br />in one place.</h2>
-      <p class="resources-lead">Pick where to dive in. Each path is built for a different level of familiarity.</p>
+    <!-- LIBRARY / FOLDERS -->
+    <section class="library">
+      <div class="sec-head">
+        <div class="kicker">The library</div>
+        <h2>Browse the knowledge base by folder.</h2>
+        <p>Everything we've written, sorted into a directory you can actually navigate. Pick a folder, drill into the pages.</p>
+      </div>
 
-      <div class="resource-grid">
-        <a href="/start/" class="resource-card resource-card-r1">
-          <span class="resource-icon" aria-hidden="true">&#9654;</span>
-          <h3>Getting Started</h3>
-          <p>Zero to first domain in 20 minutes. The absolute beginner path.</p>
-          <span class="resource-arrow" aria-hidden="true">&#8599;</span>
+      <div class="explorer">
+        <div class="folders" id="folders">
+          {folders.map((f, i) => (
+            <button class:list={["folder", { active: i === 0 }]} data-key={f.slug} type="button">
+              <span class="ico" aria-hidden="true">{f.icon}</span>
+              <h4>{f.name}</h4>
+              <div class="count">{f.total} {f.total === 1 ? 'doc' : 'docs'}</div>
+            </button>
+          ))}
+        </div>
+
+        <div class="tree-wrap">
+          {folders.map((f, i) => (
+            <div class:list={["tree", { active: i === 0 }]} data-panel={f.slug}>
+              <div class="tree-path">📁 docs/<b>{f.slug}</b></div>
+              <ul>
+                {f.entries.map((e) => (
+                  <li>
+                    <a href={e.url}>
+                      <span class="f" aria-hidden="true">▸</span>
+                      <span class="fname">{e.file}</span>
+                      <span class="arr" aria-hidden="true">open →</span>
+                    </a>
+                  </li>
+                ))}
+                {f.total > f.entries.length && (
+                  <li class="more"><a href="/docs/">+ {f.total - f.entries.length} more in /docs</a></li>
+                )}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <a href="/docs/" class="library-all">Open the full documentation table of contents →</a>
+    </section>
+
+    <!-- OWNERSHIP -->
+    <section class="ownership">
+      <div class="sec-head">
+        <div class="kicker">Why it matters</div>
+        <h2>A domain you own, not one you rent.</h2>
+      </div>
+      <div class="compare">
+        <div class="cmp old">
+          <div class="cmp-tag">The old root · ICANN</div>
+          <h3>You rent from a registrar</h3>
+          <ul>
+            <li><span class="m">✕</span>Pay every year, forever, or lose the name</li>
+            <li><span class="m">✕</span>A handful of orgs decide which TLDs exist</li>
+            <li><span class="m">✕</span>Names can be seized or revoked</li>
+            <li><span class="m">✕</span>Permission required to register</li>
+          </ul>
+        </div>
+        <div class="cmp new">
+          <div class="cmp-tag">The new root · Handshake</div>
+          <h3>You own it with a key</h3>
+          <ul>
+            <li><span class="m">→</span>Buy once at auction, hold it on-chain</li>
+            <li><span class="m">→</span>Anyone can create a top-level domain</li>
+            <li><span class="m">→</span>Cryptographic ownership, nobody can revoke</li>
+            <li><span class="m">→</span>Permissionless, resolve anywhere</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PATHS -->
+    <section class="paths-section">
+      <div class="sec-head">
+        <div class="kicker">Where to begin</div>
+        <h2>Three ways in, depending on where you are.</h2>
+      </div>
+      <div class="paths">
+        <a class="path" href="/start/">
+          <span class="n">for the curious</span>
+          <h3>Getting started</h3>
+          <p>Zero to your first domain in an afternoon. Wallet, bidding, resolving — the whole beginner path.</p>
+          <span class="go">Start here →</span>
         </a>
-        <a href="/services/" class="resource-card resource-card-r2">
-          <span class="resource-icon" aria-hidden="true">&#9670;</span>
-          <h3>Wallets</h3>
-          <p>Bob Wallet, Namebase, Firefly — find the one that fits how you work.</p>
-          <span class="resource-arrow" aria-hidden="true">&#8599;</span>
+        <a class="path" href="/learn/">
+          <span class="n">for the technical</span>
+          <h3>Learn the protocol</h3>
+          <p>How HNS, DNS, and decentralized name resolution actually work, under the hood.</p>
+          <span class="go">Go deeper →</span>
         </a>
-        <a href="/market/" class="resource-card resource-card-r3">
-          <span class="resource-icon" aria-hidden="true">&#9652;</span>
-          <h3>Marketplaces</h3>
-          <p>Buy, sell, and auction TLDs. SHAKEDEX, Namebase secondary, and more.</p>
-          <span class="resource-arrow" aria-hidden="true">&#8599;</span>
-        </a>
-        <a href="/podcasts/" class="resource-card resource-card-r4">
-          <span class="resource-icon" aria-hidden="true">&#9711;</span>
-          <h3>Podcasts</h3>
-          <p>Deep dives with builders, founders, and early adopters in the HNS ecosystem.</p>
-          <span class="resource-arrow" aria-hidden="true">&#8599;</span>
-        </a>
-        <a href="/learn/" class="resource-card resource-card-r5">
-          <span class="resource-icon" aria-hidden="true">&#9632;</span>
-          <h3>Tutorials</h3>
-          <p>How to resolve HNS domains, set up DNSSEC, and build on Handshake.</p>
-          <span class="resource-arrow" aria-hidden="true">&#8599;</span>
+        <a class="path" href="/media/">
+          <span class="n">for the builders</span>
+          <h3>Media &amp; tools</h3>
+          <p>Podcasts, articles, wallet comparisons, and services curated for the ecosystem.</p>
+          <span class="go">Explore →</span>
         </a>
       </div>
     </section>
 
-  </div>
+    <!-- CTA -->
+    <section class="cta">
+      <div class="cta-card">
+        <h2>Get from zero to sovereign.</h2>
+        <p>Pick a name, learn the protocol, and join the people building a root nobody can take away.</p>
+        <div class="cta-actions">
+          <a class="btn-primary" href="/start/">Start learning</a>
+          <a class="btn-secondary" href="/market/">Browse the marketplace</a>
+        </div>
+      </div>
+    </section>
 
+  </div>
 </BaseLayout>
 
 <style>
-  /* ── Layout shell ── */
-  .home-shell {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
+  .home-shell { max-width: 1180px; margin: 0 auto; padding: 0 1.6rem; }
 
   /* ── Ticker ── */
   .ticker-wrap {
@@ -237,667 +241,349 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
     display: flex;
     align-items: center;
   }
-
-  /* [hidden] attribute is defeated by explicit display:flex above — force it back */
   .ticker-wrap[hidden] { display: none; }
-
   .ticker-label {
-    flex-shrink: 0;
-    padding: 0 1rem;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--hns-violet);
+    flex-shrink: 0; padding: 0 1rem;
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--hns-violet);
     border-right: 1px solid var(--glass-border);
-    height: 100%;
-    display: flex;
-    align-items: center;
+    height: 100%; display: flex; align-items: center;
     background: rgba(105, 58, 250, 0.04);
   }
-
   .ticker-viewport { overflow: hidden; flex: 1; }
-
   .ticker-track {
-    display: flex;
-    gap: 3rem;
+    display: flex; gap: 3rem;
     animation: ticker 28s linear infinite;
-    white-space: nowrap;
-    padding-left: 2rem;
+    white-space: nowrap; padding-left: 2rem;
   }
-
-  @keyframes ticker {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-
-  /* Ticker items are created by JS via innerHTML, so they don't carry
-     Astro's scope attribute. Use :global() so the styles apply anyway. */
-  :global(.ticker-item) {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    font-size: 0.65rem;
-    font-weight: 500;
-    line-height: 1;
-  }
-
-  :global(.ticker-name) {
-    color: var(--text-primary);
-    font-family: var(--font-mono);
-  }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  :global(.ticker-item) { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 0.65rem; font-weight: 500; line-height: 1; }
+  :global(.ticker-name) { color: var(--text-primary); font-family: var(--font-mono); }
   :global(.ticker-price) { color: var(--text-secondary); }
-
-  :global(.ticker-status-buyable),
-  :global(.ticker-status-pending) {
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding-left: 0.25rem;
-  }
-
+  :global(.ticker-status-buyable), :global(.ticker-status-pending) { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding-left: 0.25rem; }
   :global(.ticker-status-buyable) { color: var(--up-color); }
   :global(.ticker-status-pending) { color: var(--text-muted); }
 
   /* ── Hero ── */
   .home-hero {
     position: relative;
-    min-height: 75vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     text-align: center;
-    padding: 6rem 0 5rem;
-    max-width: 800px;
-    margin: 0 auto;
+    padding: 5rem 0 3.5rem;
   }
 
-  .hero-network {
+  .float-names { position: absolute; inset: -2rem 0; z-index: 0; pointer-events: none; }
+  :global(.float-names span) {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 130%;
-    max-width: 1100px;
-    height: auto;
-    transform: translate(-50%, -52%);
-    pointer-events: none;
-    opacity: 0.5;
-    z-index: 0;
-    mix-blend-mode: multiply;
-    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    border: 1px solid var(--glass-border);
+    background: var(--surface-soft);
+    padding: 0.22rem 0.55rem;
+    border-radius: 8px;
+    white-space: nowrap;
+    backdrop-filter: blur(2px);
+    animation: floaty 18s ease-in-out infinite;
   }
-
-  /* In dark mode, multiply makes things invisible — switch to screen
-     and rely on currentColor so the wireframe lifts off the dark bg. */
-  [data-theme="dark"] .hero-network {
-    mix-blend-mode: screen;
-    opacity: 0.45;
-    color: var(--text-secondary);
-  }
-
-  .hero-network .net-line {
-    stroke: currentColor;
-    stroke-width: 1;
-    stroke-opacity: 0.28;
-    fill: none;
-  }
-
-  .hero-network .net-node { fill: currentColor; }
-
-  .hero-network .net-node--pulse {
-    animation: nodePulse 3s ease-in-out infinite;
-    transform-origin: center;
-  }
-  .hero-network .net-node--pulse:nth-child(2) { animation-delay: 0.6s; }
-  .hero-network .net-node--pulse:nth-child(3) { animation-delay: 1.2s; }
-  .hero-network .net-node--pulse:nth-child(4) { animation-delay: 1.8s; }
-  .hero-network .net-node--pulse:nth-child(5) { animation-delay: 2.4s; }
-
-  @keyframes nodePulse {
-    0%, 100% { opacity: 0.4; }
-    50%      { opacity: 1; }
+  :global(.float-names span b) { color: var(--hns-mint); font-weight: 500; }
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0); opacity: 0.45; }
+    50% { transform: translateY(-16px); opacity: 0.8; }
   }
 
   .hero-eyebrow {
-    position: relative;
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--hns-violet);
-    margin-bottom: 1.5rem;
+    position: relative; z-index: 2;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--hns-violet-bright);
+    border: 1px solid var(--glass-border);
+    background: var(--surface-soft);
+    padding: 0.4rem 0.8rem; border-radius: 99px;
+    margin-bottom: 1.8rem;
   }
-
-  .hero-eyebrow::before,
-  .hero-eyebrow::after {
-    content: '';
-    width: 20px;
-    height: 1px;
-    background: var(--hns-violet);
-  }
+  .hero-eyebrow .pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--hns-mint); animation: blink 2s infinite; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
 
   .hero-title {
-    position: relative;
-    z-index: 2;
-    font-family: var(--font-serif);
-    font-size: clamp(2.5rem, 6vw, 5.25rem);
-    font-weight: 700;
-    line-height: 1.0;
-    letter-spacing: -0.03em;
+    position: relative; z-index: 2;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.4rem, 6vw, 4.6rem);
+    line-height: 1.02; letter-spacing: -0.035em;
+    max-width: 15ch; margin: 0 auto 1.3rem;
     color: var(--text-primary);
-    margin-bottom: 1.5rem;
-    background: none;
-    -webkit-background-clip: initial;
-    -webkit-text-fill-color: initial;
-  }
-
-  .hero-title em {
-    font-style: italic;
-    color: var(--hns-violet);
   }
 
   .hero-lead {
-    position: relative;
-    z-index: 2;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--text-secondary);
-    max-width: 560px;
-    margin: 0 auto 2.25rem;
-    font-weight: 400;
+    position: relative; z-index: 2;
+    font-size: 1.12rem; color: var(--text-secondary);
+    max-width: 50ch; margin: 0 auto 2.4rem;
   }
 
-  .hero-actions {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
+  /* Resolver */
+  .resolver { position: relative; z-index: 2; max-width: 560px; margin: 0 auto; }
+  .resolver-box {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: var(--surface); border: 1px solid var(--glass-border-strong);
+    border-radius: 16px; padding: 0.55rem 0.55rem 0.55rem 1.1rem;
+    transition: 0.25s; box-shadow: var(--shadow-card);
   }
-
-  /* ── Section labels ── */
-  .section-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--hns-violet);
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  .resolver-box:focus-within { border-color: var(--hns-violet-bright); box-shadow: 0 0 0 4px rgba(105, 58, 250, 0.18); }
+  .resolver-box input {
+    flex: 1; background: none; border: none; outline: none;
+    color: var(--text-primary); font-family: var(--font-mono);
+    font-size: 1.15rem; min-width: 0;
   }
-
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, rgba(105, 58, 250, 0.4), transparent);
+  .resolver-box input::placeholder { color: var(--text-muted); }
+  .resolver-box .tld { font-family: var(--font-mono); font-size: 1.15rem; color: var(--hns-violet-bright); font-weight: 700; }
+  .resolve-btn {
+    border: none; border-radius: 11px; background: var(--hns-violet);
+    color: #fff; font-weight: 600; padding: 0.7rem 1.2rem; cursor: pointer;
+    font-family: var(--font-body); font-size: 0.92rem; white-space: nowrap; transition: 0.2s;
   }
-
-  /* ── Learning paths ── */
-  .learning-paths { padding: 0 0 5rem; }
-
-  .paths-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+  .resolve-btn:hover { background: var(--hns-violet-bright); }
+  .resolve-status { height: 1.4rem; margin-top: 0.9rem; font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); transition: 0.2s; }
+  .resolve-status.available { color: var(--hns-mint); }
+  .resolve-status.taken { color: var(--hns-violet-bright); }
+  .suggest { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-top: 1.3rem; }
+  .suggest .chip {
+    font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);
+    border: 1px solid var(--glass-border); background: var(--surface-soft);
+    padding: 0.32rem 0.7rem; border-radius: 9px; cursor: pointer; transition: 0.2s;
   }
+  .suggest .chip:hover { border-color: var(--hns-violet-bright); color: var(--text-primary); }
+  .suggest .chip b { color: var(--hns-violet-bright); font-weight: 500; }
 
-  .path-card {
-    position: relative;
-    display: block;
-    padding: 2rem;
-    border-radius: 16px;
-    background: var(--surface);
+  /* trust */
+  .trust {
+    position: relative; z-index: 2;
+    display: flex; gap: 2.4rem; justify-content: center; flex-wrap: wrap;
+    margin-top: 3.4rem; padding-top: 2.2rem; border-top: 1px solid var(--glass-border);
+  }
+  .trust .stat { text-align: center; }
+  .trust .num { font-family: var(--font-display); font-size: 1.9rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); }
+  .trust .num .u { color: var(--hns-mint); }
+  .trust .lbl { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.2rem; }
+
+  /* ── Section scaffold ── */
+  .library, .ownership, .paths-section { padding: 4.5rem 0; }
+  .sec-head { margin-bottom: 2.6rem; }
+  .kicker {
+    font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--hns-violet-bright);
+    display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;
+  }
+  .kicker::before { content: ''; width: 26px; height: 1px; background: var(--hns-violet-bright); }
+  .sec-head h2 {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: clamp(1.8rem, 3.4vw, 2.7rem); letter-spacing: -0.03em;
+    line-height: 1.1; max-width: 20ch; margin: 0;
+  }
+  .sec-head p { color: var(--text-secondary); max-width: 52ch; margin-top: 0.9rem; }
+
+  /* ── Folder explorer ── */
+  .explorer { display: grid; grid-template-columns: 1.05fr 1.4fr; gap: 1.6rem; align-items: start; }
+  .folders { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .folder {
+    position: relative; text-align: left; cursor: pointer;
+    border: 1px solid var(--glass-border); background: var(--surface-soft);
+    border-radius: 14px; padding: 1.2rem; transition: 0.22s; color: inherit; font-family: inherit;
+  }
+  .folder:hover, .folder.active { border-color: var(--hns-violet-bright); background: var(--surface); transform: translateY(-3px); }
+  .folder .ico { font-size: 1.3rem; margin-bottom: 0.7rem; display: block; }
+  .folder h4 { font-family: var(--font-display); font-weight: 500; font-size: 1.02rem; letter-spacing: -0.01em; margin: 0; }
+  .folder .count { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); margin-top: 0.3rem; }
+  .folder.active .count { color: var(--hns-mint); }
+
+  .tree-wrap { position: relative; }
+  .tree {
+    display: none;
     border: 1px solid var(--glass-border-strong);
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    background: linear-gradient(180deg, var(--surface), transparent);
+    border-radius: 16px; padding: 1.4rem 1.5rem; font-family: var(--font-mono);
+    font-size: 0.85rem; min-height: 280px;
   }
-
-  .path-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--hns-violet);
-    box-shadow: 0 12px 36px rgba(105, 58, 250, 0.1);
-    text-decoration: none;
+  .tree.active { display: block; }
+  .tree-path { color: var(--text-muted); font-size: 0.74rem; letter-spacing: 0.04em; margin-bottom: 1rem; }
+  .tree-path b { color: var(--hns-mint); font-weight: 500; }
+  .tree ul { list-style: none; }
+  .tree li { border-bottom: 1px solid var(--glass-border); }
+  .tree li:last-child { border-bottom: none; }
+  .tree li a {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.42rem 0; color: var(--text-secondary); transition: 0.18s; text-decoration: none;
   }
+  .tree li a:hover { color: var(--text-primary); padding-left: 0.4rem; text-decoration: none; }
+  .tree li .f { color: var(--hns-violet-bright); }
+  .tree li .fname { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tree li .arr { margin-left: auto; color: var(--text-muted); opacity: 0; transition: 0.18s; white-space: nowrap; }
+  .tree li a:hover .arr { opacity: 1; }
+  .tree li.more a { color: var(--hns-violet-bright); }
 
-  .path-icon {
-    display: block;
-    font-size: 1.85rem;
-    color: var(--hns-violet);
-    margin-bottom: 1.1rem;
+  .library-all {
+    display: inline-block; margin-top: 1.6rem;
+    font-family: var(--font-mono); font-size: 0.85rem; color: var(--hns-violet-bright);
   }
+  .library-all:hover { text-decoration: underline; }
 
-  .path-label {
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 0.4rem;
+  /* ── Ownership compare ── */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .cmp { border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.8rem; }
+  .cmp.old { background: var(--surface-soft); }
+  .cmp.new { background: linear-gradient(160deg, rgba(105, 58, 250, 0.12), rgba(0, 240, 192, 0.04)); border-color: var(--hns-violet); }
+  .cmp-tag { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+  .cmp.new .cmp-tag { color: var(--hns-mint); }
+  .cmp h3 { font-family: var(--font-display); font-weight: 500; font-size: 1.3rem; margin-bottom: 1.2rem; letter-spacing: -0.02em; }
+  .cmp ul { list-style: none; display: grid; gap: 0.8rem; }
+  .cmp li { display: flex; gap: 0.7rem; font-size: 0.94rem; color: var(--text-secondary); }
+  .cmp li .m { flex-shrink: 0; font-family: var(--font-mono); }
+  .cmp.old li .m { color: var(--text-muted); }
+  .cmp.new li .m { color: var(--hns-mint); }
+
+  /* ── Paths ── */
+  .paths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+  .path {
+    position: relative; overflow: hidden; text-decoration: none; color: inherit;
+    border: 1px solid var(--glass-border); background: var(--surface-soft);
+    border-radius: 16px; padding: 1.7rem; transition: 0.22s;
   }
+  .path::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 2px; background: linear-gradient(90deg, var(--hns-violet), var(--hns-mint)); transform: scaleX(0); transform-origin: left; transition: 0.3s; }
+  .path:hover { transform: translateY(-4px); border-color: var(--glass-border-strong); text-decoration: none; }
+  .path:hover::before { transform: scaleX(1); }
+  .path .n { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); }
+  .path h3 { font-family: var(--font-display); font-weight: 500; font-size: 1.25rem; margin: 0.8rem 0 0.5rem; letter-spacing: -0.02em; }
+  .path p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; }
+  .path .go { margin-top: 1.1rem; display: inline-flex; gap: 0.4rem; font-family: var(--font-mono); font-size: 0.82rem; color: var(--hns-violet-bright); }
 
-  .path-card h3 {
-    font-family: var(--font-serif);
-    font-size: 1.3rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.01em;
+  /* ── CTA ── */
+  .cta { padding: 1rem 0 5rem; }
+  .cta-card {
+    border: 1px solid var(--hns-violet); border-radius: 24px;
+    padding: 3.4rem 2rem; text-align: center;
+    background: linear-gradient(150deg, rgba(105, 58, 250, 0.16), rgba(0, 240, 192, 0.05));
   }
-
-  .path-tagline {
-    font-size: 0.9rem;
-    color: var(--hns-violet);
-    font-weight: 500;
-    font-style: italic;
-    margin-bottom: 0.75rem;
-  }
-
-  .path-card p {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    font-weight: 400;
-  }
-
-  .path-arrow {
-    position: absolute;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    transition: transform 0.2s, color 0.2s;
-  }
-
-  .path-card:hover .path-arrow {
-    transform: translate(3px, -3px);
-    color: var(--hns-violet);
-  }
-
-  /* ── Explainer ── */
-  .explainer { padding: 5rem 0; }
-
-  .explainer-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .explainer h2 {
-    font-family: var(--font-serif);
-    font-size: clamp(1.85rem, 3.4vw, 3rem);
-    font-weight: 500;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-  }
-
-  .explainer h2 em {
-    font-style: italic;
-    color: var(--hns-violet);
-  }
-
-  .explainer p {
-    color: var(--text-secondary);
-    line-height: 1.75;
-    font-size: 0.98rem;
-    font-weight: 400;
-    margin-bottom: 1.1rem;
-  }
-
-  /* DNS diagram */
-  .dns-diagram {
-    padding: 1.75rem;
-    border-radius: 14px;
-    background: var(--surface);
-    border: 1px solid var(--glass-border);
-  }
-
-  .diagram-title {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 1.1rem;
-  }
-
-  .diagram-row {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 0.6rem;
-    flex-wrap: wrap;
-  }
-
-  .diagram-node {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.55rem 0.9rem;
-    border-radius: 8px;
-    font-size: 0.78rem;
-    font-weight: 500;
-  }
-
-  .node-icann {
-    background: var(--surface-soft);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    color: rgba(0, 0, 0, 0.5);
-    text-decoration: line-through;
-  }
-
-  .node-hns {
-    background: rgba(105, 58, 250, 0.08);
-    border: 1px solid rgba(105, 58, 250, 0.3);
-    color: var(--hns-violet);
-  }
-
-  .node-user {
-    background: var(--hover-bg);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    color: rgba(0, 0, 0, 0.7);
-  }
-
-  .node-user--owner {
-    background: rgba(0, 249, 202, 0.12);
-    border-color: rgba(0, 249, 202, 0.4);
-    color: var(--up-color);
-  }
-
-  .diagram-arrow {
-    color: var(--text-muted);
-    font-size: 0.8rem;
-  }
-
-  .diagram-label {
-    font-size: 0.65rem;
-    color: var(--text-muted);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding-left: 0.25rem;
-    margin-bottom: 1.1rem;
-  }
-
-  .diagram-label:last-of-type { margin-bottom: 0; }
-
-  .stats-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-  }
-
-  .stat-item {
-    padding: 1rem;
-    border-radius: 10px;
-    text-align: center;
-    background: var(--surface);
-    border: 1px solid var(--glass-border);
-  }
-
-  .stat-number {
-    font-family: var(--font-serif);
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-
-  .stat-label {
-    font-size: 0.62rem;
-    color: var(--text-muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
+  .cta-card h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.8rem, 4vw, 2.8rem); letter-spacing: -0.03em; margin-bottom: 1rem; }
+  .cta-card p { color: var(--text-secondary); max-width: 46ch; margin: 0 auto 2rem; }
+  .cta-actions { display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap; }
 
   /* ── Auctions strip ── */
-  .auctions-strip { padding: 3rem 0 2rem; }
-
-  .auctions-strip-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-    flex-wrap: wrap;
-  }
-
+  .auctions-strip { padding: 1rem 0 0; }
+  .auctions-strip[hidden] { display: none; }
+  .auctions-strip-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
   .auctions-label { margin: 0; flex: 1; min-width: 200px; }
-
-  .live-dot {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.65rem;
-    color: var(--up-color);
-    font-weight: 500;
-  }
-
-  .live-dot::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--up-color);
-    animation: pulse-dot 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%      { opacity: 0.4; transform: scale(0.7); }
-  }
-
-  .strip-link {
-    font-size: 0.75rem;
-    color: var(--hns-violet);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .strip-link:hover { color: var(--hns-violet-deep); text-decoration: underline; }
-
-  .auctions-row {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.75rem;
-    padding: 1.25rem;
-    border-radius: 14px;
-    background: var(--surface);
-    border: 1px solid var(--glass-border);
-  }
-
-  .auction-card {
-    display: block;
-    padding: 1rem;
-    border-radius: 10px;
-    background: var(--surface);
-    border: 1px solid var(--glass-border);
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    min-width: 0;
-  }
-
-  .auction-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--hns-violet);
-    box-shadow: 0 8px 24px rgba(105, 58, 250, 0.1);
-    text-decoration: none;
-  }
-
-  .auction-tld {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--text-primary);
-    margin-bottom: 0.25rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .auction-price {
-    font-size: 0.8rem;
-    color: var(--hns-violet);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  .auction-meta-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-
-  .badge {
-    font-size: 0.55rem;
-    padding: 0.15rem 0.45rem;
-    border-radius: 4px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .badge-buyable {
-    background: rgba(0, 249, 202, 0.18);
-    color: var(--up-color);
-    border: 1px solid rgba(0, 249, 202, 0.5);
-  }
-
-  .badge-pending {
-    background: var(--hover-bg);
-    color: var(--text-muted);
-    border: 1px solid var(--glass-border-strong);
-  }
-
-  .auction-bids {
-    font-size: 0.65rem;
-    color: var(--text-muted);
-  }
-
-  .strip-loading,
-  .strip-error {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 0.85rem;
-  }
+  .live-dot { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.65rem; color: var(--up-color); font-weight: 500; }
+  .live-dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--up-color); animation: pulse-dot 2s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
+  .strip-link { font-size: 0.75rem; color: var(--hns-violet-bright); }
+  .strip-link:hover { text-decoration: underline; }
+  .auctions-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; padding: 1.25rem; border-radius: 14px; background: var(--surface-soft); border: 1px solid var(--glass-border); }
+  :global(.auction-card) { display: block; padding: 1rem; border-radius: 10px; background: var(--surface); border: 1px solid var(--glass-border); text-decoration: none; color: inherit; transition: 0.2s; min-width: 0; }
+  :global(.auction-card:hover) { transform: translateY(-3px); border-color: var(--hns-violet-bright); box-shadow: var(--shadow-hover); text-decoration: none; }
+  :global(.auction-tld) { font-weight: 700; font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.25rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-mono); }
+  :global(.auction-price) { font-size: 0.8rem; color: var(--hns-violet-bright); font-weight: 600; margin-bottom: 0.5rem; }
+  :global(.auction-meta-row) { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+  :global(.badge) { font-size: 0.55rem; padding: 0.15rem 0.45rem; border-radius: 4px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+  :global(.badge-buyable) { background: rgba(0, 240, 192, 0.16); color: var(--up-color); border: 1px solid rgba(0, 240, 192, 0.4); }
+  :global(.auction-bids) { font-size: 0.65rem; color: var(--text-muted); }
+  .strip-loading, .strip-error { grid-column: 1 / -1; text-align: center; padding: 1.5rem; font-size: 0.85rem; }
   .strip-loading { color: var(--text-muted); }
   .strip-error { color: var(--down-color); }
-  .strip-error a { color: var(--hns-violet); }
-
-  /* ── Resources ── */
-  .resources { padding: 3rem 0 6rem; }
-
-  .resources h2 {
-    font-family: var(--font-serif);
-    font-size: 2.25rem;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.4rem;
-    color: var(--text-primary);
-  }
-
-  .resources-lead {
-    color: var(--text-secondary);
-    font-weight: 400;
-    margin-bottom: 2.5rem;
-    font-size: 1rem;
-  }
-
-  .resource-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.85rem;
-  }
-
-  .resource-card {
-    position: relative;
-    display: block;
-    padding: 1.5rem;
-    border-radius: 12px;
-    background: var(--surface);
-    border: 1px solid var(--glass-border-strong);
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-  }
-
-  .resource-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--hns-violet);
-    box-shadow: 0 12px 36px rgba(105, 58, 250, 0.1);
-    text-decoration: none;
-  }
-
-  .resource-icon {
-    display: block;
-    font-size: 1.55rem;
-    color: var(--hns-violet);
-    margin-bottom: 0.9rem;
-  }
-
-  .resource-card h3 {
-    font-family: var(--font-serif);
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    margin-bottom: 0.35rem;
-  }
-
-  .resource-card p {
-    font-size: 0.76rem;
-    color: var(--text-secondary);
-    line-height: 1.55;
-    font-weight: 400;
-  }
-
-  .resource-arrow {
-    position: absolute;
-    bottom: 1.1rem;
-    right: 1.1rem;
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    transition: transform 0.2s, color 0.2s;
-  }
-
-  .resource-card:hover .resource-arrow {
-    transform: translate(3px, -3px);
-    color: var(--hns-violet);
-  }
 
   /* ── Responsive ── */
   @media (max-width: 900px) {
     .home-shell { padding: 0 1.25rem; }
-    .home-hero { padding: 4rem 0 3rem; min-height: 60vh; }
-    .paths-grid { grid-template-columns: 1fr; gap: 1rem; }
-    .explainer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .resource-grid { grid-template-columns: repeat(2, 1fr); }
+    .explorer { grid-template-columns: 1fr; }
     .auctions-row { grid-template-columns: repeat(2, 1fr); }
   }
-
+  @media (max-width: 720px) {
+    .compare { grid-template-columns: 1fr; }
+    .paths { grid-template-columns: 1fr; }
+  }
   @media (max-width: 600px) {
-    .resource-grid { grid-template-columns: 1fr; }
-    .stats-row { grid-template-columns: 1fr; }
+    .folders { grid-template-columns: 1fr; }
     .auctions-row { grid-template-columns: 1fr; }
+    .trust { gap: 1.6rem; }
+    .float-names { display: none; }
+    .hero-eyebrow { font-size: 0.64rem; letter-spacing: 0.08em; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track, :global(.float-names span), .hero-eyebrow .pulse, .live-dot::before { animation: none !important; }
   }
 </style>
 
 <script>
-  // Live auction data — populates ticker + 5-card strip.
+  // ── Resolver (demo availability + route to marketplace) ──
+  const input = document.getElementById('nameInput') as HTMLInputElement | null;
+  const statusEl = document.getElementById('status');
+  const form = document.getElementById('resolver-form');
+
+  function sanitize(v: string): string {
+    return v.trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
+  }
+
+  function preview(): void {
+    if (!input || !statusEl) return;
+    const raw = sanitize(input.value);
+    input.value = raw;
+    if (!raw) { statusEl.textContent = 'Try a name to check the root zone'; statusEl.className = 'resolve-status'; return; }
+    // Lightweight hint only — the real check happens on the marketplace.
+    const looksOpen = raw.length % 2 === 0;
+    if (looksOpen) {
+      statusEl.textContent = '● ' + raw + '/ may be open — check it on the market';
+      statusEl.className = 'resolve-status available';
+    } else {
+      statusEl.textContent = '● ' + raw + '/ likely owned — view it on the market';
+      statusEl.className = 'resolve-status taken';
+    }
+  }
+
+  if (input) input.addEventListener('input', preview);
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const raw = input ? sanitize(input.value) : '';
+      const url = raw ? 'https://market.learnhns.com/?q=' + encodeURIComponent(raw) : 'https://market.learnhns.com/';
+      window.open(url, '_blank', 'noopener');
+    });
+  }
+  document.querySelectorAll<HTMLButtonElement>('.suggest .chip').forEach((c) => {
+    c.addEventListener('click', () => {
+      if (!input) return;
+      input.value = c.dataset.n || '';
+      preview();
+      input.focus();
+    });
+  });
+
+  // ── Folder explorer toggle ──
+  const folderBtns = document.querySelectorAll<HTMLElement>('.folder');
+  const panels = document.querySelectorAll<HTMLElement>('.tree');
+  folderBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.key;
+      folderBtns.forEach((b) => b.classList.toggle('active', b === btn));
+      panels.forEach((p) => p.classList.toggle('active', p.dataset.panel === key));
+    });
+  });
+
+  // ── Floating name tokens (decorative, home only) ──
+  const NAMES = ['welcome', 'crypto', 'nb', 'degen', 'wallet', 'root', 'tld', 'shake', 'hns', 'sovereign', 'namebase', 'resolve'];
+  const positions = [[5, 30], [90, 17], [9, 62], [92, 54], [4, 46], [94, 40], [14, 86], [89, 83]];
+  const fl = document.getElementById('floats');
+  if (fl) {
+    positions.forEach((p, i) => {
+      const s = document.createElement('span');
+      s.innerHTML = NAMES[i % NAMES.length] + '<b>/</b>';
+      s.style.left = p[0] + '%';
+      s.style.top = p[1] + '%';
+      s.style.animationDelay = (i * 1.6) + 's';
+      fl.appendChild(s);
+    });
+  }
+
+  // ── Live auction data — populates ticker + 5-card strip. ──
   let punyDecode: (s: string) => string = (s) => s;
   try {
     const mod = await import('https://unpkg.com/punycode@2.3.1/punycode.es6.js');
@@ -924,17 +610,14 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
 
-      // Only show buyable listings on the home page — pending listings
-      // belong on /market/ under the "Coming Soon" section.
       const buyable = ((data.auctions || []) as any[]).filter((l) => l.buyable === true).slice(0, 5);
-      if (!buyable.length) return; // sections remain hidden
+      if (!buyable.length) return;
 
       auctionsEl.innerHTML = buyable.map((listing: any) => {
         const name = punyDecode(listing.name) + '/';
         const price = formatPrice(listing.expectedPrice);
         const bids = listing.bids?.length || 0;
         const url = `https://market.learnhns.com/listing/${listing.name}`;
-
         return `
           <a href="${url}" target="_blank" rel="noopener noreferrer" class="auction-card">
             <div class="auction-tld">${name}</div>
@@ -956,10 +639,8 @@ import { organizationSchema, websiteSchema } from '../lib/seo';
 
       stripEl.hidden = false;
       tickerEl.hidden = false;
-
     } catch (err) {
       console.warn('[LearnHNS] Market data unavailable:', err);
-      // Sections remain hidden — no awkward error UI on the home page.
     }
   }
 

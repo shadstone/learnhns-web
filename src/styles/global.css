@@ -18,8 +18,9 @@
 
   /* Brand */
   --hns-violet: #693AFA;
+  --hns-violet-bright: #8B6BFF;
   --hns-violet-deep: #5630CD;
-  --hns-mint: #00f9ca;
+  --hns-mint: #00f0c0;
 
   /* Text */
   --text-primary: rgba(0, 0, 0, 0.92);
@@ -54,9 +55,14 @@
   --footer-bg: var(--aurora-2);
   --card-bg: var(--surface);
 
-  --font-serif: 'Fraunces', Georgia, serif;
-  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  /* Namespace type system — Space Grotesk display, Inter body, JetBrains Mono
+     for name tokens / code. --font-serif and --font-sans are kept as aliases
+     so existing page styles pick up the new faces with no per-page edits. */
+  --font-display: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -65,10 +71,10 @@
    based on saved preference or system setting.
    ────────────────────────────────────────────────────────── */
 [data-theme="dark"] {
-  --aurora-1: #0b0d12;
-  --aurora-2: #11141b;
+  --aurora-1: #08080f;
+  --aurora-2: #0d0d18;
 
-  --surface: #13161e;
+  --surface: #13131f;
   --surface-soft: rgba(255, 255, 255, 0.04);
   --surface-elevated: #1a1e28;
   --header-bg: rgba(11, 13, 18, 0.78);
@@ -96,12 +102,49 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background: var(--aurora-1); }
+
+/* ──────────────────────────────────────────────────────────
+   Living namespace background — site-wide aurora wash plus a
+   faint root-zone grid that fades out below the masthead.
+   Anchored to <html> (body is a flex container, so pseudo-
+   elements there would become flex items). Static by design;
+   the home page layers animated name tokens on top.
+   ────────────────────────────────────────────────────────── */
+html::before {
+  content: '';
+  position: fixed;
+  inset: -20%;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 44% at 20% 10%, rgba(105, 58, 250, 0.20), transparent 70%),
+    radial-gradient(34% 40% at 84% 22%, rgba(0, 240, 192, 0.07), transparent 70%),
+    radial-gradient(46% 56% at 62% 98%, rgba(105, 58, 250, 0.12), transparent 72%);
+  filter: blur(8px);
+}
+
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--glass-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(circle at 50% 0%, #000, transparent 66%);
+  mask-image: radial-gradient(circle at 50% 0%, #000, transparent 66%);
+  opacity: 0.45;
+}
+
+[data-theme="light"] html::before { opacity: 0.6; }
 
 body {
   font-family: var(--font-sans);
   line-height: 1.7;
-  background: var(--aurora-1);
+  background: transparent;
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
@@ -369,9 +412,16 @@ img { max-width: 100%; height: auto; border-radius: 8px; }
   margin: 0 0 1.25rem;
 }
 
-.page-hero-title em {
-  font-style: italic;
+/* Accent words: a violet→mint gradient instead of serif italic
+   (Space Grotesk has no true italic). Used by inner-page heroes. */
+.page-hero-title em,
+.accent-grad {
+  font-style: normal;
   color: var(--hns-violet);
+  background: linear-gradient(100deg, var(--hns-violet-bright), var(--hns-mint));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .page-hero-lede {

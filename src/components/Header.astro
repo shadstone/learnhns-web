@@ -8,7 +8,7 @@ const isActive = (href: string) =>
     <a href="/" class="logo-lockup" aria-label="LearnHNS home">
       <img class="logo-light" src="/learnhnsicon-dark.svg" alt="" onerror="this.style.display='none'" />
       <img class="logo-dark" src="/learnhnsicon.svg" alt="" onerror="this.style.display='none'" />
-      <span>LearnHNS</span>
+      <span>learnhns</span>
     </a>
 
     <nav class="main-nav" id="primary-nav" aria-label="Primary">
@@ -105,10 +105,16 @@ const isActive = (href: string) =>
   }
 
   .logo-lockup span {
-    font-family: var(--font-serif);
+    font-family: var(--font-mono);
     font-weight: 700;
-    font-size: 1.15rem;
-    letter-spacing: -0.02em;
+    font-size: 1.05rem;
+    letter-spacing: -0.03em;
+  }
+
+  .logo-lockup span::after {
+    content: '/';
+    color: var(--hns-violet-bright);
+    font-weight: 700;
   }
 
   .main-nav {
