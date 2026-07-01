@@ -5,8 +5,10 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 
-# Agent-oriented endpoints — useful for AI tools, not for search indexing
+# /llms.txt is intentionally left crawlable — it's the AI-facing index of the
+# site and must be fetchable by AI tools and crawlers.
+
+# skill.md is an agent-action endpoint, not content for search indexing.
 Disallow: /skill.md
-Disallow: /llms.txt
 
 Sitemap: https://learnhns.com/sitemap-index.xml

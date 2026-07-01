@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExploreWithAI from '../../components/ExploreWithAI.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { abs, blogPostingSchema, breadcrumbSchema } from '../../lib/seo';
+import { abs, blogPostingSchema, breadcrumbSchema, parseCrawlerSignal } from '../../lib/seo';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -24,8 +25,21 @@ const dateLabel = data.created_at
   : null;
 
 const postUrl = abs(`/blog/${post.id}/`);
-const description = data.seo?.meta_description || data.excerpt || undefined;
+const canonicalUrl = data.seo?.canonical_url || postUrl;
+
+// Prefer the author-written SEO fields from the CMS over the plain
+// title / auto-excerpt when they're present.
+const cf = (data.custom_fields ?? {}) as Record<string, unknown>;
+const cfStr = (v: unknown): string | undefined =>
+  typeof v === 'string' && v.trim() ? v.trim() : undefined;
+
+const metaTitle = cfStr(cf.seo_title) || data.seo?.meta_title || data.title;
+const description = cfStr(cf.seo_description) || data.seo?.meta_description || data.excerpt || undefined;
 const authorName = data.author?.username || undefined;
+
+// Route the crawler_signal hints into standard schema.org keywords + about.
+const signal = parseCrawlerSignal(cf.crawler_signal);
+const exploreAI = data.site_features?.explore_with_ai;
 
 const schemas = [
   blogPostingSchema({
@@ -38,6 +52,8 @@ const schemas = [
     dateModified: data.updated_at || data.created_at || undefined,
     category: data.primary_category?.name || undefined,
     tags: data.tags?.map((t) => t.name) || undefined,
+    keywords: signal.keywords,
+    about: signal.about,
   }),
   breadcrumbSchema([
     { name: 'Home', path: '/' },
@@ -47,7 +63,7 @@ const schemas = [
 ];
 ---
 <BaseLayout
-  title={data.seo?.meta_title || data.title}
+  title={metaTitle}
   description={description}
   image={data.featured_image_url || undefined}
   canonicalOverride={data.seo?.canonical_url || undefined}
@@ -78,6 +94,13 @@ const schemas = [
           </>
         )}
       </div>
+
+      <ExploreWithAI
+        enabled={exploreAI?.enabled ?? false}
+        providers={exploreAI?.providers ?? {}}
+        canonicalUrl={canonicalUrl}
+        type={data.type ?? 'post'}
+      />
     </header>
 
     {data.featured_image_url && (

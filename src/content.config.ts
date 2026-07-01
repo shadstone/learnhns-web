@@ -40,6 +40,18 @@ const posts = defineCollection({
         .default([]),
       created_at: z.string().nullable().optional(),
       updated_at: z.string().nullable().optional(),
+      type: z.string().optional(),
+      custom_fields: z.record(z.unknown()).optional().default({}),
+      site_features: z
+        .object({
+          explore_with_ai: z
+            .object({
+              enabled: z.boolean().optional().default(false),
+              providers: z.record(z.boolean()).optional().default({}),
+            })
+            .optional(),
+        })
+        .optional(),
       og_meta: z.record(z.string()).optional(),
       seo: z
         .object({

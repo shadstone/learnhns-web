@@ -53,6 +53,36 @@ export const breadcrumbSchema = (items: Array<{ name: string; path: string }>) =
   })),
 });
 
+/**
+ * Parse WDD's `crawler_signal` custom field into standard structured-data
+ * hints. The field is a human-authored pipe-delimited string, e.g.
+ *   "TOPIC: X | TECH: Y | USE CASE: Z | AUDIENCE: A | KEYWORD: k1, k2"
+ * We deliberately do NOT render the raw string (that reads as keyword
+ * stuffing) — instead we map it onto schema.org `keywords` + `about`, which
+ * search engines and AI actually consume.
+ */
+export const parseCrawlerSignal = (
+  signal: unknown,
+): { keywords: string[]; about: string[] } => {
+  const out = { keywords: [] as string[], about: [] as string[] };
+  if (typeof signal !== 'string' || !signal.trim()) return out;
+
+  for (const seg of signal.split('|')) {
+    const idx = seg.indexOf(':');
+    if (idx === -1) continue;
+    const key = seg.slice(0, idx).trim().toUpperCase();
+    const val = seg.slice(idx + 1).trim();
+    if (!val) continue;
+    const parts = val.split(',').map((s) => s.trim()).filter(Boolean);
+    if (key === 'KEYWORD' || key === 'KEYWORDS') {
+      out.keywords.push(...parts);
+    } else if (key === 'TOPIC' || key === 'TECH' || key === 'USE CASE' || key === 'AUDIENCE') {
+      out.about.push(...parts);
+    }
+  }
+  return out;
+};
+
 /** Blog/Article schema for a single post. */
 export interface BlogPostingArgs {
   title: string;
@@ -64,6 +94,10 @@ export interface BlogPostingArgs {
   dateModified?: string;
   category?: string;
   tags?: string[];
+  /** Extra keywords (e.g. parsed from crawler_signal), merged with tags. */
+  keywords?: string[];
+  /** schema.org `about` — the things this article is about. */
+  about?: string[];
 }
 
 export const blogPostingSchema = (args: BlogPostingArgs) => {
@@ -85,7 +119,16 @@ export const blogPostingSchema = (args: BlogPostingArgs) => {
     schema.dateModified = args.dateModified || args.datePublished;
   }
   if (args.category) schema.articleSection = args.category;
-  if (args.tags && args.tags.length > 0) schema.keywords = args.tags.join(', ');
+
+  const keywords = Array.from(
+    new Set([...(args.tags ?? []), ...(args.keywords ?? [])].map((k) => k.trim()).filter(Boolean)),
+  );
+  if (keywords.length > 0) schema.keywords = keywords.join(', ');
+
+  if (args.about && args.about.length > 0) {
+    const about = Array.from(new Set(args.about.map((a) => a.trim()).filter(Boolean)));
+    if (about.length > 0) schema.about = about.map((name) => ({ '@type': 'Thing', name }));
+  }
   return schema;
 };
 
