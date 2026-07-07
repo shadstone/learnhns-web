@@ -106,25 +106,25 @@ Open your domain in Bob Wallet's DNS / records panel and add records using the f
 
 To add a Nameserver using an IP address you need to use a GLUE4 record. For example, to add a nameserver record for GLUE4 with IP address `44.231.6.183` you would add the first line as below:
 
-![](https://github.com/namebasehq/gitbook-learning-center/blob/master/.gitbook/assets/glue-records.png?raw=true)
+![](/images/docs/starting-from-zero/glue-records.png)
 
 #### NS without GLUE4
 
 To add a NS record to an existing domain's GLUE4 (or to point to an ICANN domain's A record) you need to add the nameserver in the `Value` field while leaving the `Name` field blank. This is shown in the below image.
 
-![](https://github.com/namebasehq/gitbook-learning-center/blob/master/.gitbook/assets/ns-record.png?raw=true)
+![](/images/docs/starting-from-zero/ns-record.png)
 
 #### DS Records
 
 Adding a DS record is straightforward in Bob Wallet. Add the DS content in the `Value` field. This is shown in the image below.
 
-![](https://github.com/namebasehq/gitbook-learning-center/blob/master/.gitbook/assets/ds-record.png?raw=true)
+![](/images/docs/starting-from-zero/ds-record.png)
 
 #### TXT Records
 
 Adding TXT records is as easy as typing the contents of the record. This is shown in the image below.
 
-![](https://github.com/namebasehq/gitbook-learning-center/blob/master/.gitbook/assets/txt-records.png?raw=true)
+![](/images/docs/starting-from-zero/txt-records.png)
 
 ### Off-Chain Records
 

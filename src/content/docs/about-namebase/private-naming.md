@@ -52,10 +52,10 @@ No custodial registrar is required. Your name is associated with your public key
 
 The walkthrough images below show Namebase's original private-naming UI (offline since June 2026):
 
-![](https://images.ctfassets.net/v3ez3dek3dk6/2wKi16OwIyw9gFwFJWJizg/4009512c5ea4a713b5f8df955ef5a9f1/image.png?fit=pad&w=720)
+![](/images/docs/about-namebase/private-naming-step-1.png)
 
-![](https://images.ctfassets.net/v3ez3dek3dk6/3lLczfL6b3tEaBgcIsgX90/70f55aa83c35a723917bd23889fd0a58/image.png?fit=pad&w=720)
+![](/images/docs/about-namebase/private-naming-step-2.png)
 
-![](https://images.ctfassets.net/v3ez3dek3dk6/5LsjfUHj0kt9QMpJMSS63G/cb5b2e79a1d5eedaac23d9c293e34c8e/image.png?fit=pad&w=720)
+![](/images/docs/about-namebase/private-naming-step-3.png)
 
-![](https://images.ctfassets.net/v3ez3dek3dk6/1tTLSClCogaSqax1bD0xj9/4d44d1f7955928c9d5b99ebba719b948/image.png?fit=pad&w=720)
+![](/images/docs/about-namebase/private-naming-step-4.png)
