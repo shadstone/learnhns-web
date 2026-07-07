@@ -593,11 +593,6 @@ const folders = FOLDER_ORDER
     console.warn('[LearnHNS] punycode CDN unavailable, using raw names', e);
   }
 
-  function formatPrice(expectedPrice: number | null | undefined): string {
-    if (!expectedPrice) return 'Make Offer';
-    return (expectedPrice / 1_000_000).toLocaleString() + ' HNS';
-  }
-
   async function loadAuctions(): Promise<void> {
     const stripEl = document.getElementById('learnhns-auctions-strip');
     const tickerEl = document.getElementById('learnhns-ticker');
@@ -606,16 +601,15 @@ const folders = FOLDER_ORDER
     if (!auctionsEl || !tickerTrack || !stripEl || !tickerEl) return;
 
     try {
-      const res = await fetch('https://market.learnhns.com/api/v2/auctions');
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const data = await res.json();
-
-      const buyable = ((data.auctions || []) as any[]).filter((l) => l.buyable === true).slice(0, 5);
+      const { fetchMarketAuctions, formatListingPrice, getListingPrice, isBuyableListing } =
+        await import('../lib/market');
+      const auctions = await fetchMarketAuctions();
+      const buyable = auctions.filter(isBuyableListing).slice(0, 5);
       if (!buyable.length) return;
 
       auctionsEl.innerHTML = buyable.map((listing: any) => {
         const name = punyDecode(listing.name) + '/';
-        const price = formatPrice(listing.expectedPrice);
+        const price = formatListingPrice(getListingPrice(listing));
         const bids = listing.bids?.length || 0;
         const url = `https://market.learnhns.com/listing/${listing.name}`;
         return `
@@ -632,7 +626,7 @@ const folders = FOLDER_ORDER
 
       const tickerItems = buyable.map((listing: any) => {
         const name = punyDecode(listing.name) + '/';
-        const price = formatPrice(listing.expectedPrice);
+        const price = formatListingPrice(getListingPrice(listing));
         return `<span class="ticker-item"><span class="ticker-name">${name}</span><span class="ticker-price">${price}</span><span class="ticker-status-buyable">Buyable</span></span>`;
       }).join('');
       tickerTrack.innerHTML = tickerItems + tickerItems;

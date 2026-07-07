@@ -275,11 +275,16 @@ const description = "Discover the LearnHNS ShakeDex channel. Learn how to buy an
 
 <script>
   import punycode from 'punycode/';
+  import {
+    fetchMarketAuctions,
+    formatListingPrice,
+    getListingPrice,
+    isBuyableListing,
+    isPendingListing,
+  } from '../lib/market';
 
   function renderListing(listing: any, kind: 'buyable' | 'coming-soon'): string {
-    const price = listing.expectedPrice
-      ? (listing.expectedPrice / 1000000).toLocaleString() + ' HNS'
-      : 'Make Offer';
+    const price = formatListingPrice(getListingPrice(listing));
     const decodedName = punycode.toUnicode(listing.name);
     const statusClass = kind === 'buyable' ? 'status-buyable' : 'status-coming-soon';
     const statusText = kind === 'buyable' ? 'Buyable' : 'Coming Soon';
@@ -299,14 +304,10 @@ const description = "Discover the LearnHNS ShakeDex channel. Learn how to buy an
     if (!activeEl || !pendingEl) return;
 
     try {
-      const response = await fetch('https://market.learnhns.com/api/v2/auctions');
-      if (!response.ok) throw new Error('Network response was not ok');
+      const auctions = await fetchMarketAuctions();
 
-      const data = await response.json();
-      const auctions = data.auctions || [];
-
-      const buyable = auctions.filter((l: any) => l.buyable === true).slice(0, 12);
-      const pending = auctions.filter((l: any) => l.buyable !== true).slice(0, 12);
+      const buyable = auctions.filter(isBuyableListing).slice(0, 12);
+      const pending = auctions.filter(isPendingListing).slice(0, 12);
 
       activeEl.innerHTML = buyable.length
         ? buyable.map((l: any) => renderListing(l, 'buyable')).join('')
