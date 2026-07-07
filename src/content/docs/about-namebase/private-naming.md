@@ -4,40 +4,58 @@ archived: true
 
 # Private naming
 
-> **Warning**
-> **Historical only (June 2026):** Namebase shut down and no longer operates. This page is preserved for reference. For current tooling see [/start/](/start/) and [SkyInclude's wind-down explainer](https://skyinclude.com/blog/namebase-wind-down/).
+> **Historical record (2020–2026):** Namebase offered a path to acquire Handshake names with only an email for signup — no full KYC required for bidding and marketplace purchases. This was a distinctive feature during their years as the main Handshake marketplace. Namebase ceased operations in June 2026.
 
-You can acquire Handshake names through Namebase using only an email for signup.
+## Why this mattered
 
-## Why this matters <a href="#why-this-matters" id="why-this-matters"></a>
+For most of 2020–2026, buying a Handshake name through Namebase normally required account verification and on-chain HNS. Users could transfer HNS from external wallets, but they still needed to obtain HNS somewhere — often from exchanges with their own verification requirements.
 
-Until now, anyone trying to buy a Handshake name using Namebase needed to complete account verification and buy HNS before doing so. It was always possible to transfer HNS from an external wallet and use that HNS to bid on names, but Namers would still need to get their HNS from somewhere. This typically meant using another exchange that required extensive verification or buying HNS OTC which carries its own risks as well.
+Namebase introduced **private naming** so users could acquire censorship-resistant Handshake names without submitting identity documents, as long as they did not need to withdraw or freely trade on-chain HNS.
 
-It’s fine for users to verify their accounts in order to purchase on-chain HNS that can be traded and transferred, but sharing your private information shouldn't be necessary to get a Handshake name when you have no interest in engaging in financial transactions with an exchange. There are important situations where users may want to register censorship-resistant Handshake names privately — in those situations it could mean the difference between life or death!
+This mattered for activists, journalists, and anyone who needed a Handshake name without linking it to government ID — situations where privacy could be safety-critical.
 
-## Walkthrough <a href="#instructions" id="instructions"></a>
+## How it worked (historical walkthrough)
 
-### Sign up
+### 1. Sign up with a private email
 
-Sign up for a Namebase account at <https://www.namebase.io/register> with a private email address through services like [ProtonMail](https://protonmail.com/) or public email inboxes like [Mailinator](https://www.mailinator.com/) (make sure to immediately enable 2FA if you use Mailinator since the inboxes are public).
+Users created a Namebase account with an email only — often through privacy-focused providers like [ProtonMail](https://protonmail.com/) or disposable inboxes. Two-factor authentication was strongly recommended.
 
-![](https://images.ctfassets.net/v3ez3dek3dk6/2wKi16OwIyw9gFwFJWJizg/4009512c5ea4a713b5f8df955ef5a9f1/image.png?fit=pad\&w=720)
+### 2. Buy HNS name credits with BTC
 
-### Buy HNS
+Users sent BTC through Namebase's buy flow and received **HNS name credits** (not freely transferable on-chain HNS). These credits could be used to:
 
-Purchase HNS name credits with [BTC](/docs/starting-from-zero/buy-hns#buy-hns-with-btc) at <https://www.namebase.io/buy>. The HNS credits can be used to purchase Handshake names on the marketplace and to bid in Handshake name auctions, but it is important to understand that buying HNS credits does not give you the right to acquire any HNS or engage in any other transactions on Namebase until you submit [additional verification information](/docs/about-namebase/verifying). You can always complete account verification if you would like to acquire and transact with on-chain HNS.
+* Bid in [Handshake name auctions](/docs/about-handshake/handshake-auction)
+* Purchase names on the Namebase marketplace
 
-![](https://images.ctfassets.net/v3ez3dek3dk6/3lLczfL6b3tEaBgcIsgX90/70f55aa83c35a723917bd23889fd0a58/image.png?fit=pad\&w=720)
+Credits did **not** grant the right to withdraw on-chain HNS or use other financial features until the user completed [verification](/docs/about-namebase/verifying).
 
 > **Info**
-> When buying HNS credits, we do not recommend buying more than you expect is necessary to acquire your desired names unless you are willing to provide verification information, as our legal obligations will require we collect certain information before you can withdraw or transfer funds from Namebase.
+> Namebase recommended buying only enough credits for intended name purchases unless the user was willing to verify — legal obligations required identity collection before fund withdrawal.
 
-### Search for names
+### 3. Search and acquire names
 
-Search for the names you want at <https://namebase.io/domains>. You can buy a name on the marketplace instantly, or participate in a Handshake auction to win a name that hasn’t been registered yet.Handshake name bulk search
+Users searched for available names through Namebase's domain interface, then either bought listed names instantly or placed auction bids. Namebase handled bid reveals automatically.
 
-![](https://images.ctfassets.net/v3ez3dek3dk6/5LsjfUHj0kt9QMpJMSS63G/cb5b2e79a1d5eedaac23d9c293e34c8e/image.png?fit=pad\&w=720)
+Successful purchasers received custodied names in their Namebase account — private, [censorship-resistant](/docs/about-handshake/about-handshake#uncensorable), and [truly owned](/docs/about-handshake/about-handshake#true-domain-ownership) on-chain, managed through Namebase's UI.
 
-![](https://images.ctfassets.net/v3ez3dek3dk6/1tTLSClCogaSqax1bD0xj9/4d44d1f7955928c9d5b99ebba719b948/image.png?fit=pad\&w=720)
+## What replaced private naming
 
-You now own a name on the new internet! Your domain is [private](/docs/about-handshake/about-handshake#privacy-preserving), [censorship-resistant](/docs/about-handshake/about-handshake#uncensorable), and truly [owned](/docs/about-handshake/about-handshake#true-domain-ownership) by you instead of merely rented like in the traditional internet. You can now set up your devices to [access Handshake sites](/docs/starting-from-zero/how-to-access-handshake-sites) and learn how to [create your own websites](/docs/starting-from-zero/how-to-create-a-handshake-website) on Handshake.
+Namebase's email-only onboarding no longer exists. Today, comparable privacy is achieved through **self-custody**:
+
+1. Acquire HNS via [Liquidity Spot](https://liquidity.spot), CoinEx, or MEXC ([buy guide](/docs/starting-from-zero/buy-hns))
+2. Import HNS into [Bob Wallet](https://bobwallet.org/download/bob-learnhns) — no identity tied to the wallet itself
+3. Bid on names directly on-chain ([auctions guide](https://skyinclude.com/blog/auctions/))
+
+No custodial registrar is required. Your name is associated with your public key, not a Namebase account email.
+
+## Historical screenshots
+
+The walkthrough images below show Namebase's original private-naming UI (offline since June 2026):
+
+![](https://images.ctfassets.net/v3ez3dek3dk6/2wKi16OwIyw9gFwFJWJizg/4009512c5ea4a713b5f8df955ef5a9f1/image.png?fit=pad&w=720)
+
+![](https://images.ctfassets.net/v3ez3dek3dk6/3lLczfL6b3tEaBgcIsgX90/70f55aa83c35a723917bd23889fd0a58/image.png?fit=pad&w=720)
+
+![](https://images.ctfassets.net/v3ez3dek3dk6/5LsjfUHj0kt9QMpJMSS63G/cb5b2e79a1d5eedaac23d9c293e34c8e/image.png?fit=pad&w=720)
+
+![](https://images.ctfassets.net/v3ez3dek3dk6/1tTLSClCogaSqax1bD0xj9/4d44d1f7955928c9d5b99ebba719b948/image.png?fit=pad&w=720)

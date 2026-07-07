@@ -37,7 +37,7 @@ Handshake decentralizes the Internet by shifting control of the root zone file a
 > **Warning**
 > Namebase shut down in June 2026. The pages under [About Namebase](/docs/about-namebase/vision-and-mission) are kept for historical reference only. For current tooling, use [Bob Wallet](https://bobwallet.org), [Liquidity Spot](https://liquidity.spot), [ShakeDex](/market/), and the guides at [/start/](/start/).
 
-[Namebase](/docs/about-namebase/vision-and-mission) was an onramp for Handshake — a web wallet, exchange, and registrar that made it easy to buy HNS, bid on names, and manage DNS. LearnHNS preserved their documentation when learn.namebase.io went offline.
+[Namebase](/docs/about-namebase/vision-and-mission) was Handshake's primary marketplace and onramp from **2020 to 2026** — a web wallet, exchange, and registrar where most early Namers bought HNS, bid on names, and traded on the secondary market. LearnHNS preserved their documentation when learn.namebase.io went offline.
 
 ## Getting started (2026)
 

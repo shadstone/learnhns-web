@@ -4,55 +4,63 @@ archived: true
 
 # Revenue streams
 
-> **Warning**
-> **Historical only (June 2026):** Namebase shut down and no longer operates. This page is preserved for reference. For current tooling see [/start/](/start/) and [SkyInclude's wind-down explainer](https://skyinclude.com/blog/namebase-wind-down/).
+> **Historical record (2020–2026):** Namebase was a VC-backed, for-profit company built on the non-profit Handshake movement. This page documents how they generated revenue during their operating years. Namebase ceased operations in June 2026.
 
-While Handshake is a non-profit movement, Namebase is a [VC-backed](https://www.namebase.io/about/) for-profit company built on Handshake. Here's how we generate revenue:
+While Handshake itself was a community protocol, Namebase was a commercial platform that charged fees for services Namers relied on for most of the ecosystem's first six years.
 
 ## Exchange
 
-While you may see [other exchanges](https://www.coingecko.com/en/coins/handshake) list HNS, Namebase is the only one fully focused on unlocking Handshake's potential.
+For much of 2020–2026, Namebase was the most Handshake-focused exchange available. Other platforms listed HNS, but Namebase was the primary onramp for newcomers buying coins with BTC.
 
-**Namebase Consumer Exchange** can be used to [purchase HNS with BTC](/docs/starting-from-zero/buy-hns). We charge a 5% exchange fee for providing this liquidity and aim to price HNS with a spread of 1-3% depending on market conditions.
+### Consumer exchange
 
-> **Warning**
-> A common confusion with HNS pricing is when there's a noticeable (10%+) difference between the spot price and the settlement price, which is mostly slippage and not spread. Our home page shows the spot price (when you look up the price of any coin, you’re always shown the spot price), but the actual buy/sell price will differ based on the live offers on the order book. Liquid markets like BTC have deep order books, so the spot price will be close to the price you get for standard order sizes. HNS is generally less liquid, so there’s more slippage. The price changes the more you buy, because there's not an unlimited amount of HNS to buy at the spot price. The best way to avoid slippage is to split up each order into smaller orders and spread them out so the market can adjust between trades. For example, instead of placing one $100k order you may want to place ten $10k purchases spread out over a couple days.
+Namebase operated a **Consumer Exchange** where users could purchase HNS with BTC. They charged approximately a **5% exchange fee** and targeted a **1–3% spread** depending on market conditions.
+
+> **Info**
+> HNS was less liquid than BTC, so large orders often experienced slippage beyond the quoted spot price. Namebase recommended splitting large purchases into smaller orders spread over time.
 
 ### Namebase Pro
 
-[Namebase Pro](https://www.namebase.io/pro) can be used trade HNS for BTC using a traditional order book exchange similar to Binance and Coinbase Pro. (0% maker fee and 2% taker fee).
+**Namebase Pro** was a traditional order-book exchange (similar to Coinbase Pro) with **0% maker** and **2% taker** fees. Due to U.S. cryptocurrency regulations, American users could not access Pro for most of its lifespan.
 
-> **Info**
-> Due to cryptocurrency regulations, Namers within the USA are currently unable to access Namebase Pro.
+## Blockchain transactions
 
-## Blockchain Transactions
+Namebase charged a small transactional fee (approximately **1 HNS**) when submitting Handshake blockchain operations on behalf of custodied users, covering mining fees and operational costs.
 
-Namebase charges a small transactional fee (approximately 1 HNS) when interacting with the Handshake blockchain to cover [mining fees](#mining-fees) and operational costs.
-
-### Mining Fees
-
-Mining fees are paid to the miners who add your transactions to the Handshake blockchain, and do not get paid to Namebase.
+Mining fees themselves were paid to Handshake miners — not to Namebase.
 
 ### Bidding
 
-Namebase's bidding service makes it possible for anyone to participate in [Handshake name auctions](/docs/about-handshake/handshake-auction) without needing to be a developer. We do not currently charge any additional transactional fees for our bidding services.
+Namebase's bidding service let non-developers participate in [Handshake name auctions](/docs/about-handshake/handshake-auction) through a web UI. They automatically revealed bids during the reveal period — a feature many users depended on to avoid losing lockups. No additional bidding fee was charged beyond the standard transaction fee.
 
 ### Renewals
 
-Please see this [Domain Renewals](https://support.namebase.io/en/articles/8019613-domain-renewals) support document for the latest info about Renewal Fees.
+Namebase automatically submitted biennial RENEW (heartbeat) transactions for custodied names so owners did not lose domains by forgetting to renew.
 
 ## Marketplace
 
-The Namebase Marketplace makes it easy to [sell](/docs/starting-from-zero/how-to-use-handshake-names#sell-your-name) or purchase owned Handshake names. We charge a 10% commission fee to sellers that is only collected when your name successfully sells.
+The **Namebase Marketplace** was the dominant secondary market for Handshake TLDs during 2020–2026. Sellers listed names with buy-now prices; Namebase charged a **10% commission** collected only on successful sales. Transfers settled on-chain rather than through manual escrow.
+
+Today, secondary trading continues via [ShakeDex](https://market.learnhns.com) and Bob Wallet integrations.
 
 ## Namebase Registry
 
-The [Namebase Registry](https://www.namebase.io/registry/) is a service that enables you to sell 2nd-level domains on your Handshake TLD. We created an EPP-based registry platform that is compatible with all existing domain registrars, making it easy to plug directly into their existing distribution channels. We essentially handle all of the logistics regarding the sale of your domains, while you just handle the actual pricing of your domains and your marketing. The Namebase Registry charges only $1 per registration year for SLDs while the rest of the proceeds go directly to the TLD owner.
+The **Namebase Registry** enabled TLD owners to sell second-level domains (SLDs) through an EPP-compatible platform that plugged into traditional domain registrar distribution channels. Namebase charged **$1 per registration year** for SLDs; the remainder went to the TLD owner.
 
-[Learn more about the registry here](https://support.namebase.io/en/collections/3733627-namebase-registry).
+The registry infrastructure wound down with Namebase in June 2026. Alternatives like [Headless Domains](https://my.host.limo) and [HNS.ID](https://hns.id/) serve overlapping needs today.
 
 ## HNS.ID
 
-[HNS.ID](https://hns.id/) is a service that enabled you to sell decentralized 2nd-level domains on your Handshake TLD using the Optimism Layer 2 Ethereum network. We charge 5% of the registration fees for our [Handshake Development Fund](https://docs.hns.id/faq#what-is-the-handshake-dev-fund) and other related purposes.
+**HNS.ID** was a Namebase-affiliated service that let TLD owners sell decentralized SLDs as NFTs on the Optimism L2. Namebase allocated 5% of registration fees to a Handshake Development Fund.
 
-[Learn more about HNS.ID here](https://support.namebase.io/en/collections/8666069-hns-id).
+HNS.ID continues to operate independently of Namebase.
+
+## What replaced these services
+
+| Former Namebase service | 2026 alternative |
+| ----------------------- | ---------------- |
+| BTC → HNS onramp | [Liquidity Spot](https://liquidity.spot), CoinEx, MEXC |
+| Web wallet + auctions | [Bob Wallet](https://bobwallet.org) |
+| Secondary marketplace | [market.learnhns.com](https://market.learnhns.com) |
+| Learn docs | [/docs/](/docs/) on LearnHNS |
+| Registry / SLD sales | Headless Domains, HNS.ID |

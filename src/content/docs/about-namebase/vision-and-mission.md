@@ -4,43 +4,48 @@ archived: true
 
 # Vision and mission
 
-> **Warning**
-> **Historical only (June 2026):** Namebase shut down and no longer operates. This page is preserved for reference. For current tooling see [/start/](/start/) and [SkyInclude's wind-down explainer](https://skyinclude.com/blog/namebase-wind-down/).
+> **Historical record (2020–2026):** Namebase was the primary onramp and marketplace for Handshake from launch through its wind-down in June 2026. This page preserves their original vision and mission statement. For current tooling, see [/start/](/start/) or [SkyInclude's wind-down explainer](https://skyinclude.com/blog/namebase-wind-down/).
 
-Namebase exists to enable an internet that is owned by individuals and not a handful of organizations like ICANN that control the DNS today.
+Namebase existed to enable an internet owned by individuals — not a handful of organizations like ICANN that controlled the DNS.
 
-Namebase is a fundamentally new experience though it can feel familiar in some ways. For example, it can operate like GoDaddy while letting you transact like Coinbase. You can basically buy and manage domains, control your funds, and trade on one of our exchanges — all in one platform.
+For most of Handshake's early commercial era, Namebase was the main place newcomers landed. It combined domain registration, wallet custody, HNS trading, and a secondary marketplace in one platform — often described as "GoDaddy meets Coinbase" for the decentralized naming protocol.
 
-Our mission boils down to a desire for a better Internet. The Internet has become the backbone of society. At its inception the Internet was open and global, but today that is no longer the case. All the recent events affecting the Internet show a trend of the Internet becoming worse over time, and it’s clear that the Internet 10 years from now will be less open, less free, less secure, and less private. However, there is still hope. Technological developments in the past decade have created an opportunity to reverse the trend such that the Internet 10 years from now is more open, free, secure, and private.
+## The vision
 
-## The Vision <a href="#the-vision" id="the-vision"></a>
+Namebase believed blockchain was a technology for mass empowerment. Bitcoin offered money without masters; Handshake offered domain names resistant to censorship and seizure. Namebase positioned itself as the company that would make that protocol usable for everyday people — not just developers running full nodes.
 
-Blockchain is fundamentally a technology for mass empowerment. Bitcoin gives you money without masters. Handshake allows anyone to own a domain name that is resistant to censorship and seizure, without revealing their identity. Others (i.e. Siacoin, Filecoin, IPFS) are working on separate layers of the stack, but naming is the first layer that must be decentralized in order to build a better Internet. These protocols will work together such that end-users will be able to reliably visit websites without being blocked at any layer, and domain owners will truly own their own domain names — by controlling their private key they will be able to register domain names privately with confidence that their name can’t be censored, seized, or tampered with. Handshake will create a naming system that the Internet can rely on, without gatekeepers or overseers getting in people’s way.&#x20;
+Their stated long-term vision: a naming layer that the internet could rely on without gatekeepers, where domain owners controlled their fate through private keys rather than registrar rental agreements.
 
-Once this vision is realized, it won’t just be internet infrastructure that has changed. Internet users will change as well. The organizations at the top of the DNS hierarchy will have been disintermediated and individuals will control their own fate on the Internet. We suspect that once people have a taste of this ownership, they will never let it go.
+## The mission
 
-## The Mission <a href="#the-mission" id="the-mission"></a>
+Namebase's mission was to enable freedom and safety on the Internet by making it easy for anyone, anywhere, to own, manage, and access a Handshake domain.
 
-Our mission is to enable the vision described above. Specifically, the mission of Namebase is to enable freedom and safety on the Internet.&#x20;
+In practice, that meant:
 
-> The mission of Namebase is to enable freedom and safety on the Internet.
+* A web wallet and registrar most Namers used between **2020 and 2026**
+* Automatic bid reveals and renewals for custodied names
+* A BTC → HNS onramp when few exchanges listed Handshake
+* An open marketplace for instant on-chain name transfers
+* Educational content at **learn.namebase.io** (now preserved at [/docs/](/docs/))
 
-We will do this by making it really easy for anyone around the world to own, manage, and access a Handshake domain. Websites and content on Handshake domains cannot be taken down by anyone other than the owner. DNS settings are saved on-chain making them impossible to hack, and anyone around the world with an internet connection can access these domains. If we execute effectively along this mission, then we can be confident that we’ll have changed the Internet for the better.
+## The strategy
 
-## The Strategy <a href="#the-strategy" id="the-strategy"></a>
+Namebase pursued three strategic pillars during its operating years:
 
-Our strategy for accomplishing this mission is centered around enabling access to Handshake and supporting Handshake adoption.
+### Empower every type of user
 
-### Empower every type of user to use Handshake
+Handshake attracted domain investors, crypto enthusiasts, developers, and privacy-conscious registrants. Namebase navigated regulatory requirements (including KYC tiers) while also offering paths for users who wanted names without full financial verification — see [Private naming](/docs/about-namebase/private-naming).
 
-Handshake provides different value props for different user bases. Domain owners will register Handshake names and end-users will resolve them. Many crypto enthusiasts will support Handshake for ideological reasons, and speculators will speculate on both Handshake coins (HNS) and domain names. Everyone plays an important role in the Handshake ecosystem, and we will navigate regulatory hurdles so that we can serve all user types, even users who wish to remain anonymous. We will also utilize technology like multisig wallets (in addition to Handshake itself) to protect our customers from bad actors, governments, and even ourselves.
+### Make Handshake easier than traditional domains
 
-### Make it easier to use Handshake domains than traditional domains
+Namebase aimed to reduce onboarding friction below that of ICANN registrars. They hosted DNS, managed auctions, and operated a secondary market that settled on-chain rather than through month-long escrow transfers common in legacy domain sales.
 
-Our domain registrar and HNS onramp enables anyone to start using Handshake with near-zero friction. I’m confident that our crypto onboarding experience at launch will be unrivaled in the space. Past launch, we will continue simplifying the onboarding and domain registration experience such that friction trends to zero over time, surpassing even the traditional domain registration experience because we don’t need to deal with legacy infrastructure from the existing system.
+### Support ecosystem adoption
 
-Even though it’s 2020, the secondary market for traditional domain names is still slow and manual. Secondary sales are fragmented and transfers can take up to a month to complete in escrow. Handshake provides an opportunity to change that by avoiding the existing infrastructure. Namebase will change the way domains are bought and sold with an open marketplace that transfers domain names immediately on-chain.&#x20;
+Namebase invested in community growth, browser integration efforts, and partnerships (including projects like Pi-hole and educational outreach). They maintained **learn.namebase.io** as the canonical beginner documentation for the protocol during this period.
 
-### Support Handshake adoption amongst all stakeholders
+## After Namebase
 
-Handshake is still in its earliest stages, so it’s important for all ecosystem participants to support adoption. We will support Handshake on marketing and community growth. We will also work on integration efforts with browsers and other relevant projects (i.e. Pi-hole) to bring Handshake to even more users. If you’re interested in joining forces on these efforts, join the [Namer Community](https://community.namebase.io) and help us enable freedom and safety on the Internet!
+Namebase wound down in **June 2026**. The Handshake protocol continues independently of any single company. The LearnHNS community preserved Namebase's documentation and the ecosystem moved to self-custody tools like [Bob Wallet](https://bobwallet.org), [Liquidity Spot](https://liquidity.spot), and [ShakeDex](https://market.learnhns.com).
+
+For a detailed account of the shutdown and what it meant for name owners, see [SkyInclude's wind-down update](https://skyinclude.com/blog/namebase-wind-down/).
