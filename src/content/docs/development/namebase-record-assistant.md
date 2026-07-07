@@ -1,3 +1,7 @@
+---
+archived: true
+---
+
 # Namebase Record Assistant
 
 > **Warning**

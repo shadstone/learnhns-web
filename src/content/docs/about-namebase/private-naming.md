@@ -1,3 +1,7 @@
+---
+archived: true
+---
+
 # Private naming
 
 > **Warning**

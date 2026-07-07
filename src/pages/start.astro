@@ -60,6 +60,7 @@ const steps = [
     num: 6,
     title: 'Host Handshake Sites',
     body: 'Sign up for Host.limo to use various Handshake hosting options, from free Headlessdomains hosting to Pages to Handout.',
+    tutorial: '/docs/starting-from-zero/how-to-create-a-handshake-website',
     actions: [
       { href: 'https://my.host.limo', label: 'Visit Host.limo', primary: true },
       { href: '/handout/', label: 'Make Your Own Handout Server' },
@@ -133,7 +134,12 @@ const steps = [
                 </a>
               ))}
               {step.tutorial && (
-                <a href={step.tutorial} target="_blank" rel="noopener" class="btn btn-tutorial">
+                <a
+                  href={step.tutorial}
+                  target={step.tutorial.startsWith('http') ? '_blank' : undefined}
+                  rel={step.tutorial.startsWith('http') ? 'noopener' : undefined}
+                  class="btn btn-tutorial"
+                >
                   Read Tutorial &rarr;
                 </a>
               )}
@@ -161,7 +167,12 @@ const steps = [
                   </a>
                 ))}
                 {step.tutorial && (
-                  <a href={step.tutorial} target="_blank" rel="noopener" class="btn btn-tutorial">
+                  <a
+                    href={step.tutorial}
+                    target={step.tutorial.startsWith('http') ? '_blank' : undefined}
+                    rel={step.tutorial.startsWith('http') ? 'noopener' : undefined}
+                    class="btn btn-tutorial"
+                  >
                     Read Tutorial &rarr;
                   </a>
                 )}

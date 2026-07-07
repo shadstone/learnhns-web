@@ -13,6 +13,17 @@ To "login" or interact with LearnHNS applications (such as the LearnHNS ShakeDex
 3. **Read-Only Access:** For read-only actions (checking name availability, exploring DNS records), agents should query public Handshake RPC nodes or block explorers (e.g., HNSFans, ShakeShift) without needing authentication.
 4. **Transactional Access:** For transactional actions (e.g., buying/selling names on ShakeDex, transferring HNS), the AI agent must prepare the transaction and prompt the user. The user must explicitly sign and approve the transaction via their Bob Wallet or LearnHNS Chrome extension.
 
+## Key Resources
+- **Documentation Archive (former learn.namebase.io):** \`https://learnhns.com/docs/\`
+- **Getting Started:** \`https://learnhns.com/start/\`
+- **Services Directory:** \`https://learnhns.com/services/\`
+
+## HNS Exchanges (2026)
+- **Liquidity Spot (P2P):** \`https://liquidity.spot\`
+- **CoinEx:** \`https://www.coinex.com\`
+- **MEXC:** \`https://www.mexc.com\`
+- Namebase and Gate.io no longer list HNS.
+
 ## Integration Endpoints
 - **Web Marketplace:** \`https://market.learnhns.com\`
 - **Wallet Documentation:** \`https://bobwallet.org/docs/bob-learnhns-testing-party/\`

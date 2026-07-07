@@ -1,3 +1,7 @@
+---
+archived: true
+---
+
 # Vision and mission
 
 > **Warning**

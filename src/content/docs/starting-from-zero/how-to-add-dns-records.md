@@ -97,6 +97,9 @@ These records are the same as ICANN domains. They are provided by the nameserver
 
 Open your domain in Bob Wallet's DNS / records panel and add records using the formats described above.
 
+> **Warning**
+> Screenshots below show the legacy Namebase DNS manager UI (offline June 2026). Record types and field values still apply — use Bob Wallet's equivalent fields.
+
 ### On-Chain Records
 
 #### GLUE4

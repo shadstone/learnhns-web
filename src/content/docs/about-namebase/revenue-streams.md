@@ -1,3 +1,7 @@
+---
+archived: true
+---
+
 # Revenue streams
 
 > **Warning**

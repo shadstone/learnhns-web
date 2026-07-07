@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DocsArchiveNotice from '../../components/DocsArchiveNotice.astro';
+import { isArchivedDocId } from '../../lib/rehype-dead-links.mjs';
 
 export async function getStaticPaths() {
   const docsEntries = await getCollection('docs');
@@ -16,6 +17,9 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 
+const archived = entry.data.archived ?? isArchivedDocId(entry.id);
+const mirroredFrom = entry.data.mirroredFrom;
+
 // Generate the GitHub edit URL
 const editUrl = `https://github.com/shadstoneofficial/learnhns-web/edit/main/src/content/docs/${entry.id}.md`;
 ---
@@ -26,7 +30,7 @@ const editUrl = `https://github.com/shadstoneofficial/learnhns-web/edit/main/src
 >
   <div class="page-content" style="max-width: 800px; margin: 2rem auto; padding: 2rem; background: var(--surface); border: 1px solid var(--glass-border); border-radius: 12px;">
     
-    <DocsArchiveNotice editUrl={editUrl} />
+    <DocsArchiveNotice editUrl={editUrl} archived={archived} mirroredFrom={mirroredFrom} />
 
     <article class="markdown-body">
       <Content />
@@ -70,6 +74,18 @@ const editUrl = `https://github.com/shadstoneofficial/learnhns-web/edit/main/src
   }
   .markdown-body a:hover {
     color: var(--hns-violet-deep);
+  }
+  .markdown-body a.dead-link {
+    text-decoration: line-through;
+    text-decoration-color: rgba(180, 120, 0, 0.7);
+    opacity: 0.75;
+  }
+  .markdown-body a.dead-link::after {
+    content: ' (offline)';
+    font-size: 0.75em;
+    font-weight: 600;
+    text-decoration: none;
+    color: rgba(180, 120, 0, 0.9);
   }
   .markdown-body pre {
     background: rgba(0,0,0,0.2);

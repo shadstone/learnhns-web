@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DocsArchiveNotice from '../../components/DocsArchiveNotice.astro';
+import { isArchivedDocId } from '../../lib/rehype-dead-links.mjs';
 
 // Fetch all markdown files from the "docs" collection
 const docsEntries = await getCollection('docs');
@@ -85,10 +86,12 @@ const categories = Object.keys(groupedDocs).sort((a, b) => {
             {groupedDocs[category].map(entry => {
               // Special case: map 'readme' directly to '/docs/'
               const url = entry.id === 'readme' ? '/docs/' : `/docs/${entry.id}`;
+              const archived = entry.data.archived ?? isArchivedDocId(entry.id);
               return (
                 <li>
-                  <a href={url} class="toc-link">
-                    {formatTitle(entry.id)}
+                  <a href={url} class:list={['toc-link', { 'toc-link--archived': archived }]}>
+                    <span>{formatTitle(entry.id)}</span>
+                    {archived && <span class="toc-archived-badge">Historical</span>}
                   </a>
                 </li>
               );
@@ -132,5 +135,25 @@ const categories = Object.keys(groupedDocs).sort((a, b) => {
 
   .toc-link:hover::after {
     opacity: 1;
+  }
+
+  .toc-link--archived {
+    opacity: 0.85;
+  }
+
+  .toc-archived-badge {
+    margin-left: auto;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(180, 120, 0, 0.95);
+    padding: 0.15rem 0.45rem;
+    border: 1px solid rgba(180, 120, 0, 0.35);
+    border-radius: 4px;
+  }
+
+  .toc-link--archived::after {
+    display: none;
   }
 </style>
