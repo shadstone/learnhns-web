@@ -3,42 +3,44 @@
 In order to acquire Handshake names, you'll need to first purchase [Handshake coins (HNS)](/docs/about-handshake/handshake-coin).
 
 > **Info**
-> You will need a Namebase account to purchase HNS through Namebase.io. If you have not done so, please register [here](https://www.namebase.io/register).
+> **Namebase is closed (June 2026).** The sections below describe current ways to acquire HNS. Tutorial: [Liquidity Spot on SkyInclude](https://skyinclude.com/blog/liquidity-spot/).
 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/XJp1WqADrmE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-This video covers how to purchase HNS with BTC
+## Option 1: Liquidity Spot (P2P, BTC ↔ HNS)
 
+[Liquidity Spot](https://liquidity.spot) is a decentralized person-to-person trading platform built for the Handshake ecosystem. It supports experimental atomic swaps between HNS and Bitcoin — useful when centralized exchanges have thin liquidity.
 
-## Buy HNS with BTC
+1. Download [Bob Wallet](https://bobwallet.org/download/bob-learnhns) and create a wallet.
+2. Visit [liquidity.spot](https://liquidity.spot) and browse open offers.
+3. Complete a trade and confirm HNS arrives in your Bob Wallet.
 
-Anyone can purchase HNS with BTC on Namebase, but you will have to first purchase Bitcoin on another platform to then transfer to your Namebase account. *While there are numerous ways to purchase BTC, we show you 2 methods below — using Coinbase and Cash App.*
+See the full walkthrough at [skyinclude.com/blog/liquidity-spot/](https://skyinclude.com/blog/liquidity-spot/).
 
-> **Info**
-> The price your purchase settles at may be different than the current price because we confirm BTC transactions after 3 [blocks ](/docs/about-handshake/about-handshake#block-time)(\~30 minutes). Additionally, large order sizes may incur [price slippage](/docs/about-namebase/revenue-streams#exchange) that affects the final overall settlement price, depending on the liquidity available on the market. Check your [dashboard](https://www.namebase.io/dashboard) periodically to confirm your HNS reception.
+## Option 2: Centralized exchanges
 
-### Coinbase
+As of mid-2026, these exchanges still list HNS:
 
-If you haven’t already, first set up your [Coinbase](https://www.coinbase.com/) account. Once you’re set up, visit <https://www.coinbase.com/price/bitcoin> and buy however much Bitcoin you want to transfer to Namebase to convert into HNS. In your Coinbase Portfolio, select Bitcoin and its "Receive" tab, and then copy the receiving address of your Coinbase wallet.
+| Exchange | URL |
+| -------- | --- |
+| CoinEx | <https://www.coinex.com/> |
+| MEXC | <https://www.mexc.com/> |
 
+> **Warning**
+> Gate.io and Namebase no longer list HNS. Always verify an exchange still supports HNS before depositing funds.
 
+### General CEX workflow
 
-Go to <https://www.namebase.io/buy> and enter roughly the amount of BTC you want to convert to HNS in the Step 1 section, paste the Coinbase receiving address in the Step 2 section, and then copy the address produced in Step 4 — this is your Namebase account’s receiving address where you will send the BTC in your Coinbase account to. Go back to Bitcoin in your Coinbase Portfolio and this time select the "Send" tab to paste your Namebase account’s receiving address into the “Recipient” field.
+1. Create an account on CoinEx or MEXC and complete any required verification.
+2. Deposit funds (USDT, BTC, or another supported asset).
+3. Trade for HNS on the spot market.
+4. **Withdraw HNS to your own wallet** — we recommend [Bob Wallet](https://bobwallet.org/download/bob-learnhns). Never leave large balances on an exchange long-term.
 
+## Option 3: OTC / community
 
+The [Handshake Telegram community](https://t.me/handshake_hns) sometimes facilitates over-the-counter trades. Exercise caution, use escrow when possible, and prefer established P2P platforms like Liquidity Spot when you can.
 
-### Cash App
+## Historical: Buy HNS with BTC on Namebase
 
+> **Warning**
+> The content below is preserved from the original Namebase documentation. Namebase.io is offline and these steps no longer work.
 
-
-### Walkthrough
-
-
-1. If you haven’t already, first set up your Cash App account. Once you’re set up, go to the "Investing" section of your Cash App and buy however much Bitcoin you want to transfer to Namebase to convert into HNS\_.\_
-2. Still in the "Investing" section, select the "send" icon then "Deposit Bitcoin", and copy the address of your Cash App wallet address.
-3. Go to <https://www.namebase.io/buy> and enter roughly the amount of BTC you want to convert to HNS in the Step 1 section, and paste the Cash App wallet address in the Step 2 section.
-4. Copy the address produced in Step 4 — this is your Namebase account’s receiving address where you will send the BTC in your Cash App account to.
-5. Go back to the "send" icon in the Investing section and this time select "Send Bitcoin", and paste your Namebase account’s receiving address into the “Recipient” field.
-   
-
-
-### Pictures
+Namebase previously let users send BTC to convert into HNS credits. That service closed in June 2026. If you still have assets on Namebase, see [SkyInclude's wind-down guide](https://skyinclude.com/blog/namebase-wind-down/) for withdrawal instructions that were published before shutdown.

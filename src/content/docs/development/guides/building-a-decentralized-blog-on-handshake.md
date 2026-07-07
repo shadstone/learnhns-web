@@ -42,7 +42,7 @@ When using Skynet, each time you redeploy your application, you’ll be returned
 
 This can present issues for those looking for a site that's truly censorship-resistant. The first way users interact with any application is via its domain. Handshake allows you to obtain your own Top Level Domain that no one can block access to.
 
-Before continuing, you’ll need a Handshake domain. [Namebase](https://namebase.io) makes it easy to purchase your own Handshake domain.
+Before continuing, you’ll need a Handshake domain. Acquire one via [Bob Wallet](https://bobwallet.org/download/bob-learnhns) auctions or [ShakeDex](https://market.learnhns.com) — see [Get Handshake names](/docs/starting-from-zero/how-to-get-a-name).
 
 ### Update domain records
 
@@ -60,9 +60,7 @@ When working with Handshake domains, domain records operate similarly to traditi
 
 #### Setting the TXT record
 
-1. Navigate to the Namebase domain manager for the domain you’re putting your project on at: `https://namebase.io/domain-manager/YOUR_DOMAIN`
-2. Scroll down to the “Namebase nameserver DNS records” section, and click, “Add new record”
-3. Select “TXT” from the dropdown, and input
+In [Bob Wallet](https://bobwallet.org/download/bob-learnhns) (or your self-custody DNS tool), add a TXT record with:
 
 | Parameter  | Value                                                                                                                                                     |
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -76,22 +74,23 @@ You're done with Part 1! The good news is: any computer that makes a request to 
 
 Because most computers aren’t currently setup to natively access files on Skynet, they don't know how to find your app using just a Skylink. To fix this, we’ll need to set either an `ALIAS` or `CNAME` record pointing to the gateway that computers can use to access your application.
 
-Namebase currently hosts a public gateway for anyone to use at `sia.namebase.io.`. However, keep in mind this is experimental and won’t be thoroughly maintained. If you want to create a more reliable, secure site, hosting your own gateway is highly recommended.
+> **Warning**
+> Namebase's public Skynet gateway (`sia.namebase.io`) is offline (June 2026). Use a public Skynet portal (e.g. `siasky.net`) or host your own gateway.
 
 If you want to create a site that is truly decentralized, hosting your own gateway is the next step to complete decentralization.
 
-#### **Using Namebase’s public Skynet gateway**
+#### **Using a public Skynet gateway**
 
-If you're **setting content on the bare TLD**, create an ALIAS type record under the "Namebase nameserver DNS records" section and set:
+If you're **setting content on the bare TLD**, create an ALIAS type record and set:
 
 1. Name: @
-2. Value/Data: `sia.namebase.io.` (note the trailing period)
+2. Value/Data: your Skynet portal hostname (e.g. `siasky.net.` — note the trailing period)
 3. TTL: 60 mins
 
 If you're **setting content on a subdomain**, start by double-checking that the TXT record name you set above is of the format, `_contenthash.YOUR_SUBDOMAIN`. Then create a CNAME type record with the following values:
 
 1. Name: `YOUR_SUBDOMAIN`
-2. Value/Data: `sia.namebase.io.` (again, note the trailing period)
+2. Value/Data: your Skynet portal hostname (e.g. `siasky.net.` — note the trailing period)
 3. TTL: 60 mins
 
 ## Conclusion

@@ -1,5 +1,8 @@
 # Security
 
+> **Warning**
+> **Historical only (June 2026):** Namebase shut down and no longer operates. This page is preserved for reference. For current tooling see [/start/](/start/) and [SkyInclude's wind-down explainer](https://skyinclude.com/blog/namebase-wind-down/).
+
 ### Coin storage
 
 The majority of customer funds are stored offline in "cold storage." Offline storage provides an important security measure against theft or loss because it prevents malicious actors from being able to access customer funds through the internet.

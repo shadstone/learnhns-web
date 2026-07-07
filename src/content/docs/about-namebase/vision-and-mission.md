@@ -1,6 +1,7 @@
 # Vision and mission
 
-
+> **Warning**
+> **Historical only (June 2026):** Namebase shut down and no longer operates. This page is preserved for reference. For current tooling see [/start/](/start/) and [SkyInclude's wind-down explainer](https://skyinclude.com/blog/namebase-wind-down/).
 
 Namebase exists to enable an internet that is owned by individuals and not a handful of organizations like ICANN that control the DNS today.
 

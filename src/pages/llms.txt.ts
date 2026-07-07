@@ -43,7 +43,7 @@ LearnHNS is your gateway to exploring the future of decentralized domains. We cu
 - Services & Wallets: ${SITE}/services/
 - How DNS Works: ${SITE}/dns/
 - Blog: ${SITE}/blog/
-- Documentation: ${SITE}/docs/
+- Documentation Archive (former learn.namebase.io): ${SITE}/docs/
 - Privacy Policy: ${SITE}/privacy/
 
 ## Getting Started with Handshake
@@ -54,7 +54,7 @@ LearnHNS is your gateway to exploring the future of decentralized domains. We cu
    - LearnHNS 2026 Version: https://bobwallet.org/extension/learnhns-wallet/
    - 2024 Version: https://bobwallet.org/extension/shake-wallet/
 3. Trade on ShakeDex: ${SITE}/market/
-4. Buy/Sell HNS at Liquidity Spot: https://liquidity.spot
+4. Buy/Sell HNS: Liquidity Spot (https://liquidity.spot), CoinEx (https://www.coinex.com), MEXC (https://www.mexc.com)
 5. Participate: https://github.com/handshake-org
 
 ## What is Handshake?

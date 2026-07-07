@@ -7,7 +7,7 @@ const description = "A complete directory of Handshake (HNS) services including 
 <BaseLayout
   title="HNS Services - Wallets, Exchanges, and More"
   description={description}
-  keywords="HNS wallets, Bob Wallet, Namebase, ShakeStation, HNS Ledger, HNS mining pool, HNS exchange, HNS resolver, NextDNS, HDNS"
+  keywords="HNS wallets, Bob Wallet, ShakeStation, HNS Ledger, HNS mining pool, HNS exchange, HNS resolver, NextDNS, HDNS"
   schema={[
     collectionPageSchema({ title: 'Handshake Services Directory', description, url: abs('/services/') }),
     breadcrumbSchema([
@@ -38,10 +38,11 @@ const description = "A complete directory of Handshake (HNS) services including 
           <p>Desktop wallet for managing HNS coins and names.</p>
           <span class="link-tile-cta">Visit website &rarr;</span>
         </a>
-        <a href="https://www.namebase.io" target="_blank" rel="noopener" class="link-tile">
+        <a href="#" title="Service Closed" onclick="event.preventDefault();" class="link-tile link-tile--offline">
           <h3>Namebase</h3>
-          <p>Web-based wallet and name management platform.</p>
-          <span class="link-tile-cta">Visit website &rarr;</span>
+          <p>Web-based wallet and name management platform. Closed June 2026.</p>
+          <span class="link-tile-cta">Service closed</span>
+          <p class="link-tile-original">Original URL: https://www.namebase.io</p>
         </a>
         <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">
           <h3>ShakeStation</h3>
@@ -60,16 +61,32 @@ const description = "A complete directory of Handshake (HNS) services including 
     <section class="page-section">
       <div class="section-label">Exchanges</div>
       <div class="tile-grid tile-grid--3">
-        <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">
+        <a href="https://liquidity.spot" target="_blank" rel="noopener" class="link-tile">
+          <h3>Liquidity Spot</h3>
+          <p>P2P HNS trading and experimental BTC atomic swaps.</p>
+          <span class="link-tile-cta">Trade now &rarr;</span>
+        </a>
+        <a href="https://www.coinex.com" target="_blank" rel="noopener" class="link-tile">
+          <h3>CoinEx</h3>
+          <p>Centralized exchange with HNS spot trading.</p>
+          <span class="link-tile-cta">Trade now &rarr;</span>
+        </a>
+        <a href="https://www.mexc.com" target="_blank" rel="noopener" class="link-tile">
+          <h3>MEXC</h3>
+          <p>Centralized exchange with HNS spot trading.</p>
+          <span class="link-tile-cta">Trade now &rarr;</span>
+        </a>
+        <a href="#" title="Service Closed" onclick="event.preventDefault();" class="link-tile link-tile--offline">
           <h3>Namebase Exchange</h3>
-          <p>Buy, sell, and trade HNS.</p>
-          <span class="link-tile-cta">Trade now (Offline)</span>
+          <p>Former HNS onramp. Closed June 2026.</p>
+          <span class="link-tile-cta">Service closed</span>
           <p class="link-tile-original">Original URL: https://www.namebase.io/exchange</p>
         </a>
-        <a href="https://gate.io" target="_blank" rel="noopener" class="link-tile">
+        <a href="#" title="Delisted" onclick="event.preventDefault();" class="link-tile link-tile--offline">
           <h3>Gate.io</h3>
-          <p>HNS trading pairs available.</p>
-          <span class="link-tile-cta">Trade now &rarr;</span>
+          <p>HNS no longer listed.</p>
+          <span class="link-tile-cta">Delisted</span>
+          <p class="link-tile-original">Original URL: https://gate.io</p>
         </a>
       </div>
     </section>

@@ -14,9 +14,9 @@ However, anybody can:
 
 If a blog wants to add support for logging in with Handshake, then that blog can run their own OIDC authorization server that implements the protocol specified in this document. There's no need to trust any centralized parties for authentication. The blog only needs to trust Handshake.
 
-With this being said, for convenience, that blog could use a third-party Handshake authorization server, provided they trust the organization running it. Namebase runs an authorization server for Namer News, and developers that are interested in using it in their applications can use it once it is open to the public.
+With this being said, for convenience, that blog could use a third-party Handshake authorization server, provided they trust the organization running it. Namebase previously ran an authorization server for Namer News — both services are offline as of June 2026.
 
-Alternatively, developers can host their own authorization server.
+Developers should host their own authorization server using the open-source repos linked below.
 
 Now let's go through how the specific Namer News login implementation works in detail. We hope this can act as a guide for others to implement their own authorization flows.
 

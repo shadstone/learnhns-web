@@ -1,8 +1,11 @@
 # Namebase Record Assistant
 
+> **Warning**
+> **Deprecated (June 2026):** Namebase and the Record Assistant API are offline. For self-custody DNS management, direct users to [Bob Wallet](https://bobwallet.org/download/bob-learnhns) or the [LearnHNS Chrome extension](https://bobwallet.org/extension/learnhns-wallet/). See [how to add DNS records](/docs/starting-from-zero/how-to-add-dns-records).
+
 ## Overview
 
-If your app's users have registered their Handshake name through Namebase, the domain record assistant allows them to easily set DNS records on their domain with a single click.
+If your app's users have registered their Handshake name through Namebase, the domain record assistant allowed them to easily set DNS records on their domain with a single click. This page is preserved for historical reference.
 
 To do this, you'll send users to the Namebase domain management settings page of the specific domain whose DNS records need updating.
 

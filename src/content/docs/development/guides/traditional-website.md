@@ -4,7 +4,7 @@ With Handshake, you can use both your root name (i.e. [nb/](https://nb.hns.to)) 
 
 Conceptually all you have to do is set resource records like A records and CNAME records just like you would with a traditional domain. However, root resource records are [limited](https://hsd-dev.org/guides/resource-records.html), so you need to set an NS record on your root name pointing to a nameserver in order to set A and CNAME records.
 
-If you register your name on Namebase, we configure this automatically for you and provide a free nameserver you can use as well.
+With [Bob Wallet](https://bobwallet.org/download/bob-learnhns) or self-custody, you set NS and glue records yourself — see [how to add DNS records](/docs/starting-from-zero/how-to-add-dns-records).
 
 
 
@@ -22,6 +22,6 @@ If a hosting provider doesn't support Handshake, it's most likely because they h
 
 ## HTTPS
 
-One of Handshake's primary goals is to replace CAs with a more secure blockchain-based root of trust. [This article](https://www.namebase.io/blog/meet-handshake-decentralizing-dns-to-improve-the-security-of-the-internet/) provides an overview of the concept, and community members have documented how to set up HTTPS websites using Handshake in our [Learning Center](/docs/starting-from-zero/how-to-create-a-handshake-website).
+One of Handshake's primary goals is to replace CAs with a more secure blockchain-based root of trust. See [About Handshake](/docs/about-handshake/about-handshake#a-more-secure-internet) for an overview, and community members have documented how to set up HTTPS websites in our [Create Handshake websites](/docs/starting-from-zero/how-to-create-a-handshake-website) guide.
 
-Note that end-user configuration is necessary to visit Handshake HTTPs sites until browsers support it natively. A client app can be created to make this configuration easier in the meantime but such an app doesn't currently exist (if you're interested in making this let the [community](https://community.namebase.io/) know!).
+Note that end-user configuration is necessary to visit Handshake HTTPS sites until browsers support it natively. The [SkyInclude Browser](https://skyinclude.com/browser) and [HNSDoH](https://welcome.hnsdoh.com/) resolver make this easier today. Join the [Handshake Telegram community](https://t.me/handshake_hns) if you want to help improve tooling.

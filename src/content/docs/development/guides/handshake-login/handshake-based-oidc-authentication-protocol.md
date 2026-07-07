@@ -1,5 +1,8 @@
 # Handshake-based OIDC Authentication Protocol
 
+> **Info**
+> Namebase-hosted login services (id.namebase.io, news.namebase.io) are offline as of June 2026. The protocol and open-source repos below remain valid for self-hosted implementations.
+
 ## Background and Motivation
 
 Handshake secures DNS by using a blockchain as the root-of-trust. With a trusted DNS, you can use domain names to attach many different types of information to a name. In this document, we'll describe how you can pin public keys to your Handshake names and subsequently use those keys to login to websites.

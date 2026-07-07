@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import DocsArchiveNotice from '../../components/DocsArchiveNotice.astro';
 
 // Fetch all markdown files from the "docs" collection
 const docsEntries = await getCollection('docs');
@@ -34,10 +35,12 @@ const groupedDocs = docsEntries.reduce((acc, entry) => {
 
   // Use the directory name as the category
   const categorySlug = parts[0];
-  const categoryName = categorySlug
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+  const categoryName = categorySlug === 'about-namebase'
+    ? 'About Namebase (Historical)'
+    : categorySlug
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
 
   if (!acc[categoryName]) {
     acc[categoryName] = [];
@@ -57,16 +60,18 @@ const categories = Object.keys(groupedDocs).sort((a, b) => {
 
 <BaseLayout 
   title="Documentation Table of Contents | LearnHNS" 
-  description="Browse all Handshake and Namebase documentation preserved by the LearnHNS community."
+  description="Browse all Handshake documentation preserved by the LearnHNS community — the former learn.namebase.io archive."
 >
   <div class="page-content" style="max-width: 800px; margin: 2rem auto; padding: 2rem; background: var(--surface); border: 1px solid var(--glass-border); border-radius: 12px;">
-    
+
+    <DocsArchiveNotice />
+
     <header style="margin-bottom: 3rem; text-align: center;">
       <h1 style="font-family: var(--font-serif); font-size: 2.5rem; color: var(--text-primary); margin-bottom: 1rem;">
         Documentation Archive
       </h1>
       <p style="color: var(--text-secondary); line-height: 1.6; max-width: 600px; margin: 0 auto;">
-        Welcome to the LearnHNS community documentation archive. Below you will find a complete index of all preserved Handshake and Namebase resources.
+        The preserved learn.namebase.io GitBook, maintained by the LearnHNS community. For current setup steps, start at <a href="/start/" style="color: var(--hns-violet); font-weight: 600;">/start/</a>.
       </p>
     </header>
 

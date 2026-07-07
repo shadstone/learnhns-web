@@ -1,5 +1,8 @@
 # Verifying
 
+> **Warning**
+> **Historical only (June 2026):** Namebase shut down and no longer operates. This page is preserved for reference. For current tooling see [/start/](/start/) and [SkyInclude's wind-down explainer](https://skyinclude.com/blog/namebase-wind-down/).
+
 Before you can start trading HNS, you must first verify your profile. This is because Namebase is an incorporated company that has to follow normal AML/KYC laws like other onramps such as Coinbase.
 
 The verification process can vary depending on your location. Some users may only need to verify with their first name, last name, and phone number. For others it may require more information such as your ID (drivers license, local ID or passport). We partner with Jumio to verify accounts and store verification data — Jumio is also the same verification partner that Coinbase, Airbnb, United Airlines, and many other well-known companies use, which is to ensure your data is always safe and secure.

@@ -1,5 +1,8 @@
 # Revenue streams
 
+> **Warning**
+> **Historical only (June 2026):** Namebase shut down and no longer operates. This page is preserved for reference. For current tooling see [/start/](/start/) and [SkyInclude's wind-down explainer](https://skyinclude.com/blog/namebase-wind-down/).
+
 While Handshake is a non-profit movement, Namebase is a [VC-backed](https://www.namebase.io/about/) for-profit company built on Handshake. Here's how we generate revenue:
 
 ## Exchange

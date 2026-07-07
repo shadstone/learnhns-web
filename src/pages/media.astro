@@ -7,7 +7,7 @@ const description = "Explore curated articles, tutorials, and press coverage abo
 <BaseLayout
   title="Handshake Articles, Reading & Media Mentions"
   description={description}
-  keywords="Handshake articles, HNS press coverage, CoinDesk Handshake, TechCrunch Handshake, decentralized DNS articles, Namebase blog"
+  keywords="Handshake articles, HNS press coverage, CoinDesk Handshake, TechCrunch Handshake, decentralized DNS articles, LearnHNS docs"
   schema={[
     collectionPageSchema({ title: 'Reading & Media', description, url: abs('/media/') }),
     breadcrumbSchema([
@@ -33,12 +33,11 @@ const description = "Explore curated articles, tutorials, and press coverage abo
       <div class="section-label">Featured articles</div>
 
       <div class="featured-articles">
-        <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--featured link-tile--offline featured-primary">
+        <a href="/docs/about-handshake/about-handshake" class="link-tile link-tile--featured featured-primary">
           <div class="featured-eyebrow">Long read</div>
-          <h3>Handshake: A Decentralized Certificate Authority and DNS</h3>
-          <p>A comprehensive overview of the Handshake protocol and its implications for internet infrastructure — the canonical introductory essay.</p>
-          <span class="link-tile-cta">Read article (Offline)</span>
-          <p class="link-tile-original">Original URL: https://namebase.io/blog/handshake-a-decentralized-certificate-authority-and-dns/</p>
+          <h3>Handshake: Decentralized DNS &amp; Certificate Authority</h3>
+          <p>A comprehensive overview of the Handshake protocol — preserved in the LearnHNS docs archive (formerly on the Namebase blog).</p>
+          <span class="link-tile-cta">Read in docs archive &rarr;</span>
         </a>
 
         <div class="featured-secondary">
@@ -84,11 +83,10 @@ const description = "Explore curated articles, tutorials, and press coverage abo
     <section class="page-section">
       <div class="section-label">Educational resources</div>
       <div class="tile-grid tile-grid--2">
-        <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">
+        <a href="/docs/" class="link-tile">
           <h3>Getting Started with Handshake</h3>
-          <p>A beginner's guide to understanding and using Handshake domains.</p>
-          <span class="link-tile-cta">Read guide (Offline)</span>
-          <p class="link-tile-original">Original URL: https://learn.namebase.io/starting-from-zero/getting-started-with-handshake</p>
+          <p>Beginner guides preserved from the former learn.namebase.io — now on LearnHNS.</p>
+          <span class="link-tile-cta">Browse docs archive &rarr;</span>
         </a>
 
         <a href="#" title="Link Offline" onclick="event.preventDefault();" class="link-tile link-tile--offline">

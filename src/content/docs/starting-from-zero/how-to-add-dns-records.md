@@ -90,13 +90,18 @@ For example
 
 These records are the same as ICANN domains. They are provided by the nameserver specified in the NS records on the chain. These records include (but not limited to): A, AAAA, CNAME, DS, MX, NS, TLSA, TXT.
 
-## Adding DNS records to domains in Namebase
+## Adding DNS records (Bob Wallet / self-custody)
+
+> **Info**
+> **2026 update:** Namebase's DNS manager is offline. Use [Bob Wallet](https://bobwallet.org/download/bob-learnhns) or the [LearnHNS Chrome extension](https://bobwallet.org/extension/learnhns-wallet/) to edit on-chain records for names you self-custody.
+
+Open your domain in Bob Wallet's DNS / records panel and add records using the formats described above.
 
 ### On-Chain Records
 
 #### GLUE4
 
-To add a Nameserver using an IP address you need to use a GLUE4 record. For example, to add a nameserver record for GLUE4 with IP address `44.231.6.183` (this is the default Namebase nameserver) you would add the first line as below:
+To add a Nameserver using an IP address you need to use a GLUE4 record. For example, to add a nameserver record for GLUE4 with IP address `44.231.6.183` you would add the first line as below:
 
 ![](https://github.com/namebasehq/gitbook-learning-center/blob/master/.gitbook/assets/glue-records.png?raw=true)
 
@@ -108,7 +113,7 @@ To add a NS record to an existing domain's GLUE4 (or to point to an ICANN domain
 
 #### DS Records
 
-Adding a DS record to names in Namebase is very easy. Simply add the DS content in the `Value` field. This is shown in the image below.
+Adding a DS record is straightforward in Bob Wallet. Add the DS content in the `Value` field. This is shown in the image below.
 
 ![](https://github.com/namebasehq/gitbook-learning-center/blob/master/.gitbook/assets/ds-record.png?raw=true)
 

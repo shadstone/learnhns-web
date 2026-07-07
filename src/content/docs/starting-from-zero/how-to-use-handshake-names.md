@@ -1,55 +1,52 @@
 # Use Handshake names
 
-You [truly own](/docs/about-handshake/about-handshake#true-domain-ownership) your Handshake names, which means you're free to do anything you'd like with them. Below are some of the ways you can use your Handshake names through Namebase.
+You [truly own](/docs/about-handshake/about-handshake#true-domain-ownership) your Handshake names, which means you're free to do anything you'd like with them. Below are practical ways to use your names with current 2026 tooling.
 
 > **Success**
-> Share your resolvable Handshake name in the [Namer Community ](https://discord.gg/V3aTrkp)to become a Namer!
+> Share your resolvable Handshake name in the [Namer Community](https://discord.gg/V3aTrkp) to become a Namer!
 
 <iframe width="100%" height="400" src="https://www.youtube.com/embed/m1Q7ertlKwI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Create a website
 
-One of the most straightforward use cases of Handshake names is to set up a website on them. Check out the [Create Handshake websites](/docs/starting-from-zero/how-to-create-a-handshake-website) page for numerous tutorials on how on you can do so!
+One of the most straightforward use cases of Handshake names is to set up a website on them. Check out the [Create Handshake websites](/docs/starting-from-zero/how-to-create-a-handshake-website) page for tutorials.
+
+Hosting options today:
+
+* [Host.limo](https://my.host.limo) — Headless Domains, Pages, and more ([/start/](/start/) step 6)
+* [Handout](/handout/) — self-hosted app server for Handshake sites
+* Self-hosted DNS + any web host — see [how to add DNS records](/docs/starting-from-zero/how-to-add-dns-records)
+
+## Set DNS records (Bob Wallet)
+
+Manage on-chain and off-chain DNS records from [Bob Wallet](https://bobwallet.org/download/bob-learnhns) or the [LearnHNS Chrome extension](https://bobwallet.org/extension/learnhns-wallet/). See [how to add DNS records](/docs/starting-from-zero/how-to-add-dns-records) for record types and formats.
 
 ## Redirect your name
 
-[Redirects](https://www.namebase.io/manage/redirects) allows you to redirect your Handshake name to any other domain, serving as a human-readable URL shortener. Hover over "Products" in the navbar and select "Redirects", then enter your redirects as follows:
-
-
-
-> **Warning**
-> Remember to include the "http\://" or "https\://" part of your redirect URL.
+Point your Handshake TLD or subdomain at another URL by setting ALIAS or CNAME records in Bob Wallet. Include the full `http://` or `https://` prefix in redirect targets.
 
 ## Sell your name
 
-Find your Handshake name in the [Domain Manager](https://www.namebase.io/domain-manager), select "Manage", and click the slider next to "Sell this domain" to set your name's "Buy now price" and list it for sale.
+List names for sale on ShakeDex:
 
+* [market.learnhns.com](https://market.learnhns.com) — tutorial: [skyinclude.com/blog/shakedex-learnhns/](https://skyinclude.com/blog/shakedex-learnhns/)
+* Bob Wallet's integrated marketplace tab
 
+## Transfer or gift your name
 
-You can edit your listings' Buy now prices or remove them altogether in your Domain Manager's [for sale](https://www.namebase.io/for-sale) page.
-
-## Gift your name
-
-Find your Handshake name in the [Domain Manager](https://www.namebase.io/domain-manager), select "Manage", and select "Gift this domain". Make sure the email address of your recipient is the same as their Namebase account's. If the recipient doesn’t have a Namebase account, they’ll be prompted to create one when they claim their name.
-
-
-
-If the recipient doesn't claim their name by the expiration date, the name will be returned to your account.
+Transfer names on-chain from Bob Wallet by sending TRANSFER and FINALIZE transactions (spaced 288 blocks apart). See [Transferring HNS & Names](/docs/starting-from-zero/transferring-entities).
 
 ## Sell subdomains
 
-The [Namebase Registry](/docs/about-namebase/revenue-streams#namebase-registry) is a service that enables you to sell subdomains on your Handshake TLD. [Click here](https://www.namebase.io/registry/) to start selling now.
-
-
-
-[HNS.ID](https://hns.id/) is a service that allows you to sell decentralized subdomains on your Handshake TLD by using the Optimism Layer 2 ethereum network. Second level domains are minted as NFTs and can be managed on the HNS.ID platform.
-
-
+* [HNS.ID](https://hns.id/) — sell decentralized subdomains on your Handshake TLD using the Optimism L2 network. Second-level domains are minted as NFTs.
 
 ## Use your name as your identity
 
-The [Handshake Australia Mastodon instance](https://mastodon.hns.au) allows you to use your Handshake name as your identity. You can sign in with your Handshake name and use it as your handle.
+* [Handshake Australia Mastodon instance](https://mastodon.hns.au) — sign in with your Handshake name as your handle
+* [Handypedia](https://handypedia.org/) — wiki about Handshake; sign in with your name to edit
+* [HNS Cloud](https://cloud.hns.au) — cloud storage from [HNSAU](https://hns.au) with Handshake identity
 
-[Handypedia](https://handypedia.org/) is a wiki about Handshake. You can use your Handshake name to sign in and edit articles.
+## Historical: Namebase features (offline)
 
-[HNS Cloud](https://cloud.hns.au) is a cloud storage service hosted by [HNSAU](https://hns.au) that allows you to use your Handshake name as your identity.
+> **Warning**
+> Namebase shut down in June 2026. Redirects, custodial gifting, the Namebase Registry, and the Namebase marketplace are no longer available. The original Namebase-specific instructions have been removed from this page; see [/docs/about-namebase/](/docs/about-namebase/vision-and-mission) for historical reference.

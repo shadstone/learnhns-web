@@ -1,5 +1,8 @@
 # Private naming
 
+> **Warning**
+> **Historical only (June 2026):** Namebase shut down and no longer operates. This page is preserved for reference. For current tooling see [/start/](/start/) and [SkyInclude's wind-down explainer](https://skyinclude.com/blog/namebase-wind-down/).
+
 You can acquire Handshake names through Namebase using only an email for signup.
 
 ## Why this matters <a href="#why-this-matters" id="why-this-matters"></a>

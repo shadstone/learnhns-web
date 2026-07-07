@@ -10,7 +10,7 @@ HNS.to is a simple gateway that doesn't require local software or configuration.
 
 ## Browsers
 
-[Puma Browser](https://www.pumabrowser.com/) is a mobile browse that supports Handshake websites. Join the [community](https://community.namebase.io) to stay up-to-date on efforts to get other browsers to support Handshake as well.
+[Puma Browser](https://www.pumabrowser.com/) is a mobile browser that supports Handshake websites. The [SkyInclude Browser](https://skyinclude.com/browser) is the current open-source desktop option. Join the [Handshake Telegram community](https://t.me/handshake_hns) to stay up-to-date on browser support efforts.
 
 ## Public Handshake DNS Resolvers
 

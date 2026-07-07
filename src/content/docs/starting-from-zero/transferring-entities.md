@@ -1,32 +1,48 @@
 # Transferring HNS & Names
 
-## Transfer in HNS
+> **Info**
+> **2026 update:** Namebase custodial transfers are no longer available. Use [Bob Wallet](https://bobwallet.org/download/bob-learnhns) for self-custody transfers. Tutorial: [boblearnhns on SkyInclude](https://skyinclude.com/blog/boblearnhns/).
 
-### From BTC
+## Transfer HNS to Bob Wallet
 
-Use [this](/docs/starting-from-zero/buy-hns#buy-hns-with-btc) guide to transfer BTC to your Namebase wallet to convert to HNS. Note BTC-HNS transactinos take 6 BTC block confirmations (about an hour) to process.
+### From a centralized exchange
+
+1. Install [Bob Wallet](https://bobwallet.org/download/bob-learnhns).
+2. Copy your HNS receive address from Bob Wallet.
+3. On CoinEx or MEXC (see [buy guide](/docs/starting-from-zero/buy-hns)), withdraw HNS to that address.
+4. Wait for exchange and blockchain confirmations — typically 20 blocks on Handshake.
 
 ### From another HNS wallet
 
-You can transfer HNS from another wallet directly to your Namebase wallet by using the Deposit address on your [dashboard](https://www.namebase.io/dashboard). Due to the current volatility in Handshake's hash rate, Namebase confirms HNS deposits after 20 blocks, which typically takes 3-4 hours. Namebase will decrease the number of blocks needed to confirm deposits as the hash rate increases and stabilizes.
+Send HNS directly to your Bob Wallet receive address. Double-check the address before confirming — blockchain transfers are irreversible.
 
-## Transfer out HNS
+### From BTC (P2P)
 
-You can use the Withdraw button on your dashboard to transfer your HNS to an external wallet. Some restrictions may apply, such as daily withdrawal limits, and restrictions for new accounts. If you're inside the USA, you must complete KYC in order to withdraw HNS.
+Use [Liquidity Spot](https://liquidity.spot) for person-to-person BTC ↔ HNS swaps. See [tutorial](https://skyinclude.com/blog/liquidity-spot/).
 
-If you're outside of the USA, you can also use [Namebase Pro](https://www.namebase.io/pro) to transfer out your HNS — please note HNS transfers currently take 20 block confirmations to complete.
+## Transfer HNS out of Bob Wallet
 
-## Transfer in Handshake names
+Use Bob Wallet's Send feature to move HNS to another wallet or exchange deposit address. Keep enough HNS for mining fees when bidding or renewing names.
 
-To initiate the transfer, please transfer your name to your Namebase HNS wallet address, which you can generate through your [dashboard](https://www.namebase.io/dashboard). Once you've sent the TRANSFER and FINALIZE transactions — these must be spaced 288 blocks (\~2 days) apart, the transfer will automatically process in 20 block confirmations.
+## Transfer Handshake names
+
+Handshake name transfers require two on-chain transactions:
+
+1. **TRANSFER** — initiates the move to a new owner's address
+2. **FINALIZE** — must be submitted **288 blocks (~2 days) later** to complete the transfer
 
 > **Warning**
-> Remember to submit your FINALIZE transaction!
+> Remember to submit your FINALIZE transaction! Missing it leaves the transfer incomplete.
 
-## Transfer out Handshake name
+Bob Wallet guides you through both steps. Never share your private keys or seed phrase.
 
-You can transfer your Handshake names to any HNS address by visiting your names' domain manager page and clicking "Transfer domain".
+## Transfer between wallets (general)
 
-We handle name transfer requests in the same order of when they are submitted, so there may be a queue of up to 7 days before the TRANSFER transaction is sent for your name. In addition, there is an inherent 288 blocks that must past before we submit your FINALIZE transaction (this is a Handshake restrction, not a Namebase one), thus completing the name transfer. This may also take up to 7 days to process.
+Whether moving HNS or names, the pattern is the same: self-custody means **you** sign the transactions. There is no custodial queue — transfers confirm as miners include them in blocks.
 
-There are inherent blockchain limitations for the number of TRANSFER and FINALIZE transactions we can submit each block, so we appreciate your patience as we work through the queue.
+## Historical: Namebase custodial transfers
+
+> **Warning**
+> The content below is preserved from the original Namebase documentation. Namebase.io is offline (June 2026).
+
+Namebase previously offered custodial deposit, withdrawal, and name transfer services through their dashboard and Namebase Pro. Users who still had assets on Namebase before shutdown should refer to [SkyInclude's wind-down guide](https://skyinclude.com/blog/namebase-wind-down/) for the withdrawal steps that were published at the time.

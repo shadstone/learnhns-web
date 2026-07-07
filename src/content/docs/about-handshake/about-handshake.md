@@ -26,7 +26,7 @@ Handshake name owners have complete control over their data and can use their TL
 
 
 
-Handshake domain names provide true ownership, which means there are no yearly rental fees. Handshake TLD owners need only submit a biennial "heartbeat transaction" (costs a mining fee) to prove they still have access to their name. In the event a TLD owner loses access to their name and are unable to submit the RENEW transaction, said name will revert to the "auction-able names" pile. However, if you use Namebase you don't need to remember to perform these transactions because our system does this automatically for you. [Learn more about renewals here.](https://support.namebase.io/en/articles/8019613-domain-renewals)
+Handshake domain names provide true ownership, which means there are no yearly rental fees. Handshake TLD owners need only submit a biennial "heartbeat transaction" (costs a mining fee) to prove they still have access to their name. In the event a TLD owner loses access to their name and are unable to submit the RENEW transaction, said name will revert to the "auction-able names" pile. [Bob Wallet](https://bobwallet.org/download/bob-learnhns) can submit RENEW transactions for names you self-custody — set a calendar reminder if you manage keys manually.
 
 ## Endless top-level domains
 
@@ -46,7 +46,7 @@ Handshake names can be virtually anything, from English letters and decimal numb
 
 ### Existing domains
 
-All of the \~1,500 TLDs that already exist in the ICANN root zone (e.g. .com, .org, .io) are reserved for backwards-compatibility, and can be claimed by the owners of those names. This means that you can use Handshake domains without disrupting usual access to traditional domains like .com. Additionally, the top 100,000 most visited websites as determined by [Alexa](https://www.alexa.com/topsites) are also reserved for their owners (e.g. [bitcoin/](https://www.namebase.io/domains/bitcoin) on Handshake is set aside for the owner of bitcoin.com, and [google/](http://namebase.io/domains/google) is set aside for Google). You can [see the full list of already claimed Handshake names on handshake.rsvp](https://handshake.rsvp).
+All of the \~1,500 TLDs that already exist in the ICANN root zone (e.g. .com, .org, .io) are reserved for backwards-compatibility, and can be claimed by the owners of those names. This means that you can use Handshake domains without disrupting usual access to traditional domains like .com. Additionally, the top 100,000 most visited websites as determined by [Alexa](https://www.alexa.com/topsites) are also reserved for their owners (e.g. `bitcoin/` on Handshake is set aside for the owner of bitcoin.com, and `google/` is set aside for Google). You can [see the full list of already claimed Handshake names on handshake.rsvp](https://handshake.rsvp).
 
 If you own an Alexa top 100k website, you can use [these instructions](https://hsd-dev.org/guides/claims.html) to claim your name.
 
@@ -62,9 +62,7 @@ Handshake ensures DNS records can be modified only by the name's owner, which pr
 
 ### Privacy preserving
 
-Your privacy is protected when you register a Handshake domain because no personal information is required. Ownership of names is determined by public-key cryptography, so it’s easy to verify name owners by having them sign a message with their private key. Privacy is a core feature of Handshake names; there is no WHOIS lookup or any other public database where ownership or contact information can be accessed. Unlike traditional domain registrars, Namebase does not charge annual fees to keep your personal details away from prying eyes.
-
-It is possible to [register Handshake names on Namebase **completely** privately without revealing any personal information](/docs/about-namebase/private-naming).
+Your privacy is protected when you register a Handshake domain because no personal information is required on-chain. Ownership of names is determined by public-key cryptography, so it’s easy to verify name owners by having them sign a message with their private key. Privacy is a core feature of Handshake names; there is no WHOIS lookup or any other public database where ownership or contact information can be accessed. Self-custody via [Bob Wallet](https://bobwallet.org/download/bob-learnhns) lets you register and manage names without sharing personal information with a custodial registrar. Historical note: Namebase previously offered a [private naming flow](/docs/about-namebase/private-naming) — that service closed in June 2026.
 
 ## A more secure internet
 

@@ -1,5 +1,8 @@
 # Name minting auction
 
+> **Info**
+> **2026 tooling:** Bid, reveal, and claim names with [Bob Wallet](https://bobwallet.org/download/bob-learnhns). Step-by-step tutorial: [skyinclude.com/blog/auctions/](https://skyinclude.com/blog/auctions/).
+
 <iframe width="100%" height="400" src="https://www.youtube.com/embed/KfRDofpzEF8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Minting process
@@ -8,7 +11,7 @@ The cost to mint a Handshake name is determined by the name's on-chain auction.
 
 You can place a bid on any unminted name with [Handshake coins (HNS)](/docs/about-handshake/handshake-coin). This triggers the start of the name's 720-[block](https://github.com/namebasehq/gitbook-learning-center/blob/master/about-handshake/mining-hns#handshake-blocks) (\~5 days) bidding period. You can bid any amount and optionally add a blind to hide your actual bid from others. Your bid + blind is called your [lockup](#lockup), which is the only value that other bidders see.&#x20;
 
-After the bidding period ends, the 1440-block reveal period begins, during which bidders must reveal the true value of their bids. The bidder with the highest bid (NOT the highest lockup) wins the auction and mints the name. If you placed a blind, it's immediately returned to you when you reveal your bid. A note of caution: If you forget to reveal your bid, it will not be counted and you will permanently lose your entire lockup (both your bid and any blind). However, you don't have to worry about losing your coins if you use Namebase as Namebase reveals your bids automatically.
+After the bidding period ends, the 1440-block reveal period begins, during which bidders must reveal the true value of their bids. The bidder with the highest bid (NOT the highest lockup) wins the auction and mints the name. If you placed a blind, it's immediately returned to you when you reveal your bid. A note of caution: If you forget to reveal your bid, it will not be counted and you will permanently lose your entire lockup (both your bid and any blind). Bob Wallet can reveal bids automatically — always confirm your reveal status before the reveal period ends.
 
 After the reveal period ends, the winning bidder pays only the second highest bid amount — not their winning bid — and is refunded the difference between the two. Losing bidders get their entire lockup amount back in full. If there is only one bid, the sole bidder mints the name for free because the second highest bid is effectively zero. No one receives the coins paid by the winner; they are burned from the blockchain, creating a deflationary effect on the HNS price.
 
@@ -30,8 +33,8 @@ Your lockup cannot be changed after you submit it. You can submit additional loc
 
 If you tied with someone else but they won, there are two possibilities:
 
-1. You were outbid by a tiny amount. Go to the auction page on a computer (not on mobile) and mouseover the bid amounts to show more decimal places. Namebase shows two decimal places by default, so if you bid 1 HNS, and someone else bid 1.0001 HNS, they will have won. Unless you mouseover your competitor’s lockup, their bid will look identical.
-2. The winner’s bid was revealed before yours. If you and your competitor place identical bids, whoever reveals their bid first wins. However if you’re both Namebase users, the winner is chosen at random because Namebase reveals all bids at nearly the same time in no preset order.
+1. You were outbid by a tiny amount. Some UIs round bid amounts to two decimal places, so if you bid 1 HNS and someone else bid 1.0001 HNS, they may have won while the lockups look identical. Check precise bid values in Bob Wallet or a block explorer.
+2. The winner’s bid was revealed before yours. If you and your competitor place identical bids, whoever reveals their bid first wins.
 
 Many ties are caused by use of whole numbers. If you add a fractional amount to your bid, you are less likely to tie.
 
@@ -83,13 +86,13 @@ Check your understanding of the name auction process by seeing if you can answer
 
 #### Case Study 3
 
-1. The winner here is a bit difficult to determine because all 3 bidders [tied](#what-happens-if-theres-a-tie) with identical bid amounts of 1,000 HNS. The winner of a name auction with identical winning bid amounts is determined by whichever bidder reveals their bid amount first. However if all 3 bidders are Namebase users, then the winner is random.
+1. The winner here is a bit difficult to determine because all 3 bidders [tied](#what-happens-if-theres-a-tie) with identical bid amounts of 1,000 HNS. The winner of a name auction with identical winning bid amounts is determined by whichever bidder reveals their bid amount first.
 2. The winner burned 1,000 HNS because the second highest bid was also 1,000 HNS
 3. The winner receives no bid rebate because they've burned their entire 1,000 HNS bid; they'll get back their entire added blind as does everyone else
 
 ## Notes on "sniping"
 
-While Namebase submits your bids promptly to the blockchain, it may still take a few blocks for miners to add your bids to the blockchain. Given this, there's a risk-reward spectrum for placing bids at the last minute (colloquially called "sniping"): the later you place a bid, the less likely someone will see it in time to post a higher bid, but the greater the chance your bid won't make it onto the blockchain.
+Even when your wallet submits bids promptly, it may still take a few blocks for miners to add your bids to the blockchain. Given this, there's a risk-reward spectrum for placing bids at the last minute (colloquially called "sniping"): the later you place a bid, the less likely someone will see it in time to post a higher bid, but the greater the chance your bid won't make it onto the blockchain.
 
 When bidding on a name you really care about (e.g. your first+last name), we highly recommend placing your highest true bid amount well before the end of an auction. This way you can ensure your bid is mined in time, and that if you do get outbid, you'll know it was by someone who was simply willing to pay more. For example, if you place a 5 HNS bid on your name, you're signaling that you wouldn't be willing to pay more than that and would be okay giving your name up to someone who bids more.
 

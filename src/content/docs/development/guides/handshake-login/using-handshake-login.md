@@ -1,8 +1,11 @@
 # Using Handshake Login
 
+> **Warning**
+> **Offline (June 2026):** The Namebase identity manager at id.namebase.io is no longer available. Use the [handshake-id-manager](https://github.com/namebasehq/handshake-id-manager) repo to run your own identity manager, or set TXT records manually as described below.
+
 ## Set up the TXT record manually
 
-Open the identity manager:[ https://id.namebase.io](https://id.namebase.io)
+The former Namebase identity manager (`id.namebase.io`) is offline. Configure records in [Bob Wallet](https://bobwallet.org/download/bob-learnhns) or your preferred DNS tool instead.
 
 Create a new identity by entering a name you own. Click on "Copy my record".
 

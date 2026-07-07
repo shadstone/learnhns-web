@@ -4,7 +4,7 @@
 
 Conceptually creating a decentralized website using Handshake is very simple. You just need to upload your static content onto a decentralized storage provider and then pin the content address to your Handshake name.
 
-As an example, visit [niccarter/](https://niccarter.hns.to) to see [Nic Carter](https://twitter.com/nic__carter)'s decentralized website — he used [dLinks](https://www.namebase.io/dlinks) which is a decentralized alternative to LinkTree built on Handshake and Skynet.
+As an example, visit [niccarter/](https://niccarter.hns.to) to see [Nic Carter](https://twitter.com/nic__carter)'s decentralized website — he used dLinks, a decentralized LinkTree alternative on Handshake and Skynet (the former Namebase-hosted dLinks service is offline as of June 2026).
 
 ## Skynet
 

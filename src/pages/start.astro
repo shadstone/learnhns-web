@@ -3,6 +3,89 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { breadcrumbSchema, webPageSchema, abs } from '../lib/seo';
 
 const description = "A step-by-step guide to downloading Bob Wallet, installing the Chrome extension, and exploring Handshake (HNS) decentralized domains.";
+
+const steps = [
+  {
+    num: 1,
+    featured: true,
+    title: 'Download Bob Wallet',
+    body: 'The premier desktop wallet for managing your HNS coins and domain names securely. Start here — it\'s the foundation for everything else.',
+    tutorial: 'https://skyinclude.com/blog/boblearnhns/',
+    actions: [
+      { href: 'https://bobwallet.org/download/bob-learnhns', label: 'LearnHNS 2026 Version', primary: true },
+      { href: 'https://bobwallet.org/download/bob-wallet', label: '2024 Version' },
+    ],
+  },
+  {
+    num: 2,
+    title: 'Install Chrome Extension',
+    body: 'Interact with Handshake domains directly from your browser with the Bob Wallet extension.',
+    tutorial: 'https://skyinclude.com/blog/learnhns-wallet/',
+    actions: [
+      { href: 'https://bobwallet.org/extension/learnhns-wallet/', label: 'LearnHNS 2026 Version', primary: true },
+      { href: 'https://bobwallet.org/extension/shake-wallet/', label: '2024 Version' },
+    ],
+  },
+  {
+    num: 3,
+    title: 'Visit ShakeDex Marketplace',
+    body: 'Buy and sell Handshake domains on our decentralized web marketplace channel.',
+    tutorial: 'https://skyinclude.com/blog/shakedex-learnhns/',
+    actions: [
+      { href: '/market/', label: 'Learn About Our Market', primary: true },
+      { href: 'https://shakedex.org/markets', label: 'More Shakedex Channels' },
+    ],
+  },
+  {
+    num: 4,
+    title: 'Buy/Sell HNS',
+    body: 'Easily trade Handshake coins (HNS) through the decentralized Liquidity Spot.',
+    tutorial: 'https://skyinclude.com/blog/liquidity-spot/',
+    actions: [
+      { href: 'https://liquidity.spot', label: 'Visit Liquidity Spot', primary: true },
+      { href: 'https://liquidity.spot/opensource', label: 'Make Your Own' },
+    ],
+  },
+  {
+    num: 5,
+    title: 'Browse HNS Sites',
+    body: 'Download the open source SkyInclude Browser to easily and quickly open and navigate Handshake websites.',
+    tutorial: 'https://skyinclude.com/blog/skyinclude-browser-launch/',
+    actions: [
+      { href: 'https://skyinclude.com/browser', label: 'Download for Mac, Windows, Linux', primary: true },
+      { href: 'https://github.com/shadstoneofficial/skyinclude-browser#readme', label: 'Verify Source Code' },
+    ],
+  },
+  {
+    num: 6,
+    title: 'Host Handshake Sites',
+    body: 'Sign up for Host.limo to use various Handshake hosting options, from free Headlessdomains hosting to Pages to Handout.',
+    actions: [
+      { href: 'https://my.host.limo', label: 'Visit Host.limo', primary: true },
+      { href: '/handout/', label: 'Make Your Own Handout Server' },
+    ],
+  },
+  {
+    num: 7,
+    title: 'Contribute Blog Content',
+    body: 'This LearnHNS Blog is community-centric. Read our latest articles or contribute your own knowledge to the ecosystem.',
+    tutorial: 'https://skyinclude.com/blog/learnhns-kickoff/',
+    actions: [
+      { href: '/blog/', label: 'Visit Blog', primary: true },
+      { href: '/blog/become-contributor/', label: 'Become a Contributor' },
+    ],
+  },
+  {
+    num: 8,
+    title: 'Join the Community',
+    body: 'Participate in GitHub development, join discussions, and help build the future of the decentralized web.',
+    tutorial: 'https://skyinclude.com/blog/handshake2026/',
+    actions: [
+      { href: 'https://github.com/handshake-org', label: 'GitHub' },
+      { href: 'https://t.me/handshake_hns', label: 'Telegram' },
+    ],
+  },
+];
 ---
 <BaseLayout
   title="Get Started with Handshake Tools"
@@ -32,107 +115,60 @@ const description = "A step-by-step guide to downloading Bob Wallet, installing 
     <section class="page-section steps-section">
       <div class="section-label">The path</div>
 
-      <!-- Featured first step -->
-      <article class="step-card step-card--featured">
-        <span class="step-badge">1</span>
-        <div class="step-body">
-          <h2>Download Bob Wallet</h2>
-          <p>
-            The premier desktop wallet for managing your HNS coins and domain
-            names securely. Start here — it's the foundation for everything else.
-          </p>
-          <div class="btn-group">
-            <a href="https://bobwallet.org/download/bob-learnhns" target="_blank" class="primary-btn">LearnHNS 2026 Version</a>
-            <a href="https://bobwallet.org/download/bob-wallet" target="_blank" class="btn">2024 Version</a>
+      {steps.filter((step) => step.featured).map((step) => (
+        <article class="step-card step-card--featured">
+          <span class="step-badge">{step.num}</span>
+          <div class="step-body">
+            <h2>{step.title}</h2>
+            <p>{step.body}</p>
+            <div class="btn-group">
+              {step.actions.map((action) => (
+                <a
+                  href={action.href}
+                  target={action.href.startsWith('http') ? '_blank' : undefined}
+                  rel={action.href.startsWith('http') ? 'noopener' : undefined}
+                  class={action.primary ? 'primary-btn' : 'btn'}
+                >
+                  {action.label}
+                </a>
+              ))}
+              {step.tutorial && (
+                <a href={step.tutorial} target="_blank" rel="noopener" class="btn btn-tutorial">
+                  Read Tutorial &rarr;
+                </a>
+              )}
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      ))}
 
-      <!-- Remaining steps in tighter grid -->
       <div class="steps-grid">
-        <article class="step-card">
-          <span class="step-badge">2</span>
-          <div class="step-body">
-            <h2>Install Chrome Extension</h2>
-            <p>Interact with Handshake domains directly from your browser with the Bob Wallet extension.</p>
-            <div class="btn-group">
-              <a href="https://bobwallet.org/extension/learnhns-wallet/" target="_blank" class="primary-btn">LearnHNS 2026 Version</a>
-              <a href="https://bobwallet.org/extension/shake-wallet/" target="_blank" class="btn">2024 Version</a>
+        {steps.filter((step) => !step.featured).map((step) => (
+          <article class="step-card">
+            <span class="step-badge">{step.num}</span>
+            <div class="step-body">
+              <h2>{step.title}</h2>
+              <p>{step.body}</p>
+              <div class="btn-group">
+                {step.actions.map((action) => (
+                  <a
+                    href={action.href}
+                    target={action.href.startsWith('http') ? '_blank' : undefined}
+                    rel={action.href.startsWith('http') ? 'noopener' : undefined}
+                    class={action.primary ? 'primary-btn' : 'btn'}
+                  >
+                    {action.label}
+                  </a>
+                ))}
+                {step.tutorial && (
+                  <a href={step.tutorial} target="_blank" rel="noopener" class="btn btn-tutorial">
+                    Read Tutorial &rarr;
+                  </a>
+                )}
+              </div>
             </div>
-          </div>
-        </article>
-
-        <article class="step-card">
-          <span class="step-badge">3</span>
-          <div class="step-body">
-            <h2>Visit ShakeDex Marketplace</h2>
-            <p>Buy and sell Handshake domains on our decentralized web marketplace channel.</p>
-            <div class="btn-group">
-              <a href="/market/" class="primary-btn">Learn About Our Market</a>
-              <a href="https://shakedex.org/markets" target="_blank" class="btn">More Shakedex Channels</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="step-card">
-          <span class="step-badge">4</span>
-          <div class="step-body">
-            <h2>Buy/Sell HNS</h2>
-            <p>Easily trade Handshake coins (HNS) through the decentralized Liquidity Spot.</p>
-            <div class="btn-group">
-              <a href="https://liquidity.spot" target="_blank" class="primary-btn">Visit Liquidity Spot</a>
-              <a href="https://liquidity.spot/opensource" target="_blank" class="btn">Make Your Own</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="step-card">
-          <span class="step-badge">5</span>
-          <div class="step-body">
-            <h2>Browse HNS Sites</h2>
-            <p>Download the open source SkyInclude Browser to easily and quickly open and navigate Handshake websites.</p>
-            <div class="btn-group">
-              <a href="https://skyinclude.com/browser" target="_blank" class="primary-btn">Download for Mac, Windows, Linux</a>
-              <a href="https://github.com/shadstoneofficial/skyinclude-browser#readme" target="_blank" class="btn">Verify Source Code</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="step-card">
-          <span class="step-badge">6</span>
-          <div class="step-body">
-            <h2>Host Handshake Sites</h2>
-            <p>Sign up for Host.limo to use various Handshake hosting options, from free Headlessdomains hosting to Pages to Handout.</p>
-            <div class="btn-group">
-              <a href="https://my.host.limo" target="_blank" class="primary-btn">Visit Host.limo</a>
-              <a href="/handout/" class="btn">Make Your Own Handout Server</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="step-card">
-          <span class="step-badge">7</span>
-          <div class="step-body">
-            <h2>Contribute Blog Content</h2>
-            <p>This LearnHNS Blog is community-centric. Read our latest articles or contribute your own knowledge to the ecosystem.</p>
-            <div class="btn-group">
-              <a href="/blog/" class="primary-btn">Visit Blog</a>
-              <a href="/blog/become-contributor/" class="btn">Become a Contributor</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="step-card">
-          <span class="step-badge">8</span>
-          <div class="step-body">
-            <h2>Join the Community</h2>
-            <p>Participate in GitHub development, join discussions, and help build the future of the decentralized web.</p>
-            <div class="btn-group">
-              <a href="https://github.com/handshake-org" target="_blank" class="btn">GitHub</a>
-              <a href="https://t.me/handshake_hns" target="_blank" class="btn">Telegram</a>
-            </div>
-          </div>
-        </article>
+          </article>
+        ))}
       </div>
     </section>
 
@@ -252,6 +288,10 @@ const description = "A step-by-step guide to downloading Bob Wallet, installing 
     display: flex;
     gap: 0.6rem;
     flex-wrap: wrap;
+  }
+
+  .btn-tutorial {
+    border-style: dashed;
   }
 
   @media (max-width: 800px) {

@@ -6,56 +6,67 @@
 Make sure you fully understand how [Handshake auctions](/docs/about-handshake/handshake-auction) work before bidding on Handshake names. You can check your understanding with [these case studies](/docs/about-handshake/handshake-auction#case-studies).
 
 > **Info**
-> You will need HNS in your Namebase account to get Handshake names. If you have not done so, please follow the walkthrough [here](/docs/starting-from-zero/buy-hns) to buy HNS.
+> You will need HNS in a self-custody wallet to bid on names. If you have not done so, follow [Buy Handshake coins](/docs/starting-from-zero/buy-hns). Tutorial: [Bidding 101 on SkyInclude](https://skyinclude.com/blog/auctions/).
 
 <iframe width="100%" height="400" src="https://www.youtube.com/embed/KfRDofpzEF8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 This video covers how Handshake auctions work
 
+## Bid on a name (Bob Wallet)
 
-## Name search
+The standard way to acquire an unregistered TLD is through a Handshake name auction:
 
-Visit <https://www.namebase.io/domains> and use the Power search to find names you want to own. There are 6 possible results to your name search:
+1. Download [Bob LearnHNS](https://bobwallet.org/download/bob-learnhns) — see [tutorial](https://skyinclude.com/blog/boblearnhns/).
+2. Fund your wallet with HNS ([buy guide](/docs/starting-from-zero/buy-hns)).
+3. Search for the name you want inside Bob Wallet and place a bid.
+4. Wait for the bidding period to end, then **reveal** your bid (Bob Wallet can do this automatically).
+5. If you win, **claim** the name once the reveal period completes.
+
+Full step-by-step: [skyinclude.com/blog/auctions/](https://skyinclude.com/blog/auctions/)
+
+## Buy a listed name (ShakeDex)
+
+If someone already owns the name and listed it for sale, you can buy it on the secondary market:
+
+* [market.learnhns.com](https://market.learnhns.com) — web marketplace (tutorial: [ShakeDex on SkyInclude](https://skyinclude.com/blog/shakedex-learnhns/))
+* Bob Wallet's built-in ShakeDex integration
+
+## Name search results
+
+When searching for a name, you may see these states:
 
 ### Owned — listed for sale
 
-This name was already minted. The name is owned by someone else and it's up for sale — you can immediately purchase it. If the seller has enabled "Make an Offer", you'll also be able to make them an offer for their name.
-
-
+The name was already minted and is listed on a marketplace — you can purchase it directly if a buy-now price is set.
 
 ### Owned — unlisted
 
-This name was already minted. The name is owned by someone else and it isn't up for sale. If the owner has enabled "Make an Offer", you'll be able to make them an offer on their name.
-
-
+The name is owned by someone else and isn't currently for sale. You may be able to make an offer through ShakeDex channels.
 
 ### Unopened auction
 
-This [Handshake name auction](/docs/about-handshake/handshake-auction) hasn't started and placing a bid on this — around 30 minutes to confirm — will begin the auction.
-
-
+This [Handshake name auction](/docs/about-handshake/handshake-auction) hasn't started. Placing the first bid (after a short confirmation period) begins the auction.
 
 ### Active auction
 
-This [Handshake name auction](/docs/about-handshake/handshake-auction) is underway.
-
-
+The auction is underway — place a higher bid before the bidding period ends.
 
 ### Revealing
 
-This name's auction recently ended and the winner will receive their name once the [reveal period](/docs/about-handshake/handshake-auction) ends.
-
-
+The auction recently ended. The winner receives the name once the [reveal period](/docs/about-handshake/handshake-auction) ends.
 
 ### Reserved
 
-This name is either one of the existing [\~1,500 blacklisted traditional TLDs or is reserved for a top 100,000 Alexa website](/docs/about-handshake/about-handshake#existing-domains). If you are the owner of a reserved name, [follow these instructions](https://hsd-dev.org/guides/claims.html) to claim your Handshake name.
-
-
+This name is either one of the existing [~1,500 blacklisted traditional TLDs or is reserved for a top 100,000 Alexa website](/docs/about-handshake/about-handshake#existing-domains). If you are the owner of a reserved name, [follow these instructions](https://hsd-dev.org/guides/claims.html) to claim your Handshake name.
 
 ## More
 
 Read about how [Handshake auctions](/docs/about-handshake/handshake-auction) work before bidding.
 
-Use <https://www.namebase.io/domain-manager> to keep track of all your domains
+Use Bob Wallet's domain manager to keep track of all your names.
 
-Visit the [Namer Community](https://discord.gg/V3aTrkp) to ask about and discuss bidding strategies.&#x20;
+Visit the [Namer Community](https://discord.gg/V3aTrkp) to ask about and discuss bidding strategies.
+
+## Historical: Namebase domain search
+
+> **Warning**
+> Namebase.io/domains is offline (June 2026). The Namebase Power Search and custodial bidding UI no longer exist. Use Bob Wallet or ShakeDex instead.

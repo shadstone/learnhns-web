@@ -2,7 +2,10 @@
 
 
 
-The Handshake coin (HNS) is used by participants to transfer, register, and update domain names. The coin is necessary to prevent spam on the peer-to-peer network. The vast majority of the initial coin supply will be granted freely to the Free and Open Source Software community — the majority will go to individual FOSS contributors via the [developer airdrop](https://www.namebase.io/airdrop). For all non-developers, the coin is available to [buy](/docs/starting-from-zero/buy-hns#buy-hns-with-btc) through Namebase. Users on our platform will be able to use HNS to bid on names or buy it for trading with other assets like BTC. HNS is also used as payment for names on the secondary marketplace and for [SLD sales](https://twitter.com/NamesakeMark/status/1369751977123581954?s=20). The main utility of HNS on Namebase will always be to facilitate an easy and secure onramp to the decentralized Internet.
+The Handshake coin (HNS) is used by participants to transfer, register, and update domain names. The coin is necessary to prevent spam on the peer-to-peer network. The vast majority of the initial coin supply will be granted freely to the Free and Open Source Software community — the majority will go to individual FOSS contributors via the [developer airdrop](https://www.namebase.io/airdrop). For all non-developers, HNS is available through [Liquidity Spot](https://liquidity.spot), [CoinEx](https://www.coinex.com), [MEXC](https://www.mexc.com), and other channels — see [Buy Handshake coins](/docs/starting-from-zero/buy-hns). HNS is also used as payment for names on secondary marketplaces and for [SLD sales](https://twitter.com/NamesakeMark/status/1369751977123581954?s=20).
+
+> **Info**
+> Namebase (formerly a major HNS onramp) closed in June 2026. Gate.io has also delisted HNS. Current exchange listings are maintained on [/services/](/services/).
 
 ## Distribution
 

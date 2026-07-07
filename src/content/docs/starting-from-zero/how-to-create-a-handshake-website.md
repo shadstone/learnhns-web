@@ -72,7 +72,7 @@ Host any HTML file on your Handshake name through Github Pages. The template use
 
 ### Wordpress and AWS
 
-Skyinclude.com Mike made a quick video on how to build a Handshake site using Wordpress.org, WP2Static.com, and Amazon AWS.amazon.com with Namebase.io as the TLD registrar.
+Skyinclude.com Mike made a quick video on how to build a Handshake site using Wordpress.org, WP2Static.com, and Amazon AWS — DNS is managed via Bob Wallet or self-custody (Namebase, the registrar shown in the video, closed in June 2026).
 
 <iframe width="100%" height="400" src="https://www.youtube.com/embed/dxgLBvKC5YM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
