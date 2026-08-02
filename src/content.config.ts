@@ -39,6 +39,7 @@ const posts = defineCollection({
         .array(z.object({ id: z.number(), name: z.string(), slug: z.string() }))
         .default([]),
       created_at: z.string().nullable().optional(),
+      published_at: z.string().nullable().optional(),
       updated_at: z.string().nullable().optional(),
       type: z.string().optional(),
       custom_fields: z.record(z.unknown()).optional().default({}),

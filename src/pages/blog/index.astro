@@ -3,9 +3,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { breadcrumbSchema, collectionPageSchema, abs } from '../../lib/seo';
 
+const publicationDate = (post: { data: { published_at?: string | null; created_at?: string | null } }) =>
+  post.data.published_at || post.data.created_at;
+
 const posts = (await getCollection('posts')).sort((a, b) => {
-  const ad = a.data.created_at ? new Date(a.data.created_at).getTime() : 0;
-  const bd = b.data.created_at ? new Date(b.data.created_at).getTime() : 0;
+  const aPublished = publicationDate(a);
+  const bPublished = publicationDate(b);
+  const ad = aPublished ? new Date(aPublished).getTime() : 0;
+  const bd = bPublished ? new Date(bPublished).getTime() : 0;
   return bd - ad;
 });
 
@@ -66,8 +71,8 @@ const description = "Latest articles from LearnHNS about Handshake (HNS), decent
               )}
               <div class="featured-post-body">
                 <div class="post-meta">
-                  {featured.data.created_at && (
-                    <time datetime={featured.data.created_at}>{fmt(featured.data.created_at)}</time>
+                  {publicationDate(featured) && (
+                    <time datetime={publicationDate(featured)}>{fmt(publicationDate(featured))}</time>
                   )}
                   {featured.data.primary_category && (
                     <>
@@ -98,8 +103,8 @@ const description = "Latest articles from LearnHNS about Handshake (HNS), decent
                     )}
                     <div class="post-card-body">
                       <div class="post-meta">
-                        {post.data.created_at && (
-                          <time datetime={post.data.created_at}>{fmt(post.data.created_at)}</time>
+                        {publicationDate(post) && (
+                          <time datetime={publicationDate(post)}>{fmt(publicationDate(post))}</time>
                         )}
                         {post.data.primary_category && (
                           <>

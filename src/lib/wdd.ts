@@ -30,6 +30,7 @@ export interface WDDContent {
   primary_category: WDDCategory | null;
   tags: WDDTag[];
   created_at: string | null;
+  published_at: string | null;
   updated_at: string | null;
   og_meta: Record<string, string>;
   seo: {

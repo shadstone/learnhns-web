@@ -14,8 +14,10 @@ export async function GET() {
 
   const posts = (await getCollection('posts'))
     .sort((a, b) => {
-      const ad = a.data.created_at ? new Date(a.data.created_at).getTime() : 0;
-      const bd = b.data.created_at ? new Date(b.data.created_at).getTime() : 0;
+      const aPublished = a.data.published_at || a.data.created_at;
+      const bPublished = b.data.published_at || b.data.created_at;
+      const ad = aPublished ? new Date(aPublished).getTime() : 0;
+      const bd = bPublished ? new Date(bPublished).getTime() : 0;
       return bd - ad;
     });
 

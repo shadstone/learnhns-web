@@ -15,9 +15,10 @@ export async function getStaticPaths() {
 type Props = { post: CollectionEntry<'posts'> };
 const { post } = Astro.props as Props;
 const { data } = post;
+const publicationDate = data.published_at || data.created_at;
 
-const dateLabel = data.created_at
-  ? new Date(data.created_at).toLocaleDateString('en-US', {
+const dateLabel = publicationDate
+  ? new Date(publicationDate).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -48,8 +49,8 @@ const schemas = [
     url: postUrl,
     image: data.featured_image_url || undefined,
     authorName,
-    datePublished: data.created_at || undefined,
-    dateModified: data.updated_at || data.created_at || undefined,
+    datePublished: publicationDate || undefined,
+    dateModified: data.updated_at || publicationDate || undefined,
     category: data.primary_category?.name || undefined,
     tags: data.tags?.map((t) => t.name) || undefined,
     keywords: signal.keywords,
@@ -68,8 +69,8 @@ const schemas = [
   image={data.featured_image_url || undefined}
   canonicalOverride={data.seo?.canonical_url || undefined}
   ogType="article"
-  publishedTime={data.created_at || undefined}
-  modifiedTime={data.updated_at || data.created_at || undefined}
+  publishedTime={publicationDate || undefined}
+  modifiedTime={data.updated_at || publicationDate || undefined}
   author={authorName}
   keywords={data.tags?.map((t) => t.name).join(', ') || undefined}
   schema={schemas}
@@ -90,7 +91,7 @@ const schemas = [
         {dateLabel && (
           <>
             <span class="dot">·</span>
-            <time datetime={data.created_at ?? ''}>{dateLabel}</time>
+            <time datetime={publicationDate ?? ''}>{dateLabel}</time>
           </>
         )}
       </div>
