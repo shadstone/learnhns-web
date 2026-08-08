@@ -1,0 +1,463 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema, collectionPageSchema, abs } from '../lib/seo';
+import {
+  communityMeta,
+  securityBullets,
+  banPolicy,
+  communitySections,
+  suggestEditIssueUrl,
+  editDataFileUrl,
+  statusLabel,
+  isInactive,
+} from '../data/community-resources';
+
+const description =
+  'Handshake community start-here guide: security rules, wallets, nodes, resolvers, explorers, regional chats, and how to suggest edits. Web mirror of the main Telegram pin.';
+
+const suggestUrl = suggestEditIssueUrl();
+const editUrl = editDataFileUrl();
+---
+<BaseLayout
+  title="Handshake Community — Start Here"
+  description={description}
+  keywords="Handshake community, HNS Telegram, HNS resources, Handshake start here, HNS wallets, HNS security, Handshake Discord"
+  schema={[
+    collectionPageSchema({
+      title: 'Handshake Community — Start Here',
+      description,
+      url: abs('/community/'),
+    }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Community', path: '/community/' },
+    ]),
+  ]}
+>
+  <div class="page-shell">
+
+    <section class="page-hero">
+      <div class="page-hero-eyebrow">Community map</div>
+      <h1 class="page-hero-title">
+        Handshake <em>start here.</em>
+      </h1>
+      <p class="page-hero-lede">
+        {communityMeta.disclaimer}
+      </p>
+      <p class="meta-line">
+        Last audited: <strong>{communityMeta.lastAuditedLabel}</strong>
+        {communityMeta.auditedBy && <> from {communityMeta.auditedBy}</>}
+        · Source:
+        <a href={communityMeta.sourceTelegram} target="_blank" rel="noopener noreferrer">
+          Telegram pin
+        </a>
+      </p>
+    </section>
+
+    <!-- HOW TO SUGGEST EDITS VIA GITHUB -->
+    <section class="page-section tutorial-section" id="how-to-edit" aria-labelledby="howto-heading">
+      <div class="section-label" id="howto-heading">How to suggest an edit (GitHub)</div>
+      <div class="callout tutorial-callout">
+        <h2>You do not need to be a developer</h2>
+        <p>
+          This list lives in a public GitHub repository. Anyone with a free
+          <a href="https://github.com/signup" target="_blank" rel="noopener noreferrer">GitHub account</a>
+          can propose a change. Maintainers review it, then it shows up here
+          (and can be synced back to the Telegram pin).
+        </p>
+
+        <div class="howto-paths">
+          <div class="howto-path">
+            <div class="howto-path-label">Easiest — open an issue</div>
+            <ol class="howto-steps">
+              <li>
+                Click
+                <a href={suggestUrl} target="_blank" rel="noopener noreferrer">Open a GitHub issue</a>
+                (sign in if asked).
+              </li>
+              <li>
+                Fill the short form: what section, what changed, and the old/new URL if you have it.
+              </li>
+              <li>
+                Submit. You can close the tab — a maintainer will review and update the list.
+              </li>
+            </ol>
+            <a href={suggestUrl} class="btn-primary" target="_blank" rel="noopener noreferrer">
+              Open a GitHub issue
+            </a>
+          </div>
+
+          <div class="howto-path">
+            <div class="howto-path-label">Direct edit — pull request</div>
+            <ol class="howto-steps">
+              <li>
+                Open the
+                <a href={editUrl} target="_blank" rel="noopener noreferrer">resource data file</a>
+                on GitHub.
+              </li>
+              <li>
+                Click the pencil icon (<strong>Edit this file</strong>). GitHub may ask you to
+                <em>fork</em> the repo — that is normal; accept it.
+              </li>
+              <li>
+                Change only what you need (a link, title, or note). Keep the same structure
+                as neighboring items.
+              </li>
+              <li>
+                Scroll down, write a short commit message (e.g. “Fix broken HNSDoH link”),
+                choose <strong>Create a new branch for this commit and start a pull request</strong>,
+                then propose the change.
+              </li>
+              <li>
+                Submit the pull request. Maintainers merge good updates; you will get email
+                when they comment or merge.
+              </li>
+            </ol>
+            <a href={editUrl} class="btn-secondary" target="_blank" rel="noopener noreferrer">
+              Edit the data file
+            </a>
+          </div>
+        </div>
+
+        <p class="howto-tip">
+          <strong>Tip:</strong> Prefer an issue for “is this project safe / should it be listed?”
+          Prefer a pull request for a clear broken link or typo. Prefer
+          <a href="https://t.me/handshake_hns" target="_blank" rel="noopener noreferrer">Telegram</a>
+          if you want a quick public discussion first.
+        </p>
+        <p class="suggest-meta">
+          File to edit:
+          <code>{communityMeta.dataFilePath}</code>
+          · Repo:
+          <a href={communityMeta.githubRepo} target="_blank" rel="noopener noreferrer">
+            shadstone/learnhns-web
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- SECURITY -->
+    <section class="page-section" id="security" aria-labelledby="security-heading">
+      <div class="security-callout">
+        <div class="section-label" id="security-heading">⚠️ Security</div>
+        <ul class="security-list">
+          {securityBullets.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- RESOURCE SECTIONS -->
+    {communitySections.map((section) => (
+      <section class="page-section" id={section.id} aria-labelledby={`${section.id}-heading`}>
+        <div class="section-label" id={`${section.id}-heading`}>
+          {section.emoji} {section.title}
+        </div>
+        {section.lede && <p class="page-section-lede">{section.lede}</p>}
+        <div class={`tile-grid ${section.links.length <= 4 ? 'tile-grid--2' : 'tile-grid--3'}`}>
+          {section.links.map((link) => {
+            const inactive = isInactive(link.status);
+            const label = statusLabel(link.status);
+            const href = inactive ? '#' : link.href;
+            const external = href.startsWith('http');
+            return (
+              <a
+                href={href}
+                class:list={['link-tile', { 'link-tile--offline': inactive }]}
+                target={external && !inactive ? '_blank' : undefined}
+                rel={external && !inactive ? 'noopener noreferrer' : undefined}
+                title={inactive ? (label ?? 'Unavailable') : undefined}
+                onclick={inactive ? 'event.preventDefault()' : undefined}
+              >
+                <h3>
+                  {link.title}
+                  {label && !inactive && <span class="status-pill">{label}</span>}
+                </h3>
+                {link.note && <p>{link.note}</p>}
+                {inactive ? (
+                  <>
+                    <span class="link-tile-cta">{label ?? 'Unavailable'}</span>
+                    {link.originalUrl && (
+                      <p class="link-tile-original">Original URL: {link.originalUrl}</p>
+                    )}
+                  </>
+                ) : (
+                  <span class="link-tile-cta">Open &rarr;</span>
+                )}
+              </a>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+
+    <!-- BAN POLICY -->
+    <section class="page-section" id="ban-policy" aria-labelledby="ban-heading">
+      <div class="ban-callout">
+        <div class="section-label" id="ban-heading">🚫 {banPolicy.title}</div>
+        <p class="ban-body">{banPolicy.body}</p>
+        <p class="ban-note">{banPolicy.note}</p>
+      </div>
+    </section>
+
+    <!-- SUGGEST EDITS (footer CTAs) -->
+    <section class="page-section" id="suggest-edits" aria-labelledby="suggest-heading">
+      <div class="section-label" id="suggest-heading">Suggest an edit</div>
+      <div class="callout suggest-callout">
+        <h2>Help keep this list accurate</h2>
+        <p>
+          Full walkthrough is at the
+          <a href="#how-to-edit">top of this page</a>.
+          Broken links, new projects, and status updates are welcome — security-sensitive
+          additions get maintainer review before they go live.
+        </p>
+        <ul class="suggest-rules">
+          <li><strong>Broken link / small fix</strong> — open a GitHub issue or PR; usually merged quickly.</li>
+          <li><strong>New project or wallet</strong> — issue + brief public discussion if it claims “official” status.</li>
+          <li><strong>Security wording</strong> — maintainers only.</li>
+        </ul>
+        <div class="suggest-actions">
+          <a href={suggestUrl} class="btn-primary" target="_blank" rel="noopener noreferrer">
+            Open a GitHub issue
+          </a>
+          <a href={editUrl} class="btn-secondary" target="_blank" rel="noopener noreferrer">
+            Edit the data file (PR)
+          </a>
+          <a href="https://t.me/handshake_hns" class="btn-secondary" target="_blank" rel="noopener noreferrer">
+            Discuss on Telegram
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .meta-line {
+    margin: 1.25rem 0 0;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .meta-line a {
+    color: var(--hns-violet);
+    text-decoration: none;
+  }
+
+  .meta-line a:hover {
+    text-decoration: underline;
+  }
+
+  .meta-line strong {
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+
+  /* Tighter vertical rhythm — many sections back to back */
+  .page-section {
+    padding: 1.75rem 0 2.5rem;
+  }
+
+  .page-section:last-child {
+    padding-bottom: 5rem;
+  }
+
+  .tutorial-section {
+    padding-top: 0;
+  }
+
+  .tutorial-callout h2 {
+    font-size: clamp(1.35rem, 2vw, 1.75rem);
+  }
+
+  .tutorial-callout > p a {
+    color: var(--hns-violet);
+  }
+
+  .howto-paths {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin: 1.5rem 0 1.25rem;
+  }
+
+  @media (max-width: 800px) {
+    .howto-paths {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .howto-path {
+    padding: 1.25rem;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--glass-border);
+  }
+
+  .howto-path-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--hns-violet);
+    margin-bottom: 0.85rem;
+  }
+
+  .howto-steps {
+    margin: 0 0 1.15rem;
+    padding: 0 0 0 1.15rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .howto-steps li {
+    margin-bottom: 0.55rem;
+  }
+
+  .howto-steps li:last-child {
+    margin-bottom: 0;
+  }
+
+  .howto-steps a {
+    color: var(--hns-violet);
+  }
+
+  .howto-tip {
+    margin: 0 0 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  .howto-tip a {
+    color: var(--hns-violet);
+  }
+
+  .security-callout {
+    padding: 1.75rem 1.75rem 1.5rem;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(185, 28, 28, 0.06), rgba(185, 28, 28, 0));
+    border: 1px solid rgba(185, 28, 28, 0.22);
+  }
+
+  [data-theme='dark'] .security-callout {
+    background: linear-gradient(135deg, rgba(248, 113, 113, 0.08), rgba(248, 113, 113, 0));
+    border-color: rgba(248, 113, 113, 0.28);
+  }
+
+  .security-callout .section-label {
+    color: var(--down-color);
+  }
+
+  .security-callout .section-label::after {
+    background: linear-gradient(to right, rgba(185, 28, 28, 0.4), transparent);
+  }
+
+  .security-list {
+    margin: 0;
+    padding: 0 0 0 1.15rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .security-list li {
+    margin-bottom: 0.5rem;
+  }
+
+  .security-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .status-pill {
+    display: inline-block;
+    margin-left: 0.45rem;
+    padding: 0.12rem 0.45rem;
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    vertical-align: middle;
+    color: var(--hns-violet);
+    background: rgba(105, 58, 250, 0.1);
+    border-radius: 999px;
+  }
+
+  .ban-callout {
+    padding: 1.75rem;
+    border-radius: 14px;
+    background: var(--surface-soft);
+    border: 1px solid var(--glass-border);
+  }
+
+  .ban-body {
+    margin: 0 0 0.75rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .ban-note {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .suggest-callout h2 {
+    font-size: clamp(1.35rem, 2vw, 1.75rem);
+  }
+
+  .suggest-callout p a {
+    color: var(--hns-violet);
+  }
+
+  .suggest-rules {
+    margin: 0 0 1.5rem;
+    padding: 0 0 0 1.15rem;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .suggest-rules li {
+    margin-bottom: 0.4rem;
+  }
+
+  .suggest-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .suggest-meta {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  .suggest-meta code {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    background: var(--surface-soft);
+    border: 1px solid var(--glass-border);
+  }
+
+  .suggest-meta a {
+    color: var(--hns-violet);
+  }
+</style>
