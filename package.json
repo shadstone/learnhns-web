@@ -6,7 +6,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "community:telegram": "node scripts/export-community-telegram.mjs",
+    "community:telegram:copy": "node scripts/export-community-telegram.mjs --copy",
+    "community:telegram:html": "node scripts/export-community-telegram.mjs --html",
+    "community:telegram:full": "node scripts/export-community-telegram.mjs --full"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",

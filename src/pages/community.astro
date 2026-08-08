@@ -11,12 +11,22 @@ import {
   statusLabel,
   isInactive,
 } from '../data/community-resources';
+import {
+  formatTelegramPlain,
+  formatTelegramHtml,
+  telegramExportStats,
+} from '../lib/telegram-community-export';
 
 const description =
   'Handshake community start-here guide: security rules, wallets, nodes, resolvers, explorers, regional chats, and how to suggest edits. Web mirror of the main Telegram pin.';
 
 const suggestUrl = suggestEditIssueUrl();
 const editUrl = editDataFileUrl();
+const telegramPlain = formatTelegramPlain('compact');
+const telegramPlainFull = formatTelegramPlain('full');
+const telegramHtml = formatTelegramHtml();
+const telegramStats = telegramExportStats(telegramPlain);
+const telegramFullStats = telegramExportStats(telegramPlainFull);
 ---
 <BaseLayout
   title="Handshake Community — Start Here"
@@ -207,6 +217,77 @@ const editUrl = editDataFileUrl();
       </div>
     </section>
 
+    <!-- UPDATE TELEGRAM PIN (maintainers) -->
+    <section class="page-section" id="telegram-pin" aria-labelledby="telegram-pin-heading">
+      <div class="section-label" id="telegram-pin-heading">Update the Telegram pin</div>
+      <div class="callout telegram-pin-callout">
+        <h2>Copy → paste into the group pin</h2>
+        <p>
+          Keep this site as the source of truth, then refresh the
+          <a href={communityMeta.sourceTelegram} target="_blank" rel="noopener noreferrer">pinned message</a>
+          so newcomers get the same links. Compact plain text stays under Telegram’s
+          <strong>4096 character</strong> limit and uses full <code>https://…</code> URLs
+          (Telegram auto-makes them clickable).
+        </p>
+
+        <ol class="telegram-pin-steps">
+          <li>Update links in <code>{communityMeta.dataFilePath}</code> (or merge a community PR).</li>
+          <li>Click <strong>Copy for Telegram</strong> below (or run <code>npm run community:telegram:copy</code>).</li>
+          <li>Open <a href={communityMeta.sourceTelegram} target="_blank" rel="noopener noreferrer">the pin</a> in Telegram Desktop.</li>
+          <li>Edit message → Select all → Paste → Save. Re-pin if needed.</li>
+        </ol>
+
+        <p class:list={['telegram-char-count', { 'is-over': telegramStats.overLimit }]}>
+          Compact paste: <strong>{telegramStats.length}</strong> / {telegramStats.limit} characters
+          {telegramStats.overLimit
+            ? ' — over limit; trim the data file before posting.'
+            : ` — ${telegramStats.remaining} free.`}
+          {telegramFullStats.overLimit && (
+            <> Full labeled version is {telegramFullStats.length} chars (over limit — use compact to paste).</>
+          )}
+        </p>
+
+        <div class="suggest-actions">
+          <button type="button" class="btn-primary" id="copy-tg-plain" data-copy-target="tg-plain">
+            Copy for Telegram
+          </button>
+          <button type="button" class="btn-secondary" id="copy-tg-html" data-copy-target="tg-html">
+            Copy HTML (bots only)
+          </button>
+          <a class="btn-secondary" href="/community/telegram.txt" target="_blank" rel="noopener">
+            Open .txt
+          </a>
+          <a class="btn-secondary" href="/community/telegram.html" target="_blank" rel="noopener">
+            Open HTML
+          </a>
+        </div>
+        <p class="copy-feedback" id="copy-feedback" hidden aria-live="polite"></p>
+
+        <details class="tg-preview" open>
+          <summary>Preview — compact plain (ready to paste)</summary>
+          <pre id="tg-plain" class="tg-pre">{telegramPlain}</pre>
+        </details>
+        <details class="tg-preview">
+          <summary>Preview — full labels (may exceed limit)</summary>
+          <pre id="tg-plain-full" class="tg-pre">{telegramPlainFull}</pre>
+        </details>
+        <details class="tg-preview">
+          <summary>Preview — HTML (Bot API <code>parse_mode=HTML</code>)</summary>
+          <pre id="tg-html" class="tg-pre">{telegramHtml}</pre>
+          <p class="tg-bot-note">
+            Bots can only edit messages <em>they</em> sent. To automate later: post once with your bot,
+            pin that message, then call <code>editMessageText</code> with this HTML.
+          </p>
+        </details>
+
+        <p class="suggest-meta">
+          CLI: <code>npm run community:telegram</code>
+          · clipboard: <code>npm run community:telegram:copy</code>
+          · HTML: <code>npm run community:telegram:html</code>
+        </p>
+      </div>
+    </section>
+
     <!-- SUGGEST EDITS (footer CTAs) -->
     <section class="page-section" id="suggest-edits" aria-labelledby="suggest-heading">
       <div class="section-label" id="suggest-heading">Suggest an edit</div>
@@ -239,6 +320,46 @@ const editUrl = editDataFileUrl();
 
   </div>
 </BaseLayout>
+
+<script>
+  function bindCopy(buttonId: string) {
+    const btn = document.getElementById(buttonId);
+    const feedback = document.getElementById('copy-feedback');
+    if (!btn || !feedback) return;
+
+    btn.addEventListener('click', async () => {
+      const targetId = btn.getAttribute('data-copy-target');
+      const el = targetId ? document.getElementById(targetId) : null;
+      const text = el?.textContent ?? '';
+      if (!text) return;
+
+      try {
+        await navigator.clipboard.writeText(text);
+        feedback.hidden = false;
+        feedback.textContent =
+          targetId === 'tg-html'
+            ? 'HTML copied — use with a bot and parse_mode=HTML.'
+            : 'Copied — paste into the Telegram pin edit box.';
+        btn.classList.add('is-copied');
+        setTimeout(() => btn.classList.remove('is-copied'), 2000);
+      } catch {
+        // Fallback: select the pre for manual copy
+        const range = document.createRange();
+        if (el) {
+          range.selectNodeContents(el);
+          const sel = window.getSelection();
+          sel?.removeAllRanges();
+          sel?.addRange(range);
+        }
+        feedback.hidden = false;
+        feedback.textContent = 'Clipboard blocked — text selected; press ⌘C / Ctrl+C.';
+      }
+    });
+  }
+
+  bindCopy('copy-tg-plain');
+  bindCopy('copy-tg-html');
+</script>
 
 <style>
   .page-shell {
@@ -465,5 +586,112 @@ const editUrl = editDataFileUrl();
 
   .suggest-meta a {
     color: var(--hns-violet);
+  }
+
+  .telegram-pin-callout h2 {
+    font-size: clamp(1.35rem, 2vw, 1.75rem);
+  }
+
+  .telegram-pin-callout > p a,
+  .telegram-pin-steps a {
+    color: var(--hns-violet);
+  }
+
+  .telegram-pin-steps {
+    margin: 0 0 1.15rem;
+    padding: 0 0 0 1.15rem;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .telegram-pin-steps li {
+    margin-bottom: 0.4rem;
+  }
+
+  .telegram-char-count {
+    margin: 0 0 1.15rem;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+
+  .telegram-char-count.is-over {
+    color: var(--down-color);
+    font-weight: 600;
+  }
+
+  .telegram-pin-callout .suggest-actions {
+    margin-bottom: 0.75rem;
+  }
+
+  .telegram-pin-callout button.btn-primary,
+  .telegram-pin-callout button.btn-secondary {
+    cursor: pointer;
+    font: inherit;
+  }
+
+  .telegram-pin-callout button.is-copied {
+    opacity: 0.85;
+  }
+
+  .copy-feedback {
+    margin: 0 0 1rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--up-color);
+  }
+
+  .tg-preview {
+    margin: 0 0 0.75rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .tg-preview summary {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    user-select: none;
+  }
+
+  .tg-preview summary:hover {
+    color: var(--hns-violet);
+  }
+
+  .tg-pre {
+    margin: 0;
+    padding: 1rem 1.1rem 1.15rem;
+    max-height: 320px;
+    overflow: auto;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+    word-break: break-word;
+    border-top: 1px solid var(--glass-border);
+    background: var(--surface-soft);
+  }
+
+  .tg-bot-note {
+    margin: 0;
+    padding: 0.75rem 1rem 1rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    border-top: 1px solid var(--glass-border);
+  }
+
+  .tg-bot-note code {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .telegram-pin-callout .suggest-meta {
+    margin-top: 1rem;
   }
 </style>
