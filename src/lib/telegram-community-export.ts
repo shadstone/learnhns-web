@@ -214,11 +214,6 @@ export function formatTelegramPlain(mode: PlainMode = 'compact'): string {
   );
   parts.push('');
 
-  if (mode === 'compact') {
-    parts.push(`Living list + suggest edits: ${SITE}/community/`);
-    parts.push('');
-  }
-
   for (const section of communitySections) {
     parts.push(sectionHeadingPlain(section.emoji, section.title, mode));
     for (const link of section.links) {
@@ -246,7 +241,14 @@ export function formatTelegramPlain(mode: PlainMode = 'compact'): string {
   parts.push(
     mode === 'compact'
       ? 'Keep support discussions public. Report broken/unsafe links to admins.'
-      : 'Keep support discussions public. Report broken or unsafe links to the admins, or suggest edits at https://learnhns.com/community/',
+      : 'Keep support discussions public. Report broken or unsafe links to the admins.',
+  );
+  parts.push('');
+  // Matches the live Telegram pin footer (community preference)
+  parts.push(
+    mode === 'compact'
+      ? `To make edits to this post, please visit ${SITE}/community/`
+      : `To make edits to this post, please visit https://learnhns.com/community/`,
   );
 
   return parts.join('\n').trim() + '\n';
@@ -280,10 +282,6 @@ export function formatTelegramHtml(): string {
     ),
   );
   parts.push('');
-  parts.push(
-    `Living list + suggest edits: <a href="${SITE}/community/">learnhns.com/community</a>`,
-  );
-  parts.push('');
 
   for (const section of communitySections) {
     parts.push(
@@ -302,7 +300,11 @@ export function formatTelegramHtml(): string {
   parts.push(escapeHtml(banPolicy.body));
   parts.push('');
   parts.push(
-    '<b>Keep support discussions public.</b> Report broken or unsafe links to the admins, or suggest edits at <a href="https://learnhns.com/community/">learnhns.com/community</a>.',
+    '<b>Keep support discussions public.</b> Report broken or unsafe links to the admins.',
+  );
+  parts.push('');
+  parts.push(
+    `To make edits to this post, please visit <a href="${SITE}/community/">learnhns.com/community</a>`,
   );
 
   return parts.join('\n').trim() + '\n';

@@ -51,7 +51,8 @@ export const securityBullets = [
 export const banPolicy = {
   title: 'Ban / remove',
   body: 'Scams, impersonation, spam, unsolicited DMs, OTC buying/selling, repeated promotion, harassment, disrespect, or persistent off-topic disruption.',
-  note: 'Keep support discussions public. Report broken or unsafe links to the admins, or suggest an edit on this page.',
+  note: 'Keep support discussions public. Report broken or unsafe links to the admins.',
+  editCta: 'To make edits to this post, please visit https://learnhns.com/community/',
 } as const;
 
 export const communitySections: CommunitySection[] = [

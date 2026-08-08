@@ -214,6 +214,11 @@ const telegramFullStats = telegramExportStats(telegramPlainFull);
         <div class="section-label" id="ban-heading">🚫 {banPolicy.title}</div>
         <p class="ban-body">{banPolicy.body}</p>
         <p class="ban-note">{banPolicy.note}</p>
+        <p class="ban-note ban-edit-cta">
+          <strong>To make edits to this post,</strong> please visit
+          <a href="/community/">learnhns.com/community</a>
+          (GitHub issue/PR or the guide above).
+        </p>
       </div>
     </section>
 
@@ -577,6 +582,14 @@ const telegramFullStats = telegramExportStats(telegramPlainFull);
     color: var(--text-muted);
     font-size: 0.88rem;
     line-height: 1.55;
+  }
+
+  .ban-edit-cta {
+    margin-top: 0.75rem;
+  }
+
+  .ban-edit-cta a {
+    color: var(--hns-violet);
   }
 
   .suggest-callout h2 {
