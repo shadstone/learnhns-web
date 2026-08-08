@@ -31,6 +31,9 @@ export const communityMeta = {
   lastAudited: '2026-07-15',
   lastAuditedLabel: 'July 15, 2026',
   auditedBy: 'Jaron',
+  lastEdited: '2026-08-08',
+  lastEditedLabel: 'August 8, 2026',
+  lastEditedBy: 'pcfreak30',
   sourceTelegram: 'https://t.me/handshake_hns/156540',
   sourceTelegramLabel: 'Pinned message in @handshake_hns',
   githubRepo: 'https://github.com/shadstone/learnhns-web',
@@ -162,6 +165,11 @@ export const communitySections: CommunitySection[] = [
     title: 'Access, DNS, and DANE',
     links: [
       {
+        title: 'HNSDNS',
+        href: 'https://hnsdns.com/',
+        note: 'Simple, privacy-focused access to Handshake names',
+      },
+      {
         title: 'HNS DANE Browser for Android',
         href: 'https://play.google.com/store/apps/details?id=com.denuoweb.hnsdane',
         note: 'Play Store',
@@ -218,6 +226,24 @@ export const communitySections: CommunitySection[] = [
         title: 'HNS network topology visualization',
         href: 'https://hns.denuoweb.com/hns-topology/',
         note: 'Network map',
+      },
+    ],
+  },
+  {
+    id: 'hosting',
+    emoji: '🌍',
+    title: 'Hosting and decentralized web',
+    lede: 'Full hosting directory on LearnHNS /host.',
+    links: [
+      {
+        title: 'Pinner',
+        href: 'https://pinner.xyz/host',
+        note: 'Decentralized hosting (IPFS) built for websites on Handshake names',
+      },
+      {
+        title: 'LearnHNS hosting guide',
+        href: '/host/',
+        note: 'Host.limo, Handout, Pinner, and more',
       },
     ],
   },

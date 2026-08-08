@@ -1,0 +1,317 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema, webPageSchema, abs } from '../lib/seo';
+
+const description =
+  'Host a website on your Handshake (HNS) name — Pinner decentralized IPFS hosting, Host.limo, Handout, HNSHosting, and self-hosted options.';
+
+const featured = {
+  title: 'Pinner',
+  href: 'https://pinner.xyz/host',
+  deployHref: 'https://account.pinner.xyz/register?intent=hosting',
+  docsHref: 'https://docs.pinner.xyz/ipfs/cli/getting-started',
+  blurb:
+    'Decentralized hosting for static sites, built for Handshake names. Upload your build, get a content address, point your HNS name with DNSLink — files are pinned across independent providers on the Sia network so no single host can take you offline.',
+  points: [
+    'IPFS content addressing — same content, stable link',
+    'Handshake, ENS, DNSLink, and traditional domains',
+    'Static sites and dApp frontends (no server runtime)',
+    'CLI: curl -fsSL https://get.pinner.xyz | sh',
+  ],
+};
+
+const options = [
+  {
+    title: 'Host.limo',
+    href: 'https://my.host.limo',
+    note: 'Headless Domains, Pages, and Handout-style hosting for HNS names.',
+    cta: 'Open Host.limo',
+  },
+  {
+    title: 'Handout',
+    href: '/handout/',
+    note: 'Open-source path for TLD owners: authoritative DNS, DNSSEC, DANE/TLSA, and web hosting.',
+    cta: 'Learn about Handout',
+  },
+  {
+    title: 'HNSHosting',
+    href: 'https://hnshosting.au',
+    note: 'WordPress-style hosting on Handshake names with HTTPS support.',
+    cta: 'Visit HNSHosting',
+  },
+  {
+    title: 'HNS Links',
+    href: 'https://links.hns.au/',
+    note: 'No-code link page for your name — HIP-05 wallets, NIP-05, and more.',
+    cta: 'Open HNS Links',
+  },
+  {
+    title: 'Docs: create a Handshake website',
+    href: '/docs/starting-from-zero/how-to-create-a-handshake-website',
+    note: 'Guides for IPFS, GitHub Pages, Vercel, Heroku, CoreDNS, and DANE/HTTPS.',
+    cta: 'Read the guides',
+  },
+  {
+    title: 'Start learning path',
+    href: '/start/',
+    note: 'Wallet, market, browser, then host — the full LearnHNS onboarding sequence.',
+    cta: 'Go to Start',
+  },
+];
+---
+<BaseLayout
+  title="Host a Handshake Website"
+  description={description}
+  keywords="Handshake hosting, HNS website, Pinner IPFS, Host.limo, Handout, HNSHosting, decentralized web hosting, DNSLink Handshake"
+  schema={[
+    webPageSchema({ title: 'Host a Handshake Website', description, url: abs('/host/') }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Host', path: '/host/' },
+    ]),
+  ]}
+>
+  <div class="page-shell">
+
+    <section class="page-hero">
+      <div class="page-hero-eyebrow">Hosting &amp; decentralized web</div>
+      <h1 class="page-hero-title">
+        Host your site on a <em>Handshake name.</em>
+      </h1>
+      <p class="page-hero-lede">
+        Own the name on-chain, then publish the site. Options range from one-command
+        decentralized pins to managed hosts and full self-hosted DNS + DANE stacks.
+      </p>
+    </section>
+
+    <!-- PINNER FEATURED (pcfreak30 community update, Aug 2026) -->
+    <section class="page-section featured-section" id="pinner" aria-labelledby="pinner-heading">
+      <div class="section-label" id="pinner-heading">Featured · community add</div>
+      <div class="featured-card">
+        <div class="featured-copy">
+          <p class="featured-eyebrow">Pinner · pinner.xyz</p>
+          <h2>{featured.title}</h2>
+          <p class="featured-blurb">{featured.blurb}</p>
+          <ul class="featured-points">
+            {featured.points.map((p) => (
+              <li>{p}</li>
+            ))}
+          </ul>
+          <div class="featured-actions">
+            <a class="btn-primary" href={featured.href} target="_blank" rel="noopener noreferrer">
+              Pinner hosting overview
+            </a>
+            <a class="btn-secondary" href={featured.deployHref} target="_blank" rel="noopener noreferrer">
+              Deploy your site
+            </a>
+            <a class="btn-secondary" href={featured.docsHref} target="_blank" rel="noopener noreferrer">
+              CLI docs
+            </a>
+          </div>
+          <p class="featured-credit">
+            Added from community suggestion by
+            <a href="https://github.com/pcfreak30" target="_blank" rel="noopener noreferrer">pcfreak30</a>
+            (LumeWeb / Pinner) ·
+            <a href="https://gist.github.com/pcfreak30/04da4bed9e4d894afb42f3e445c8f733" target="_blank" rel="noopener noreferrer">
+              gist
+            </a>
+          </p>
+        </div>
+        <aside class="featured-panel" aria-label="Pinner quick start">
+          <div class="panel-label">Quick start</div>
+          <ol class="panel-steps">
+            <li>Build your static site locally (or in CI).</li>
+            <li>Install the CLI and run <code>pinner upload ./dist</code>.</li>
+            <li>Point your Handshake name at the content (DNSLink / resolver path).</li>
+            <li>Browse with an HNS-aware resolver or browser.</li>
+          </ol>
+          <p class="panel-note">
+            Static files only — no serverless or PHP. For dynamic apps, pair Pinner
+            static assets with a traditional host.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- OTHER OPTIONS -->
+    <section class="page-section" id="options" aria-labelledby="options-heading">
+      <div class="section-label" id="options-heading">More hosting options</div>
+      <div class="tile-grid tile-grid--3">
+        {options.map((opt) => {
+          const external = opt.href.startsWith('http');
+          return (
+            <a
+              href={opt.href}
+              class="link-tile"
+              target={external ? '_blank' : undefined}
+              rel={external ? 'noopener noreferrer' : undefined}
+            >
+              <h3>{opt.title}</h3>
+              <p>{opt.note}</p>
+              <span class="link-tile-cta">{opt.cta} &rarr;</span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="page-section" id="related">
+      <div class="callout">
+        <h2>Related</h2>
+        <p>
+          See the full community map on
+          <a href="/community/">/community/</a>,
+          resolvers and access tools under Access on that page (including
+          <a href="https://hnsdns.com/" target="_blank" rel="noopener noreferrer">HNSDNS</a>),
+          and the
+          <a href="/docs/starting-from-zero/how-to-create-a-handshake-website">website creation docs</a>.
+        </p>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .page-section {
+    padding: 1.75rem 0 2.5rem;
+  }
+
+  .page-section:last-child {
+    padding-bottom: 5rem;
+  }
+
+  .featured-section {
+    padding-top: 0;
+  }
+
+  .featured-card {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 1.5rem;
+    padding: 1.75rem;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(105, 58, 250, 0.07), rgba(0, 240, 192, 0.04));
+    border: 1px solid rgba(105, 58, 250, 0.22);
+  }
+
+  @media (max-width: 850px) {
+    .featured-card {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .featured-eyebrow {
+    margin: 0 0 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hns-violet);
+  }
+
+  .featured-copy h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.85rem;
+    color: var(--text-primary);
+  }
+
+  .featured-blurb {
+    margin: 0 0 1rem;
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .featured-points {
+    margin: 0 0 1.35rem;
+    padding: 0 0 0 1.15rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .featured-points li {
+    margin-bottom: 0.4rem;
+  }
+
+  .featured-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-bottom: 1rem;
+  }
+
+  .featured-credit {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .featured-credit a {
+    color: var(--hns-violet);
+  }
+
+  .featured-panel {
+    padding: 1.35rem;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--glass-border);
+    align-self: start;
+  }
+
+  .panel-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hns-violet);
+    margin-bottom: 0.85rem;
+  }
+
+  .panel-steps {
+    margin: 0 0 1rem;
+    padding: 0 0 0 1.1rem;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .panel-steps li {
+    margin-bottom: 0.5rem;
+  }
+
+  .panel-steps code {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 0.08rem 0.3rem;
+    border-radius: 4px;
+    background: var(--surface-soft);
+    border: 1px solid var(--glass-border);
+  }
+
+  .panel-note {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .callout h2 {
+    font-size: 1.35rem;
+  }
+
+  .callout a {
+    color: var(--hns-violet);
+  }
+</style>

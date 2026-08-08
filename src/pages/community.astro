@@ -47,6 +47,12 @@ const editUrl = editDataFileUrl();
       <p class="meta-line">
         Last audited: <strong>{communityMeta.lastAuditedLabel}</strong>
         {communityMeta.auditedBy && <> from {communityMeta.auditedBy}</>}
+        {communityMeta.lastEditedLabel && (
+          <>
+            {' '}· Last edited: <strong>{communityMeta.lastEditedLabel}</strong>
+            {communityMeta.lastEditedBy && <> from {communityMeta.lastEditedBy}</>}
+          </>
+        )}
         · Source:
         <a href={communityMeta.sourceTelegram} target="_blank" rel="noopener noreferrer">
           Telegram pin
