@@ -224,18 +224,36 @@ const telegramFullStats = telegramExportStats(telegramPlainFull);
         <h2>Copy → paste into the group pin</h2>
         <p>
           Keep this site as the source of truth, then refresh the
-          <a href={communityMeta.sourceTelegram} target="_blank" rel="noopener noreferrer">pinned message</a>
-          so newcomers get the same links. Compact plain text stays under Telegram’s
-          <strong>4096 character</strong> limit and uses full <code>https://…</code> URLs
-          (Telegram auto-makes them clickable).
+          <a href={communityMeta.sourceTelegram} target="_blank" rel="noopener noreferrer">pinned message</a>.
+          Compact plain text stays under Telegram’s <strong>4096 character</strong> limit.
+          Each item is <code>Title (https://…)</code> so Telegram auto-makes URLs clickable.
+        </p>
+        <p class="telegram-pin-warning">
+          <strong>If everything looks underlined / wrong:</strong> you pasted <em>on top of</em> the old
+          formatted pin. Telegram keeps the old bold/underline entities. Follow the steps below exactly
+          (empty the box first).
         </p>
 
         <ol class="telegram-pin-steps">
-          <li>Update links in <code>{communityMeta.dataFilePath}</code> (or merge a community PR).</li>
-          <li>Click <strong>Copy for Telegram</strong> below (or run <code>npm run community:telegram:copy</code>).</li>
-          <li>Open <a href={communityMeta.sourceTelegram} target="_blank" rel="noopener noreferrer">the pin</a> in Telegram Desktop.</li>
-          <li>Edit message → Select all → Paste → Save. Re-pin if needed.</li>
+          <li>Click <strong>Copy for Telegram</strong> below.</li>
+          <li>
+            Open
+            <a href={communityMeta.sourceTelegram} target="_blank" rel="noopener noreferrer">the pin</a>
+            in <strong>Telegram Desktop</strong> → Edit message.
+          </li>
+          <li>
+            <strong>Select all</strong> (⌘A / Ctrl+A) → <strong>Delete</strong> so the field is empty.
+            Do not paste while old text is still selected.
+          </li>
+          <li>
+            Optional but recommended: paste once into Notes/Notepad, copy again (strips any leftover rich text).
+          </li>
+          <li>Click in the empty Telegram field → Paste (⌘V) → Save. Re-pin if the group dropped the pin.</li>
         </ol>
+        <p class="telegram-pin-note">
+          This will look a bit different from the original pin: the original used hidden hyperlinks on the
+          titles only. Plain paste shows the full URL (that is required without a bot). Links still work.
+        </p>
 
         <p class:list={['telegram-char-count', { 'is-over': telegramStats.overLimit }]}>
           Compact paste: <strong>{telegramStats.length}</strong> / {telegramStats.limit} characters
@@ -322,6 +340,24 @@ const telegramFullStats = telegramExportStats(telegramPlainFull);
 </BaseLayout>
 
 <script>
+  async function copyPlainOnly(text: string) {
+    // Prefer ClipboardItem with text/plain only so browsers don't also attach
+    // text/html from the page (which Telegram can mis-apply as formatting).
+    if (typeof ClipboardItem !== 'undefined' && navigator.clipboard?.write) {
+      try {
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            'text/plain': new Blob([text], { type: 'text/plain' }),
+          }),
+        ]);
+        return;
+      } catch {
+        /* fall through */
+      }
+    }
+    await navigator.clipboard.writeText(text);
+  }
+
   function bindCopy(buttonId: string) {
     const btn = document.getElementById(buttonId);
     const feedback = document.getElementById('copy-feedback');
@@ -330,20 +366,20 @@ const telegramFullStats = telegramExportStats(telegramPlainFull);
     btn.addEventListener('click', async () => {
       const targetId = btn.getAttribute('data-copy-target');
       const el = targetId ? document.getElementById(targetId) : null;
-      const text = el?.textContent ?? '';
-      if (!text) return;
+      // textContent, not innerText — avoid layout-dependent whitespace surprises
+      const text = (el?.textContent ?? '').replace(/\u00a0/g, ' ');
+      if (!text.trim()) return;
 
       try {
-        await navigator.clipboard.writeText(text);
+        await copyPlainOnly(text);
         feedback.hidden = false;
         feedback.textContent =
           targetId === 'tg-html'
-            ? 'HTML copied — use with a bot and parse_mode=HTML.'
-            : 'Copied — paste into the Telegram pin edit box.';
+            ? 'HTML copied — only for a bot with parse_mode=HTML (not for manual paste).'
+            : 'Copied as plain text. In Telegram: Edit → Select all → Delete → Paste into empty field → Save.';
         btn.classList.add('is-copied');
-        setTimeout(() => btn.classList.remove('is-copied'), 2000);
+        setTimeout(() => btn.classList.remove('is-copied'), 2500);
       } catch {
-        // Fallback: select the pre for manual copy
         const range = document.createRange();
         if (el) {
           range.selectNodeContents(el);
@@ -352,7 +388,8 @@ const telegramFullStats = telegramExportStats(telegramPlainFull);
           sel?.addRange(range);
         }
         feedback.hidden = false;
-        feedback.textContent = 'Clipboard blocked — text selected; press ⌘C / Ctrl+C.';
+        feedback.textContent =
+          'Clipboard blocked — text selected in the preview; press ⌘C, then paste into Notes first, then Telegram.';
       }
     });
   }
@@ -597,8 +634,26 @@ const telegramFullStats = telegramExportStats(telegramPlainFull);
     color: var(--hns-violet);
   }
 
-  .telegram-pin-steps {
+  .telegram-pin-warning {
+    margin: 0 0 1rem;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    background: linear-gradient(135deg, rgba(180, 83, 9, 0.08), rgba(180, 83, 9, 0));
+    border: 1px solid rgba(180, 83, 9, 0.28);
+  }
+
+  .telegram-pin-note {
     margin: 0 0 1.15rem;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  .telegram-pin-steps {
+    margin: 0 0 1rem;
     padding: 0 0 0 1.15rem;
     color: var(--text-secondary);
     font-size: 0.92rem;
@@ -606,7 +661,7 @@ const telegramFullStats = telegramExportStats(telegramPlainFull);
   }
 
   .telegram-pin-steps li {
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.45rem;
   }
 
   .telegram-char-count {
