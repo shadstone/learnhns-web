@@ -1,0 +1,407 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbSchema, webPageSchema, abs } from '../../lib/seo';
+
+const description =
+  'A reusable community runbook for building hnsd, checking bootstrap peer reachability, testing initial synchronization, and reporting review evidence.';
+---
+<BaseLayout
+  title="hnsd Bootstrap Seed Validation"
+  description={description}
+  keywords="hnsd testing, Handshake bootstrap seeds, seed validation, community testing, HNS peer reachability"
+  schema={[
+    webPageSchema({ title: 'hnsd Bootstrap Seed Validation', description, url: abs('/guides/hnsd-bootstrap-seed-validation/') }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'DNS', path: '/dns/' },
+      { name: 'hnsd Bootstrap Seed Validation', path: '/guides/hnsd-bootstrap-seed-validation/' },
+    ]),
+  ]}
+>
+  <article class="runbook">
+    <header class="runbook-hero">
+      <a class="back-link" href="/dns/">DNS resources</a>
+      <p class="eyebrow">Community validation runbook</p>
+      <h1>Test an <code>hnsd</code> bootstrap seed update.</h1>
+      <p class="lede">
+        Bootstrap seeds help a new hnsd installation find its first Handshake peers.
+        This guide gives contributors a repeatable way to check a proposed seed-list
+        change and leave evidence that maintainers can use in a pull-request review.
+      </p>
+      <div class="scope-note">
+        <strong>The most valuable independent test</strong>
+        <p>
+          Run the candidate from a different country, ISP, hosting provider, or network.
+          Automated checks can prove that the code builds; only distributed community
+          testing can show that the replacement peers are broadly reachable.
+        </p>
+      </div>
+    </header>
+
+    <section class="runbook-section">
+      <p class="section-kicker">Purpose</p>
+      <h2>What are we validating?</h2>
+      <div class="check-grid">
+        <article>
+          <span>01</span>
+          <h3>Build integrity</h3>
+          <p>The candidate branch compiles and its unit tests pass without local source changes.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Peer reachability</h3>
+          <p>A useful share of the proposed peers accepts Handshake P2P connections on TCP port 44806.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Bootstrap behavior</h3>
+          <p>hnsd starts with its built-in peers, connects, and begins advancing headers without a manually supplied seed.</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h3>Network diversity</h3>
+          <p>The list does not depend too heavily on one operator, address range, provider, or geographic region.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="runbook-section">
+      <p class="section-kicker">Choose a test</p>
+      <h2>Minimum or full validation.</h2>
+      <div class="path-grid">
+        <article class="path-card path-card--featured">
+          <p class="path-label">Recommended</p>
+          <h3>Runtime smoke test</h3>
+          <p>
+            Best when CI is already green. Build the candidate, start hnsd on safe local
+            ports, and confirm that it finds peers and advances headers. Usually 10–15 minutes.
+          </p>
+        </article>
+        <article class="path-card">
+          <p class="path-label">Additional evidence</p>
+          <h3>Reachability survey</h3>
+          <p>
+            Check each proposed IP from your network and report how many accept TCP/44806.
+            A failed individual peer is not automatically a failed proposal.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="runbook-section steps">
+      <p class="section-kicker">Procedure</p>
+      <h2>Run the candidate.</h2>
+
+      <div class="step">
+        <div class="step-number">1</div>
+        <div>
+          <h3>Download the pull request</h3>
+          <p>Replace <code>134</code> with the pull-request number you are testing.</p>
+          <pre><code>git clone https://github.com/handshake-org/hnsd.git
+cd hnsd
+git fetch origin pull/134/head:validation-candidate
+git switch validation-candidate</code></pre>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div>
+          <h3>Install dependencies and build</h3>
+          <div class="platform-grid">
+            <div>
+              <h4>macOS</h4>
+              <pre><code>brew install automake autoconf libtool unbound
+./autogen.sh
+./configure --with-unbound="$(brew --prefix unbound)"
+make
+./test_hnsd</code></pre>
+            </div>
+            <div>
+              <h4>Ubuntu or Debian</h4>
+              <pre><code>sudo apt update
+sudo apt install -y git automake autoconf libtool \
+  libunbound-dev build-essential
+./autogen.sh
+./configure
+make
+./test_hnsd</code></pre>
+            </div>
+          </div>
+          <p class="expected"><strong>Expected:</strong> the build completes and <code>./test_hnsd</code> passes.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div>
+          <h3>Start hnsd with only its built-in seeds</h3>
+          <p>
+            These high local DNS ports avoid changing system DNS settings or requiring root access.
+            Do not add the <code>-s</code> option: the point is to exercise the candidate seed list.
+          </p>
+          <pre><code>mkdir -p /tmp/hnsd-seed-validation
+./hnsd -t -x /tmp/hnsd-seed-validation \
+  -n 127.0.0.1:15369 \
+  -r 127.0.0.1:15368</code></pre>
+          <p>
+            Let it run for a few minutes. A pass means hnsd loads its checkpoint, connects
+            to peers, and begins receiving or advancing headers. A complete chain sync is
+            unnecessary. Stop it with <code>Ctrl+C</code>.
+          </p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <div>
+          <h3>Optionally count reachable peers</h3>
+          <pre><code>grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' src/seeds.h |
+sort -u |
+while IFS= read -r ip; do
+  if nc -z -w 3 "$ip" 44806; then
+    echo "REACHABLE $ip"
+  else
+    echo "UNREACHABLE $ip"
+  fi
+done</code></pre>
+          <p>
+            Report the count and your approximate region. Do not publish your home IP address.
+            Results vary by firewall, ISP, geography, and time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="runbook-section">
+      <p class="section-kicker">Decision guide</p>
+      <h2>What counts as a pass?</h2>
+      <div class="decision-grid">
+        <div class="decision decision--pass">
+          <h3>Pass</h3>
+          <ul>
+            <li>The candidate builds without local source patches.</li>
+            <li>Unit tests pass.</li>
+            <li>hnsd finds at least one peer and advances headers.</li>
+            <li>The seed set retains reasonable operator and network diversity.</li>
+          </ul>
+        </div>
+        <div class="decision decision--investigate">
+          <h3>Investigate</h3>
+          <ul>
+            <li>The branch needs a source edit to compile.</li>
+            <li>hnsd remains without peers after several minutes.</li>
+            <li>Most seeds are unreachable from multiple independent networks.</li>
+            <li>The proposed list is concentrated under one operator or address range.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="runbook-section report-section">
+      <p class="section-kicker">Evidence</p>
+      <h2>Leave a useful review report.</h2>
+      <p>Paste this into the pull request and replace the bracketed fields:</p>
+      <pre><code>Tested this hnsd seed update from [country/region] on [operating system].
+
+- Candidate commit: [short commit SHA]
+- Build: passed / failed
+- Unit tests: passed / failed
+- Reachable seeds: [X/Y, if checked]
+- Connected using built-in seeds: yes / no
+- Began advancing headers: yes / no
+- Local source changes required: none / [describe]
+
+Result: LGTM / needs investigation
+Notes: [errors, timing, or other observations]</code></pre>
+      <p class="closing-note">
+        Maintainers can combine this report with CI results, the source diff, and reports
+        from other regions. Community testing supplies evidence; repository maintainers
+        still make the final merge and seed-policy decision.
+      </p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .runbook {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 1.5rem 5rem;
+  }
+
+  .runbook-hero {
+    padding: 4rem 0 2.5rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    margin-bottom: 1.25rem;
+    color: var(--hns-violet);
+    font-weight: 700;
+  }
+
+  .eyebrow,
+  .section-kicker,
+  .path-label {
+    color: var(--hns-violet);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    max-width: 820px;
+    font-size: clamp(2.4rem, 6vw, 4.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+  }
+
+  h1 code,
+  .runbook code {
+    color: var(--hns-violet);
+    font-family: var(--font-mono);
+  }
+
+  .lede {
+    max-width: 760px;
+    color: var(--text-secondary);
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    line-height: 1.75;
+  }
+
+  .scope-note,
+  .closing-note {
+    margin-top: 2rem;
+    padding: 1.35rem 1.5rem;
+    border: 1px solid var(--hns-violet);
+    border-radius: 12px;
+    background: rgba(105, 58, 250, 0.06);
+  }
+
+  .scope-note p,
+  .closing-note {
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .scope-note p { margin: 0.45rem 0 0; }
+
+  .runbook-section {
+    padding: 3rem 0;
+    border-top: 1px solid var(--glass-border);
+  }
+
+  .runbook-section > h2 {
+    margin: 0.4rem 0 1.5rem;
+    font-size: clamp(1.8rem, 4vw, 2.7rem);
+  }
+
+  .runbook-section p,
+  .runbook-section li {
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .check-grid,
+  .path-grid,
+  .decision-grid,
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .check-grid article,
+  .path-card,
+  .decision {
+    padding: 1.5rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .check-grid article > span {
+    color: var(--hns-violet);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .check-grid h3,
+  .path-card h3,
+  .decision h3,
+  .step h3 {
+    margin: 0.45rem 0 0.65rem;
+  }
+
+  .check-grid p,
+  .path-card p { margin-bottom: 0; }
+
+  .path-card--featured {
+    border-color: var(--hns-violet);
+    background: rgba(105, 58, 250, 0.06);
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: 2rem 0;
+    border-top: 1px dashed var(--glass-border);
+  }
+
+  .step:first-of-type { border-top: 0; }
+
+  .step-number {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    color: white;
+    background: var(--hns-violet);
+    border-radius: 50%;
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+
+  pre {
+    margin: 1rem 0;
+    padding: 1.2rem;
+    overflow-x: auto;
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    background: #090b10;
+    color: #e8eaf0;
+    font-size: 0.83rem;
+    line-height: 1.65;
+  }
+
+  pre code { color: inherit !important; }
+
+  .platform-grid h4 { margin-bottom: 0.4rem; }
+
+  .expected { margin-top: 0; }
+
+  .decision ul {
+    margin-bottom: 0;
+    padding-left: 1.2rem;
+  }
+
+  .decision--pass { border-color: rgba(31, 160, 108, 0.5); }
+  .decision--investigate { border-color: rgba(211, 139, 30, 0.55); }
+  .report-section > pre { margin-top: 1.25rem; }
+
+  @media (max-width: 720px) {
+    .runbook-hero { padding-top: 2.5rem; }
+    .check-grid,
+    .path-grid,
+    .decision-grid,
+    .platform-grid { grid-template-columns: 1fr; }
+    .step {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+</style>
