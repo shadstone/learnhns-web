@@ -14,6 +14,10 @@ export const PROFILE_FIELDS = [
   { key: 'btc', label: 'Bitcoin address', group: 'wallet' },
 ];
 
+export const ACTIVATE_PROPOSAL_SCHEMA_URL = 'https://learnhns.com/schemas/activate-proposal-v1.schema.json';
+export const ACTIVATE_PROPOSAL_KIND = 'activate-proposal';
+export const ACTIVATE_PROPOSAL_VERSION = 1;
+
 export const PROFILE_PREFIXES = new Set([
   ...PROFILE_FIELDS.map(({ key }) => key),
   'custom', 'description', 'category', 'bg', 'bgcolor', 'fav', 'tel', 'tb',
@@ -388,22 +392,75 @@ export function createProfileProposal(currentRecords, values = {}) {
   };
 }
 
-export function buildExport({ name, resolver, currentRecords, proposal, mode, canonicalResourceHex = null }) {
+function proposalOperations(publicationPatch = []) {
+  return publicationPatch.map((record) => {
+    if (['SYNTH4', 'SYNTH6', 'A', 'AAAA'].includes(record.type)) {
+      return { op: 'set-address', recordType: record.type, value: String(record.value || '').trim() };
+    }
+
+    if (record.type === 'TXT') {
+      const txtValue = Array.isArray(record.txt) && record.txt.length === 1
+        ? record.txt[0]
+        : record.value;
+      const match = String(txtValue || '').match(/^([a-z0-9_-]+):(.*)$/is);
+      const key = match?.[1]?.toLowerCase();
+      if (match && PROFILE_FIELDS.some((field) => field.key === key)) {
+        const value = match[2];
+        if (new TextEncoder().encode(`${key}:${value}`).length > 255) {
+          throw new Error(`${key} is too long for one on-chain Handshake TXT entry (255 UTF-8 bytes maximum).`);
+        }
+        return { op: 'upsert-hnsbio-txt', key, value };
+      }
+    }
+
+    throw new Error(`The proposal contains an unsupported ${record.type || 'unknown'} operation.`);
+  });
+}
+
+export function buildExport({
+  name,
+  proposal,
+  canonicalResourceHex = null,
+  network = 'main',
+  generatedAt = new Date().toISOString(),
+}) {
+  if (!proposal || proposal.errors?.length) throw new Error('Build a valid proposal before exporting it.');
+  const publishingLayer = proposal.publishingContext?.id;
+  if (!['handshake-onchain', 'authoritative-zone'].includes(publishingLayer)) {
+    throw new Error('The proposal has no supported publishing layer.');
+  }
+
+  let canonicalResource = null;
+  if (publishingLayer === 'handshake-onchain') {
+    const value = String(canonicalResourceHex || '').toLowerCase();
+    if (!/^(?:[0-9a-f]{2})+$/.test(value) || value.length > 1024) {
+      throw new Error('The canonical on-chain resource is unavailable or malformed. Inspect the name again before exporting for Bob.');
+    }
+    canonicalResource = {
+      source: 'handshake-chain',
+      encoding: 'hex',
+      value,
+      requirement: 'exact-match',
+    };
+  }
+
   return {
-    version: 'learnhns-activate-0.1',
-    name,
-    mode,
-    generatedAt: new Date().toISOString(),
-    resolver,
-    publishingContext: proposal.publishingContext,
-    warning: proposal.publishingContext?.id === 'handshake-onchain'
-      ? 'This patch is not a standalone Handshake UPDATE payload. A trusted wallet must decode the canonical resource, merge this patch, and show the complete resource before signing.'
-      : 'Apply this patch in the authoritative DNS or registry manager, preserving unrelated zone records.',
-    canonicalOnchainResourceHex: canonicalResourceHex,
-    observedDnsRecords: cloneRecords(currentRecords),
-    desiredDnsRecords: cloneRecords(proposal.records),
-    publicationPatch: cloneRecords(proposal.publicationPatch || []),
-    changes: proposal.changes,
+    $schema: ACTIVATE_PROPOSAL_SCHEMA_URL,
+    kind: ACTIVATE_PROPOSAL_KIND,
+    version: ACTIVATE_PROPOSAL_VERSION,
+    source: {
+      application: 'learnhns-web',
+      origin: 'https://learnhns.com/activate/',
+      generatedAt,
+    },
+    target: {
+      name,
+      network,
+      publishingLayer,
+    },
+    canonicalResource,
+    operations: proposalOperations(proposal.publicationPatch || []),
+    preservation: { strategy: 'preserve-unmentioned' },
   };
 }
 

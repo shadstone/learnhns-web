@@ -1,7 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import jsonschema from 'jsonschema';
 import {
   analyzeRecords,
+  buildExport,
   buildDnsWireQuery,
   createProfileProposal,
   createWebsiteProposal,
@@ -12,6 +15,18 @@ import {
   parseTxtValue,
   validateProfileField,
 } from '../src/lib/activate.mjs';
+
+const { Validator } = jsonschema;
+const schema = JSON.parse(readFileSync(new URL('../public/schemas/activate-proposal-v1.schema.json', import.meta.url)));
+
+function fixture(name) {
+  return JSON.parse(readFileSync(new URL(`./fixtures/${name}`, import.meta.url)));
+}
+
+function assertValidProposal(proposal) {
+  const result = new Validator().validate(proposal, schema);
+  assert.deepEqual(result.errors.map((error) => error.stack), []);
+}
 
 test('normalizes HNS names and rejects paths or invalid labels', () => {
   assert.deepEqual(normalizeName('HNS://München/'), { displayName: 'münchen', asciiName: 'xn--mnchen-3ya' });
@@ -108,4 +123,68 @@ test('rejects unsafe profile link schemes', () => {
   assert.match(validateProfileField('link', 'javascript://alert.example'), /HTTP or HTTPS/);
   assert.equal(validateProfileField('link', 'https://example.com/profile'), null);
   assert.equal(validateProfileField('link', 'example.com/profile'), null);
+});
+
+test('exports a machine-valid activate-proposal/v1 address handoff', () => {
+  const proposal = createWebsiteProposal([], {
+    name: 'example',
+    ipv4: '203.0.113.8',
+    ipv6: '2001:db8::8',
+  });
+  const exported = buildExport({
+    name: 'example',
+    proposal,
+    canonicalResourceHex: '00',
+    generatedAt: '2026-08-18T00:00:00.000Z',
+  });
+  assertValidProposal(exported);
+  assert.deepEqual(exported, fixture('activate-proposal-v1-addresses.json'));
+});
+
+test('exports machine-valid hns.bio operations without observed DNS as signing input', () => {
+  const proposal = createProfileProposal([], {
+    __name: 'example',
+    name: 'Example Name',
+    bio: 'Building useful names',
+  });
+  const exported = buildExport({
+    name: 'example',
+    proposal,
+    canonicalResourceHex: '00',
+    generatedAt: '2026-08-18T00:00:00.000Z',
+  });
+  assertValidProposal(exported);
+  assert.deepEqual(exported, fixture('activate-proposal-v1-hnsbio.json'));
+  assert.equal('observedDnsRecords' in exported, false);
+  assert.equal('desiredDnsRecords' in exported, false);
+});
+
+test('requires an exact canonical resource for on-chain Bob exports', () => {
+  const proposal = createWebsiteProposal([], { name: 'example', ipv4: '203.0.113.8' });
+  assert.throws(() => buildExport({ name: 'example', proposal }), /canonical on-chain resource/i);
+});
+
+test('authoritative-zone proposals remain portable but have no on-chain canonical reference', () => {
+  const proposal = createWebsiteProposal([], { name: 'www.example', ipv4: '203.0.113.8' });
+  const exported = buildExport({
+    name: 'www.example',
+    proposal,
+    generatedAt: '2026-08-18T00:00:00.000Z',
+  });
+  assertValidProposal(exported);
+  assert.equal(exported.canonicalResource, null);
+  assert.equal(exported.operations[0].recordType, 'A');
+
+  const profile = createProfileProposal([], { __name: 'www.example', name: 'Zone Profile' });
+  const profileExport = buildExport({
+    name: 'www.example',
+    proposal: profile,
+    generatedAt: '2026-08-18T00:00:00.000Z',
+  });
+  assertValidProposal(profileExport);
+  assert.deepEqual(profileExport.operations[0], {
+    op: 'upsert-hnsbio-txt',
+    key: 'name',
+    value: 'Zone Profile',
+  });
 });

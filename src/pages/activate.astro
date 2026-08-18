@@ -136,7 +136,7 @@ const description = 'Inspect a Handshake name, activate a hosted website or port
             <div id="change-list" class="change-list"></div>
             <div class="proposal-actions">
               <button id="copy-proposal" type="button" class="primary-action">Copy JSON</button>
-              <button id="download-proposal" type="button" class="secondary-action">Download proposal</button>
+              <button id="download-proposal" type="button" class="secondary-action">Download for Bob</button>
             </div>
             <p id="handoff-note" class="handoff-note">Review the publishing layer and patch before continuing in a trusted manager.</p>
           </div>
@@ -310,7 +310,8 @@ const description = 'Inspect a Handshake name, activate a hosted website or port
     });
     if (!response.ok) throw new Error(`canonical resource lookup returned HTTP ${response.status}`);
     const payload = await response.json();
-    return payload?.result?.info?.data || null;
+    if (payload?.error || !payload?.result?.info) throw new Error('canonical resource lookup did not return name information');
+    return payload.result.info.data || '00';
   }
 
   function renderCapabilities(records) {
@@ -396,8 +397,11 @@ const description = 'Inspect a Handshake name, activate a hosted website or port
     panel.hidden = false;
     byId('proposal-mode').textContent = mode === 'website' ? 'Website' : 'Personal profile';
     if (proposal.publishingContext) {
+      byId('download-proposal').textContent = proposal.publishingContext.id === 'handshake-onchain'
+        ? 'Download for Bob'
+        : 'Download zone proposal';
       byId('handoff-note').textContent = proposal.publishingContext.id === 'handshake-onchain'
-        ? `This is a ${proposal.publishingContext.addressTypes.ipv4 === 'SYNTH4' ? 'Handshake resource' : 'record'} patch, not a standalone UPDATE payload. Open it in ${proposal.publishingContext.manager}; the wallet must merge it with the canonical resource and show every resulting record before signing.`
+        ? 'Download the JSON file. In Bob Wallet, open this owned name, go to Records, and choose “Import LearnHNS proposal.” Bob will reload the canonical resource and show the complete before/after review. Importing does not sign or publish.'
         : `Apply this zone-record patch through ${proposal.publishingContext.manager}. Preserve unrelated records in that zone.`;
     }
     const errors = byId('proposal-errors');
@@ -473,8 +477,27 @@ const description = 'Inspect a Handshake name, activate a hosted website or port
   document.querySelectorAll('.mode-tab').forEach((button) => button.addEventListener('click', () => switchMode(button.dataset.mode)));
   byId('website-form').addEventListener('submit', (event) => { event.preventDefault(); switchMode('website'); renderProposal(createWebsiteProposal(state.records, { ...Object.fromEntries(new FormData(event.currentTarget)), name: state.name }), 'website'); });
   byId('profile-form').addEventListener('submit', (event) => { event.preventDefault(); switchMode('profile'); renderProposal(createProfileProposal(state.records, { ...Object.fromEntries(new FormData(event.currentTarget)), __name: state.name }), 'profile'); });
-  byId('copy-proposal').addEventListener('click', async () => { await navigator.clipboard.writeText(JSON.stringify(exportObject(), null, 2)); byId('copy-proposal').textContent = 'Copied'; window.setTimeout(() => { byId('copy-proposal').textContent = 'Copy JSON'; }, 1600); });
-  byId('download-proposal').addEventListener('click', () => { const blob = new Blob([JSON.stringify(exportObject(), null, 2)], { type:'application/json' }); const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = `${state.name}-activate-proposal.json`; link.click(); URL.revokeObjectURL(link.href); });
+  byId('copy-proposal').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(exportObject(), null, 2));
+      byId('copy-proposal').textContent = 'Copied';
+      window.setTimeout(() => { byId('copy-proposal').textContent = 'Copy JSON'; }, 1600);
+    } catch (error) {
+      showNotice(`Could not export this proposal: ${error.message}`, 'error');
+    }
+  });
+  byId('download-proposal').addEventListener('click', () => {
+    try {
+      const blob = new Blob([JSON.stringify(exportObject(), null, 2)], { type:'application/json' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `${state.name}-activate-proposal-v1.json`;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    } catch (error) {
+      showNotice(`Could not export this proposal: ${error.message}`, 'error');
+    }
+  });
   byId('verify-live').addEventListener('click', verifyLive);
 
   const initialName = new URLSearchParams(location.search).get('name');
