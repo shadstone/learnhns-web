@@ -1,13 +1,15 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { unified } from '@astrojs/markdown-remark';
 import { rehypeDeadLinks } from './src/lib/rehype-dead-links.mjs';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://learnhns.com',
+  compressHTML: true,
   markdown: {
-    rehypePlugins: [rehypeDeadLinks],
+    processor: unified({ rehypePlugins: [rehypeDeadLinks] }),
   },
   integrations: [
     sitemap({

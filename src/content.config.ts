@@ -1,5 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 import { fetchAllContent } from './lib/wdd';
 
 const categorySchema = z.object({
@@ -70,7 +71,7 @@ const docs = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/docs" }),
   schema: z.object({
     archived: z.boolean().optional().default(false),
-    mirroredFrom: z.string().url().optional(),
+    mirroredFrom: z.url().optional(),
   }),
 });
 
