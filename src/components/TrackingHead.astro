@@ -1,0 +1,59 @@
+---
+/**
+ * Third-party tags that belong in <head>, driven by src/data/site-tags.ts.
+ * The GTM <noscript> iframe is not here: it has to sit in <body>, so it lives
+ * in TrackingBody.astro.
+ *
+ * Read through a loose record rather than a nested type literal — a nested
+ * `{ ... }` inside an `as` annotation trips the Astro frontmatter parser.
+ */
+import { siteTags } from '../data/site-tags';
+
+const t = siteTags as Record<string, string | undefined>;
+const id = t.analyticsId ?? '';
+const isGtm = id.startsWith('GTM-');
+// A site injected with BOTH a GA4 tag and a GTM container.
+const extraGtm = !isGtm ? (t.gtmId ?? '') : '';
+const adsense = t.adsenseClient
+  ? `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${t.adsenseClient}`
+  : '';
+---
+{t.verifyGoogle && <meta name="google-site-verification" content={t.verifyGoogle} />}
+{t.verifyFacebook && <meta name="facebook-domain-verification" content={t.verifyFacebook} />}
+
+{id && isGtm && (
+  <script is:inline define:vars={{ id }}>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer',i);
+  </script>
+)}
+{id && !isGtm && (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${id}`}></script>
+    <script is:inline define:vars={{ id }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ window.dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', id);
+    </script>
+  </>
+)}
+
+{adsense && <script is:inline async crossorigin="anonymous" src={adsense}></script>}
+{t.attractionFunnelId && (
+  <script is:inline id="xero-domain-name" xero-data-name={t.attractionFunnelId}
+    type="text/javascript" src="https://app.attractionfunnel.com/js_controller/client"></script>
+)}
+{t.ahrefsKey && (
+  <script is:inline async src="https://analytics.ahrefs.com/analytics.js" data-key={t.ahrefsKey}></script>
+)}
+{extraGtm && (
+  <script is:inline define:vars={{ extraGtm }}>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer',extraGtm);
+  </script>
+)}

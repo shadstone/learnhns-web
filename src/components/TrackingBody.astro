@@ -1,0 +1,17 @@
+---
+/**
+ * GTM's <noscript> fallback iframe, which Google requires inside <body>.
+ * Renders nothing unless src/data/site-tags.ts carries a GTM container.
+ *
+ * The iframe is built as a single-line string on purpose: a newline inside a
+ * template literal in a JSX attribute breaks the Astro compiler.
+ */
+import { siteTags } from '../data/site-tags';
+
+const t = siteTags as Record<string, string | undefined>;
+const primary = t.analyticsId ?? '';
+const id = primary.startsWith('GTM-') ? primary : (t.gtmId ?? '');
+const isGtm = id.startsWith('GTM-');
+const frame = `<iframe src="https://www.googletagmanager.com/ns.html?id=${id}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+---
+{id && isGtm && <noscript set:html={frame} />}
