@@ -1,6 +1,6 @@
 # Traditional website
 
-With Handshake, you can use both your root name (i.e. [nb/](https://nb.hns.to)) and a subdomain (i.e. [welcome.nb/](http://welcome.nb.hns.to)) as the domain for your traditional websites.
+With Handshake, you can use both your root name (i.e. nb/, historical: `https://nb.hns.to`) and a subdomain (i.e. welcome.nb/, historical: `http://welcome.nb.hns.to`) as the domain for your traditional websites.
 
 Conceptually all you have to do is set resource records like A records and CNAME records just like you would with a traditional domain. However, root resource records are [limited](https://hsd-dev.org/guides/resource-records.html), so you need to set an NS record on your root name pointing to a nameserver in order to set A and CNAME records.
 

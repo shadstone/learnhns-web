@@ -14,10 +14,10 @@ Registering for free might be limited to users on their discord server. <https:/
 
 ### Excerpt
 
-Excerpt is a simple blog hosting platform that allows you to deploy a blog to your Handshake name in minutes. Find out more at [https://excerpt/](https://excerpt.hns.to).
+Excerpt is a simple blog hosting platform that allows you to deploy a blog to your Handshake name in minutes. Find out more at excerpt/ (historical: `https://excerpt.hns.to`).
 
 > **Info**
-> This site was created soley by Namer [e.skimo/](https://hns.to/e.skimo/).
+> This site was created soley by Namer e.skimo/ (historical: `https://hns.to/e.skimo/`).
 
 ### HNS Links
 
@@ -37,14 +37,14 @@ Excerpt is a simple blog hosting platform that allows you to deploy a blog to yo
 <iframe width="100%" height="400" src="https://www.youtube.com/embed/Bv6RXQ8jKWg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 > **Info**
-> This tutorial was created soley by Namer [skyinclude/](https://hns.to/skyinclude/).
+> This tutorial was created soley by Namer skyinclude/ (historical: `https://hns.to/skyinclude/`).
 
 ### Wordpress and Kinsta
 
 <iframe width="100%" height="400" src="https://www.youtube.com/embed/EU-AfMkmQEk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 > **Info**
-> This tutorial was created soley by Namer [skyinclude/](https://hns.to/skyinclude/).
+> This tutorial was created soley by Namer skyinclude/ (historical: `https://hns.to/skyinclude/`).
 
 ## Level 2 - HTML
 
@@ -56,19 +56,19 @@ If you have a website on IPFS, here's how to link it to your Handshake name.
 
 ### Any HTML file on Github Pages
 
-Host any HTML file on your Handshake name through Github Pages. The template used in the video can be accessed at [templates.nb/](https://hns.to/templates.nb/).
+Host any HTML file on your Handshake name through Github Pages. The template used in the video can be accessed at templates.nb/ (historical: `https://hns.to/templates.nb/`).
 
 <iframe width="100%" height="400" src="https://www.youtube.com/embed/_PsHU2gAMEM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 > **Info**
-> This tutorial was made possible by Namer [outofthisworld/](https://hns.to/outofthisworld/).
+> This tutorial was made possible by Namer outofthisworld/ (historical: `https://hns.to/outofthisworld/`).
 
 ### Heroku
 
 [View External Resource](https://rithvikvibhu.medium.com/deploy-apps-on-a-handshake-name-with-heroku-ccdb23ff839b)
 
 > **Info**
-> This tutorial was created soley by Namer [rithvik/](https://hns.to/rithvik/).
+> This tutorial was created soley by Namer rithvik/ (historical: `https://hns.to/rithvik/`).
 
 ### Wordpress and AWS
 
@@ -77,7 +77,7 @@ Skyinclude.com Mike made a quick video on how to build a Handshake site using Wo
 <iframe width="100%" height="400" src="https://www.youtube.com/embed/dxgLBvKC5YM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 > **Info**
-> This tutorial was created soley by Namer [skyinclude/](https://hns.to/skyinclude/).
+> This tutorial was created soley by Namer skyinclude/ (historical: `https://hns.to/skyinclude/`).
 
 ### Gatsby and Github Pages
 
@@ -86,7 +86,7 @@ In this tutorial @kiba\_gateaux does a quick run through of how to deploy a site
 <iframe width="100%" height="400" src="https://www.youtube.com/embed/AL3uiw17OwM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 > **Info**
-> This tutorial was created solely by Namer [kiba\_gateaux/](https://hns.to/kiba_gateaux/).
+> This tutorial was created solely by Namer kiba_gateaux/ (historical: `https://hns.to/kiba_gateaux/`).
 
 ### Fleek
 
@@ -106,7 +106,7 @@ In this tutorial @kiba\_gateaux does a quick run through of how to deploy a site
 
 ## Level 4 - HTTPS
 
-[View External Resource](https://www.sebastianrasor.com/blog/hosting-a-secure-website-on-the-handshake-protocol-using-dane#sign-records-to-enable-dnssec)
+Historical resource: `https://www.sebastianrasor.com/blog/hosting-a-secure-website-on-the-handshake-protocol-using-dane#sign-records-to-enable-dnssec`
 
 [View External Resource](https://medium.com/@matthewzipkin/building-a-secure-website-on-your-handshake-tld-a8922a950a4f)
 

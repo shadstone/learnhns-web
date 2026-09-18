@@ -99,7 +99,7 @@ And the user would be directed to the domain:
 
 `https://namebase.io/next/domain-manager/wouidn/records?records=W3sidHlwZSI6IlRYVCIsImhvc3QiOiJfY29udGVudGhhc2gubXlibG9nIiwidmFsdWUiOiJzaWE6Ly8zQUhQalg4SGxKOUhUQVQ0OHptQ3BwRHNrOEh0dFFCNXN4Yms2NHczX2tvZ0JBIiwidHRsIjo2MH0seyJ0eXBlIjoiQ05BTUUiLCJob3N0IjoibXlibG9nIiwidmFsdWUiOiJzaWEubmFtZWJhc2UuaW8uIiwidHRsIjozNjAwfV0=&redirect=https://example.com`
 
-This same process is how we implemented the content upload flow for dLinks, and the authentication flow for Namer News. To read more about how to use the record assistant for authentication specifically, check out our the [Using Handshake Login](https://github.com/namebasehq/gitbook-learning-center/blob/master/handshake-login/using-handshake-login) post.
+This same process is how we implemented the content upload flow for dLinks, and the authentication flow for Namer News. To read more about how to use the record assistant for authentication specifically, check out the Using Handshake Login post (historical: `https://github.com/namebasehq/gitbook-learning-center/blob/master/handshake-login/using-handshake-login`).
 
 ## Step 2: User confirms record setting, and is sent back to your app
 
@@ -114,4 +114,4 @@ At this point, the user is asked to confirm the records you're asking to have se
 
 If your users are looking to update content, simply repeat the process. We hope this article was helpful, and helps you create engaging applications for your users.
 
-To see an example application that utilizes this flow and the record assistant, check out [dWord](http://dword.johnxu.hns.to/), an app built by John Xu for the Namebase hackathon.
+To see an example application that utilizes this flow and the record assistant, check out dWord (`http://dword.johnxu.hns.to/`, historical), an app built by John Xu for the Namebase hackathon.

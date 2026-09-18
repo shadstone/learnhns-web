@@ -302,7 +302,12 @@ export const communitySections: CommunitySection[] = [
     links: [
       { title: 'Australia', href: 'https://hns.au/' },
       { title: 'Canada', href: 'https://hnscanada.ca/' },
-      { title: 'China / HNSFans', href: 'https://hnsfans.com/' },
+      {
+        title: 'China / HNSFans',
+        href: '#',
+        status: 'offline',
+        originalUrl: 'https://hnsfans.com/',
+      },
       { title: 'Italian Telegram', href: 'https://t.me/handshake_hns_italia' },
       { title: 'German Telegram', href: 'https://t.me/handshake_de' },
       { title: 'Spanish Telegram', href: 'https://t.me/HNSes' },

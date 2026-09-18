@@ -10,7 +10,7 @@ The first part of creating a decentralized application involves creating the con
 
 If you're just starting off, we recommend choosing a static site generator, and building a single page application that you can then upload to Skynet. We suggest [this Netlify guide](https://www.netlify.com/blog/2020/05/04/building-a-markdown-blog-with-next-9.4-and-netlify/) if you're looking for steps on creating a simple static blog.
 
-If you're just looking to go through the motions of this guide and confirm content is accessible, [download the 'public' folder from this Github repo](https://github.com/jakeschaeffer/exampleBlog).
+If you're just looking to go through the motions of this guide and confirm content is accessible, download the `public` folder from this GitHub repo (historical: `https://github.com/jakeschaeffer/exampleBlog`).
 
 ## Upload to Skynet
 
@@ -99,6 +99,6 @@ Now as long as your device can resolve Handshake names, you can go to a web brow
 
 ### Further Reading
 
-#### [How to build a decentralized site on Handshake](https://ras.cr/handshake-tutorial.html) - ras.cr/
+#### How to build a decentralized site on Handshake - ras.cr/ (historical: `https://ras.cr/handshake-tutorial.html`)
 
 ##

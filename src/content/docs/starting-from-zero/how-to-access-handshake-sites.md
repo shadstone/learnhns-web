@@ -10,15 +10,15 @@ Level 0 methods require trusting a central party to resolve Handshake for you, a
 
 ### HNS↗TO
 
-[HNS.to](https://hns.to/) is a proxy gateway created by [nijynot/](http://nijynot/) that you can use to access Handshake domains without installing anything or changing your DNS settings.
+HNS.to (`https://hns.to`) was a proxy gateway created by nijynot/ that let you access Handshake domains without installing anything or changing your DNS settings. That gateway is historical and no longer resolves.
 
-Try visiting welcome.nb/ by appending hns.to at the end of the domain: [welcome.nb.hns.to](http://welcome.nb.hns.to).
+Try visiting welcome.nb/ by appending hns.to at the end of the domain: `welcome.nb.hns.to` (historical).
 
-[View External Resource](https://hns.to)
+Historical resource: `https://hns.to`
 
 #### Alternatives to HNS.to
 
-If HNS.to is down, you can use an alternative like [costanzo/](http://costanzo/)'s [rsvr.xyz](https://rsvr.xyz).
+If HNS.to is down, you can use an alternative like costanzo/'s [rsvr.xyz](https://rsvr.xyz).
 
 ## Level 1
 
@@ -39,7 +39,7 @@ It has very little downtime compared to other public resolvers.
 
 ### easyhandshake
 
-[easyhandshake](https://easyhandshake.com) is a server created by [pinheadmz/](https://pinheadmz/) that you can use to resolve Handshake using DoH.
+easyhandshake (`https://easyhandshake.com`) was a server created by pinheadmz/ that you could use to resolve Handshake using DoH. That hostname is historical and no longer resolves.
 
 [View External Resource](https://matthewzipkin.medium.com/resolving-hns-names-using-dns-over-https-94643fe62ecd)
 

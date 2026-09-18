@@ -9,7 +9,7 @@ const SITE_TAGLINE = 'Your gateway to understanding Handshake.';
 const SITE_DESCRIPTION =
   'LearnHNS curates the best guides, wallets, tutorials, and community resources for the Handshake decentralized naming protocol.';
 const LOGO_URL = `${SITE_URL}/learnhnsicon-dark.svg`;
-const SOCIAL_LINKS = ['https://x.com/learnhns', 'https://github.com/learnhns'];
+const SOCIAL_LINKS = ['https://x.com/learnhns', 'https://github.com/shadstone/learnhns-web'];
 
 /** Absolute URL helper — accepts a path or full URL. */
 export const abs = (urlOrPath: string): string =>

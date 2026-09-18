@@ -9,7 +9,7 @@
 
 The cost to mint a Handshake name is determined by the name's on-chain auction.
 
-You can place a bid on any unminted name with [Handshake coins (HNS)](/docs/about-handshake/handshake-coin). This triggers the start of the name's 720-[block](https://github.com/namebasehq/gitbook-learning-center/blob/master/about-handshake/mining-hns#handshake-blocks) (\~5 days) bidding period. You can bid any amount and optionally add a blind to hide your actual bid from others. Your bid + blind is called your [lockup](#lockup), which is the only value that other bidders see.&#x20;
+You can place a bid on any unminted name with [Handshake coins (HNS)](/docs/about-handshake/handshake-coin). This triggers the start of the name's 720-block (~5 days) bidding period. You can bid any amount and optionally add a blind to hide your actual bid from others. Your bid + blind is called your [lockup](#lockup), which is the only value that other bidders see.&#x20;
 
 After the bidding period ends, the 1440-block reveal period begins, during which bidders must reveal the true value of their bids. The bidder with the highest bid (NOT the highest lockup) wins the auction and mints the name. If you placed a blind, it's immediately returned to you when you reveal your bid. A note of caution: If you forget to reveal your bid, it will not be counted and you will permanently lose your entire lockup (both your bid and any blind). Bob Wallet can reveal bids automatically — always confirm your reveal status before the reveal period ends.
 
