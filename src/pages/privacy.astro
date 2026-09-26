@@ -31,7 +31,10 @@ const sections = [
     n: '05',
     label: 'Node Requests',
     title: 'Node and Explorer Requests',
-    body: 'To display balances and facilitate transactions, the wallet must communicate with the Handshake blockchain. This is done by querying public Handshake nodes and block explorers. These requests may expose your IP address to those public nodes, but they do not contain any personally identifiable information linking your identity to your wallet addresses.',
+    body: [
+      'To display balances, discover wallet activity, manage Handshake names, and submit user-approved transactions, the wallet communicates with the configured Handshake RPC or indexer. Requests may include derived wallet addresses, transaction identifiers, name data, and signed raw transactions. The configured service also receives ordinary connection metadata such as an IP address.',
+      'When the default LearnHNS service is used, this information is processed only to provide the requested blockchain functionality. Application logs do not intentionally record wallet addresses, RPC parameters, or raw transaction payloads. Seed phrases, private keys, and wallet passwords are never sent to the service. Users may instead configure their own compatible RPC endpoint.',
+    ],
   },
   {
     n: '06',
@@ -59,10 +62,16 @@ const sections = [
     n: '09',
     label: 'No Sale',
     title: 'No Sale of User Data',
-    body: 'Because we do not collect personal data, we have no data to sell. We will never sell, rent, or trade your information to advertisers, data brokers, or any other third parties.',
+    body: 'LearnHNS does not sell, rent, or trade wallet data. Blockchain data sent to the configured RPC or indexer is used only to provide wallet functionality and is not used for advertising, profiling, creditworthiness, or lending decisions.',
   },
   {
     n: '10',
+    label: 'Limited Use',
+    title: 'Chrome Web Store Limited Use',
+    body: 'LearnHNS Wallet uses and transfers user data only to provide or improve its user-facing wallet features. We do not use or transfer this data for personalized advertising or unrelated purposes, and we do not permit humans to read it except with the user\'s affirmative consent for support, when required for security, or when required by law. Our handling of user data complies with the Chrome Web Store User Data Policy, including its Limited Use requirements.',
+  },
+  {
+    n: '11',
     label: 'Support',
     title: 'Support Contact',
     body: 'If you have any questions or concerns regarding this Privacy Policy or how your data is handled, please reach out to our maintainers at SkyInclude.',
@@ -96,7 +105,7 @@ const sections = [
         How LearnHNS wallets and extensions handle your seed phrases,
         node requests, and personal data. Minimal collection, maximum user control.
       </p>
-      <p class="last-updated">Last updated: May 2026</p>
+      <p class="last-updated">Last updated: September 2026</p>
     </section>
 
     <article class="privacy-body">
