@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { breadcrumbSchema, collectionPageSchema, abs } from '../lib/seo';
 import {
   communityMeta,
+  communityAnnouncement,
   securityBullets,
   banPolicy,
   communitySections,
@@ -55,7 +56,7 @@ const telegramFullStats = telegramExportStats(telegramPlainFull);
         {communityMeta.disclaimer}
       </p>
       <p class="meta-line">
-        Last audited: <strong>{communityMeta.lastAuditedLabel}</strong>
+        Updated: <strong>{communityMeta.lastAuditedLabel}</strong>
         {communityMeta.auditedBy && <> from {communityMeta.auditedBy}</>}
         {communityMeta.lastEditedLabel && (
           <>
@@ -67,6 +68,12 @@ const telegramFullStats = telegramExportStats(telegramPlainFull);
         <a href={communityMeta.sourceTelegram} target="_blank" rel="noopener noreferrer">
           Telegram pin
         </a>
+      </p>
+      <p class="meta-line">
+        📅 <a href={communityAnnouncement.href} target="_blank" rel="noopener noreferrer">
+          <strong>{communityAnnouncement.title}</strong>
+        </a>
+        {' '}— {communityAnnouncement.dateLabel}
       </p>
     </section>
 
