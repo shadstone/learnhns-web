@@ -12,9 +12,11 @@
 
 import {
   banPolicy,
+  communityAnnouncement,
   communityMeta,
   communitySections,
   isInactive,
+  securityBullets,
   type CommunityLink,
 } from '../data/community-resources';
 
@@ -73,8 +75,9 @@ const COMPACT_TITLES: Record<string, string> = {
 
 function statusSuffix(link: CommunityLink, mode: PlainMode): string {
   if (mode === 'compact') {
-    // Status folded into compact titles where needed (e.g. Namebase closed)
     if (link.status === 'beta') return ' (beta)';
+    if (link.status === 'experimental') return ' (experimental)';
+    if (link.status === 'pilot') return ' (pilot)';
     if (link.status === 'closed' && !COMPACT_TITLES[link.title]?.includes('closed')) {
       return ' (closed)';
     }
@@ -82,6 +85,7 @@ function statusSuffix(link: CommunityLink, mode: PlainMode): string {
   }
   if (link.status === 'beta') return ' (beta)';
   if (link.status === 'experimental') return ' (experimental)';
+  if (link.status === 'pilot') return ' (pilot)';
   if (link.status === 'prerelease') return ' (pre-release)';
   if (link.status === 'legacy') return ' (experimental/legacy)';
   if (link.status === 'closed') return ' (closed)';
@@ -180,38 +184,23 @@ function sectionHeadingPlain(emoji: string, title: string, mode: PlainMode): str
  * Default compact mode targets ≤4096 characters with full URLs (auto-linked).
  */
 export function formatTelegramPlain(mode: PlainMode = 'compact'): string {
-  const shortDisclaimer =
-    mode === 'compact'
-      ? 'Handshake is decentralized. No single official foundation, company, or website. Projects below are independent.'
-      : communityMeta.disclaimer;
-
   const banBody =
     mode === 'compact'
-      ? 'Scams, impersonation, spam, unsolicited DMs, OTC, harassment, or persistent disruption.'
+      ? 'Scams, impersonation, spam, unsolicited DMs, OTC trades, repeated promotion, harassment, disrespect, or off-topic disruption.'
       : banPolicy.body;
 
   const parts: string[] = [
-    '🤝 HANDSHAKE (HNS) GENERAL CHAT - START HERE',
-    `Last audited: ${communityMeta.lastAuditedLabel} from ${communityMeta.auditedBy}`,
+    '🤝 HANDSHAKE HNS — START HERE',
+    `Updated: ${communityMeta.lastAuditedLabel}`,
+    '',
+    `📅 ${communityAnnouncement.title} — ${communityAnnouncement.dateLabel} (${communityAnnouncement.href})`,
   ];
 
-  if (communityMeta.lastEditedLabel && communityMeta.lastEditedBy) {
-    parts.push(
-      `Last edited: ${communityMeta.lastEditedLabel} from ${communityMeta.lastEditedBy}`,
-    );
-  }
-
   parts.push('');
-  parts.push(shortDisclaimer);
+  parts.push(communityMeta.disclaimer);
   parts.push('');
   parts.push('⚠️ SECURITY');
-  parts.push(
-    'Admins and support will never DM first, request remote access, or offer an OTC trade.',
-  );
-  parts.push('Never share your seed phrase, private key, password, or API key.');
-  parts.push(
-    'Verify domains, repositories, release signatures/checksums, and app publishers before installing software or sending funds.',
-  );
+  for (const bullet of securityBullets) parts.push(bullet);
   parts.push('');
 
   for (const section of communitySections) {
@@ -238,18 +227,7 @@ export function formatTelegramPlain(mode: PlainMode = 'compact'): string {
   parts.push(`🚫 ${banPolicy.title.toUpperCase()}`);
   parts.push(banBody);
   parts.push('');
-  parts.push(
-    mode === 'compact'
-      ? 'Keep support discussions public. Report broken/unsafe links to admins.'
-      : 'Keep support discussions public. Report broken or unsafe links to the admins.',
-  );
-  parts.push('');
-  // Matches the live Telegram pin footer (community preference)
-  parts.push(
-    mode === 'compact'
-      ? `To make edits to this post, please visit ${SITE}/community/`
-      : `To make edits to this post, please visit https://learnhns.com/community/`,
-  );
+  parts.push(banPolicy.note);
 
   return parts.join('\n').trim() + '\n';
 }
@@ -260,27 +238,16 @@ export function formatTelegramPlain(mode: PlainMode = 'compact'): string {
  */
 export function formatTelegramHtml(): string {
   const parts: string[] = [
-    '<b><u>🤝 HANDSHAKE (HNS) GENERAL CHAT - START HERE</u></b>',
-    `<i>Last audited: ${escapeHtml(communityMeta.lastAuditedLabel)}</i> from ${escapeHtml(communityMeta.auditedBy)}`,
+    '<b>🤝 HANDSHAKE HNS — START HERE</b>',
+    `Updated: ${escapeHtml(communityMeta.lastAuditedLabel)}`,
+    '',
+    `📅 <a href="${escapeHtml(communityAnnouncement.href)}">${escapeHtml(communityAnnouncement.title)}</a> — <b>${escapeHtml(communityAnnouncement.dateLabel)}</b>`,
   ];
-  if (communityMeta.lastEditedLabel && communityMeta.lastEditedBy) {
-    parts.push(
-      `<i>Last edited: ${escapeHtml(communityMeta.lastEditedLabel)}</i> from ${escapeHtml(communityMeta.lastEditedBy)}`,
-    );
-  }
   parts.push('');
   parts.push(escapeHtml(communityMeta.disclaimer));
   parts.push('');
   parts.push('<b>⚠️ SECURITY</b>');
-  parts.push(
-    'Admins and support will <s>DM first</s> <b>never DM first</b>, request remote access, or offer an OTC trade.',
-  );
-  parts.push(escapeHtml('Never share your seed phrase, private key, password, or API key.'));
-  parts.push(
-    escapeHtml(
-      'Verify domains, repositories, release signatures/checksums, and app publishers before installing software or sending funds.',
-    ),
-  );
+  for (const bullet of securityBullets) parts.push(escapeHtml(bullet));
   parts.push('');
 
   for (const section of communitySections) {
@@ -299,13 +266,7 @@ export function formatTelegramHtml(): string {
   parts.push(`<b><u>🚫 ${escapeHtml(banPolicy.title.toUpperCase())}</u></b>`);
   parts.push(escapeHtml(banPolicy.body));
   parts.push('');
-  parts.push(
-    '<b>Keep support discussions public.</b> Report broken or unsafe links to the admins.',
-  );
-  parts.push('');
-  parts.push(
-    `To make edits to this post, please visit <a href="${SITE}/community/">learnhns.com/community</a>`,
-  );
+  parts.push(`<b>Keep support public.</b> Report unsafe or broken links to admins.`);
 
   return parts.join('\n').trim() + '\n';
 }

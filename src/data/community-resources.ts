@@ -7,7 +7,15 @@
  * Security-sensitive additions need maintainer review before merge.
  */
 
-export type ResourceStatus = 'active' | 'offline' | 'closed' | 'experimental' | 'legacy' | 'beta' | 'prerelease';
+export type ResourceStatus =
+  | 'active'
+  | 'offline'
+  | 'closed'
+  | 'experimental'
+  | 'legacy'
+  | 'beta'
+  | 'pilot'
+  | 'prerelease';
 
 export type CommunityLink = {
   title: string;
@@ -27,31 +35,37 @@ export type CommunitySection = {
 };
 
 export const communityMeta = {
-  title: 'Handshake community — start here',
-  lastAudited: '2026-07-15',
-  lastAuditedLabel: 'July 15, 2026',
+  title: 'Handshake HNS — start here',
+  lastAudited: '2026-09-29',
+  lastAuditedLabel: 'September 29, 2026',
   auditedBy: 'Jaron',
-  lastEdited: '2026-08-08',
-  lastEditedLabel: 'August 8, 2026',
-  lastEditedBy: 'pcfreak30',
+  lastEdited: undefined,
+  lastEditedLabel: undefined,
+  lastEditedBy: undefined,
   sourceTelegram: 'https://t.me/handshake_hns/156540',
   sourceTelegramLabel: 'Pinned message in @handshake_hns',
   githubRepo: 'https://github.com/shadstone/learnhns-web',
   dataFilePath: 'src/data/community-resources.ts',
   disclaimer:
-    'Handshake is decentralized. There is no single official foundation, company, spokesperson, website, or permanent canonical repository. Community projects below are independent.',
+    'Handshake is decentralized. No single organization speaks for it. Projects below are independent.',
+} as const;
+
+export const communityAnnouncement = {
+  title: 'HandyCon 2027',
+  dateLabel: 'March 10–12, 2027',
+  href: 'https://handycon.xyz/',
 } as const;
 
 export const securityBullets = [
-  'Admins and support will never DM first, request remote access, or offer an OTC trade.',
-  'Never share your seed phrase, private key, password, or API key.',
-  'Verify domains, repositories, release signatures/checksums, and app publishers before installing software or sending funds.',
+  'Admins and support never DM first, request remote access, or offer OTC trades.',
+  'Never share seed phrases, private keys, API keys, passwords, or session cookies.',
+  'Verify publishers, URLs, and downloads before installing software or sending funds.',
 ] as const;
 
 export const banPolicy = {
   title: 'Ban / remove',
-  body: 'Scams, impersonation, spam, unsolicited DMs, OTC buying/selling, repeated promotion, harassment, disrespect, or persistent off-topic disruption.',
-  note: 'Keep support discussions public. Report broken or unsafe links to the admins.',
+  body: 'Scams, impersonation, spam, unsolicited DMs, OTC trades, repeated promotion, harassment, disrespect, or off-topic disruption.',
+  note: 'Keep support public. Report unsafe or broken links to admins.',
   editCta: 'To make edits to this post, please visit https://learnhns.com/community/',
 } as const;
 
@@ -61,220 +75,97 @@ export const communitySections: CommunitySection[] = [
     emoji: '📚',
     title: 'Start here',
     links: [
-      { title: 'Project homepage', href: 'https://handshake.org/', note: 'handshake.org' },
-      { title: 'Beginner guides and documentation', href: 'https://learnhns.com/', note: 'LearnHNS' },
-      { title: 'Maintained ecosystem directory', href: '/services/', note: 'Wallets, exchanges, pools, resolvers' },
-      {
-        title: 'Legacy FAQ archive',
-        href: 'https://handypedia.org/en/faq',
-        note: 'Some entries are outdated',
-      },
+      { title: 'Guides', href: '/start/', note: 'Beginner guides and documentation' },
+      { title: 'Ecosystem directory', href: '/services/', note: 'Wallets, exchanges, pools, resolvers, and tools' },
     ],
   },
   {
     id: 'wallets',
     emoji: '💼',
-    title: 'Wallets and name management',
+    title: 'Wallets • name management',
     links: [
+      { title: 'Bob LearnHNS', href: 'https://bobwallet.org/download/', note: 'Desktop HNS wallet and name manager' },
+      { title: 'Shakescape', href: 'https://shakescape.com/', note: 'Dual-root browser with native HNS wallet features' },
+      { title: 'Namebase', href: 'https://www.namebase.io/', note: 'Handshake name platform' },
       {
-        title: 'Bob LearnHNS 2026 desktop build',
-        href: 'https://bobwallet.org/download/',
+        title: 'Namehold',
+        href: 'https://github.com/DimazzzZ/namehold-wallet',
         status: 'beta',
-        note: 'Primary desktop wallet for HNS and names',
-      },
-      { title: 'Bob source', href: 'https://github.com/bob-wallet/bob-wallet', note: 'Open-source repository' },
-      { title: 'Bob support', href: 'https://t.me/bobwallet', note: 'Telegram support channel' },
-      {
-        title: 'Ledger HNS app',
-        href: 'https://github.com/handshake-org/ledger-app-hns',
-        note: 'Hardware wallet support',
+        note: 'Non-custodial HNS wallet and TLD manager',
       },
       {
-        title: 'FireWallet HSD frontend',
+        title: 'FireWallet',
         href: 'https://github.com/Nathanwoodburn/firewalletbrowser',
         status: 'experimental',
-        note: 'Web frontend for HSD',
+        note: 'HSD wallet frontend',
       },
-      {
-        title: 'Namebase registrar/registry',
-        href: '#',
-        status: 'closed',
-        note: 'Closed June 2026',
-        originalUrl: 'https://www.namebase.io/',
-      },
-      {
-        title: 'Previous Namebase migration',
-        href: 'https://sunset.namebase.io/',
-        note: 'Sunset / migration info',
-      },
-      {
-        title: 'LearnHNS name market',
-        href: 'https://market.learnhns.com/',
-        note: 'Buy and sell Handshake names',
-      },
-      {
-        title: 'Name lookup and management',
-        href: 'https://hns.id/',
-        note: 'HNS.ID',
-      },
-    ],
-  },
-  {
-    id: 'nodes',
-    emoji: '🖥',
-    title: 'Nodes, protocol, and development',
-    links: [
-      {
-        title: 'HSD',
-        href: 'https://github.com/handshake-org/hsd',
-        note: 'JavaScript full/SPV node and wallet',
-      },
-      {
-        title: 'handshake-node',
-        href: 'https://github.com/blinklabs-io/handshake-node',
-        note: 'Go full-node release candidate; no wallet',
-      },
-      {
-        title: 'HNSD',
-        href: 'https://github.com/handshake-org/hnsd',
-        note: 'C SPV resolver / light client',
-      },
-      { title: 'HSD developer documentation', href: 'https://hsd-dev.org/', note: 'Protocol and node guides' },
-      { title: 'HSD API documentation', href: 'https://hsd-dev.org/api-docs/', note: 'RPC and REST reference' },
-      {
-        title: 'FireHSD public API source',
-        href: 'https://github.com/Nathanwoodburn/firehsd',
-        note: 'Public API implementation',
-      },
-      {
-        title: 'Handshake Improvement Proposals',
-        href: 'https://github.com/handshake-org/HIPs',
-        note: 'HIPs repository',
-      },
-      {
-        title: 'Handshake GitHub organization',
-        href: 'https://github.com/handshake-org',
-        note: 'Core org',
-      },
-      { title: 'Developer chat', href: 'https://t.me/hns_tech', note: 'Telegram' },
-      { title: 'GitHub activity feed', href: 'https://t.me/handshake_github', note: 'Telegram' },
     ],
   },
   {
     id: 'access',
-    emoji: '🌐',
-    title: 'Access, DNS, and DANE',
+    emoji: '🧭',
+    title: 'DNS • DANE',
     links: [
+      { title: 'HNSGo', href: 'https://github.com/Acktarius/HNSGo', note: 'Android SPV resolver' },
+      { title: 'Fingertip', href: 'https://github.com/imperviousinc/fingertip', note: 'Desktop resolver and DANE support' },
+      { title: 'HNSDNS', href: 'https://hnsdns.com/', note: 'Privacy-focused Handshake resolver' },
+      { title: 'HNSDoH', href: 'https://welcome.hnsdoh.com/', note: 'Community DNS-over-HTTPS resolver' },
+      { title: 'Easy HNS', href: 'https://easyhns.com/', note: 'Resolver and setup guides' },
+      { title: 'Self-hosted resolver', href: 'https://github.com/HNSDNS/service-info', note: 'Run your own resolver' },
+      { title: 'TLSA generator', href: 'https://hns.denuoweb.com/dane-generator/', note: 'Create DANE/TLSA records' },
+    ],
+  },
+  {
+    id: 'development',
+    emoji: '🖥',
+    title: 'Development',
+    links: [
+      { title: 'HSD', href: 'https://github.com/handshake-org/hsd', note: 'JavaScript node and wallet' },
+      { title: 'HSRD', href: 'https://github.com/handshake-rs/hns-node-rs', note: 'Rust node and wallet ecosystem' },
+      { title: 'handshake-node', href: 'https://github.com/blinklabs-io/handshake-node', note: 'Go node; no wallet' },
+      { title: 'HNSD', href: 'https://github.com/handshake-org/hnsd', note: 'C SPV resolver' },
+      { title: 'hs-client', href: 'https://github.com/handshake-org/hs-client', note: 'REST, WebSocket, and RPC client for HSD' },
+      { title: 'FireHSD', href: 'https://github.com/Nathanwoodburn/firehsd', note: 'Public HSD API implementation' },
       {
-        title: 'HNSDNS',
-        href: 'https://hnsdns.com/',
-        note: 'Simple, privacy-focused access to Handshake names',
-      },
-      {
-        title: 'HNS DANE Browser for Android',
-        href: 'https://play.google.com/store/apps/details?id=com.denuoweb.hnsdane',
-        note: 'Play Store',
-      },
-      {
-        title: 'HNS DANE Browser source',
-        href: 'https://github.com/Denuo-Web/hns-dane-browser-android',
-        note: 'Open source',
-      },
-      {
-        title: 'SkyInclude desktop browser',
-        href: 'https://skyinclude.com/browser/',
-        status: 'prerelease',
-        note: 'Mac, Windows, Linux',
-      },
-      {
-        title: 'HNSGo Android SPV resolver',
-        href: 'https://github.com/Acktarius/HNSGo',
+        title: 'cDNSd',
+        href: 'https://github.com/blinklabs-io/cdnsd',
         status: 'experimental',
-        note: 'Android light resolver',
-      },
-      {
-        title: 'Fingertip desktop resolver and DANE',
-        href: 'https://github.com/imperviousinc/fingertip',
-        status: 'legacy',
-        note: 'Experimental / legacy',
-      },
-      {
-        title: 'HNSDoH community resolver',
-        href: 'https://welcome.hnsdoh.com/',
-        note: 'DNS-over-HTTPS for Handshake',
-      },
-      {
-        title: 'Easy HNS resolver and setup guides',
-        href: 'https://easyhns.com/',
-        note: 'Resolver + setup',
-      },
-      {
-        title: 'Self-hosted resolver guide',
-        href: 'https://github.com/HNSDNS/service-info',
-        note: 'Run your own',
-      },
-      {
-        title: 'DANE/TLSA record generator',
-        href: 'https://hns.denuoweb.com/dane-generator/',
-        note: 'DANE tooling',
-      },
-      {
-        title: 'HNS Live domain directory',
-        href: 'https://hns.denuoweb.com/hns-live/',
-        note: 'Live names directory',
-      },
-      {
-        title: 'HNS network topology visualization',
-        href: 'https://hns.denuoweb.com/hns-topology/',
-        note: 'Network map',
+        note: 'Decentralized DNS daemon with Handshake support',
       },
     ],
   },
   {
     id: 'hosting',
     emoji: '🌍',
-    title: 'Hosting and decentralized web',
-    lede: 'Full hosting directory on LearnHNS /host.',
+    title: 'Hosting',
     links: [
+      { title: 'Pinner', href: 'https://pinner.xyz/host', note: 'Decentralized IPFS hosting for Handshake names' },
+      { title: 'Hosting guide', href: '/host/', note: 'LearnHNS hosting options and setup guidance' },
       {
-        title: 'Pinner',
-        href: 'https://pinner.xyz/host',
-        note: 'Decentralized hosting (IPFS) built for websites on Handshake names',
+        title: 'Handout',
+        href: '/handout/',
+        status: 'pilot',
+        note: 'Authoritative DNS, DNSSEC, DANE/TLSA, and web hosting',
       },
-      {
-        title: 'LearnHNS hosting guide',
-        href: '/host/',
-        note: 'Host.limo, Handout, Pinner, and more',
-      },
+      { title: 'HNSHosting', href: 'https://hnshosting.au/', note: 'Managed WordPress hosting for Handshake names' },
     ],
   },
   {
     id: 'explorers',
     emoji: '🔎',
-    title: 'Explorers, stats, and mining',
+    title: 'Explorers • mining',
     links: [
-      { title: 'ShakeShift explorer', href: 'https://shakeshift.com/', note: 'Block and name explorer' },
-      {
-        title: 'Supply and network statistics',
-        href: 'https://shakeshift.com/stats',
-        note: 'Network stats',
-      },
-      {
-        title: 'Halvings and emission schedule',
-        href: 'https://shakeshift.com/halvings',
-        note: 'Emission timeline',
-      },
-      { title: 'Pools and hashrate', href: 'https://shakeshift.com/pools', note: 'Mining pools' },
+      { title: 'ShakeShift Explorer', href: 'https://shakeshift.com/', note: 'Blocks, names, network stats, and mining pools' },
       { title: 'HNSFans explorer', href: 'https://e.hnsfans.com/', note: 'Community explorer' },
     ],
   },
   {
-    id: 'learning',
+    id: 'media',
     emoji: '📰',
-    title: 'Learning and media',
+    title: 'Media',
     links: [
       { title: 'LearnHNS', href: 'https://learnhns.com/', note: 'Guides, docs, and ecosystem hub' },
-      { title: 'SkyInclude news and guides', href: 'https://skyinclude.com/', note: 'News and tutorials' },
+      { title: 'SkyInclude', href: 'https://skyinclude.com/', note: 'Handshake news and guides' },
       { title: 'Own The Dot', href: 'https://ownthedot.com/', note: 'Podcast and media' },
     ],
   },
@@ -283,36 +174,26 @@ export const communitySections: CommunitySection[] = [
     emoji: '💬',
     title: 'Community',
     links: [
-      { title: 'General Telegram', href: 'https://t.me/handshake_hns', note: 'Main public chat' },
-      { title: 'Discord', href: 'https://handshake.org/discord', note: 'Discord invite' },
+      { title: 'Telegram', href: 'https://t.me/handshake_hns', note: 'Main public chat' },
+      { title: 'Discord', href: 'https://handshake.org/discord', note: 'Handshake Discord' },
       { title: 'Reddit', href: 'https://www.reddit.com/r/handshake', note: 'r/handshake' },
       { title: 'IRC', href: 'https://web.libera.chat/#handshake', note: 'Libera #handshake' },
-      {
-        title: 'Matrix bridge',
-        href: 'https://matrix.to/#/#handshake:libera.chat',
-        note: 'Matrix ↔ IRC',
-      },
     ],
   },
   {
     id: 'regional',
     emoji: '🌍',
-    title: 'Regional and language communities',
+    title: 'Regional',
     lede: 'Activity varies by community.',
     links: [
       { title: 'Australia', href: 'https://hns.au/' },
       { title: 'Canada', href: 'https://hnscanada.ca/' },
-      {
-        title: 'China / HNSFans',
-        href: '#',
-        status: 'offline',
-        originalUrl: 'https://hnsfans.com/',
-      },
-      { title: 'Italian Telegram', href: 'https://t.me/handshake_hns_italia' },
-      { title: 'German Telegram', href: 'https://t.me/handshake_de' },
-      { title: 'Spanish Telegram', href: 'https://t.me/HNSes' },
-      { title: 'Vietnamese Telegram', href: 'https://t.me/hnsvietnamese' },
-      { title: 'Russian Telegram', href: 'https://t.me/handshake_hns_RU' },
+      { title: 'China', href: 'https://hnsfans.com/' },
+      { title: 'Italian', href: 'https://t.me/handshake_hns_italia' },
+      { title: 'German', href: 'https://t.me/handshake_de' },
+      { title: 'Spanish', href: 'https://t.me/HNSes' },
+      { title: 'Vietnamese', href: 'https://t.me/hnsvietnamese' },
+      { title: 'Russian', href: 'https://t.me/handshake_hns_RU' },
     ],
   },
 ];
@@ -330,7 +211,7 @@ export function suggestEditIssueUrl(): string {
       '- [ ] Security concern',
       '',
       '## Section',
-      '<!-- e.g. Wallets, Access/DNS, Community -->',
+      '<!-- e.g. Wallets, DNS/DANE, Community -->',
       '',
       '## Current URL (if fixing/removing)',
       '',
@@ -358,6 +239,7 @@ export function statusLabel(status?: ResourceStatus): string | null {
     experimental: 'Experimental',
     legacy: 'Legacy',
     beta: 'Beta',
+    pilot: 'Pilot',
     prerelease: 'Pre-release',
   };
   return map[status];
