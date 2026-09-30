@@ -14,6 +14,8 @@ To "login" or interact with LearnHNS applications (such as the LearnHNS ShakeDex
 4. **Transactional Access:** For transactional actions (e.g., buying/selling names on ShakeDex, transferring HNS), the AI agent must prepare the transaction and prompt the user. The user must explicitly sign and approve the transaction via their Bob Wallet or LearnHNS Chrome extension.
 
 ## Key Resources
+- **About:** \`https://learnhns.com/about/\`
+- **Logo kit:** \`https://learnhns.com/brand/learnhns-logo-kit.zip\`
 - **Documentation Archive (former learn.namebase.io):** \`https://learnhns.com/docs/\`
 - **Getting Started:** \`https://learnhns.com/start/\`
 - **Services Directory:** \`https://learnhns.com/services/\`

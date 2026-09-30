@@ -46,6 +46,8 @@ LearnHNS is your gateway to exploring the future of decentralized domains. We cu
 - How DNS Works: ${SITE}/dns/
 - Blog: ${SITE}/blog/
 - Documentation Archive (former learn.namebase.io): ${SITE}/docs/
+- About: ${SITE}/about/
+- Logo kit (SVG + high-res PNG zip): ${SITE}/brand/learnhns-logo-kit.zip
 - Privacy Policy: ${SITE}/privacy/
 
 ## Getting Started with Handshake

@@ -1,0 +1,303 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema, webPageSchema, organizationSchema, abs } from '../lib/seo';
+
+const description =
+  'LearnHNS is the independent education hub for Handshake — guides, wallets, docs, and the community map. Maintained by SkyInclude. Not affiliated with Handshake Foundation.';
+
+const whatWeDo = [
+  {
+    title: 'This site',
+    body: 'Guides, a docs archive, a services directory, and a start-here path for people who have never heard of Handshake.',
+    href: '/start/',
+    cta: 'Start learning',
+  },
+  {
+    title: 'Bob LearnHNS',
+    body: 'The 2026 fork of Bob Wallet — names, auctions, and the SPV helper that still actually resolves.',
+    href: 'https://bobwallet.org/download/bob-learnhns',
+    cta: 'Download the wallet',
+  },
+  {
+    title: 'Docs archive',
+    body: 'When Namebase shut down in June 2026, the learning center went with it. We mirrored it here and keep the current tooling pointed at the right places.',
+    href: '/docs/',
+    cta: 'Browse the archive',
+  },
+  {
+    title: 'Market & hosting',
+    body: 'ShakeDex via market.learnhns.com, plus Host.limo, Handout, and Pinner so a name can actually serve a site.',
+    href: '/host/',
+    cta: 'Host a site',
+  },
+];
+
+const principles = [
+  {
+    n: '01',
+    title: 'Independent',
+    body: 'Not Handshake Foundation. Not a registrar. We write the maps, maintain the wallets, and keep the lights on when other docs go dark.',
+  },
+  {
+    n: '02',
+    title: 'Self-custody first',
+    body: 'Seed phrases stay on your device. We will never ask you to paste one into a chat, a form, or a “support agent.”',
+  },
+  {
+    n: '03',
+    title: 'Built in public',
+    body: 'Edits to the community map happen on GitHub. Feedback lands in Telegram. If something is wrong, say so — we’ll fix the page.',
+  },
+];
+---
+<BaseLayout
+  title="About"
+  description={description}
+  keywords="LearnHNS, about LearnHNS, Handshake education, SkyInclude, Bob LearnHNS, Handshake logo, HNS brand"
+  schema={[
+    organizationSchema(),
+    webPageSchema({ title: 'About LearnHNS', description, url: abs('/about/') }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'About', path: '/about/' },
+    ]),
+  ]}
+>
+  <div class="page-shell">
+
+    <section class="page-hero">
+      <div class="page-hero-eyebrow">About</div>
+      <h1 class="page-hero-title">
+        The independent hub for <em>Handshake.</em>
+      </h1>
+      <p class="page-hero-lede">
+        LearnHNS is where you go to understand Handshake — the naming protocol
+        that puts top-level domains on a blockchain. Guides, wallets, docs, and
+        the community map. No foundation. No token pitch. The stuff you need
+        to own a name.
+      </p>
+    </section>
+
+    <section class="page-section about-intro">
+      <div class="section-label">Who we are</div>
+      <div class="about-prose">
+        <p>
+          Handshake puts the internet’s root zone on a chain so a top-level name
+          is property you hold, not a lease you renew. That’s the whole pitch.
+          The hard part has always been the on-ramp: wallets that stall, docs
+          that 404, and newcomers who get pointed at a dead helper URL.
+        </p>
+        <p>
+          LearnHNS exists to close that gap. We curate the working tools,
+          preserve the writing that still matters, and maintain the 2026 Bob
+          Wallet fork so people can actually open a name they own.
+        </p>
+        <p>
+          The site is maintained by
+          <a href="https://skyinclude.com/contact" target="_blank" rel="noopener">SkyInclude</a>.
+          We are not affiliated with Handshake Foundation.
+        </p>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">What we run</div>
+      <div class="tile-grid tile-grid--2">
+        {whatWeDo.map((item) => (
+          <a href={item.href} class="link-tile" target={item.href.startsWith('http') ? '_blank' : undefined} rel={item.href.startsWith('http') ? 'noopener' : undefined}>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+            <span class="link-tile-cta">{item.cta} &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">How we work</div>
+      <div class="principles">
+        {principles.map((p) => (
+          <div class="principle">
+            <span class="principle-n">{p.n}</span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="page-section brand-section" id="logo">
+      <div class="section-label">Brand</div>
+      <div class="brand-grid">
+        <div class="brand-preview">
+          <div class="brand-swatch brand-swatch--dark">
+            <img src="/brand/learnhns-icon-white.svg" alt="LearnHNS icon, white on black" class="brand-mark" />
+          </div>
+          <div class="brand-swatch brand-swatch--light">
+            <img src="/brand/learnhns-icon-black.svg" alt="LearnHNS icon, black on white" class="brand-mark" />
+          </div>
+        </div>
+        <div class="brand-copy">
+          <h2>Head in profile. Handshake H in mind.</h2>
+          <p>
+            People kept asking for a high-res zip of the logo. The old files
+            were a 318px PNG and an auto-traced “SVG” that ballooned to a
+            megabyte. We redrew the same mark as real vectors — even stroke,
+            official Handshake H inside the skull — and packed SVG plus PNG
+            up to 4096px.
+          </p>
+          <p>
+            Use SVG when you can. Don’t stretch it, don’t add a drop shadow,
+            don’t recolor the H to a random palette. White on dark, black on
+            light. Violet <code>#693AFA</code> is optional for the whole mark.
+          </p>
+          <div class="brand-actions">
+            <a class="btn-primary" href="/brand/learnhns-logo-kit.zip" download>Download logo kit (.zip)</a>
+            <a class="btn-secondary" href="/community/">Community map</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="section-label">Talk to us</div>
+      <div class="tile-grid tile-grid--3">
+        <a href="https://skyinclude.com/contact" target="_blank" rel="noopener" class="link-tile">
+          <h3>SkyInclude</h3>
+          <p>Maintainer contact for the site, wallets, and hosting questions.</p>
+          <span class="link-tile-cta">Contact &rarr;</span>
+        </a>
+        <a href="https://github.com/learnhns" target="_blank" rel="noopener" class="link-tile">
+          <h3>GitHub</h3>
+          <p>Public repos for the site, community map, and related tooling.</p>
+          <span class="link-tile-cta">Open GitHub &rarr;</span>
+        </a>
+        <a href="https://x.com/learnhns" target="_blank" rel="noopener" class="link-tile">
+          <h3>X / Twitter</h3>
+          <p>Release notes, docs, and the occasional name that shouldn’t have been available.</p>
+          <span class="link-tile-cta">Follow @learnhns &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .about-prose {
+    max-width: 720px;
+  }
+
+  .about-prose p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin: 0 0 1.1rem;
+  }
+
+  .about-prose a { color: var(--hns-violet); }
+
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .principle {
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--glass-border);
+  }
+
+  .principle-n {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--hns-violet);
+    letter-spacing: 0.06em;
+  }
+
+  .principle h3 {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0.6rem 0 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .principle p {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .brand-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .brand-preview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .brand-swatch {
+    aspect-ratio: 1;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--glass-border);
+  }
+
+  .brand-swatch--dark { background: #000; }
+  .brand-swatch--light { background: #fff; }
+
+  .brand-mark {
+    width: 72%;
+    height: auto;
+  }
+
+  .brand-copy h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.85rem;
+  }
+
+  .brand-copy p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0 0 1rem;
+  }
+
+  .brand-copy code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--hns-violet);
+  }
+
+  .brand-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  @media (max-width: 800px) {
+    .principles,
+    .brand-grid { grid-template-columns: 1fr; }
+  }
+</style>
