@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbSchema, webPageSchema, abs } from '../../lib/seo';
+const title = 'Host your own Handshake SPV helper';
+const description = 'How an independent operator can provide a Bob-compatible Handshake API: an indexed HSD node, a restricted gateway, HTTPS, and compatibility checks.';
+---
+<BaseLayout title={title} description={description} schema={[
+  webPageSchema({ title, description, url: abs('/guides/host-a-bob-spv-helper/') }),
+  breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Learn', path: '/learn/' }, { name: title, path: '/guides/host-a-bob-spv-helper/' }]),
+]}>
+<article class="guide">
+  <header>
+    <a href="/learn/">← Learn Handshake</a>
+    <p class="eyebrow">Community infrastructure · October 25, 2026</p>
+    <h1>{title}</h1>
+    <p class="lede">Yes, you can host an independent replacement for the old HandshakeAPI helper. You need your own server and hostname; you do not need control of the former operator’s domain.</p>
+  </header>
+  <aside>
+    <strong>Public starter available — preview status</strong>
+    <p>The <a href="https://github.com/shadstoneofficial/handshake-spv-helper">MIT-licensed Handshake SPV helper starter</a> is public. It includes the gateway, tests, and Docker/Caddy setup. Gateway tests and Compose validation pass; a fresh-node deployment and full wallet acceptance test are still pending. Review its status before production use.</p>
+  </aside>
+  <section>
+    <h2>What are you hosting?</h2>
+    <pre><code>Bob LearnHNS → HTTPS /hsd → restricted gateway → private indexed HSD</code></pre>
+    <p>The wallet runs locally. The server supplies indexed chain and name information that its SPV mode needs. The backend must be a fully synced, non-pruned mainnet HSD full node with both transaction and address indexes enabled from the beginning.</p>
+    <p>This is separate from a DNS resolver, an hnsd lightweight resolver, a peer-discovery seed, or the ShakeScape Rust rendezvous relay. None of those alone replaces this API.</p>
+    <p>The helper does not need wallet seeds, private keys, or signing authority. It can observe addresses and names requested through it, so choose an operator you trust with that metadata. The current LearnHNS gateway also accepts a narrowly limited relay of already-signed transactions for Shake Wallet; this does not grant wallet access.</p>
+  </section>
+  <section>
+    <h2>1. Plan the server and its responsibilities</h2>
+    <p>Use a Linux server with Docker Engine and Compose v2, a stable hostname, reliable outbound networking, and persistent SSD storage. Plan capacity for the full chain plus both indexes and future growth. Measure current disk use and sync performance before choosing a plan; a fixed storage figure or a guaranteed monthly price would quickly become misleading.</p>
+    <ul>
+      <li>Keep enough RAM and CPU for initial sync and historical address queries; benchmark your intended load before opening the service to everyone.</li>
+      <li>Budget for storage, bandwidth, monitoring, patching, and recovery—not only a running container.</li>
+      <li>Use a fresh dedicated database. Adding flags to an existing unindexed database is not proof that historical indexes are complete.</li>
+      <li>If your only goal is to avoid a third-party helper for your own wallet, consider Bob’s full-node mode instead of operating a public API.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>2. Obtain and review the software</h2>
+    <p>Start with <a href="https://github.com/handshake-org/hsd">HSD’s public source</a> and the <a href="https://bobwallet.org/standards/bob-spv-helper-api-v1.md">Bob SPV Helper API v1 contract</a>. A reverse proxy that exposes unrestricted HSD RPC is not a compatible security boundary.</p>
+    <p>Clone the public starter, review its README and pinned HSD revision, then enter the self-host directory. The remaining setup commands run from there.</p>
+    <pre><code>git clone https://github.com/shadstoneofficial/handshake-spv-helper.git
+cd handshake-spv-helper/deploy/self-host</code></pre>
+    <p>If implementing your own gateway, preserve the contract’s JSON envelopes, integer dollary amounts, block/transaction/coin lookups, address-history response shape, and name-state semantics. Compare the public v1 documentation with the current implementation before claiming support for newer header, name-resource, or signed-transaction-relay extensions.</p>
+  </section>
+  <section>
+    <h2>3. Configure a private indexed node</h2>
+    <p>The reference starter creates three services: HSD, the gateway, and Caddy for HTTPS. HSD data persists in a Docker volume. Its node flags include:</p>
+    <pre><code>--network=main
+--index-tx=true
+--index-address=true
+--spv=false
+--prune=false
+--no-wallet</code></pre>
+    <p>Generate two different secrets on your own server:</p>
+    <pre><code>umask 077
+cp .env.example .env
+openssl rand -hex 32
+openssl rand -hex 32</code></pre>
+    <p>Edit <code>.env</code>: set <code>HELPER_HOST</code> to your hostname (for example <code>spv.example.com</code>), and use the generated values for <code>HSD_API_KEY</code> and <code>METRICS_TOKEN</code>. Never share this file or credential-bearing container inspection output.</p>
+    <p>The gateway’s private upstream is <code>http://hsd:12037</code>. Only the gateway receives the HSD credential. Clients receive the HTTPS helper URL, never that key.</p>
+  </section>
+  <section>
+    <h2>4. Add DNS and HTTPS, then synchronize</h2>
+    <p>Point an A record at your server. Add AAAA only if the server’s IPv6 path works. Allow inbound TCP 80 and 443 for Caddy and certificate issuance. Restrict SSH to your management network. Do not publish HSD RPC port 12037, wallet RPC port 12039, or the gateway’s port 3000.</p>
+    <pre><code>docker compose config --quiet
+docker compose up -d --build
+docker compose logs --tail=100 hsd</code></pre>
+    <p>The starter uses outbound HSD peer connections. Caddy is the direct internet-facing proxy and sanitizes forwarded client headers. Adding a CDN or another proxy requires reviewing trusted-IP handling; otherwise rate limits may be bypassed or all users may share one limit.</p>
+    <p>Wait for chain synchronization and index readiness. This can take substantial time; container startup is not completion. A 503 readiness response during synchronization is expected. Never run <code>docker compose down -v</code> unless you intentionally want to delete the persistent data.</p>
+  </section>
+  <section>
+    <h2>5. Verify compatibility before sharing</h2>
+    <pre><code>curl -fsS https://spv.example.com/healthz
+curl -fsS https://spv.example.com/hsd</code></pre>
+    <p>Require all readiness checks to pass and compare chain height with an independent synced node. The progress estimate alone cannot prove that you are at the current network tip.</p>
+    <p>From the reference repository root, with Node.js 20 or newer:</p>
+    <pre><code>HELPER_URL=https://spv.example.com/hsd npm run audit:provider</code></pre>
+    <p>The default audit is a useful smoke test, not full certification. Opt into address-history checks with <code>AUDIT_ADDRESS</code> using a dedicated test address with known history. Use <code>AUDIT_REGISTER_NAME</code> for a known unregistered CLOSED auction. Check every required REST route and RPC method, and confirm that wallet, mining, and administrative calls are rejected.</p>
+    <p>Test with a small dedicated Bob wallet: synchronization, historical transactions, name state, and the workflows you intend to support. Keep amounts in integer dollary on the wire. In particular, a REGISTER’s auction value must come from <code>info.value</code>, not the highest bid.</p>
+  </section>
+  <section>
+    <h2>6. Point Bob LearnHNS at your helper</h2>
+    <p>Open <strong>Settings → Network &amp; Connection → SPV Helper API</strong> in Bob LearnHNS. Enter <code>https://spv.example.com/hsd</code>, confirm the Active Helper, and wait for synchronization. Original Bob 2.1.0 does not have a custom-helper setting. See the <a href="https://bobwallet.org/blog/spv-service-transition-bobwallet-org/">migration announcement</a> for the supported upgrade path.</p>
+    <p>Other people can choose your compatible endpoint too. A new hostname does not automatically redirect old installed wallets or transfer management of the old service.</p>
+  </section>
+  <section>
+    <h2>7. Keep it useful after launch</h2>
+    <ul>
+      <li>Monitor chain lag, disk headroom, peers, request latency, timeouts, and recent error rates.</li>
+      <li>Keep rate limits, bounded request sizes, and upstream timeouts. The reference limits are per process; multiple replicas need a shared abuse boundary.</li>
+      <li>Keep metrics authenticated and avoid access logs containing addresses, names, hashes, RPC parameters, or transaction bodies—including at the proxy.</li>
+      <li>Maintain TLS renewal, security updates, a tested restore procedure, and a contact for outages. Preserve a working revision for rollback.</li>
+    </ul>
+    <p>Different operators, hosts, and regions reduce dependence on one service. Publish your compatibility checks and limitations so users can make an informed choice.</p>
+  </section>
+  <footer><a href="https://spv.learnhns.com/">LearnHNS helper status</a> · <a href="https://bobwallet.org/docs/spv-helper-api-v1/">Public API documentation</a> · <a href="https://github.com/handshake-org/hsd">HSD source</a></footer>
+</article>
+</BaseLayout>
+<style>
+.guide { max-width: 880px; margin: auto; padding: 3rem 1.5rem 5rem; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.1; }
+h2 { font-size: 1.65rem; margin-bottom: 1rem; }
+p, li { line-height: 1.8; color: var(--text-secondary); }
+.lede { font-size: 1.2rem; }
+a, .eyebrow { color: var(--hns-violet); }
+section { padding: 1.5rem 0; border-bottom: 1px solid var(--glass-border); }
+aside { padding: 1.3rem; border: 1px solid var(--hns-violet); border-radius: 12px; margin: 2rem 0; }
+pre { overflow-x: auto; padding: 1.2rem; background: #090b10; color: #e8eaf0; border-radius: 10px; line-height: 1.6; }
+code { overflow-wrap: anywhere; }
+pre code { overflow-wrap: normal; }
+footer { padding-top: 2rem; line-height: 1.8; }
+</style>
