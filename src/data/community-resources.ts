@@ -89,7 +89,7 @@ export const communitySections: CommunitySection[] = [
       { title: 'Namebase', href: 'https://www.namebase.io/', note: 'Handshake name platform' },
       {
         title: 'Namehold',
-        href: 'https://github.com/DimazzzZ/namehold-wallet',
+        href: 'https://dimazzzz.github.io/namehold-wallet/',
         status: 'beta',
         note: 'Non-custodial HNS wallet and TLD manager',
       },
