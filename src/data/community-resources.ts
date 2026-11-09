@@ -91,7 +91,7 @@ export const communitySections: CommunitySection[] = [
         title: 'Namehold',
         href: 'https://dimazzzz.github.io/namehold-wallet/',
         status: 'beta',
-        note: 'Non-custodial HNS wallet and TLD manager',
+        note: 'Non-custodial HNS wallet and TLD manager. v0.7.1 supports LearnHNS Market listings, signed expiry renewal, and pending-listing retries after confirmation.',
       },
       {
         title: 'FireWallet',
